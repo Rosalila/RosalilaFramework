@@ -1,3 +1,6 @@
+#ifndef BOTON_H
+#define BOTON_H
+
 #include "Input/Receiver.h"
 
 class Boton
@@ -21,3 +24,5 @@ int teclado;
     bool usaJoystick();
     std::string keyToString();
 };
+
+#endif

@@ -70,7 +70,6 @@ bool Receiver::IsJoyDown(int joyCode,int joystick)
             return joy_up_pressed_player_1;
         if(JOYKEYS_player1[joyCode])
         {
-          JOYKEYS_player1[joyCode]=false;
           return true;
         }
         return false;
@@ -95,7 +94,6 @@ bool Receiver::IsJoyDown(int joyCode,int joystick)
             return joy_up_pressed_player_2;
         if(JOYKEYS_player2[joyCode])
         {
-          JOYKEYS_player2[joyCode]=false;
           return true;
         }
         return false;
@@ -127,22 +125,35 @@ void Receiver::updateInputs()
         {
             for(int i=0;i<max_joystick_inputs;i++)
             {
-                if ( event.jbutton.button == i )
+                if ( event.jbutton.button == i
+                    && event.jbutton.which==0)
                 {
-                    if(event.jbutton.which==0)
-                        JOYKEYS_player1[i]=true;
-                }else
+                    JOYKEYS_player1[i]=true;
+                }
+            }
+            for(int i=0;i<max_joystick_inputs;i++)
+            {
+                if ( event.jbutton.button == i
+                    && event.jbutton.which==1)
+                {
+                    JOYKEYS_player2[i]=true;
+                }
+            }
+        }
+        if( event.type == SDL_JOYBUTTONUP )
+        {
+            for(int i=0;i<max_joystick_inputs;i++)
+            {
+                if ( event.jbutton.button == i
+                    && event.jbutton.which==0)
                 {
                     JOYKEYS_player1[i]=false;
                 }
             }
             for(int i=0;i<max_joystick_inputs;i++)
             {
-                if ( event.jbutton.button == i )
-                {
-                    if(event.jbutton.which==1)
-                        JOYKEYS_player2[i]=true;
-                }else
+                if ( event.jbutton.button == i
+                    && event.jbutton.which==1)
                 {
                     JOYKEYS_player2[i]=false;
                 }

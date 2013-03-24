@@ -35,7 +35,7 @@ public:
         this->red=0;
         this->green=0;
         this->blue=0;
-        this->alpha=0;
+        this->alpha=255;
     }
 
     Color(int red,int green,int blue,int alpha)

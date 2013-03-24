@@ -1,3 +1,6 @@
+#ifndef INPUT_H
+#define INPUT_H
+
 #include "Input/Boton.h"
 #include <IA/IA.h>
 
@@ -28,3 +31,5 @@ vector<Boton> cruz;
     void endEventProcess();
     void startEventProcess();
 };
+
+#endif

@@ -12,7 +12,11 @@ Painter::Painter()
 
     TiXmlNode *config_file=doc->FirstChild("ConfigFile");
 
-    TiXmlElement *resolution_element=config_file->FirstChild("Resolution")->ToElement();
+    TiXmlElement *screensize_element=config_file->FirstChild("Resolution")->ToElement();
+    screen_width=atoi(screensize_element->Attribute("x"));
+    screen_height=atoi(screensize_element->Attribute("y"));
+
+    TiXmlElement *resolution_element=config_file->FirstChild("ScreenSize")->ToElement();
     screen_resized_width=atoi(resolution_element->Attribute("x"));
     screen_resized_height=atoi(resolution_element->Attribute("y"));
 
@@ -29,9 +33,6 @@ Painter::Painter()
     screen=NULL;
     joystick_1 = NULL;
     joystick_2 = NULL;
-
-    screen_width = 1280;
-    screen_height = 800;
 
     screen_bpp = 32;
     camera_x=camera_y=0;
