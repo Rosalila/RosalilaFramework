@@ -13,7 +13,7 @@ using namespace std;
 #include "SDL/SDL_ttf.h"
 #include "SDL/SDL_mixer.h"
 
-#include "Utility/Utility.h"
+#include "RosalilaUtility/RosalilaUtility.h"
 #include <map>
 
 class Sound

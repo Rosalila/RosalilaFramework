@@ -1,0 +1,26 @@
+#include "SDL/SDL_image.h"
+
+#include <GL/freeglut.h>
+#include <GL/gl.h>
+#include <stdio.h>
+
+#include "TinyXml/tinyxml.h"
+#include "RosalilaGraphics/RosalilaGraphics.h"
+#include "RosalilaSound/RosalilaSound.h"
+#include "RosalilaInputs/RosalilaInputs.h"
+
+class Animation
+{
+    RosalilaGraphics*painter;
+
+    std::vector <Image*> images;
+    int x,y;
+    int animation_velocity;
+    int animation_iteration;
+    int current_frame;
+public:
+    Animation(){}
+    Animation(int x,int y,int animation_velocity,RosalilaGraphics* painter);
+    void addImage(Image*image);
+    void render();
+};
