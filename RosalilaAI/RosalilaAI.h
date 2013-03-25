@@ -11,7 +11,7 @@ class RosalilaAI
     Automata *automata;
 public:
     Transicion *transicion_a_recompenzar;
-    RosalilaAI(char* archivo,char* archivo_default);
+    RosalilaAI(std::string archivo,std::string archivo_default);
     std::string getRosalilaInputs(std::map<std::string,std::string>*strings,
                      std::map<std::string,std::string>*strings_contrario,
                      std::map<std::string,int>*enteros,

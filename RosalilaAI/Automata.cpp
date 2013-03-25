@@ -1,6 +1,6 @@
 #include "RosalilaAI/Automata.h"
 
-Automata::Automata(char* archivo,char* archivo_default)
+Automata::Automata(std::string archivo,std::string archivo_default)
 {
     estado_actual="S";
     estados["S"]=new Estado(vector<Transicion*>());
@@ -39,13 +39,13 @@ std::string Automata::getNextRosalilaInputs(std::map<std::string,std::string>*st
     }
 }
 
-void Automata::cargarDesdeXML(char* archivo,char* archivo_default)
+void Automata::cargarDesdeXML(string archivo,string archivo_default)
 {
-    TiXmlDocument doc_t(archivo);
+    TiXmlDocument doc_t(archivo.c_str());
     bool loadOkay = doc_t.LoadFile();
     if(!loadOkay)
     {
-        doc_t=TiXmlDocument(archivo_default);
+        doc_t=TiXmlDocument(archivo_default.c_str());
         loadOkay=doc_t.LoadFile();
         cout.flush();
     }

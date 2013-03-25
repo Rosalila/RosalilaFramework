@@ -230,7 +230,7 @@ void RosalilaInputs::cargarDesdeXML(int jugador,Receiver* receiver)
     }
 }
 
-void RosalilaInputs::cargarRosalilaAIXML(int jugador,char* archivo,char* archivo_default)
+void RosalilaInputs::cargarRosalilaAIXML(int jugador,std::string archivo,std::string archivo_default)
 {
     this->jugador=jugador;
     this->inteligencia_artificial=true;

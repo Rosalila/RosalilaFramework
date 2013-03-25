@@ -19,7 +19,7 @@ vector<Boton> botones;
 vector<Boton> cruz;
     RosalilaInputs(){}
     void cargarDesdeXML(int jugador,Receiver* receiver);
-    void cargarRosalilaAIXML(int jugador,char* archivo,char* archivo_default);
+    void cargarRosalilaAIXML(int jugador,std::string archivo,std::string archivo_default);
     TiXmlDocument* getXML(TiXmlDocument *doc);
     void actualizarBuffer();
     void actualizarBuffer(std::map<std::string,std::string>*strings,

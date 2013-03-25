@@ -1,6 +1,6 @@
 #include "RosalilaAI/RosalilaAI.h"
 
-RosalilaAI::RosalilaAI(char* archivo,char* archivo_default)
+RosalilaAI::RosalilaAI(std::string archivo,std::string archivo_default)
 {
     automata=new Automata(archivo,archivo_default);
     //transicion_a_recompenzar=automata->getEstadoInicial()->transiciones[0];

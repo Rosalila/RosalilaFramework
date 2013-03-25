@@ -116,8 +116,7 @@ void Receiver::updateInputs()
         //If the user has Xed out the window
         if( event.type == SDL_QUIT )
         {
-            //Quit the program
-            //quit = true;
+            exit(0);
         }
         if( event.type == SDL_KEYDOWN )
         {
