@@ -24,6 +24,7 @@ public:
     Sound();
     void drop();
     void addSound(std::string variable,std::string value);
+    bool soundExists(std::string variable);
     void playSound(std::string variable);
     void playMusic(std::string variable);
     void stopMusic();

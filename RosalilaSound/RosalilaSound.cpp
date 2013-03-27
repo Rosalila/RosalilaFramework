@@ -27,8 +27,10 @@ void Sound::addSound(std::string variable,std::string value)
 }
 void Sound::playSound(std::string variable)
 {
-    if(sounds.find(variable)==sounds.end())
-        return;
+    if(!soundExists(variable))
+    {
+        writeLogLine("Error: "+variable+" sound does not exists.");
+    }
 
     if(sounds[variable]!=NULL)
     {
@@ -52,4 +54,10 @@ void Sound::stopMusic()
         Mix_FreeMusic(music);
         music=NULL;
     }
+}
+
+bool Sound::soundExists(std::string variable)
+{
+    map<std::string,Mix_Chunk*>::const_iterator it = sounds.find(variable);
+    return it!=sounds.end();
 }
