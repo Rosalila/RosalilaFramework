@@ -4,7 +4,7 @@ Automata::Automata(std::string archivo,std::string archivo_default)
 {
     estado_actual="S";
     estados["S"]=new Estado(vector<Transicion*>());
-    cargarDesdeXML(archivo,archivo_default);
+    loadFromXML(archivo,archivo_default);
     transicion_a_recompenzar=NULL;
     wait=0;
 }
@@ -39,7 +39,7 @@ std::string Automata::getNextRosalilaInputs(std::map<std::string,std::string>*st
     }
 }
 
-void Automata::cargarDesdeXML(string archivo,string archivo_default)
+void Automata::loadFromXML(string archivo,string archivo_default)
 {
     TiXmlDocument doc_t(archivo.c_str());
     bool loadOkay = doc_t.LoadFile();

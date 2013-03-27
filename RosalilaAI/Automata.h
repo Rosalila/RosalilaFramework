@@ -22,7 +22,7 @@ Transicion *transicion_a_recompenzar;
                          std::map<std::string,int>*enteros,
                          std::map<std::string,int>*enteros_contrario
                          );
-    void cargarDesdeXML(string archivo,string archivo_default);
+    void loadFromXML(string archivo,string archivo_default);
 };
 
 #endif

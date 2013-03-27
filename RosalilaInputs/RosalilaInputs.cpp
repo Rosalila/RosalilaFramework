@@ -110,7 +110,7 @@ vector<std::string> RosalilaInputs::getBufferRosalilaInputss()
 //}
 
 
-void RosalilaInputs::cargarDesdeXML(int jugador,Receiver* receiver)
+void RosalilaInputs::loadFromXML(int jugador,Receiver* receiver)
 {
     this->jugador=jugador;
     this->receiver=receiver;
