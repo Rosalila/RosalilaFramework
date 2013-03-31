@@ -24,11 +24,27 @@ RosalilaGraphics::RosalilaGraphics()
     fullscreen=strcmp(fullscreen_element->Attribute("enabled"),"yes")==0;
 
     TiXmlElement *font_element=config_file->FirstChild("Font")->ToElement();
-    int font_size=atoi(font_element->Attribute("size"));
-    int font_red=atoi(font_element->Attribute("red"));
-    int font_green=atoi(font_element->Attribute("green"));
-    int font_blue=atoi(font_element->Attribute("blue"));
 
+    int font_size=10;
+    if(font_element->Attribute("size")!=NULL)
+    {
+        font_size=atoi(font_element->Attribute("size"));
+    }
+    int font_red=0;
+    if(font_element->Attribute("red")!=NULL)
+    {
+        font_red=atoi(font_element->Attribute("red"));
+    }
+    int font_green=0;
+    if(font_element->Attribute("green")!=NULL)
+    {
+        font_green=atoi(font_element->Attribute("green"));
+    }
+    int font_blue=0;
+    if(font_element->Attribute("blue")!=NULL)
+    {
+        font_blue=atoi(font_element->Attribute("blue"));
+    }
     //Internal initializations
     screen=NULL;
     joystick_1 = NULL;
