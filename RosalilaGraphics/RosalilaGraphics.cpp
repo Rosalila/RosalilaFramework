@@ -463,6 +463,7 @@ void RosalilaGraphics::draw3D()
 {
     //  glViewport (0.0, 0.0, (GLfloat) screen_width, (GLfloat) screen_height);
     //glDisable(GL_BLEND);
+    glDisable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
     glMatrixMode (GL_PROJECTION);
     glLoadIdentity ();
