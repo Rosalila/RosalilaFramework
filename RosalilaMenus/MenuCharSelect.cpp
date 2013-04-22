@@ -44,9 +44,13 @@ MenuCharSelect::MenuCharSelect(RosalilaGraphics*painter,int x, int y,
     this->select_p2_y=select_p2_y;
 
     selected_char_p1=painter->getTexture("menu/selected_char_p1.png");
-    selected_char_p2=painter->getTexture("menu/selected_char_p2.png");
     locked_char_p1=painter->getTexture("menu/locked_char_p1.png");
-    locked_char_p2=painter->getTexture("menu/locked_char_p2.png");
+
+    if(max_locked_chars_pb>0)
+    {
+        locked_char_p2=painter->getTexture("menu/locked_char_p2.png");
+        selected_char_p2=painter->getTexture("menu/selected_char_p2.png");
+    }
     no_portrait=painter->getTexture("menu/no_portrait.png");
 }
 

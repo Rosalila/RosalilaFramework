@@ -11,13 +11,17 @@ private:
     int size_cuadro_x,size_cuadro_y;
     int separacion_x,separacion_y;
     int preview_pa_x,preview_pa_y;
+    int current_preview_alpha;
     std::vector<Image*>portraits;
     std::vector<Image*>previews;
+    std::vector<Image*>fullscreens;
     Image* border_cursor;
     Image* border_thumbnail;
     Image* border_preview;
     Image* no_portrait;
+    Image* filter;
 public:
+    bool fullscreen_on;
     int select_p1_x,select_p1_y;
     int size_x,size_y;
     MenuGallery(RosalilaGraphics*painter,int x, int y,
@@ -30,6 +34,7 @@ public:
                    );
     virtual std::string getTipo();
     virtual void dibujar();
+    void select();
 };
 
 #endif

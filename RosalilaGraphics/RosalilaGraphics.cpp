@@ -517,10 +517,10 @@ void RosalilaGraphics::draw3D()
 
     if (cube.fuel == 0)
     {
-        glEnable (GL_LIGHTING);
-        glDisable (GL_LIGHT0);
-        glEnable (GL_DEPTH_TEST);
-        glutSolidCube (4.0);
+//        glEnable (GL_LIGHTING);
+//        glDisable (GL_LIGHT0);
+//        glEnable (GL_DEPTH_TEST);
+//        glutSolidCube (4.0);
     }
 
     if (cube.fuel > 0)
