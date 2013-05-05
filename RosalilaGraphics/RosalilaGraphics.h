@@ -109,6 +109,7 @@ class RosalilaGraphics
     void drawText(std::string text,int position_x,int position_y);
     void drawRectangle(int x,int y,int width,int height,float rotation,int red,int green,int blue,int alpha,bool camera_align);
     void draw3D();
+    void draw3DCube(int x,int y,float size);
     void explode(float pos_x,float pos_y);
     void drawObject();
     void updateScreen();

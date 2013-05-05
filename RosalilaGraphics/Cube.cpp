@@ -1,5 +1,78 @@
 #include "RosalilaGraphics/Cube.h"
 
+Cube::Cube()
+{
+    pos_x=0;
+    pos_y=0;
+
+    fuel = 0;                /* "fuel" of the explosion */
+
+    angle = 0.0;             /* camera rotation angle */
+
+    wantNormalize = 0;   /* Speed vector normalization flag */
+    wantPause = 0;       /* Pause flag */
+
+
+    /* Light sources and material */
+//
+    light0Amb[0]=1.0;
+    light0Amb[1]=1.0;
+    light0Amb[2]=1.0;
+    light0Amb[3]=1.0;
+
+    light0Dif[0]=1.0;
+    light0Dif[1]=1.0;
+    light0Dif[2]=1.0;
+    light0Dif[3]=1.0;
+
+    light0Spec[0]=1.0;
+    light0Spec[1]=1.0;
+    light0Spec[2]=1.0;
+    light0Spec[3]=1.0;
+
+    light0Pos[0]=1.0;
+    light0Pos[1]=1.0;
+    light0Pos[2]=1.0;
+    light0Pos[3]=1.0;
+
+    light1Amb[0]=1.0;
+    light1Amb[1]=1.0;
+    light1Amb[2]=1.0;
+    light1Amb[3]=1.0;
+
+    light1Dif[0]=1.0;
+    light1Dif[1]=0.0;
+    light1Dif[2]=0.0;
+    light1Dif[3]=1.0;
+
+    light1Spec[0]=1.0;
+    light1Spec[1]=1.0;
+    light1Spec[2]=1.0;
+    light1Spec[3]=1.0;
+
+    light1Pos[0]=0.0;
+    light1Pos[1]=5.0;
+    light1Pos[2]=5.0;
+    light1Pos[3]=0.0;
+
+    materialAmb[0]=255.0/255.0;
+    materialAmb[1]=0.0/255.0;
+    materialAmb[2]=0.0/255.0;
+    materialAmb[3]=255.0/255.0;
+
+    materialDif[0]=1.0;
+    materialDif[1]=1.0;
+    materialDif[2]=1.0;
+    materialDif[3]=0.9;
+
+    materialSpec[0]=1.0;
+    materialSpec[1]=1.0;
+    materialSpec[2]=1.0;
+    materialSpec[3]=0.9;
+
+    materialShininess = 10.0;
+}
+
 void Cube::logic()
 {
     if (this->fuel > 0)
@@ -43,7 +116,7 @@ void Cube::logic()
         --this->fuel;
     }
 
-    this->angle += 0.3;  /* Always continue to rotate the camera */
+    this->angle += 0.7;  /* Always continue to rotate the camera */
 }
 
 void Cube::newExplosion (float pos_x,float pos_y)

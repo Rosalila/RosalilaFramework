@@ -74,78 +74,7 @@ public:
     GLfloat  materialSpec[4];
     GLfloat  materialShininess;
 
-    Cube()
-    {
-        pos_x=0;
-        pos_y=0;
-
-        fuel = 0;                /* "fuel" of the explosion */
-
-        angle = 0.0;             /* camera rotation angle */
-
-        wantNormalize = 0;   /* Speed vector normalization flag */
-        wantPause = 0;       /* Pause flag */
-
-
-        /* Light sources and material */
-//
-        light0Amb[0]=1.0;
-        light0Amb[1]=0.6;
-        light0Amb[2]=0.8;
-        light0Amb[3]=0.5;
-
-        light0Dif[0]=1.0;
-        light0Dif[1]=0.6;
-        light0Dif[2]=0.8;
-        light0Dif[3]=0.5;
-
-        light0Spec[0]=1.0;
-        light0Spec[1]=0.6;
-        light0Spec[2]=0.8;
-        light0Spec[3]=0.5;
-
-        light0Pos[0]=1.0;
-        light0Pos[1]=0.6;
-        light0Pos[2]=0.8;
-        light0Pos[3]=0.5;
-
-        light1Amb[0]=1.0;
-        light1Amb[1]=1.0;
-        light1Amb[2]=0.0;
-        light1Amb[3]=0.0;
-
-        light1Dif[0]=1.0;
-        light1Dif[1]=1.0;
-        light1Dif[2]=1.0;
-        light1Dif[3]=0.0;
-
-        light1Spec[0]=1.0;
-        light1Spec[1]=1.0;
-        light1Spec[2]=1.0;
-        light1Spec[3]=0.0;
-
-        light1Pos[0]=0.0;
-        light1Pos[1]=5.0;
-        light1Pos[2]=5.0;
-        light1Pos[3]=0.0;
-
-        materialAmb[0]=232.0/255.0;
-        materialAmb[1]=54.0/255.0;
-        materialAmb[2]=222.0/255.0;
-        materialAmb[3]=125.0/255.0;
-
-        materialDif[0]=0.0;
-        materialDif[1]=0.0;
-        materialDif[2]=0.0;
-        materialDif[3]=0.5;
-
-        materialSpec[0]=0.0;
-        materialSpec[1]=0.0;
-        materialSpec[2]=0.0;
-        materialSpec[3]=0.5;
-
-        materialShininess = 20.0;
-    }
+    Cube();
 
 //    GLfloat  light0Amb[4] =  { 1.0, 0.6, 0.2, 1.0 };
 //    GLfloat  light0Dif[4] =  { 1.0, 0.6, 0.2, 1.0 };
