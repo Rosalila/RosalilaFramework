@@ -339,6 +339,15 @@ void RosalilaGraphics::draw2DImage	(
 
 void RosalilaGraphics::drawRectangle(int x,int y,int width,int height,float rotation,int red,int green,int blue,int alpha,bool camera_align)
 {
+    glMatrixMode( GL_PROJECTION );
+    glLoadIdentity();
+    glOrtho(0.0f, screen_width, screen_height, 0.0f, -1.0f, 1.0f);
+    glMatrixMode( GL_MODELVIEW );
+
+    glDisable (GL_LIGHTING);
+    glEnable (GL_LIGHT0);
+    glDisable (GL_DEPTH_TEST);
+
     glDisable(GL_TEXTURE_2D);
     GLubyte r=red;
     GLubyte g=green;
@@ -573,10 +582,8 @@ void RosalilaGraphics::draw3D()
     glPopMatrix();
 }
 
-void RosalilaGraphics::draw3DCube(int x,int y,float size)
+void RosalilaGraphics::draw3DCube(int x,int y,float size,Color color)
 {
-    //  glViewport (0.0, 0.0, (GLfloat) screen_width, (GLfloat) screen_height);
-    //glDisable(GL_BLEND);
     glDisable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
     glMatrixMode (GL_PROJECTION);
@@ -627,12 +634,14 @@ void RosalilaGraphics::draw3DCube(int x,int y,float size)
     pos_y+=393.0;
     glTranslatef (-((screen_width-pos_x)/9.25), ((screen_height-pos_y)/9.25), -100.0);
     glRotatef (cube.angle, 0.0, 1.0, 0.0);
+    cube.setMaterialColor(color.getRed(),color.getGreen(),color.getBlue(),color.getAlpha());
 
     //Draw
     glEnable (GL_LIGHTING);
     glDisable (GL_LIGHT0);
     glEnable (GL_DEPTH_TEST);
     glutSolidCube (size);
+    glDisable (GL_LIGHTING);
 
     glPopMatrix();
 }

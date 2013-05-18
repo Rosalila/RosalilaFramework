@@ -76,6 +76,8 @@ public:
 
     Cube();
 
+    void setMaterialColor(float r,float g,float b,float a);
+
 //    GLfloat  light0Amb[4] =  { 1.0, 0.6, 0.2, 1.0 };
 //    GLfloat  light0Dif[4] =  { 1.0, 0.6, 0.2, 1.0 };
 //    GLfloat  light0Spec[4] = { 0.0, 0.0, 0.0, 1.0 };

@@ -58,19 +58,37 @@ Cube::Cube()
     materialAmb[0]=255.0/255.0;
     materialAmb[1]=0.0/255.0;
     materialAmb[2]=0.0/255.0;
-    materialAmb[3]=255.0/255.0;
+    materialAmb[3]=128.0/255.0;
 
-    materialDif[0]=1.0;
-    materialDif[1]=1.0;
-    materialDif[2]=1.0;
-    materialDif[3]=0.9;
+    materialDif[0]=255.0/255.0;
+    materialDif[1]=0.0/255.0;
+    materialDif[2]=0.0/255.0;
+    materialDif[3]=128.0/255.0;
 
-    materialSpec[0]=1.0;
-    materialSpec[1]=1.0;
-    materialSpec[2]=1.0;
-    materialSpec[3]=0.9;
+    materialSpec[0]=255.0/255.0;
+    materialSpec[1]=0.0/255.0;
+    materialSpec[2]=0.0/255.0;
+    materialSpec[3]=128.0/255.0;
 
     materialShininess = 10.0;
+}
+
+void Cube::setMaterialColor(float r,float g,float b,float a)
+{
+    materialAmb[0]=r/255.0;
+    materialAmb[1]=g/255.0;
+    materialAmb[2]=b/255.0;
+    materialAmb[3]=a/255.0;
+
+    materialDif[0]=r/255.0;
+    materialDif[1]=g/255.0;
+    materialDif[2]=b/255.0;
+    materialDif[3]=a/255.0;
+
+    materialSpec[0]=r/255.0;
+    materialSpec[1]=g/255.0;
+    materialSpec[2]=b/255.0;
+    materialSpec[3]=a/255.0;
 }
 
 void Cube::logic()
