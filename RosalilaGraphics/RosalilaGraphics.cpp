@@ -17,8 +17,8 @@ RosalilaGraphics::RosalilaGraphics()
     screen_height=atoi(screensize_element->Attribute("y"));
 
     TiXmlElement *resolution_element=config_file->FirstChild("ScreenSize")->ToElement();
-    screen_resized_width=atoi(resolution_element->Attribute("x"));
-    screen_resized_height=atoi(resolution_element->Attribute("y"));
+    int screen_resized_width=atoi(resolution_element->Attribute("x"));
+    int screen_resized_height=atoi(resolution_element->Attribute("y"));
 
     TiXmlElement *fullscreen_element=config_file->FirstChild("Fullscreen")->ToElement();
     fullscreen=strcmp(fullscreen_element->Attribute("enabled"),"yes")==0;
@@ -85,7 +85,7 @@ RosalilaGraphics::RosalilaGraphics()
     if(!fullscreen)
         screen = SDL_SetVideoMode( screen_resized_width, screen_resized_height, screen_bpp, SDL_OPENGL );
     else
-        screen = SDL_SetVideoMode( screen_resized_width, screen_resized_height, screen_bpp, SDL_OPENGL | SDL_FULLSCREEN );
+        screen = SDL_SetVideoMode( 0, 0, screen_bpp, SDL_OPENGL | SDL_FULLSCREEN );
 
     //Set the openGL state?
     glEnable( GL_TEXTURE_2D );
@@ -94,7 +94,7 @@ RosalilaGraphics::RosalilaGraphics()
 
     glClearColor( 0.0f, 0.0f, 0.0f, 0.0f );
 
-    glViewport( 0, 0, screen_resized_width, screen_resized_height );
+    glViewport( 0, 0, screen->w, screen->h );
 
     glClear( GL_COLOR_BUFFER_BIT );
 
@@ -156,11 +156,11 @@ RosalilaGraphics::RosalilaGraphics()
 
 void RosalilaGraphics::resetScreen()
 {
-    //Set up the screen
-    if(!fullscreen)
-        screen = SDL_SetVideoMode( screen_resized_width, screen_resized_height, screen_bpp, SDL_OPENGL );
-    else
-        screen = SDL_SetVideoMode( screen_resized_width, screen_resized_height, screen_bpp, SDL_OPENGL | SDL_FULLSCREEN );
+//    //Set up the screen
+//    if(!fullscreen)
+//        screen = SDL_SetVideoMode( screen_resized_width, screen_resized_height, screen_bpp, SDL_OPENGL );
+//    else
+//        screen = SDL_SetVideoMode( screen_resized_width, screen_resized_height, screen_bpp, SDL_OPENGL | SDL_FULLSCREEN );
 }
 
 RosalilaGraphics::~RosalilaGraphics()

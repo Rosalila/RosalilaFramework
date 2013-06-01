@@ -75,8 +75,6 @@ class RosalilaGraphics
     SDL_Color textColor;
     int screen_width;
     int screen_height;
-    int screen_resized_width;
-    int screen_resized_height;
     bool fullscreen;
     int screen_bpp;
     int camera_x,camera_y;
