@@ -479,10 +479,6 @@ void RosalilaGraphics::draw3D()
     gluPerspective (45.0, (GLfloat) screen_width / (GLfloat) screen_height, 0.1, 100.0);
     glMatrixMode (GL_MODELVIEW);
 
-
-
-    srand (time (NULL));
-
     glEnable (GL_LIGHT0);
     glEnable (GL_LIGHT1);
     glLightfv (GL_LIGHT0, GL_AMBIENT, cube.light0Amb);
@@ -590,10 +586,6 @@ void RosalilaGraphics::draw3DCube(int x,int y,float size,Color color)
     glLoadIdentity ();
     gluPerspective (45.0, (GLfloat) screen_width / (GLfloat) screen_height, 0.1, 100.0);
     glMatrixMode (GL_MODELVIEW);
-
-
-
-    srand (time (NULL));
 
     glEnable (GL_LIGHT0);
     glEnable (GL_LIGHT1);

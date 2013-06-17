@@ -22,6 +22,7 @@ public:
     bool IsKeyDownn(int keycode);
     bool IsKeyPressed(int keycode);
     bool IsJoyDown(int joyCode,int joystick);
+    bool IsJoyPressed(int joyCode,int joystick);
     void endEventProcess();
     void startEventProcess();
     //SDL

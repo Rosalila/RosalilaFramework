@@ -107,6 +107,123 @@ bool Receiver::IsJoyDown(int joyCode,int joystick)
     return false;
 }
 
+bool Receiver::IsJoyPressed(int joyCode,int joystick)
+{
+    if(joystick==0)
+    {
+        if(joyCode==-1)
+        {
+            if(joy_down_pressed_player_1 && joy_left_pressed_player_1)
+            {
+                joy_down_pressed_player_1 = false;
+                joy_left_pressed_player_1 = false;
+                return true;
+            }
+        }
+        if(joyCode==-3 && joy_down_pressed_player_1 && joy_right_pressed_player_1)
+        {
+            joy_down_pressed_player_1 = false;
+            joy_right_pressed_player_1 = false;
+            return true;
+        }
+        if(joyCode==-7 && joy_up_pressed_player_1 && joy_left_pressed_player_1)
+        {
+            joy_up_pressed_player_1 = false;
+            joy_left_pressed_player_1 = false;
+            return true;
+        }
+        if(joyCode==-9 && joy_up_pressed_player_1 && joy_right_pressed_player_1)
+        {
+            joy_up_pressed_player_1 = false;
+            joy_right_pressed_player_1 = false;
+            return true;
+        }
+        if(joyCode==-2 && joy_down_pressed_player_1)
+        {
+            joy_down_pressed_player_1 = false;
+            return true;
+        }
+        if(joyCode==-4 && joy_left_pressed_player_1)
+        {
+            joy_left_pressed_player_1 = false;
+            return true;
+        }
+        if(joyCode==-6 && joy_right_pressed_player_1)
+        {
+            joy_right_pressed_player_1 = false;
+            return true;
+        }
+        if(joyCode==-8 && joy_up_pressed_player_1)
+        {
+            joy_up_pressed_player_1 = false;
+            return true;
+        }
+        if(JOYKEYS_player1[joyCode])
+        {
+            JOYKEYS_player1[joyCode] = false;
+            return true;
+        }
+        return false;
+    }
+    if(joystick==1)
+    {
+        if(joyCode==-1)
+        {
+            if(joy_down_pressed_player_2 && joy_left_pressed_player_2)
+            {
+                joy_down_pressed_player_2 = false;
+                joy_left_pressed_player_2 = false;
+                return true;
+            }
+        }
+        if(joyCode==-3 && joy_down_pressed_player_2 && joy_right_pressed_player_2)
+        {
+            joy_down_pressed_player_2 = false;
+            joy_right_pressed_player_2 = false;
+            return true;
+        }
+        if(joyCode==-7 && joy_up_pressed_player_2 && joy_left_pressed_player_2)
+        {
+            joy_up_pressed_player_2 = false;
+            joy_left_pressed_player_2 = false;
+            return true;
+        }
+        if(joyCode==-9 && joy_up_pressed_player_2 && joy_right_pressed_player_2)
+        {
+            joy_up_pressed_player_2 = false;
+            joy_right_pressed_player_2 = false;
+            return true;
+        }
+        if(joyCode==-2 && joy_down_pressed_player_2)
+        {
+            joy_down_pressed_player_1 = false;
+            return true;
+        }
+        if(joyCode==-4 && joy_left_pressed_player_2)
+        {
+            joy_left_pressed_player_2 = false;
+            return true;
+        }
+        if(joyCode==-6 && joy_right_pressed_player_2)
+        {
+            joy_right_pressed_player_2 = false;
+            return true;
+        }
+        if(joyCode==-8 && joy_up_pressed_player_2)
+        {
+            joy_up_pressed_player_2 = false;
+            return true;
+        }
+        if(JOYKEYS_player2[joyCode])
+        {
+            JOYKEYS_player2[joyCode] = false;
+            return true;
+        }
+        return false;
+    }
+    return false;
+}
+
 void Receiver::updateInputs()
 {
     //While there's events to handle
