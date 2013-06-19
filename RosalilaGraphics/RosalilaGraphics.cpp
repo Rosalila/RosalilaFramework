@@ -470,112 +470,29 @@ void RosalilaGraphics::drawText(std::string text,int position_x,int position_y)
 
 void RosalilaGraphics::draw3D()
 {
-    //  glViewport (0.0, 0.0, (GLfloat) screen_width, (GLfloat) screen_height);
-    //glDisable(GL_BLEND);
-    glDisable(GL_TEXTURE_2D);
-    glEnable(GL_BLEND);
-    glMatrixMode (GL_PROJECTION);
-    glLoadIdentity ();
-    gluPerspective (45.0, (GLfloat) screen_width / (GLfloat) screen_height, 0.1, 100.0);
-    glMatrixMode (GL_MODELVIEW);
-
-    glEnable (GL_LIGHT0);
-    glEnable (GL_LIGHT1);
-    glLightfv (GL_LIGHT0, GL_AMBIENT, cube.light0Amb);
-    glLightfv (GL_LIGHT0, GL_DIFFUSE, cube.light0Dif);
-    glLightfv (GL_LIGHT0, GL_SPECULAR, cube.light0Spec);
-    glLightfv (GL_LIGHT0, GL_POSITION, cube.light0Pos);
-//    glLightfv (GL_LIGHT1, GL_AMBIENT, cube.light1Amb);
-//    glLightfv (GL_LIGHT1, GL_DIFFUSE, cube.light1Dif);
-//    glLightfv (GL_LIGHT1, GL_SPECULAR, cube.light1Spec);
-//    glLightfv (GL_LIGHT1, GL_POSITION, cube.light1Pos);
-    glLightModelf (GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
-    glMaterialfv (GL_FRONT_AND_BACK, GL_AMBIENT, cube.materialAmb);
-    glMaterialfv (GL_FRONT_AND_BACK, GL_DIFFUSE, cube.materialDif);
-    glMaterialfv (GL_FRONT_AND_BACK, GL_SPECULAR, cube.materialSpec);
-    glMaterialf (GL_FRONT_AND_BACK, GL_SHININESS, cube.materialShininess);
-    glEnable (GL_NORMALIZE);
-
-    cube.logic();
+    for (std::list<Explosion*>::iterator explosion = explosions.begin(); explosion != explosions.end(); explosion++)
+        ((Explosion*)*explosion)->render(this->screen_width,this->screen_height);
 
 
-    //glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-    glLoadIdentity ();
-
-    /* Place the camera */
-    //
-    glPushMatrix ();
-    float pos_x=cube.pos_x;
-    float pos_y=cube.pos_y;
-    //camera align
-    pos_x-=camera_x;
-    pos_y+=camera_y;
-
-    pos_x+=650.0;
-    pos_y+=400.0;
-    glTranslatef (-((screen_width-pos_x)/2.0)/5.0, ((screen_height-pos_y)/2.0)/5.0, -100.0);
-    glRotatef (cube.angle, 0.0, 1.0, 0.0);
-
-
-    /* If no explosion, draw cube */
-
-    if (cube.fuel == 0)
+    std::list<Explosion*>::iterator i = explosions.begin();
+    while (i != explosions.end())
     {
-//        glEnable (GL_LIGHTING);
-//        glDisable (GL_LIGHT0);
-//        glEnable (GL_DEPTH_TEST);
-//        glutSolidCube (4.0);
-    }
-
-    if (cube.fuel > 0)
-    {
-        glPushMatrix ();
-
-        glDisable (GL_LIGHTING);
-        glDisable (GL_DEPTH_TEST);
-
-        glBegin (GL_POINTS);
-
-        for (int i = 0; i < NUM_PARTICLES; i++)
+        Explosion*e=(Explosion*)*i;
+        if (e->iteration>e->duration)
         {
-            glColor3fv (cube.particles[i].color);
-            glVertex3fv (cube.particles[i].position);
+            explosions.erase(i++);
+            delete e;
         }
-
-        glEnd ();
-
-        glPopMatrix ();
-
-        glEnable (GL_LIGHTING);
-        glEnable (GL_LIGHT0);
-        glEnable (GL_DEPTH_TEST);
-
-        glNormal3f (0.0, 0.0, 1.0);
-
-        for (int i = 0; i < NUM_DEBRIS; i++)
+        else
         {
-            glColor3fv (cube.debris[i].color);
-
-            glPushMatrix ();
-
-            glTranslatef (cube.debris[i].position[0],
-            cube.debris[i].position[1],
-            cube.debris[i].position[2]);
-
-            glRotatef (cube.debris[i].orientation[0], 1.0, 0.0, 0.0);
-            glRotatef (cube.debris[i].orientation[1], 0.0, 1.0, 0.0);
-            glRotatef (cube.debris[i].orientation[2], 0.0, 0.0, 1.0);
-
-//            glScalef (cube.debris[i].scale[0],
-//            cube.debris[i].scale[1],
-//            cube.debris[i].scale[2]);
-            drawObject();
-
-            glPopMatrix ();
+            ++i;
         }
     }
-    glPopMatrix();
+}
+
+void RosalilaGraphics::addExplosion(int x,int y)
+{
+    explosions.push_back(new Explosion(x-camera_x,y-camera_y));
 }
 
 void RosalilaGraphics::draw3DCube(int x,int y,float size,Color color)
@@ -646,7 +563,7 @@ void RosalilaGraphics::drawObject()
 
 void RosalilaGraphics::explode(float pos_x,float pos_y)
 {
-    cube.newExplosion(pos_x,pos_y);
+//    explosion.newExplosion(pos_x,pos_y);
 }
 
 void RosalilaGraphics::updateScreen()
@@ -656,7 +573,6 @@ void RosalilaGraphics::updateScreen()
     error+=SDL_GetError();
     if(error!=">>>")
         writeLogLine(error);
-
 
     //Draw
     frameCap();

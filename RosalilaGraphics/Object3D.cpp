@@ -28,11 +28,6 @@ Object3D::Object3D()
         }
     };
     size=2.0;
-
-//    faces.push_back(new Face(0,1,2));
-//    faces.push_back(new Face(0,2,3));
-//    faces.push_back(new Face(4,0,3));
-//    faces.push_back(new Face(5,4,3));
 }
 
 GLfloat* Object3D::getVertex(int number)

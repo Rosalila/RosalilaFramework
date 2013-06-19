@@ -2,6 +2,7 @@
 #define GRAFICO_H
 
 #include <iostream>
+#include <list>
 #include "SDL/SDL_image.h"
 #include "SDL/SDL_ttf.h"
 #include "TinyXml/tinyxml.h"
@@ -14,6 +15,7 @@
 #include "RosalilaGraphics/smpeg.h"
 #include "RosalilaGraphics/Image.h"
 #include "RosalilaGraphics/Timer.h"
+#include "RosalilaGraphics/Explosion.h"
 #include "RosalilaGraphics/Cube.h"
 #include "RosalilaGraphics/Object3D.h"
 #include "RosalilaUtility/RosalilaUtility.h"
@@ -88,6 +90,7 @@ class RosalilaGraphics
     Timer *update;
 
     //3D
+    list<Explosion*> explosions;
     Cube cube;
 
     RosalilaGraphics();
@@ -109,6 +112,7 @@ class RosalilaGraphics
     void draw3D();
     void draw3DCube(int x,int y,float size,Color color);
     void explode(float pos_x,float pos_y);
+    void addExplosion(int x,int y);
     void drawObject();
     void updateScreen();
     void frameCap();
