@@ -22,11 +22,11 @@ bool Boton::estaPresionado()
 {
     if(usando_joystick)
     {
-        if(receiver->IsJoyDown(joystick,num_joystick))
+        if(receiver->isJoyDown(joystick,num_joystick))
             return true;
     }else
     {
-        if (receiver->IsKeyDownn(teclado))
+        if (receiver->isKeyDown(teclado))
             return true;
     }
     return false;

@@ -19,10 +19,12 @@ private:
     int joystick;
 public:
     Receiver();
-    bool IsKeyDownn(int keycode);
-    bool IsKeyPressed(int keycode);
-    bool IsJoyDown(int joyCode,int joystick);
-    bool IsJoyPressed(int joyCode,int joystick);
+    bool isKeyDown(int keycode);
+    bool isKeyPressed(int keycode);
+    bool isOuyaDown(char key);
+    bool isOuyaPressed(char key);
+    bool isJoyDown(int joyCode,int joystick);
+    bool isJoyPressed(int joyCode,int joystick);
     void endEventProcess();
     void startEventProcess();
     //SDL

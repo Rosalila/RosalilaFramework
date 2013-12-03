@@ -26,7 +26,7 @@ Receiver::Receiver()
     SDL_EnableKeyRepeat(0,0);
 }
 
-bool Receiver::IsKeyPressed(int keycode)
+bool Receiver::isKeyPressed(int keycode)
 {
   if(KEYS[keycode])
   {
@@ -36,7 +36,7 @@ bool Receiver::IsKeyPressed(int keycode)
   return false;
 }
 
-bool Receiver::IsKeyDownn(int keycode)
+bool Receiver::isKeyDown(int keycode)
 {
   if(KEYS[keycode])
   {
@@ -54,7 +54,19 @@ bool Receiver::IsKeyDownn(int keycode)
 //  }
 }
 
-bool Receiver::IsJoyDown(int joyCode,int joystick)
+bool Receiver::isOuyaDown(char key)
+{
+    //Unimplemented for PC
+    return false;
+}
+
+bool Receiver::isOuyaPressed(char key)
+{
+    //Unimplemented for PC
+    return false;
+}
+
+bool Receiver::isJoyDown(int joyCode,int joystick)
 {
     if(joystick==0)
     {
@@ -107,7 +119,7 @@ bool Receiver::IsJoyDown(int joyCode,int joystick)
     return false;
 }
 
-bool Receiver::IsJoyPressed(int joyCode,int joystick)
+bool Receiver::isJoyPressed(int joyCode,int joystick)
 {
     if(joystick==0)
     {
