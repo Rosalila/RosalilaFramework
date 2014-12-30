@@ -1,4 +1,4 @@
-#include "RosalilaMenus/MenuGallery.h"
+#include "MenuGallery.h"
 
 MenuGallery::MenuGallery(RosalilaGraphics*painter,int x, int y,
                    int size_x,int size_y,

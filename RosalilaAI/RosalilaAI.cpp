@@ -1,4 +1,4 @@
-#include "RosalilaAI/RosalilaAI.h"
+#include "RosalilaAI.h"
 
 RosalilaAI::RosalilaAI(std::string archivo,std::string archivo_default)
 {

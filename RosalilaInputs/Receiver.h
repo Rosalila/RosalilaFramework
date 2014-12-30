@@ -7,7 +7,7 @@
 #include <stdarg.h>
 using namespace std;
 
-#include "TinyXml/tinyxml.h"
+#include "../TinyXml/tinyxml.h"
 #include "SDL/SDL.h"
 
 

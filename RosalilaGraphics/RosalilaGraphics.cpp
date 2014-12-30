@@ -1,4 +1,4 @@
-#include "RosalilaGraphics/RosalilaGraphics.h"
+#include "RosalilaGraphics.h"
 
 RosalilaGraphics::RosalilaGraphics()
 {
@@ -470,8 +470,8 @@ void RosalilaGraphics::drawText(std::string text,int position_x,int position_y)
 
 void RosalilaGraphics::draw3D()
 {
-    for (std::list<Explosion*>::iterator explosion = explosions.begin(); explosion != explosions.end(); explosion++)
-        ((Explosion*)*explosion)->render(this->screen_width,this->screen_height);
+//    for (std::list<Explosion*>::iterator explosion = explosions.begin(); explosion != explosions.end(); explosion++)
+//        ((Explosion*)*explosion)->render(this->screen_width,this->screen_height);
 
 
     std::list<Explosion*>::iterator i = explosions.begin();
@@ -492,7 +492,7 @@ void RosalilaGraphics::draw3D()
 
 void RosalilaGraphics::addExplosion(int x,int y)
 {
-    explosions.push_back(new Explosion(x-camera_x,y-camera_y));
+//    explosions.push_back(new Explosion(x-camera_x,y-camera_y));
 }
 
 void RosalilaGraphics::draw3DCube(int x,int y,float size,Color color)

@@ -1,12 +1,12 @@
 #ifndef MENUCONTENEDOR_H
 #define MENUCONTENEDOR_H
 
-#include "RosalilaMenus/Elemento.h"
-#include "RosalilaMenus/MenuLista.h"
-#include "RosalilaMenus/MenuBarra.h"
-#include "RosalilaMenus/MenuBoton.h"
-#include "RosalilaMenus/MenuImagen.h"
-#include "RosalilaMenus/MenuTexto.h"
+#include "Elemento.h"
+#include "MenuLista.h"
+#include "MenuBarra.h"
+#include "MenuBoton.h"
+#include "MenuImagen.h"
+#include "MenuTexto.h"
 
 class MenuContenedor:Elemento
 {

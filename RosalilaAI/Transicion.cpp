@@ -1,4 +1,4 @@
-#include "RosalilaAI/Transicion.h"
+#include "Transicion.h"
 
 Transicion::Transicion(std::string input,std::string destino,bool recompensable)
 {

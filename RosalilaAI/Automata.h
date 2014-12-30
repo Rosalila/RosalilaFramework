@@ -2,9 +2,9 @@
 #define AUTOMATA_H
 
 
-#include "RosalilaAI/Estado.h"
-#include "TinyXml/tinyxml.h"
-#include "RosalilaUtility/RosalilaUtility.h"
+#include "Estado.h"
+#include "../TinyXml/tinyxml.h"
+#include "../RosalilaUtility/RosalilaUtility.h"
 #include <vector>
 using namespace std;
 

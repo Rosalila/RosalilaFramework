@@ -1,7 +1,7 @@
 #ifndef BOTON_H
 #define BOTON_H
 
-#include "RosalilaInputs/Receiver.h"
+#include "../RosalilaInputs/Receiver.h"
 
 class Boton
 {

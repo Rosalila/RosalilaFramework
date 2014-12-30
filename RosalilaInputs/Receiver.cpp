@@ -1,4 +1,4 @@
-#include "RosalilaInputs/RosalilaInputs.h"
+#include "RosalilaInputs.h"
 
 Receiver::Receiver()
 {

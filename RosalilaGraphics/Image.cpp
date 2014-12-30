@@ -1,4 +1,4 @@
-#include "RosalilaGraphics/RosalilaGraphics.h"
+#include "RosalilaGraphics.h"
 
 Image::Image()
 {

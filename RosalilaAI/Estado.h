@@ -1,12 +1,12 @@
 #ifndef ESTADO_H
 #define ESTADO_H
 
-#include "RosalilaAI/Transicion.h"
+#include "Transicion.h"
 #include <cstdlib>
 #include <iostream>
 #include <vector>
 using namespace std;
-#include "RosalilaAI/Estado.h"
+#include "Estado.h"
 
 class Estado
 {

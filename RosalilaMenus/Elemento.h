@@ -1,7 +1,7 @@
 #ifndef ELEMENTO_H
 #define ELEMENTO_H
 
-#include "RosalilaGraphics/RosalilaGraphics.h"
+#include "../RosalilaGraphics/RosalilaGraphics.h"
 
 class Elemento
 {

@@ -1,4 +1,4 @@
-#include "RosalilaMenus/MenuCharSelect.h"
+#include "MenuCharSelect.h"
 
 MenuCharSelect::MenuCharSelect(RosalilaGraphics*painter,int x, int y,
                    int size_x,int size_y,

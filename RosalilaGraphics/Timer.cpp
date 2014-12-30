@@ -1,5 +1,5 @@
 #include "SDL/SDL.h"
-#include "RosalilaGraphics/Timer.h"
+#include "Timer.h"
 
 Timer::Timer()
 {

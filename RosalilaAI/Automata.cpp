@@ -1,4 +1,4 @@
-#include "RosalilaAI/Automata.h"
+#include "Automata.h"
 
 Automata::Automata(std::string archivo,std::string archivo_default)
 {

@@ -1,7 +1,7 @@
 #ifndef MENUIMAGEN_H
 #define MENUIMAGEN_H
 
-#include "RosalilaMenus/Elemento.h"
+#include "Elemento.h"
 
 class MenuImagen:Elemento
 {

@@ -4,10 +4,10 @@
 #include <GL/gl.h>
 #include <stdio.h>
 
-#include "TinyXml/tinyxml.h"
-#include "RosalilaGraphics/RosalilaGraphics.h"
-#include "RosalilaSound/RosalilaSound.h"
-#include "RosalilaInputs/RosalilaInputs.h"
+#include "../TinyXml/tinyxml.h"
+#include "RosalilaGraphics.h"
+#include "../RosalilaSound/RosalilaSound.h"
+#include "../RosalilaInputs/RosalilaInputs.h"
 
 class Animation
 {

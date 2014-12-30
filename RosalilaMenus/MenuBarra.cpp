@@ -1,4 +1,4 @@
-#include "RosalilaMenus/MenuBarra.h"
+#include "MenuBarra.h"
 
 MenuBarra::MenuBarra(RosalilaGraphics*painter,int x, int y, int width, int height,
           Image*fondo,int barra_x,int barra_y,Image*barra,

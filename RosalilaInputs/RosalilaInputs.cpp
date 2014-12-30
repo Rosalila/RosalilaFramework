@@ -1,4 +1,4 @@
-#include "RosalilaInputs/RosalilaInputs.h"
+#include "RosalilaInputs.h"
 #include <sstream>
 
 void RosalilaInputs::actualizarBuffer(std::map<std::string,std::string>*strings,

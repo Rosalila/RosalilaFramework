@@ -5,20 +5,20 @@
 #include <list>
 #include "SDL/SDL_image.h"
 #include "SDL/SDL_ttf.h"
-#include "TinyXml/tinyxml.h"
+#include "../TinyXml/tinyxml.h"
 
 #include <GL/freeglut.h>
 #include <GL/gl.h>
 #include <stdio.h>
 
 
-#include "RosalilaGraphics/smpeg.h"
-#include "RosalilaGraphics/Image.h"
-#include "RosalilaGraphics/Timer.h"
-#include "RosalilaGraphics/Explosion.h"
-#include "RosalilaGraphics/Cube.h"
-#include "RosalilaGraphics/Object3D.h"
-#include "RosalilaUtility/RosalilaUtility.h"
+#include "../RosalilaGraphics/smpeg.h"
+#include "../RosalilaGraphics/Image.h"
+#include "../RosalilaGraphics/Timer.h"
+#include "../RosalilaGraphics/Explosion.h"
+#include "../RosalilaGraphics/Cube.h"
+#include "../RosalilaGraphics/Object3D.h"
+#include "../RosalilaUtility/RosalilaUtility.h"
 
 #include <iostream>
 #include <fstream>

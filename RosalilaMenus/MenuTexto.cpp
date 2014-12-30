@@ -1,4 +1,4 @@
-#include "RosalilaMenus/MenuTexto.h"
+#include "MenuTexto.h"
 
 MenuTexto::MenuTexto(RosalilaGraphics*painter,int x, int y, std::string texto)
 {

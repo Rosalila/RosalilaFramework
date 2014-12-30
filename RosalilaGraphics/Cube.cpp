@@ -1,4 +1,4 @@
-#include "RosalilaGraphics/Cube.h"
+#include "Cube.h"
 
 Cube::Cube()
 {

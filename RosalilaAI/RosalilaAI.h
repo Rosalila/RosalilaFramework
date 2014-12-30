@@ -1,7 +1,7 @@
 #ifndef RosalilaAI_H
 #define RosalilaAI_H
 
-#include "RosalilaAI/Automata.h"
+#include "Automata.h"
 #include <cstdlib>
 #include <iostream>
 using namespace std;

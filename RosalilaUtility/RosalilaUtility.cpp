@@ -1,4 +1,4 @@
-#include "RosalilaUtility/RosalilaUtility.h"
+#include "RosalilaUtility.h"
 
 bool writeLogLine(std::string text)
 {

@@ -1,4 +1,4 @@
-#include "RosalilaInputs/Boton.h"
+#include "Boton.h"
 
 Boton::Boton(Receiver* receiver,int teclado,std::string mapeo)
 {

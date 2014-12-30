@@ -1,4 +1,4 @@
-#include "RosalilaMenus/MenuBoton.h"
+#include "MenuBoton.h"
 
 MenuBoton::MenuBoton(RosalilaGraphics*painter,int x, int y, int width, int height,
           Image* imagen,int alineacion_texto_x,int alineacion_texto_y, std::string texto,

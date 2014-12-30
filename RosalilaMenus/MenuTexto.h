@@ -1,7 +1,7 @@
 #ifndef MENUTEXTO_H
 #define MENUTEXTO_H
 
-#include "RosalilaMenus/Elemento.h"
+#include "Elemento.h"
 
 class MenuTexto:Elemento
 {

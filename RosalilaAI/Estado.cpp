@@ -1,4 +1,4 @@
-#include "RosalilaAI/Estado.h"
+#include "Estado.h"
 
 Estado::Estado(vector<Transicion*>transiciones)
 {

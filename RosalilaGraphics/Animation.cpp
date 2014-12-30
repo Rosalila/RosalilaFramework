@@ -1,4 +1,4 @@
-#include "RosalilaGraphics/Animation.h"
+#include "Animation.h"
 
 Animation::Animation(int x,int y,int animation_velocity,RosalilaGraphics* painter)
 {

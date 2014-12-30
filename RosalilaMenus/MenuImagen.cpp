@@ -1,4 +1,4 @@
-#include "RosalilaMenus/MenuImagen.h"
+#include "MenuImagen.h"
 
 MenuImagen::MenuImagen(RosalilaGraphics*painter,int x, int y, int displacement_x, int displacement_y,int stop_displacement_x_at,int stop_displacement_y_at, int fade_in_initial,int fade_in_speed, int width, int height,Image* imagen,std::string value)
 {
