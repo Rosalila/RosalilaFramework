@@ -2,15 +2,18 @@
 
 Receiver::Receiver()
 {
-    for(int i = 0; i < 322; i++) { // init them all to false
-       KEYS[i] = false;
+    for(int i = 0; i < 322; i++)   // init them all to false
+    {
+        KEYS[i] = false;
     }
 
-    for(int i = 0; i < max_joystick_inputs; i++) { // init them all to false
-       JOYKEYS_player1[i] = false;
+    for(int i = 0; i < max_joystick_inputs; i++)   // init them all to false
+    {
+        JOYKEYS_player1[i] = false;
     }
-    for(int i = 0; i < max_joystick_inputs; i++) { // init them all to false
-       JOYKEYS_player2[i] = false;
+    for(int i = 0; i < max_joystick_inputs; i++)   // init them all to false
+    {
+        JOYKEYS_player2[i] = false;
     }
 
     joy_up_pressed_player_1=false;
@@ -28,22 +31,22 @@ Receiver::Receiver()
 
 bool Receiver::isKeyPressed(int keycode)
 {
-  if(KEYS[keycode])
-  {
-      KEYS[keycode]=false;
-      return true;
-  }
-  return false;
+    if(KEYS[keycode])
+    {
+        KEYS[keycode]=false;
+        return true;
+    }
+    return false;
 }
 
 bool Receiver::isKeyDown(int keycode)
 {
-  if(KEYS[keycode])
-  {
-      //KEYS[keycode]=false;
-      return true;
-  }
-  return false;
+    if(KEYS[keycode])
+    {
+        //KEYS[keycode]=false;
+        return true;
+    }
+    return false;
 //  if (keystates[keycode])
 //  {
 //     return true;
@@ -88,7 +91,7 @@ bool Receiver::isJoyDown(int joyCode,int joystick)
             return joy_up_pressed_player_1;
         if(JOYKEYS_player1[joyCode])
         {
-          return true;
+            return true;
         }
         return false;
     }
@@ -112,7 +115,7 @@ bool Receiver::isJoyDown(int joyCode,int joystick)
             return joy_up_pressed_player_2;
         if(JOYKEYS_player2[joyCode])
         {
-          return true;
+            return true;
         }
         return false;
     }
@@ -257,18 +260,18 @@ void Receiver::updateInputs()
         }
         if( event.type == SDL_JOYBUTTONDOWN )
         {
-            for(int i=0;i<max_joystick_inputs;i++)
+            for(int i=0; i<max_joystick_inputs; i++)
             {
                 if ( event.jbutton.button == i
-                    && event.jbutton.which==0)
+                        && event.jbutton.which==0)
                 {
                     JOYKEYS_player1[i]=true;
                 }
             }
-            for(int i=0;i<max_joystick_inputs;i++)
+            for(int i=0; i<max_joystick_inputs; i++)
             {
                 if ( event.jbutton.button == i
-                    && event.jbutton.which==1)
+                        && event.jbutton.which==1)
                 {
                     JOYKEYS_player2[i]=true;
                 }
@@ -276,23 +279,106 @@ void Receiver::updateInputs()
         }
         if( event.type == SDL_JOYBUTTONUP )
         {
-            for(int i=0;i<max_joystick_inputs;i++)
+            for(int i=0; i<max_joystick_inputs; i++)
             {
                 if ( event.jbutton.button == i
-                    && event.jbutton.which==0)
+                        && event.jbutton.which==0)
                 {
                     JOYKEYS_player1[i]=false;
                 }
             }
-            for(int i=0;i<max_joystick_inputs;i++)
+            for(int i=0; i<max_joystick_inputs; i++)
             {
                 if ( event.jbutton.button == i
-                    && event.jbutton.which==1)
+                        && event.jbutton.which==1)
                 {
                     JOYKEYS_player2[i]=false;
                 }
             }
         }
+
+        if( event.type == SDL_JOYHATMOTION)
+        {
+            //If joystick 0 has moved
+            if( event.jhat.which == 0 )
+            {
+                joy_left_pressed_player_1=false;
+                joy_right_pressed_player_1=false;
+                joy_up_pressed_player_1=false;
+                joy_down_pressed_player_1=false;
+                switch(event.jhat.value)
+                {
+                case 8://Left
+                    joy_left_pressed_player_1=true;
+                    break;
+                case 2://Right
+                    joy_right_pressed_player_1=true;
+                    break;
+                case 1://Up
+                    joy_up_pressed_player_1=true;
+                    break;
+                case 4://Down
+                    joy_down_pressed_player_1=true;
+                    break;
+                case 9://Left up
+                    joy_left_pressed_player_1=true;
+                    joy_up_pressed_player_1=true;
+                    break;
+                case 3://Right up
+                    joy_right_pressed_player_1=true;
+                    joy_up_pressed_player_1=true;
+                    break;
+                case 12://left down
+                    joy_left_pressed_player_1=true;
+                    joy_down_pressed_player_1=true;
+                    break;
+                case 6://Right down
+                    joy_right_pressed_player_1=true;
+                    joy_down_pressed_player_1=true;
+                    break;
+                }
+
+            }
+            if( event.jhat.which == 1 )
+            {
+                joy_left_pressed_player_2=false;
+                joy_right_pressed_player_2=false;
+                joy_up_pressed_player_2=false;
+                joy_down_pressed_player_2=false;
+                switch(event.jhat.value)
+                {
+                case 8://Left
+                    joy_left_pressed_player_2=true;
+                    break;
+                case 2://Right
+                    joy_right_pressed_player_2=true;
+                    break;
+                case 1://Up
+                    joy_up_pressed_player_2=true;
+                    break;
+                case 4://Down
+                    joy_down_pressed_player_2=true;
+                    break;
+                case 9://Left up
+                    joy_left_pressed_player_2=true;
+                    joy_up_pressed_player_2=true;
+                    break;
+                case 3://Right up
+                    joy_right_pressed_player_2=true;
+                    joy_up_pressed_player_2=true;
+                    break;
+                case 12://left down
+                    joy_left_pressed_player_2=true;
+                    joy_down_pressed_player_2=true;
+                    break;
+                case 6://Right down
+                    joy_right_pressed_player_2=true;
+                    joy_down_pressed_player_2=true;
+                    break;
+                }
+            }
+        }
+
         if( event.type == SDL_JOYAXISMOTION )
         {
             //If joystick 0 has moved
@@ -310,10 +396,12 @@ void Receiver::updateInputs()
                         if( event.jaxis.value < 0 )
                         {
                             joy_left_pressed_player_1=true;
+                            joy_right_pressed_player_1=false;
                         }
                         else
                         {
                             joy_right_pressed_player_1=true;
+                            joy_left_pressed_player_1=false;
                         }
                     }
                 }
@@ -330,17 +418,16 @@ void Receiver::updateInputs()
                         if( event.jaxis.value < 0 )
                         {
                             joy_up_pressed_player_1=true;
+                            joy_down_pressed_player_1=false;
                         }
                         else
                         {
                             joy_down_pressed_player_1=true;
+                            joy_up_pressed_player_1=false;
                         }
                     }
                 }
             }
-
-
-
 
             if( event.jaxis.which == 1 )
             {
@@ -388,10 +475,8 @@ void Receiver::updateInputs()
                     }
                 }
             }
-
-
-
         }
+
     }
     keystates = SDL_GetKeyState( NULL );
 }

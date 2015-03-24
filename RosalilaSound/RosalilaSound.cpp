@@ -34,7 +34,7 @@ void Sound::playSound(std::string variable)
 
     if(sounds[variable]!=NULL)
     {
-        Mix_PlayChannel( -1, sounds[variable], 0 );
+        Mix_PlayChannel( 1, sounds[variable], 0 );
     }
 }
 

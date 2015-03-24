@@ -8,6 +8,7 @@ class RosalilaInputs
 {
 protected:
     std::vector<std::string> buffer_inputs;
+    std::vector<std::string> printable_buffer_inputs;
     int jugador;
 
 public:
@@ -27,7 +28,8 @@ vector<Boton> cruz;
                           std::map<std::string,int>*enteros,
                           std::map<std::string,int>*enteros_contrario
                           );
-    std::vector<std::string> getBufferRosalilaInputss();
+    std::vector<std::string> getBufferRosalilaInputs();
+    std::vector<std::string> getPrintableBufferRosalilaInputs();
     void endEventProcess();
     void startEventProcess();
 };

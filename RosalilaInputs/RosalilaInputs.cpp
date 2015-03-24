@@ -56,6 +56,12 @@ void RosalilaInputs::actualizarBuffer(std::map<std::string,std::string>*strings,
     }
     buffer_inputs.insert(buffer_inputs.begin(),resultado);
     buffer_inputs.pop_back();
+
+    if(resultado!=printable_buffer_inputs[0])
+    {
+        printable_buffer_inputs.insert(printable_buffer_inputs.begin(),resultado);
+        printable_buffer_inputs.pop_back();
+    }
 }
 
 void RosalilaInputs::actualizarBuffer()
@@ -97,9 +103,14 @@ void RosalilaInputs::actualizarBuffer()
     buffer_inputs.pop_back();
 }
 
-vector<std::string> RosalilaInputs::getBufferRosalilaInputss()
+vector<std::string> RosalilaInputs::getBufferRosalilaInputs()
 {
     return buffer_inputs;
+}
+
+vector<std::string> RosalilaInputs::getPrintableBufferRosalilaInputs()
+{
+    return printable_buffer_inputs;
 }
 
 //std::string stringw_to_stdstring(irr::core::stringw sw)
@@ -217,6 +228,8 @@ void RosalilaInputs::loadFromXML(int jugador,Receiver* receiver)
     tecla_arriba=true;
     for(int i=0;i<20;i++)
         buffer_inputs.push_back("5");
+    for(int i=0;i<20;i++)
+        printable_buffer_inputs.push_back("5");
     for(int i=0;i<(int)botones_temp.size();i++)
     {
         if(botones_temp[i].getMapeo()=="2" || botones_temp[i].getMapeo()=="4" || botones_temp[i].getMapeo()=="6" || botones_temp[i].getMapeo()=="8")
@@ -237,11 +250,15 @@ void RosalilaInputs::cargarRosalilaAIXML(int jugador,std::string archivo,std::st
     tecla_arriba=true;
     for(int i=0;i<20;i++)
         buffer_inputs.push_back("5");
+    for(int i=0;i<20;i++)
+        printable_buffer_inputs.push_back("5");
     ia=new RosalilaAI(archivo,archivo_default);
 
     tecla_arriba=true;
     for(int i=0;i<20;i++)
         buffer_inputs.push_back("5");
+    for(int i=0;i<20;i++)
+        printable_buffer_inputs.push_back("5");
     for(int i=0;i<(int)botones.size();i++)
     {
         if(botones[i].getMapeo()=="2" || botones[i].getMapeo()=="4" || botones[i].getMapeo()=="6" || botones[i].getMapeo()=="8")
