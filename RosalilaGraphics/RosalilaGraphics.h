@@ -87,6 +87,7 @@ class RosalilaGraphics
     //Set fps
     int frames_per_seccond;
     int frame;
+    int current_fps;
     Timer *fps;
     Timer *update;
 
@@ -118,6 +119,7 @@ class RosalilaGraphics
     void drawObject();
     void updateScreen();
     void frameCap();
+    int getFrameCap();
     void resetScreen();
     void video(RosalilaGraphics*painter);
 };

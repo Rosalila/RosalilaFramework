@@ -415,16 +415,18 @@ void RosalilaGraphics::frameCap()
         SDL_Delay( ( 1000 / frames_per_seccond ) - update->get_ticks() );
     }
 
-    std::string caption;
-
-    //Calculate the frames per second and create the string
-    caption = "Average Frames Per Second: " + toString(frame / ( fps->get_ticks() / 1000.f ));
+    current_fps=frame / ( fps->get_ticks() / 1000.f );
 
 //    //Reset the caption
 //    SDL_WM_SetCaption( caption.c_str(), NULL );
 
     //Restart the update timer
     update->start();
+}
+
+int RosalilaGraphics::getFrameCap()
+{
+    return current_fps;
 }
 
 void RosalilaGraphics::drawText(std::string text,int position_x,int position_y)
