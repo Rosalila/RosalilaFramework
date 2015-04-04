@@ -1,4 +1,4 @@
-#include "SDL/SDL_image.h"
+#include "SDL2/SDL_image.h"
 
 #include <GL/freeglut.h>
 #include <GL/gl.h>

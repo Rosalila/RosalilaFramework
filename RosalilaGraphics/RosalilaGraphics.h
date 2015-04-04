@@ -3,8 +3,8 @@
 
 #include <iostream>
 #include <list>
-#include "SDL/SDL_image.h"
-#include "SDL/SDL_ttf.h"
+#include "SDL2/SDL_image.h"
+#include "SDL2/SDL_ttf.h"
 #include "../TinyXml/tinyxml.h"
 
 #include <GL/freeglut.h>
@@ -72,7 +72,8 @@ public:
 class RosalilaGraphics
 {
     public:
-    SDL_Surface* screen;
+    SDL_Window* window;
+    SDL_Renderer* renderer;
     TTF_Font* font;
     SDL_Color textColor;
     int screen_width;

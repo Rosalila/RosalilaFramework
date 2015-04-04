@@ -26,7 +26,7 @@ Receiver::Receiver()
     joy_right_pressed_player_2=false;
 
 
-    SDL_EnableKeyRepeat(0,0);
+//    SDL_EnableKeyRepeat(0,0);
 }
 
 bool Receiver::isKeyPressed(int keycode)
@@ -41,6 +41,12 @@ bool Receiver::isKeyPressed(int keycode)
 
 bool Receiver::isKeyDown(int keycode)
 {
+    if(keycode>=332)
+    {
+        cout<<keycode<<endl;cout.flush();
+//        exit(keycode);
+        return false;
+    }
     if(KEYS[keycode])
     {
         //KEYS[keycode]=false;
@@ -478,5 +484,5 @@ void Receiver::updateInputs()
         }
 
     }
-    keystates = SDL_GetKeyState( NULL );
+    //SDL_GetKeyboardState( NULL );
 }

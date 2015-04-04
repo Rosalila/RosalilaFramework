@@ -8,7 +8,7 @@
 using namespace std;
 
 #include "../TinyXml/tinyxml.h"
-#include "SDL/SDL.h"
+#include "SDL2/SDL.h"
 
 
 const int max_joystick_inputs=50;
@@ -39,7 +39,6 @@ public:
     bool joy_down_pressed_player_2;
     bool joy_left_pressed_player_2;
     bool joy_right_pressed_player_2;
-    Uint8 *keystates;//key down
     void updateInputs();
 };
 

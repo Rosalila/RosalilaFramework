@@ -21,47 +21,47 @@
 
 #ifndef _MPEGFILTER_H_
 #define _MPEGFILTER_H_
-
-/* SMPEG filter info flags */
-#define SMPEG_FILTER_INFO_MB_ERROR    1
-#define SMPEG_FILTER_INFO_PIXEL_ERROR 2
-
-/* Filter info from SMPEG */
-typedef struct SMPEG_FilterInfo {
-  Uint16* yuv_mb_square_error;
-  Uint16* yuv_pixel_square_error;
-} SMPEG_FilterInfo;
-
-/* MPEG filter definition */
-struct SMPEG_Filter;
-
-/* Callback functions for the filter */
-typedef void (* SMPEG_FilterCallback)( SDL_Overlay * dest, SDL_Overlay * source, SDL_Rect * region, SMPEG_FilterInfo * filter_info, void * data );
-typedef void (* SMPEG_FilterDestroy)( struct SMPEG_Filter * filter );
-
-/* The filter definition itself */
-typedef struct SMPEG_Filter {
-  Uint32 flags;
-  void * data;
-  SMPEG_FilterCallback callback;
-  SMPEG_FilterDestroy destroy;
-} SMPEG_Filter;
-
-/* SMPEG built-in filters. */
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-/* The null filter (default). It simply copies the source rectangle to the video overlay. */ 
-extern DECLSPEC SMPEG_Filter * SMPEGfilter_null(void);
-
-/* The bilinear filter. A basic low-pass filter that will produce a smoother image. */ 
-extern DECLSPEC SMPEG_Filter * SMPEGfilter_bilinear(void);
-
-/* The deblocking filter. It filters block borders and non-intra coded blocks to reduce blockiness */ 
-extern DECLSPEC SMPEG_Filter * SMPEGfilter_deblocking(void);
-
-#ifdef __cplusplus
-};
-#endif
+//
+///* SMPEG filter info flags */
+//#define SMPEG_FILTER_INFO_MB_ERROR    1
+//#define SMPEG_FILTER_INFO_PIXEL_ERROR 2
+//
+///* Filter info from SMPEG */
+//typedef struct SMPEG_FilterInfo {
+//  Uint16* yuv_mb_square_error;
+//  Uint16* yuv_pixel_square_error;
+//} SMPEG_FilterInfo;
+//
+///* MPEG filter definition */
+//struct SMPEG_Filter;
+//
+///* Callback functions for the filter */
+//typedef void (* SMPEG_FilterCallback)( SDL_Overlay * dest, SDL_Overlay * source, SDL_Rect * region, SMPEG_FilterInfo * filter_info, void * data );
+//typedef void (* SMPEG_FilterDestroy)( struct SMPEG_Filter * filter );
+//
+///* The filter definition itself */
+//typedef struct SMPEG_Filter {
+//  Uint32 flags;
+//  void * data;
+//  SMPEG_FilterCallback callback;
+//  SMPEG_FilterDestroy destroy;
+//} SMPEG_Filter;
+//
+///* SMPEG built-in filters. */
+//#ifdef __cplusplus
+//extern "C" {
+//#endif
+//
+///* The null filter (default). It simply copies the source rectangle to the video overlay. */
+//extern DECLSPEC SMPEG_Filter * SMPEGfilter_null(void);
+//
+///* The bilinear filter. A basic low-pass filter that will produce a smoother image. */
+//extern DECLSPEC SMPEG_Filter * SMPEGfilter_bilinear(void);
+//
+///* The deblocking filter. It filters block borders and non-intra coded blocks to reduce blockiness */
+//extern DECLSPEC SMPEG_Filter * SMPEGfilter_deblocking(void);
+//
+//#ifdef __cplusplus
+//};
+//#endif
 #endif /* _MPEGFILTER_H_ */

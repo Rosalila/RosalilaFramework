@@ -46,7 +46,6 @@ RosalilaGraphics::RosalilaGraphics()
         font_blue=atoi(font_element->Attribute("blue"));
     }
     //Internal initializations
-    screen=NULL;
     joystick_1 = NULL;
     joystick_2 = NULL;
 
@@ -54,7 +53,7 @@ RosalilaGraphics::RosalilaGraphics()
     camera_x=camera_y=0;
 
     //Initialize all SDL subsystems
-    if( SDL_Init( SDL_INIT_EVERYTHING | SDL_INIT_AUDIO | SDL_INIT_VIDEO ) == -1 )
+    if( SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK) < 0 )
     {
         writeLogLine(SDL_GetError());
         return;
@@ -81,11 +80,18 @@ RosalilaGraphics::RosalilaGraphics()
 
     SDL_GL_SetAttribute( SDL_GL_DOUBLEBUFFER, 1 ); // *new*
 
-    //Set up the screen
-    if(!fullscreen)
-        screen = SDL_SetVideoMode( screen_resized_width, screen_resized_height, screen_bpp, SDL_OPENGL );
-    else
-        screen = SDL_SetVideoMode( 0, 0, screen_bpp, SDL_OPENGL | SDL_FULLSCREEN );
+    window = SDL_CreateWindow( "SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+                               screen_resized_width, screen_resized_height,
+                               SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN );
+
+    SDL_SetWindowFullscreen(window,SDL_WINDOW_FULLSCREEN);
+
+    renderer = SDL_CreateRenderer(window, -1, 0);
+//    //Set up the screen
+//    if(!fullscreen)
+//        screen = SDL_SetVideoMode( screen_resized_width, screen_resized_height, screen_bpp, SDL_OPENGL );
+//    else
+//        screen = SDL_SetVideoMode( 0, 0, screen_bpp, SDL_OPENGL | SDL_FULLSCREEN );
 
     //Set the openGL state?
     glEnable( GL_TEXTURE_2D );
@@ -94,7 +100,7 @@ RosalilaGraphics::RosalilaGraphics()
 
     glClearColor( 0.0f, 0.0f, 0.0f, 0.0f );
 
-    glViewport( 0, 0, screen->w, screen->h );
+    glViewport( 0, 0, screen_resized_width, screen_resized_height );
 
     glClear( GL_COLOR_BUFFER_BIT );
 
@@ -113,16 +119,6 @@ RosalilaGraphics::RosalilaGraphics()
     update=new Timer();
     fps->start();
     update->start();
-
-    //If there was an error in setting up the screen
-    if( screen == NULL )
-    {
-        writeLogLine("Error: Could not initialize SDL screen.");
-        return;
-    }
-
-    //Set the window caption
-    SDL_WM_SetCaption( "Rosalila fighter engine", NULL );
 
     //Init joysticks
     if( SDL_NumJoysticks() == 1 )
@@ -151,6 +147,14 @@ RosalilaGraphics::RosalilaGraphics()
 
     //If everything initialized fine
     writeLogLine("Success! SDL initialized.");
+
+    GLenum error = GL_NO_ERROR;
+    error = glGetError();
+    if( error != GL_NO_ERROR ) {
+         printf( "Error initializing OpenGL! %s\n", gluErrorString( error ) );
+         exit(12);
+    }
+
     return;
 }
 
@@ -165,9 +169,6 @@ void RosalilaGraphics::resetScreen()
 
 RosalilaGraphics::~RosalilaGraphics()
 {
-    //Free the surface
-    SDL_FreeSurface( screen );
-
     //Quit SDL
     SDL_Quit();
 }
@@ -211,6 +212,9 @@ Image* RosalilaGraphics::getTexture(std::string filename)
             glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
             glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
 
+//for(int x=0;x<surface->w;x++)
+//for(int y=0;y<surface->h;y++)
+//((unsigned int*)surface->pixels)[y*(surface->pitch/sizeof(unsigned int)) + x]+=1;
         // Edit the texture object's image data using the information SDL_Surface gives us
         glTexImage2D( GL_TEXTURE_2D, 0, nOfColors, surface->w, surface->h, 0,
                           texture_format, GL_UNSIGNED_BYTE, surface->pixels );
@@ -397,8 +401,8 @@ void RosalilaGraphics::frameCap()
     //Calculate the frames per second and create the string
     caption = "Average Frames Per Second: " + toString(frame / ( fps->get_ticks() / 1000.f ));
 
-    //Reset the caption
-    SDL_WM_SetCaption( caption.c_str(), NULL );
+//    //Reset the caption
+//    SDL_WM_SetCaption( caption.c_str(), NULL );
 
     //Restart the update timer
     update->start();
@@ -576,7 +580,13 @@ void RosalilaGraphics::updateScreen()
 
     //Draw
     frameCap();
-    SDL_GL_SwapBuffers();
+
+//    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+//    SDL_RenderClear(renderer);
+
+    //SDL_RenderPresent(renderer);
+    SDL_GL_SwapWindow(window);
+
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
