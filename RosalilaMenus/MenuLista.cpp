@@ -70,6 +70,7 @@ void MenuLista::dibujar()
                 false,
                 0,0,
                 Color(255,255,255,255),
+                0,0,
                 false);
         }
         if(flecha_derecha!=NULL)
@@ -83,6 +84,7 @@ void MenuLista::dibujar()
                 false,
                 0,0,
                 Color(255,255,255,255),
+                0,0,
                 false);
         }
     }else
@@ -100,6 +102,7 @@ void MenuLista::dibujar()
                 false,
                 0,0,
                 Color(255,255,255,255),
+                0,0,
                 false);
         }
         if(flecha_derecha_sel!=NULL)
@@ -113,6 +116,7 @@ void MenuLista::dibujar()
                 false,
                 0,0,
                 Color(255,255,255,255),
+                0,0,
                 false);
         }
     }

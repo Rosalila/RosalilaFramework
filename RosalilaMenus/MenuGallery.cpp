@@ -77,6 +77,7 @@ void MenuGallery::dibujar()
                         false,
                         0,0,
                         Color(255,255,255,255),
+                        0,0,
                         false);
 
                     int border_difference_x=(image->getWidth()-border_preview->getWidth())/2;
@@ -91,6 +92,7 @@ void MenuGallery::dibujar()
                         false,
                         0,0,
                         Color(255,255,255,255),
+                        0,0,
                         false);
                 }
             }
@@ -114,6 +116,7 @@ void MenuGallery::dibujar()
                     false,
                     0,0,
                     Color(255,255,255,255),
+                    0,0,
                     false);
 
                 int border_difference_x=(size_cuadro_x-border_thumbnail->getWidth())/2;
@@ -128,6 +131,7 @@ void MenuGallery::dibujar()
                     false,
                     0,0,
                     Color(255,255,255,255),
+                    0,0,
                     false);
             }else
             {
@@ -141,6 +145,7 @@ void MenuGallery::dibujar()
                     false,
                     0,0,
                     Color(255,255,255,255),
+                    0,0,
                     false);
 
                 int border_difference_x=(size_cuadro_x-border_thumbnail->getWidth())/2;
@@ -155,6 +160,7 @@ void MenuGallery::dibujar()
                     false,
                     0,0,
                     Color(255,255,255,255),
+                    0,0,
                     false);
             }
 
@@ -173,6 +179,7 @@ void MenuGallery::dibujar()
                     false,
                     0,0,
                     Color(255,255,255,255),
+                    0,0,
                     false);
                 position_selected=cont;
             }
@@ -189,6 +196,7 @@ void MenuGallery::dibujar()
             false,
             0,0,
             Color(255,255,255,255),
+            0,0,
             false);
 
         Image *fullscreen_image=fullscreens[position_selected];
@@ -203,6 +211,7 @@ void MenuGallery::dibujar()
             false,
             0,0,
             Color(255,255,255,current_preview_alpha),
+            0,0,
             false);
         current_preview_alpha+=3;
         if(current_preview_alpha>255)

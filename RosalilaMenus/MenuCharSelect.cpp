@@ -203,6 +203,7 @@ void MenuCharSelect::dibujar()
                         false,
                         0,0,
                         Color(255,255,255,255),
+                        0,0,
                         false);
                 }
                 //draw preview pb
@@ -220,6 +221,7 @@ void MenuCharSelect::dibujar()
                             false,
                             0,0,
                             Color(255,255,255,255),
+                            0,0,
                             false);
                     }
                 }
@@ -243,6 +245,7 @@ void MenuCharSelect::dibujar()
                     false,
                     0,0,
                     Color(255,255,255,255),
+                    0,0,
                     false);
             }else
             {
@@ -256,6 +259,7 @@ void MenuCharSelect::dibujar()
                     false,
                     0,0,
                     Color(255,255,255,255),
+                    0,0,
                     false);
             }
             //dibjuar locks pa
@@ -273,6 +277,7 @@ void MenuCharSelect::dibujar()
                         false,
                         0,0,
                         Color(255,255,255,255),
+                        0,0,
                         false);
                 }
             }
@@ -293,6 +298,7 @@ void MenuCharSelect::dibujar()
                             false,
                             0,0,
                             Color(255,255,255,255),
+                            0,0,
                             false);
                     }
                 }
@@ -310,6 +316,7 @@ void MenuCharSelect::dibujar()
                     false,
                     0,0,
                     Color(255,255,255,255),
+                    0,0,
                     false);
             }
             //dibjujar cursor PB
@@ -327,6 +334,7 @@ void MenuCharSelect::dibujar()
                         false,
                         0,0,
                         Color(255,255,255,255),
+                        0,0,
                         false);
                 }
             }

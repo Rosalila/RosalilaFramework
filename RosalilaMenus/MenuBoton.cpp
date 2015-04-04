@@ -48,6 +48,7 @@ void MenuBoton::dibujar()
             false,
             0,0,
             Color(255,255,255,255),
+            0,0,
             false);
 
         std::string temp=texto;
@@ -67,6 +68,7 @@ void MenuBoton::dibujar()
             false,
             0,0,
             Color(255,255,255,255),
+            0,0,
             false);
 
         std::string temp=texto_sel;

@@ -84,14 +84,10 @@ RosalilaGraphics::RosalilaGraphics()
                                screen_resized_width, screen_resized_height,
                                SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN );
 
-    SDL_SetWindowFullscreen(window,SDL_WINDOW_FULLSCREEN);
+    if(fullscreen)
+        SDL_SetWindowFullscreen(window,SDL_WINDOW_FULLSCREEN);
 
     renderer = SDL_CreateRenderer(window, -1, 0);
-//    //Set up the screen
-//    if(!fullscreen)
-//        screen = SDL_SetVideoMode( screen_resized_width, screen_resized_height, screen_bpp, SDL_OPENGL );
-//    else
-//        screen = SDL_SetVideoMode( 0, 0, screen_bpp, SDL_OPENGL | SDL_FULLSCREEN );
 
     //Set the openGL state?
     glEnable( GL_TEXTURE_2D );
@@ -252,6 +248,7 @@ void RosalilaGraphics::draw2DImage	(
              int depth_effect_x,
              int depth_effect_y,
              Color color_effects,
+             int shadow_x,int shadow_y,
              bool camera_align)
 {
     glEnable( GL_TEXTURE_2D );
@@ -336,6 +333,28 @@ void RosalilaGraphics::draw2DImage	(
 
     glEnd();
 
+    if(shadow_x!=0 || shadow_y!=0)
+    {
+        glColor4ub(0, 0, 0,100);
+        glBegin( GL_QUADS );
+            //Bottom-left vertex (corner)
+            glTexCoord2i( 0, 0 );
+            glVertex3f( x1-translate_x-size_x/3, y1-translate_y+((double)size_y/1.2), 0.0f );
+
+            //Bottom-right vertex (corner)
+            glTexCoord2i( 1, 0 );
+            glVertex3f( x2-translate_x-size_x/3, y1-translate_y+((double)size_y/1.2), 0.f );
+
+            //Top-right vertex (corner)
+            glTexCoord2i( 1, 1 );
+            glVertex3f( x2-translate_x, y2-translate_y, 0.f );
+
+            //Top-left vertex (corner)
+            glTexCoord2i( 0, 1 );
+            glVertex3f( x1-translate_x, y2-translate_y, 0.f );
+
+        glEnd();
+    }
 
     //Reset the current matrix to the one that was saved.
     glPopMatrix();

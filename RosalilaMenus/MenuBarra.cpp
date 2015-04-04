@@ -57,6 +57,7 @@ void MenuBarra::dibujar()
             false,
             0,0,
             Color(255,255,255,255),
+            0,0,
             false);
         painter->draw2DImage
         (   barra,
@@ -67,6 +68,7 @@ void MenuBarra::dibujar()
             false,
             0,0,
             Color(255,255,255,255),
+            0,0,
             false);
     }else
     {
@@ -79,6 +81,7 @@ void MenuBarra::dibujar()
             false,
             0,0,
             Color(255,255,255,255),
+            0,0,
             false);
         painter->draw2DImage
         (   barra_sel,
@@ -89,6 +92,7 @@ void MenuBarra::dibujar()
             false,
             0,0,
             Color(255,255,255,255),
+            0,0,
             false);
     }
 }
@@ -106,6 +110,7 @@ void MenuBarra::dibujar(int alineacion_x,int alineacion_y)
             false,
             0,0,
             Color(255,255,255,255),
+            0,0,
             false);
         painter->draw2DImage
         (   barra,
@@ -116,6 +121,7 @@ void MenuBarra::dibujar(int alineacion_x,int alineacion_y)
             false,
             0,0,
             Color(255,255,255,255),
+            0,0,
             false);
     }else
     {
@@ -128,6 +134,7 @@ void MenuBarra::dibujar(int alineacion_x,int alineacion_y)
             false,
             0,0,
             Color(255,255,255,255),
+            0,0,
             false);
         painter->draw2DImage
         (   barra_sel,
@@ -138,6 +145,7 @@ void MenuBarra::dibujar(int alineacion_x,int alineacion_y)
             false,
             0,0,
             Color(255,255,255,255),
+            0,0,
             false);
     }
 }

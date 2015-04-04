@@ -33,5 +33,6 @@ void MenuImagen::dibujar()
         false,
         0,0,
         Color(255,255,255,fade_in_current),
+        0,0,
         false);
 }

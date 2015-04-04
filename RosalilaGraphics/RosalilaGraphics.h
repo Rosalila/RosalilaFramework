@@ -107,6 +107,7 @@ class RosalilaGraphics
 				 int depth_effect_x,
 				 int depth_effect_y,
 				 Color color_effects,
+				 int shadow_x, int shadow_y,
 				 bool camera_align);
     void drawText(std::string text,int position_x,int position_y);
     void drawRectangle(int x,int y,int width,int height,float rotation,int red,int green,int blue,int alpha,bool camera_align);
