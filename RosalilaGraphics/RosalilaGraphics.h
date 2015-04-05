@@ -3,16 +3,31 @@
 
 #include <iostream>
 #include <list>
-#include "SDL2/SDL_image.h"
-#include "SDL2/SDL_ttf.h"
+
+#include "../system.h"
+
+#ifdef LINUX
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
+#endif
+
+#ifdef WINDOWS
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
+#endif
+
+#ifdef OSX
+#include <SDL2_image/SDL_image.h>
+#include <SDL2_ttf/SDL_ttf.h>
+#endif
+
+
 #include "../TinyXml/tinyxml.h"
 
 #include <GL/freeglut.h>
 #include <GL/gl.h>
 #include <stdio.h>
 
-
-#include "../RosalilaGraphics/smpeg.h"
 #include "../RosalilaGraphics/Image.h"
 #include "../RosalilaGraphics/Timer.h"
 #include "../RosalilaGraphics/Explosion.h"

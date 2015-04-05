@@ -1,6 +1,8 @@
 #ifndef SONIDO_H
 #define SONIDO_H
 
+#include "../system.h"
+
 #include <string>
 #include <vector>
 
@@ -9,9 +11,18 @@ using namespace std;
 
 //SDL
 #include "SDL2/SDL.h"
-#include "SDL2/SDL_image.h"
-#include "SDL2/SDL_ttf.h"
-#include "SDL2/SDL_mixer.h"
+
+#ifdef LINUX
+#include <SDL2/SDL_mixer.h>
+#endif
+
+#ifdef WINDOWS
+#include <SDL2/SDL_mixer.h>
+#endif
+
+#ifdef OSX
+#include <SDL2_mixer/SDL_mixer.h>
+#endif
 
 #include "../RosalilaUtility/RosalilaUtility.h"
 #include <map>

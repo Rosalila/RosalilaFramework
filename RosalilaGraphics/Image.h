@@ -1,4 +1,10 @@
-#include "SDL2/SDL_image.h"
+#ifdef LINUX
+#include <SDL2/SDL_image.h>
+#endif
+
+#ifdef OSX
+#include <SDL2_image/SDL_image.h>
+#endif
 
 #include <GL/freeglut.h>
 #include <GL/gl.h>
