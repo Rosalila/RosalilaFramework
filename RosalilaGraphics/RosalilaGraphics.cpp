@@ -212,8 +212,13 @@ Image* RosalilaGraphics::getTexture(std::string filename)
 //for(int y=0;y<surface->h;y++)
 //((unsigned int*)surface->pixels)[y*(surface->pitch/sizeof(unsigned int)) + x]+=1;
         // Edit the texture object's image data using the information SDL_Surface gives us
+#ifdef OSX
+        glTexImage2D( GL_TEXTURE_2D, 0, nOfColors, surface->w, surface->h, 0,
+                          GL_BGRA, GL_UNSIGNED_BYTE, surface->pixels );
+#else
         glTexImage2D( GL_TEXTURE_2D, 0, nOfColors, surface->w, surface->h, 0,
                           texture_format, GL_UNSIGNED_BYTE, surface->pixels );
+#endif
     }
     else {
         std::string sdl_error=SDL_GetError();

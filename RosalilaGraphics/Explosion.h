@@ -1,7 +1,17 @@
 #ifndef EXPLOSION_H
 #define EXPLOSION_H
 
-#include "SDL/SDL_image.h"
+#ifdef LINUX
+#include <SDL2/SDL_image.h>
+#endif
+
+#ifdef WINDOWS
+#include <SDL2/SDL_image.h>
+#endif
+
+#ifdef OSX
+#include <SDL2_image/SDL_image.h>
+#endif
 
 #include <GL/freeglut.h>
 #include <GL/gl.h>

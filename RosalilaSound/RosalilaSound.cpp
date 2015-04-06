@@ -60,4 +60,5 @@ bool Sound::soundExists(std::string variable)
 {
 //    map<std::string,Mix_Chunk*>::iterator it = sounds.find(variable);
 //    return it!=sounds.end();
+    return false;
 }

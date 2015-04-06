@@ -1,4 +1,4 @@
-#include "RosalilaGraphics/Explosion.h"
+#include "Explosion.h"
 
 Explosion::Explosion(int x, int y)
 {
