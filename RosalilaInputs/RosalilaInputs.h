@@ -1,6 +1,7 @@
 #ifndef INPUT_H
 #define INPUT_H
 
+#include "../system.h"
 #include "../RosalilaInputs/Boton.h"
 #include "../RosalilaAI/RosalilaAI.h"
 

@@ -11,6 +11,7 @@ MenuCharSelect::MenuCharSelect(RosalilaGraphics*painter,int x, int y,
                    int select_p1_x,int select_p1_y,
                    int select_p2_x,int select_p2_y)
 {
+    writeLogLine("Creating character selection menu");
     this->x=x;
     this->y=y;
     this->painter=painter;
@@ -33,8 +34,8 @@ MenuCharSelect::MenuCharSelect(RosalilaGraphics*painter,int x, int y,
 
     for(int i=0;i<(int)names.size();i++)
     {
-        portraits.push_back(painter->getTexture(std::string("chars/")+names[i]+std::string("/portrait.png")));
-        previews.push_back(painter->getTexture(std::string("chars/")+names[i]+std::string("/preview.png")));
+        portraits.push_back(painter->getTexture(assets_directory+"chars/"+names[i]+std::string("/portrait.png")));
+        previews.push_back(painter->getTexture(assets_directory+"chars/"+names[i]+std::string("/preview.png")));
     }
     this->names=names;
 
@@ -43,15 +44,16 @@ MenuCharSelect::MenuCharSelect(RosalilaGraphics*painter,int x, int y,
     this->select_p2_x=select_p2_x;
     this->select_p2_y=select_p2_y;
 
-    selected_char_p1=painter->getTexture("menu/selected_char_p1.png");
-    locked_char_p1=painter->getTexture("menu/locked_char_p1.png");
+    selected_char_p1=painter->getTexture(assets_directory+"menu/selected_char_p1.png");
+    locked_char_p1=painter->getTexture(assets_directory+"menu/locked_char_p1.png");
 
     if(max_locked_chars_pb>0)
     {
-        locked_char_p2=painter->getTexture("menu/locked_char_p2.png");
-        selected_char_p2=painter->getTexture("menu/selected_char_p2.png");
+        locked_char_p2=painter->getTexture(assets_directory+"menu/locked_char_p2.png");
+        selected_char_p2=painter->getTexture(assets_directory+"menu/selected_char_p2.png");
     }
-    no_portrait=painter->getTexture("menu/no_portrait.png");
+    no_portrait=painter->getTexture(assets_directory+"menu/no_portrait.png");
+    writeLogLine("Creating character selection menu");
 }
 
 void MenuCharSelect::lockPA(int num_paleta)

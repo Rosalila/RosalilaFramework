@@ -3,9 +3,8 @@
 RosalilaGraphics::RosalilaGraphics()
 {
     //XML Initializations
-    char *archivo=new char[255];
-    strcpy(archivo,"config.xml");
-    TiXmlDocument doc_t( archivo );
+    string configxml_path=assets_directory+"config.xml";
+    TiXmlDocument doc_t( configxml_path.c_str() );
     doc_t.LoadFile();
     TiXmlDocument *doc;
     doc=&doc_t;
@@ -71,7 +70,8 @@ RosalilaGraphics::RosalilaGraphics()
     textColor.g = font_green;
     textColor.b = font_blue;
 
-    font = TTF_OpenFont( "misc/font.ttf", font_size );
+    string font_path=assets_directory+"misc/font.ttf";
+    font = TTF_OpenFont( font_path.c_str(), font_size );
 
     if(font==NULL)
     {

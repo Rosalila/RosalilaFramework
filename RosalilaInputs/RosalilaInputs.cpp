@@ -126,7 +126,8 @@ void RosalilaInputs::loadFromXML(int jugador,Receiver* receiver)
     this->jugador=jugador;
     this->receiver=receiver;
     this->inteligencia_artificial=false;
-    TiXmlDocument doc_t((char*)"misc/inputs.xml");
+    string xml_path=assets_directory+"misc/inputs.xml";
+    TiXmlDocument doc_t(xml_path.c_str());
     doc_t.LoadFile();
     TiXmlDocument *doc;
     doc=&doc_t;
