@@ -258,11 +258,33 @@ void Receiver::updateInputs()
         }
         if( event.type == SDL_KEYDOWN )
         {
-            KEYS[event.key.keysym.sym] = true;
+            if(event.key.keysym.sym==SDLK_UP)
+                KEYS[SDL_SCANCODE_UP] = true;
+            else if(event.key.keysym.sym==SDLK_DOWN)
+                KEYS[SDL_SCANCODE_DOWN] = true;
+            else if(event.key.keysym.sym==SDLK_LEFT)
+                KEYS[SDL_SCANCODE_LEFT] = true;
+            else if(event.key.keysym.sym==SDLK_RIGHT)
+                KEYS[SDL_SCANCODE_RIGHT] = true;
+            else if(event.key.keysym.sym<322)
+                KEYS[event.key.keysym.sym] = true;
+            else
+                writeLogLine("Key pressed but not supported:"+toString(event.key.keysym.sym));
         }
         if( event.type == SDL_KEYUP )
         {
-            KEYS[event.key.keysym.sym] = false;
+            if(event.key.keysym.sym==SDLK_UP)
+                KEYS[SDL_SCANCODE_UP] = false;
+            else if(event.key.keysym.sym==SDLK_DOWN)
+                KEYS[SDL_SCANCODE_DOWN] = false;
+            else if(event.key.keysym.sym==SDLK_LEFT)
+                KEYS[SDL_SCANCODE_LEFT] = false;
+            else if(event.key.keysym.sym==SDLK_RIGHT)
+                KEYS[SDL_SCANCODE_RIGHT] = false;
+            else if(event.key.keysym.sym<322)
+                KEYS[event.key.keysym.sym] = false;
+            else
+                writeLogLine("Key pressed but not supported:"+toString(event.key.keysym.sym));
         }
         if( event.type == SDL_JOYBUTTONDOWN )
         {
