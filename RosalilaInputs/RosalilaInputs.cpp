@@ -349,3 +349,51 @@ TiXmlDocument* RosalilaInputs::getXML(TiXmlDocument *doc)
 	return doc;
 	//doc->SaveFile( "appsettings.xml" );
 }
+
+void RosalilaInputs::limpiarBuffer()
+{
+    buffer_inputs.clear();
+    for(int i=0;i<20;i++)
+        buffer_inputs.push_back("5");
+}
+
+void RosalilaInputs::editInput(int player,int joystick_number,string input,string map)
+{
+    string player_str=toString(player);
+    string joystick_number_str=toString(joystick_number);
+    string xml_path=assets_directory+"misc/inputs.xml";
+    TiXmlDocument doc(xml_path.c_str());
+    doc.LoadFile();
+    for(TiXmlNode* input_node=doc.FirstChild("Input");
+            input_node!=NULL;
+            input_node=input_node->NextSibling("Input"))
+    {
+        if(strcmp("joystick",input_node->ToElement()->Attribute("type"))==0
+           && strcmp(player_str.c_str(),input_node->ToElement()->Attribute("player"))==0
+           && strcmp(joystick_number_str.c_str(),input_node->ToElement()->Attribute("joystick_number"))==0
+           )
+        {
+            for(TiXmlNode* boton=input_node->FirstChild("button");
+                    boton!=NULL;
+                    boton=boton->NextSibling("button"))
+            {
+                if(strcmp(boton->ToElement()->Attribute("map"),map.c_str())==0)
+                {
+                    boton->ToElement()->FirstAttribute()->SetValue(input.c_str());
+                    for(TiXmlAttribute* button_attributes = boton->ToElement()->FirstAttribute();
+                        button_attributes!=NULL;
+                        button_attributes=button_attributes->Next()
+                        )
+                    {
+                        if(strcmp(button_attributes->Name(),"input")==0)
+                        {
+                            button_attributes->SetValue(input.c_str());
+                        }
+                    }
+                }
+            }
+        }
+    }
+    string path = assets_directory+"misc/inputs.xml";
+    doc.SaveFile(path.c_str());
+}

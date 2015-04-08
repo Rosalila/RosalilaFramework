@@ -33,6 +33,8 @@ vector<Boton> cruz;
     std::vector<std::string> getPrintableBufferRosalilaInputs();
     void endEventProcess();
     void startEventProcess();
+    void limpiarBuffer();
+    void editInput(int player,int joystick_number,string input,string map);
 };
 
 #endif
