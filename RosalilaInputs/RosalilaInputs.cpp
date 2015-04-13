@@ -397,3 +397,17 @@ void RosalilaInputs::editInput(int player,int joystick_number,string input,strin
     string path = assets_directory+"misc/inputs.xml";
     doc.SaveFile(path.c_str());
 }
+
+string RosalilaInputs::getJoystickInput(string map, int num_joystick)
+{
+    for(int i=0;i<botones.size();i++)
+    {
+        if(botones[i].usaJoystick()
+            && map == botones[i].getMapeo()
+            && num_joystick == botones[i].getNumJoystick())
+        {
+            return botones[i].getRosalilaInputs();
+        }
+    }
+    return "Error: no input.";
+}

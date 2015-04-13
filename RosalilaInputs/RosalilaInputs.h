@@ -35,6 +35,7 @@ vector<Boton> cruz;
     void startEventProcess();
     void limpiarBuffer();
     void editInput(int player,int joystick_number,string input,string map);
+    string getJoystickInput(string map, int num_joystick);
 };
 
 #endif

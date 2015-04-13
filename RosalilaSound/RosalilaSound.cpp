@@ -22,20 +22,20 @@ void Sound::drop()
 }
 void Sound::addSound(std::string variable,std::string value)
 {
-//    if(sounds.find(variable)==sounds.end())
-//        sounds[variable]=Mix_LoadWAV(value.c_str());
+    if(sounds.find(variable)==sounds.end())
+        sounds[variable]=Mix_LoadWAV(value.c_str());
 }
 void Sound::playSound(std::string variable)
 {
-//    if(!soundExists(variable))
-//    {
-//        writeLogLine("Error: "+variable+" sound does not exists.");
-//    }
-//
-//    if(sounds[variable]!=NULL)
-//    {
-//        Mix_PlayChannel( 1, sounds[variable], 0 );
-//    }
+    if(!soundExists(variable))
+    {
+        writeLogLine("Error: "+variable+" sound does not exists.");
+    }
+
+    if(sounds[variable]!=NULL)
+    {
+        Mix_PlayChannel( 1, sounds[variable], 0 );
+    }
 }
 
 void Sound::playMusic(std::string path)
@@ -48,17 +48,17 @@ void Sound::playMusic(std::string path)
 
 void Sound::stopMusic()
 {
-//    if(music!=NULL)
-//    {
-//        Mix_HaltMusic();
-//        Mix_FreeMusic(music);
-//        music=NULL;
-//    }
+    if(music!=NULL)
+    {
+        Mix_HaltMusic();
+        Mix_FreeMusic(music);
+        music=NULL;
+    }
 }
 
 bool Sound::soundExists(std::string variable)
 {
-//    map<std::string,Mix_Chunk*>::iterator it = sounds.find(variable);
-//    return it!=sounds.end();
+    map<std::string,Mix_Chunk*>::iterator it = sounds.find(variable);
+    return it!=sounds.end();
     return false;
 }

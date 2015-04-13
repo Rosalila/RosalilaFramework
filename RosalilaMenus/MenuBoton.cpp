@@ -52,10 +52,6 @@ void MenuBoton::dibujar()
             false);
 
         std::string temp=texto;
-        if(accion.substr(0,6)=="Player")
-        {
-            temp+=input_config;
-        }
         painter->drawText(temp,x+alineacion_texto_x,y+alineacion_texto_y);
     }else
     {
@@ -72,10 +68,6 @@ void MenuBoton::dibujar()
             false);
 
         std::string temp=texto_sel;
-        if(accion.substr(0,6)=="Player")
-        {
-            temp+=input_config;
-        }
         painter->drawText(temp,x+alineacion_texto_x_sel,y+alineacion_texto_y_sel);
     }
 }

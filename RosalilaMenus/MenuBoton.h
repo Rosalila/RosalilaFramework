@@ -9,14 +9,14 @@ private:
     bool seleccionado;
     std::string accion;
     Image* imagen;
-    std::string texto;
     int alineacion_texto_x,alineacion_texto_y;
     Image* imagen_sel;
-    std::string texto_sel;
     int alineacion_texto_x_sel,alineacion_texto_y_sel;
     //otra
 public:
     char* load_menu;
+    std::string texto;
+    std::string texto_sel;
     std::string input_config;
     MenuBoton(RosalilaGraphics*painter,int x, int y, int width, int height,
               Image* imagen,int alineacion_texto_x,int alineacion_texto_y, std::string texto,
