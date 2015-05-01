@@ -23,6 +23,10 @@ std::string toString(int number)
 {
     if (number == 0)
         return "0";
+
+    if(number < 0)
+        return "-"+toString(-number);
+
     std::string temp="";
     std::string returnvalue="";
     while (number>0)
@@ -44,81 +48,6 @@ bool pointIsInRect(int point_x,int point_y,
         return true;
     return false;
 }
-
-
-//bool hitboxCollision(int a_x,int a_y,int a_width,int a_height,float a_angle,
-//              int b_x,int b_y,int b_width,int b_height,float b_angle)
-//{
-//////
-////painter->drawRectangle(a_x,a_y,4,4,0,0,255,255,255,true);
-////painter->drawRectangle(a_x+a_width,a_y,4,4,0,0,255,255,255,true);
-////painter->drawRectangle(a_x,a_y+a_height,4,4,0,0,255,255,255,true);
-////painter->drawRectangle(a_x+a_width,a_y+a_height,4,4,0,0,255,255,255,true);
-//////
-//
-//    //Move the universe (the point b)
-//    float s = sin(a_angle*PI/180);
-//    float c = cos(a_angle*PI/180);
-//
-//    // translate point back to origin:
-//    b_x -= a_x;
-//    b_y -= a_y;
-//
-//    // rotate point
-//    float xnew = b_x * c - b_y * s;
-//    float ynew = b_x * s + b_y * c;
-//
-//    // translate point back:
-//    b_x = xnew + a_x;
-//    b_y = ynew + a_y;
-//
-//    //Rotate to move the other points
-//    b_angle-=a_angle;
-//
-//    if(pointIsInRect(b_x,b_y,
-//                    a_x,a_y,a_width,a_height) )
-//        return true;
-//
-//////
-////painter->drawRectangle(b_x,b_y,4,4,0,0,255,0,255,true);
-//////
-//
-//
-//    int change_x_1 = cos (b_angle*PI/180) * b_width;
-//    int change_y_1 = sin (b_angle*PI/180) * b_width;
-//
-//    if(pointIsInRect(b_x+change_x_1,b_y-change_y_1,
-//                    a_x,a_y,a_width,a_height) )
-//        return true;
-//
-//
-//////
-////painter->drawRectangle(b_x+change_x_1,b_y-change_y_1,4,4,0,0,255,0,255,true);
-//////
-//
-//
-//    int change_x_2 = sin (b_angle*PI/180) * b_height;
-//    int change_y_2 = cos (b_angle*PI/180) * b_height;
-//
-//    if(pointIsInRect(b_x+change_x_2,b_y+change_y_2,
-//                    a_x,a_y,a_width,a_height) )
-//        return true;
-//
-//////
-////painter->drawRectangle(b_x+change_x_2,b_y+change_y_2,4,4,0,0,255,0,255,true);
-//////
-//
-//
-//    if(pointIsInRect(b_x+change_x_1+change_x_2,b_y-change_y_1+change_y_2,
-//                    a_x,a_y,a_width,a_height) )
-//        return true;
-//
-//////
-////painter->drawRectangle(b_x+change_x_1+change_x_2,b_y-change_y_1+change_y_2,4,4,0,0,255,0,255,true);
-//////
-//
-//    return false;
-//}
 
 bool hitboxCollision(int a_x,int a_y,int a_width,int a_height,float a_angle,
               int b_x,int b_y,int b_width,int b_height,float b_angle)

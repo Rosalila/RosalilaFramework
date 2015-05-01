@@ -400,7 +400,7 @@ void RosalilaInputs::editInput(int player,int joystick_number,string input,strin
 
 string RosalilaInputs::getJoystickInput(string map, int num_joystick)
 {
-    for(int i=0;i<botones.size();i++)
+    for(int i=0;i<(int)botones.size();i++)
     {
         if(botones[i].usaJoystick()
             && map == botones[i].getMapeo()

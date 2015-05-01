@@ -3,7 +3,7 @@
 MenuBoton::MenuBoton(RosalilaGraphics*painter,int x, int y, int width, int height,
           Image* imagen,int alineacion_texto_x,int alineacion_texto_y, std::string texto,
           Image* imagen_sel,int alineacion_texto_x_sel,int alineacion_texto_y_sel, std::string texto_sel,
-          std::string accion,char* load_menu
+          std::string accion,string load_menu
           )
 {
     this->x=x;
