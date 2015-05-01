@@ -24,8 +24,7 @@
 
 #include "../TinyXml/tinyxml.h"
 
-#include <GL/freeglut.h>
-#include <GL/gl.h>
+#include <SDL2/SDL_opengl.h>
 #include <stdio.h>
 
 #include "../RosalilaGraphics/Image.h"

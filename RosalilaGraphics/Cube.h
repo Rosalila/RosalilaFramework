@@ -6,8 +6,7 @@
 #include <SDL2_image/SDL_image.h>
 #endif
 
-#include <GL/freeglut.h>
-#include <GL/gl.h>
+#include <SDL2/SDL_opengl.h>
 #include <stdio.h>
 #include <math.h>
 

@@ -170,12 +170,14 @@ void Cube::newExplosion (float pos_x,float pos_y)
       debris[i].color[1] = 0.7;
       debris[i].color[2] = 0.7;
 
+/* Died as glut did
       debris[i].scale[0] = (20.0 *
 			    ((GLfloat) rand ()) / ((GLfloat) RAND_MAX)) - 1.0;
       debris[i].scale[1] = (20.0 *
 			    ((GLfloat) rand ()) / ((GLfloat) RAND_MAX)) - 1.0;
       debris[i].scale[2] = (20.0 *
 			    ((GLfloat) rand ()) / ((GLfloat) RAND_MAX)) - 1.0;
+*/
 
       newSpeed (debris[i].speed);
       newSpeed (debris[i].orientationSpeed);
@@ -191,10 +193,11 @@ void Cube::newSpeed (float dest[3])
   float    z;
   float    len;
 
+/* Died as glut did
   x = (2.0 * ((GLfloat) rand ()) / ((GLfloat) RAND_MAX)) - 1.0;
   y = (2.0 * ((GLfloat) rand ()) / ((GLfloat) RAND_MAX)) - 1.0;
   z = (2.0 * ((GLfloat) rand ()) / ((GLfloat) RAND_MAX)) - 1.0;
-
+*/
   /*
    * Normalizing the speed vectors gives a "fireball" effect
    *

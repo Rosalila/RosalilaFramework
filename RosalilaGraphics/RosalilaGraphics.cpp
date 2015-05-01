@@ -144,10 +144,13 @@ RosalilaGraphics::RosalilaGraphics()
     //If everything initialized fine
     writeLogLine("Success! SDL initialized.");
 
+     SDL_GL_CreateContext(window);
     GLenum error = GL_NO_ERROR;
     error = glGetError();
     if( error != GL_NO_ERROR ) {
+/* Died as glu did
          printf( "Error initializing OpenGL! %s\n", gluErrorString( error ) );
+*/
          exit(12);
     }
 
@@ -532,7 +535,9 @@ void RosalilaGraphics::draw3DCube(int x,int y,float size,Color color)
     glEnable(GL_BLEND);
     glMatrixMode (GL_PROJECTION);
     glLoadIdentity ();
+/* Died as glu did
     gluPerspective (45.0, (GLfloat) screen_width / (GLfloat) screen_height, 0.1, 100.0);
+*/
     glMatrixMode (GL_MODELVIEW);
 
     glEnable (GL_LIGHT0);
@@ -580,7 +585,10 @@ void RosalilaGraphics::draw3DCube(int x,int y,float size,Color color)
     glEnable (GL_LIGHTING);
     glDisable (GL_LIGHT0);
     glEnable (GL_DEPTH_TEST);
+
+/* Died as glut did
     glutSolidCube (size);
+*/
     glDisable (GL_LIGHTING);
 
     glPopMatrix();
