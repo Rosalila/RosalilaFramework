@@ -424,6 +424,7 @@ void RosalilaGraphics::frameCap()
         SDL_Delay( ( 1000 / frames_per_seccond ) - update->get_ticks() );
     }
 
+
     current_fps=frame / ( fps->get_ticks() / 1000.f );
 
 //    //Reset the caption
@@ -500,6 +501,7 @@ void RosalilaGraphics::drawText(std::string text,int position_x,int position_y)
     glEnd();
     glDisable(GL_BLEND);
     glDisable(GL_TEXTURE_2D);
+    glDeleteTextures( 1, &texture );
 }
 
 void RosalilaGraphics::draw3D()
