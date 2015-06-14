@@ -40,6 +40,7 @@ public:
     bool joy_left_pressed_player_2;
     bool joy_right_pressed_player_2;
     void updateInputs();
+    void unpressAllInputs();
 };
 
 #endif // MYEVENTRECEIVER_H>

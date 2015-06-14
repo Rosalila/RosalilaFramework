@@ -398,6 +398,45 @@ void RosalilaInputs::editInput(int player,int joystick_number,string input,strin
     doc.SaveFile(path.c_str());
 }
 
+void RosalilaInputs::editKeyboardInput(int player,string input,string map)
+{
+    string player_str=toString(player);
+    string xml_path=assets_directory+"misc/inputs.xml";
+    TiXmlDocument doc(xml_path.c_str());
+    doc.LoadFile();
+    for(TiXmlNode* input_node=doc.FirstChild("Input");
+            input_node!=NULL;
+            input_node=input_node->NextSibling("Input"))
+    {
+        if(strcmp("keyboard",input_node->ToElement()->Attribute("type"))==0
+           && strcmp(player_str.c_str(),input_node->ToElement()->Attribute("player"))==0
+           )
+        {
+            for(TiXmlNode* boton=input_node->FirstChild("button");
+                    boton!=NULL;
+                    boton=boton->NextSibling("button"))
+            {
+                if(strcmp(boton->ToElement()->Attribute("map"),map.c_str())==0)
+                {
+                    boton->ToElement()->FirstAttribute()->SetValue(input.c_str());
+                    for(TiXmlAttribute* button_attributes = boton->ToElement()->FirstAttribute();
+                        button_attributes!=NULL;
+                        button_attributes=button_attributes->Next()
+                        )
+                    {
+                        if(strcmp(button_attributes->Name(),"input")==0)
+                        {
+                            button_attributes->SetValue(input.c_str());
+                        }
+                    }
+                }
+            }
+        }
+    }
+    string path = assets_directory+"misc/inputs.xml";
+    doc.SaveFile(path.c_str());
+}
+
 string RosalilaInputs::getJoystickInput(string map, int num_joystick)
 {
     for(int i=0;i<(int)botones.size();i++)
@@ -405,6 +444,19 @@ string RosalilaInputs::getJoystickInput(string map, int num_joystick)
         if(botones[i].usaJoystick()
             && map == botones[i].getMapeo()
             && num_joystick == botones[i].getNumJoystick())
+        {
+            return botones[i].getRosalilaInputs();
+        }
+    }
+    return "Error: no input.";
+}
+
+string RosalilaInputs::getKeyboardInput(string map)
+{
+    for(int i=0;i<(int)botones.size();i++)
+    {
+        if(!botones[i].usaJoystick()
+            && map == botones[i].getMapeo())
         {
             return botones[i].getRosalilaInputs();
         }

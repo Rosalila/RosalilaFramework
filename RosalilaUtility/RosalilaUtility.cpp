@@ -315,3 +315,28 @@ Point rotateAroundPoint(Point point,Point pivot,float angle)
 
     return Point(res_x,res_y);
 }
+
+bool collisionCheck(HitBox* hb_azul,HitBox* hb_roja)
+{
+    int x1r=hb_roja->p1x;
+    int y1r=hb_roja->p1y;
+    int x2r=hb_roja->p2x;
+    int y2r=hb_roja->p2y;
+
+    int x1a=hb_azul->p1x;
+    int y1a=hb_azul->p1y;
+    int x2a=hb_azul->p2x;
+    int y2a=hb_azul->p2y;
+
+    return(
+          (x1r<=x1a && x1a<=x2r && x2r<=x2a) ||
+          (x1r<=x1a && x1a<=x2a && x2a<=x2r) ||
+          (x1a<=x1r && x1r<=x2r && x2r<=x2a) ||
+          (x1a<=x1r && x1r<=x2a && x2a<=x2r)
+      )&&(
+          (y1r<=y1a && y1a<=y2r && y2r<=y2a) ||
+          (y1r<=y1a && y1a<=y2a && y2a<=y2r) ||
+          (y1a<=y1r && y1r<=y2r && y2r<=y2a) ||
+          (y1a<=y1r && y1r<=y2a && y2a<=y2r)
+          );
+}

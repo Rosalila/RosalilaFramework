@@ -508,3 +508,13 @@ void Receiver::updateInputs()
     }
     //SDL_GetKeyboardState( NULL );
 }
+
+void Receiver::unpressAllInputs()
+{
+    for(int i=0;i<255;i++)
+        KEYS[i]=false;
+    for(int i=0;i<max_joystick_inputs;i++)
+        JOYKEYS_player1[i]=false;
+    for(int i=0;i<max_joystick_inputs;i++)
+        JOYKEYS_player2[i]=false;
+}

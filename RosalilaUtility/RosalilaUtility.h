@@ -8,6 +8,8 @@
 using namespace std;
 #define PI 3.14159265
 
+#include "HitBox.h"
+
 class Point
 {
 public:
@@ -50,5 +52,6 @@ bool hitboxCollision(int a_x,int a_y,int a_width,int a_height,float a_angle,
 Point* lineIntersection(Line l1,Line l2);
 bool segmentIntersection(Line l1,Line l2);
 Point rotateAroundPoint(Point point,Point pivot,float angle);
+bool collisionCheck(HitBox* hb_azul,HitBox* hb_roja);
 
 #endif
