@@ -461,5 +461,14 @@ string RosalilaInputs::getKeyboardInput(string map)
             return botones[i].getRosalilaInputs();
         }
     }
+
+    for(int i=0;i<(int)cruz.size();i++)
+    {
+        if(!cruz[i].usaJoystick()
+            && map == cruz[i].getMapeo())
+        {
+            return cruz[i].getRosalilaInputs();
+        }
+    }
     return "Error: no input.";
 }
