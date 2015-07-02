@@ -15,14 +15,19 @@ Build instructions using Code::Blocks:
 ---------------------
 In Code::Blocks: "Linker settings" -> "Other linker options"
 Add the following:
-*   lGL
-*   lglut
-*   lGLU
-*   lSDL
-*   lSDL_image
-*   lSDL_ttf
-*   lSDL_mixer
-*   lsmpeg
+-lGL
+-lSDL2
+-lSDL2_image
+-lSDL2_ttf
+-lSDL2_mixer
+
+-lOpenGL32
+-lfreeglut
+-lmingw32 -lSDL2main -lSDL2
+-lSDL2_image
+-lSDL2_mixer
+-lSDL2_ttf
+
 
 3. Celebrate
 ------------
