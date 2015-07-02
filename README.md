@@ -15,11 +15,16 @@ Build instructions using Code::Blocks:
 ---------------------
 In Code::Blocks: "Linker settings" -> "Other linker options"
 Add the following:
+
+Linux:
+
 -lGL
 -lSDL2
 -lSDL2_image
 -lSDL2_ttf
 -lSDL2_mixer
+
+Windows:
 
 -lOpenGL32
 -lfreeglut
