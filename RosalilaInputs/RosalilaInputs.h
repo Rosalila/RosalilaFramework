@@ -4,7 +4,7 @@
 #include "../system.h"
 #include "../RosalilaInputs/Boton.h"
 #include "../RosalilaAI/RosalilaAI.h"
-
+class RosalilaAI;
 class RosalilaInputs
 {
 protected:

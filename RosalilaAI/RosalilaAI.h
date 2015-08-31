@@ -5,7 +5,7 @@
 #include <cstdlib>
 #include <iostream>
 using namespace std;
-
+class Automata;
 class RosalilaAI
 {
     Automata *automata;

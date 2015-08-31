@@ -1,5 +1,5 @@
-#ifndef AUTOMATA_H
-#define AUTOMATA_H
+#ifndef AUTOMATA2_H
+#define AUTOMATA2_H
 
 
 #include "Estado.h"

@@ -16,7 +16,7 @@
 
 #include <iostream>
 
-#include "Rosalila/RosalilaGraphics/RosalilaGraphics.h"
+#include "../RosalilaGraphics/RosalilaGraphics.h"
 
 using namespace std;
 

@@ -144,182 +144,182 @@ void Explosion::logic()
 
 void Explosion::newExplosion (float pos_x,float pos_y)
 {
-    this->pos_x=pos_x;
-    this->pos_y=pos_y;
-  int    i;
-
-  for (i = 0; i < NUM_PARTICLES; i++)
-    {
-      particles[i].position[0] = 0.0;
-      particles[i].position[1] = 0.0;
-      particles[i].position[2] = 0.0;
-
-      particles[i].color[0] = 1.0;
-      particles[i].color[1] = 1.0;
-      particles[i].color[2] = 0.5;
-
-      newSpeed (particles[i].speed);
-    }
-
-  for (i = 0; i < NUM_DEBRIS; i++)
-    {
-      debris[i].position[0] = 0.0;
-      debris[i].position[1] = 0.0;
-      debris[i].position[2] = 0.0;
-
-      debris[i].orientation[0] = 0.0;
-      debris[i].orientation[1] = 0.0;
-      debris[i].orientation[2] = 0.0;
-
-      debris[i].color[0] = 0.7;
-      debris[i].color[1] = 0.7;
-      debris[i].color[2] = 0.7;
-
-      debris[i].scale[0] = (20.0 *
-			    ((GLfloat) rand ()) / ((GLfloat) RAND_MAX)) - 1.0;
-      debris[i].scale[1] = (20.0 *
-			    ((GLfloat) rand ()) / ((GLfloat) RAND_MAX)) - 1.0;
-      debris[i].scale[2] = (20.0 *
-			    ((GLfloat) rand ()) / ((GLfloat) RAND_MAX)) - 1.0;
-
-      newSpeed (debris[i].speed);
-      newSpeed (debris[i].orientationSpeed);
-    }
-
-  fuel = 100;
+//    this->pos_x=pos_x;
+//    this->pos_y=pos_y;
+//  int    i;
+//
+//  for (i = 0; i < NUM_PARTICLES; i++)
+//    {
+//      particles[i].position[0] = 0.0;
+//      particles[i].position[1] = 0.0;
+//      particles[i].position[2] = 0.0;
+//
+//      particles[i].color[0] = 1.0;
+//      particles[i].color[1] = 1.0;
+//      particles[i].color[2] = 0.5;
+//
+//      newSpeed (particles[i].speed);
+//    }
+//
+//  for (i = 0; i < NUM_DEBRIS; i++)
+//    {
+//      debris[i].position[0] = 0.0;
+//      debris[i].position[1] = 0.0;
+//      debris[i].position[2] = 0.0;
+//
+//      debris[i].orientation[0] = 0.0;
+//      debris[i].orientation[1] = 0.0;
+//      debris[i].orientation[2] = 0.0;
+//
+//      debris[i].color[0] = 0.7;
+//      debris[i].color[1] = 0.7;
+//      debris[i].color[2] = 0.7;
+//
+//      debris[i].scale[0] = (20.0 *
+//			    ((GLfloat) rand ()) / ((GLfloat) RAND_MAX)) - 1.0;
+//      debris[i].scale[1] = (20.0 *
+//			    ((GLfloat) rand ()) / ((GLfloat) RAND_MAX)) - 1.0;
+//      debris[i].scale[2] = (20.0 *
+//			    ((GLfloat) rand ()) / ((GLfloat) RAND_MAX)) - 1.0;
+//
+//      newSpeed (debris[i].speed);
+//      newSpeed (debris[i].orientationSpeed);
+//    }
+//
+//  fuel = 100;
 }
 
 void Explosion::newSpeed (float dest[3])
 {
-  float    x;
-  float    y;
-  float    z;
-  float    len;
-
-  x = (2.0 * ((GLfloat) rand ()) / ((GLfloat) RAND_MAX)) - 1.0;
-  y = (2.0 * ((GLfloat) rand ()) / ((GLfloat) RAND_MAX)) - 1.0;
-  z = (2.0 * ((GLfloat) rand ()) / ((GLfloat) RAND_MAX)) - 1.0;
-
-  /*
-   * Normalizing the speed vectors gives a "fireball" effect
-   *
-   */
-
-  if (wantNormalize)
-    {
-      len = sqrt (x * x + y * y + z * z);
-
-      if (len)
-	{
-	  x = x / len;
-	  y = y / len;
-	  z = z / len;
-	}
-    }
-
-  dest[0] = x;
-  dest[1] = y;
-  dest[2] = z;
+//  float    x;
+//  float    y;
+//  float    z;
+//  float    len;
+//
+//  x = (2.0 * ((GLfloat) rand ()) / ((GLfloat) RAND_MAX)) - 1.0;
+//  y = (2.0 * ((GLfloat) rand ()) / ((GLfloat) RAND_MAX)) - 1.0;
+//  z = (2.0 * ((GLfloat) rand ()) / ((GLfloat) RAND_MAX)) - 1.0;
+//
+//  /*
+//   * Normalizing the speed vectors gives a "fireball" effect
+//   *
+//   */
+//
+//  if (wantNormalize)
+//    {
+//      len = sqrt (x * x + y * y + z * z);
+//
+//      if (len)
+//	{
+//	  x = x / len;
+//	  y = y / len;
+//	  z = z / len;
+//	}
+//    }
+//
+//  dest[0] = x;
+//  dest[1] = y;
+//  dest[2] = z;
 }
 
 void Explosion::render(int screen_width, int screen_height)
 {
-    //  glViewport (0.0, 0.0, (GLfloat) screen_width, (GLfloat) screen_height);
-    //glDisable(GL_BLEND);
-    glDisable(GL_TEXTURE_2D);
-    glEnable(GL_BLEND);
-    glMatrixMode (GL_PROJECTION);
-    glLoadIdentity ();
-    gluPerspective (45.0, (GLfloat) screen_width / (GLfloat) screen_height, 0.1, 100.0);
-    glMatrixMode (GL_MODELVIEW);
-
-    glEnable (GL_LIGHT0);
-    glEnable (GL_LIGHT1);
-    glLightfv (GL_LIGHT0, GL_AMBIENT, this->light0Amb);
-    glLightfv (GL_LIGHT0, GL_DIFFUSE, this->light0Dif);
-    glLightfv (GL_LIGHT0, GL_SPECULAR, this->light0Spec);
-    glLightfv (GL_LIGHT0, GL_POSITION, this->light0Pos);
-//    glLightfv (GL_LIGHT1, GL_AMBIENT, this->light1Amb);
-//    glLightfv (GL_LIGHT1, GL_DIFFUSE, this->light1Dif);
-//    glLightfv (GL_LIGHT1, GL_SPECULAR, this->light1Spec);
-//    glLightfv (GL_LIGHT1, GL_POSITION, this->light1Pos);
-    glLightModelf (GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
-    glMaterialfv (GL_FRONT_AND_BACK, GL_AMBIENT, this->materialAmb);
-    glMaterialfv (GL_FRONT_AND_BACK, GL_DIFFUSE, this->materialDif);
-    glMaterialfv (GL_FRONT_AND_BACK, GL_SPECULAR, this->materialSpec);
-    glMaterialf (GL_FRONT_AND_BACK, GL_SHININESS, this->materialShininess);
-    glEnable (GL_NORMALIZE);
-
-    this->logic();
-
-
-    //glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-    glLoadIdentity ();
-
-    /* Place the camera */
-    //
-    glPushMatrix ();
-    float pos_x=this->pos_x;
-    float pos_y=this->pos_y;
-    //camera align
-//    pos_x-=camera_x;
-//    pos_y+=camera_y;
-
-    pos_x+=650.0;
-    pos_y+=400.0;
-    glTranslatef (-((screen_width-pos_x)/2.0)/5.0, ((screen_height-pos_y)/2.0)/5.0, -100.0);
-    glRotatef (this->angle, 0.0, 1.0, 0.0);
-
-
-    /* If no explosion, draw cube */
-
-    if (this->fuel > 0)
-    {
-        glPushMatrix ();
-
-        glDisable (GL_LIGHTING);
-        glDisable (GL_DEPTH_TEST);
-
-        glBegin (GL_POINTS);
-
-        for (int i = 0; i < NUM_PARTICLES; i++)
-        {
-            glColor3fv (this->particles[i].color);
-            glVertex3fv (this->particles[i].position);
-        }
-
-        glEnd ();
-
-        glPopMatrix ();
-
-        glEnable (GL_LIGHTING);
-        glEnable (GL_LIGHT0);
-        glEnable (GL_DEPTH_TEST);
-
-        glNormal3f (0.0, 0.0, 1.0);
-
-        for (int i = 0; i < NUM_DEBRIS; i++)
-        {
-            glColor3fv (this->debris[i].color);
-
-            glPushMatrix ();
-
-            glTranslatef (this->debris[i].position[0],
-            this->debris[i].position[1],
-            this->debris[i].position[2]);
-
-            glRotatef (this->debris[i].orientation[0], 1.0, 0.0, 0.0);
-            glRotatef (this->debris[i].orientation[1], 0.0, 1.0, 0.0);
-            glRotatef (this->debris[i].orientation[2], 0.0, 0.0, 1.0);
-
-//            glScalef (this->debris[i].scale[0],
-//            this->debris[i].scale[1],
-//            this->debris[i].scale[2]);
-//            drawObject();
-
-            glPopMatrix ();
-        }
-    }
-    glPopMatrix();
+//    //  glViewport (0.0, 0.0, (GLfloat) screen_width, (GLfloat) screen_height);
+//    //glDisable(GL_BLEND);
+//    glDisable(GL_TEXTURE_2D);
+//    glEnable(GL_BLEND);
+//    glMatrixMode (GL_PROJECTION);
+//    glLoadIdentity ();
+//    gluPerspective (45.0, (GLfloat) screen_width / (GLfloat) screen_height, 0.1, 100.0);
+//    glMatrixMode (GL_MODELVIEW);
+//
+//    glEnable (GL_LIGHT0);
+//    glEnable (GL_LIGHT1);
+//    glLightfv (GL_LIGHT0, GL_AMBIENT, this->light0Amb);
+//    glLightfv (GL_LIGHT0, GL_DIFFUSE, this->light0Dif);
+//    glLightfv (GL_LIGHT0, GL_SPECULAR, this->light0Spec);
+//    glLightfv (GL_LIGHT0, GL_POSITION, this->light0Pos);
+////    glLightfv (GL_LIGHT1, GL_AMBIENT, this->light1Amb);
+////    glLightfv (GL_LIGHT1, GL_DIFFUSE, this->light1Dif);
+////    glLightfv (GL_LIGHT1, GL_SPECULAR, this->light1Spec);
+////    glLightfv (GL_LIGHT1, GL_POSITION, this->light1Pos);
+//    glLightModelf (GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
+//    glMaterialfv (GL_FRONT_AND_BACK, GL_AMBIENT, this->materialAmb);
+//    glMaterialfv (GL_FRONT_AND_BACK, GL_DIFFUSE, this->materialDif);
+//    glMaterialfv (GL_FRONT_AND_BACK, GL_SPECULAR, this->materialSpec);
+//    glMaterialf (GL_FRONT_AND_BACK, GL_SHININESS, this->materialShininess);
+//    glEnable (GL_NORMALIZE);
+//
+//    this->logic();
+//
+//
+//    //glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+//
+//    glLoadIdentity ();
+//
+//    /* Place the camera */
+//    //
+//    glPushMatrix ();
+//    float pos_x=this->pos_x;
+//    float pos_y=this->pos_y;
+//    //camera align
+////    pos_x-=camera_x;
+////    pos_y+=camera_y;
+//
+//    pos_x+=650.0;
+//    pos_y+=400.0;
+//    glTranslatef (-((screen_width-pos_x)/2.0)/5.0, ((screen_height-pos_y)/2.0)/5.0, -100.0);
+//    glRotatef (this->angle, 0.0, 1.0, 0.0);
+//
+//
+//    /* If no explosion, draw cube */
+//
+//    if (this->fuel > 0)
+//    {
+//        glPushMatrix ();
+//
+//        glDisable (GL_LIGHTING);
+//        glDisable (GL_DEPTH_TEST);
+//
+//        glBegin (GL_POINTS);
+//
+//        for (int i = 0; i < NUM_PARTICLES; i++)
+//        {
+//            glColor3fv (this->particles[i].color);
+//            glVertex3fv (this->particles[i].position);
+//        }
+//
+//        glEnd ();
+//
+//        glPopMatrix ();
+//
+//        glEnable (GL_LIGHTING);
+//        glEnable (GL_LIGHT0);
+//        glEnable (GL_DEPTH_TEST);
+//
+//        glNormal3f (0.0, 0.0, 1.0);
+//
+//        for (int i = 0; i < NUM_DEBRIS; i++)
+//        {
+//            glColor3fv (this->debris[i].color);
+//
+//            glPushMatrix ();
+//
+//            glTranslatef (this->debris[i].position[0],
+//            this->debris[i].position[1],
+//            this->debris[i].position[2]);
+//
+//            glRotatef (this->debris[i].orientation[0], 1.0, 0.0, 0.0);
+//            glRotatef (this->debris[i].orientation[1], 0.0, 1.0, 0.0);
+//            glRotatef (this->debris[i].orientation[2], 0.0, 0.0, 1.0);
+//
+////            glScalef (this->debris[i].scale[0],
+////            this->debris[i].scale[1],
+////            this->debris[i].scale[2]);
+////            drawObject();
+//
+//            glPopMatrix ();
+//        }
+//    }
+//    glPopMatrix();
 }

@@ -13,7 +13,6 @@
 #include <SDL2_image/SDL_image.h>
 #endif
 
-#include <GL/freeglut.h>
 #include <GL/gl.h>
 #include <stdio.h>
 #include <math.h>
