@@ -78,7 +78,8 @@ void MenuGallery::dibujar()
                         0,0,
                         Color(255,255,255,255),
                         0,0,
-                        false);
+                        false,
+                        FlatShadow());
 
                     int border_difference_x=(image->getWidth()-border_preview->getWidth())/2;
                     int border_difference_y=(image->getHeight()-border_preview->getHeight())/2;
@@ -93,7 +94,8 @@ void MenuGallery::dibujar()
                         0,0,
                         Color(255,255,255,255),
                         0,0,
-                        false);
+                        false,
+                        FlatShadow());
                 }
             }
             cont++;
@@ -117,7 +119,8 @@ void MenuGallery::dibujar()
                     0,0,
                     Color(255,255,255,255),
                     0,0,
-                    false);
+                    false,
+                    FlatShadow());
 
                 int border_difference_x=(size_cuadro_x-border_thumbnail->getWidth())/2;
                 int border_difference_y=(size_cuadro_y-border_thumbnail->getHeight())/2;
@@ -132,7 +135,8 @@ void MenuGallery::dibujar()
                     0,0,
                     Color(255,255,255,255),
                     0,0,
-                    false);
+                    false,
+                    FlatShadow());
             }else
             {
                 Image *image=portraits[cont];
@@ -146,7 +150,8 @@ void MenuGallery::dibujar()
                     0,0,
                     Color(255,255,255,255),
                     0,0,
-                    false);
+                    false,
+                    FlatShadow());
 
                 int border_difference_x=(size_cuadro_x-border_thumbnail->getWidth())/2;
                 int border_difference_y=(size_cuadro_y-border_thumbnail->getHeight())/2;
@@ -161,7 +166,8 @@ void MenuGallery::dibujar()
                     0,0,
                     Color(255,255,255,255),
                     0,0,
-                    false);
+                    false,
+                    FlatShadow());
             }
 
             //dibjujar cursor PA
@@ -180,7 +186,8 @@ void MenuGallery::dibujar()
                     0,0,
                     Color(255,255,255,255),
                     0,0,
-                    false);
+                    false,
+                    FlatShadow());
                 position_selected=cont;
             }
             cont++;
@@ -197,7 +204,8 @@ void MenuGallery::dibujar()
             0,0,
             Color(255,255,255,255),
             0,0,
-            false);
+            false,
+            FlatShadow());
 
         Image *fullscreen_image=fullscreens[position_selected];
         int screen_difference_x=(painter->screen_width-fullscreen_image->getWidth())/2;
@@ -212,7 +220,8 @@ void MenuGallery::dibujar()
             0,0,
             Color(255,255,255,current_preview_alpha),
             0,0,
-            false);
+            false,
+            FlatShadow());
         current_preview_alpha+=3;
         if(current_preview_alpha>255)
             current_preview_alpha=255;

@@ -49,7 +49,8 @@ void MenuBoton::dibujar()
             0,0,
             Color(255,255,255,255),
             0,0,
-            false);
+            false,
+            FlatShadow());
 
         std::string temp=texto;
         painter->drawText(temp,x+alineacion_texto_x,y+alineacion_texto_y);
@@ -65,7 +66,8 @@ void MenuBoton::dibujar()
             0,0,
             Color(255,255,255,255),
             0,0,
-            false);
+            false,
+            FlatShadow());
 
         std::string temp=texto_sel;
         painter->drawText(temp,x+alineacion_texto_x_sel,y+alineacion_texto_y_sel);

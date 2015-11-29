@@ -71,7 +71,8 @@ void MenuLista::dibujar()
                 0,0,
                 Color(255,255,255,255),
                 0,0,
-                false);
+                false,
+                FlatShadow());
         }
         if(flecha_derecha!=NULL)
         {
@@ -85,7 +86,8 @@ void MenuLista::dibujar()
                 0,0,
                 Color(255,255,255,255),
                 0,0,
-                false);
+                false,
+                FlatShadow());
         }
     }else
     {
@@ -103,7 +105,8 @@ void MenuLista::dibujar()
                 0,0,
                 Color(255,255,255,255),
                 0,0,
-                false);
+                false,
+                FlatShadow());
         }
         if(flecha_derecha_sel!=NULL)
         {
@@ -117,7 +120,8 @@ void MenuLista::dibujar()
                 0,0,
                 Color(255,255,255,255),
                 0,0,
-                false);
+                false,
+                FlatShadow());
         }
     }
 }

@@ -206,7 +206,8 @@ void MenuCharSelect::dibujar()
                         0,0,
                         Color(255,255,255,255),
                         0,0,
-                        false);
+                        false,
+                        FlatShadow());
                 }
                 //draw preview pb
                 if(max_locked_chars_pb>0)
@@ -224,7 +225,8 @@ void MenuCharSelect::dibujar()
                             0,0,
                             Color(255,255,255,255),
                             0,0,
-                            false);
+                            false,
+                            FlatShadow());
                     }
                 }
             }
@@ -248,7 +250,8 @@ void MenuCharSelect::dibujar()
                     0,0,
                     Color(255,255,255,255),
                     0,0,
-                    false);
+                    false,
+                    FlatShadow());
             }else
             {
                 Image *image=portraits[cont];
@@ -262,7 +265,8 @@ void MenuCharSelect::dibujar()
                     0,0,
                     Color(255,255,255,255),
                     0,0,
-                    false);
+                    false,
+                    FlatShadow());
             }
             //dibjuar locks pa
             for(int l=0;l<(int)locks_pa.size();l++)
@@ -280,7 +284,8 @@ void MenuCharSelect::dibujar()
                         0,0,
                         Color(255,255,255,255),
                         0,0,
-                        false);
+                        false,
+                        FlatShadow());
                 }
             }
             //dibjuar locks pb
@@ -301,7 +306,8 @@ void MenuCharSelect::dibujar()
                             0,0,
                             Color(255,255,255,255),
                             0,0,
-                            false);
+                            false,
+                            FlatShadow());
                     }
                 }
             }
@@ -319,7 +325,8 @@ void MenuCharSelect::dibujar()
                     0,0,
                     Color(255,255,255,255),
                     0,0,
-                    false);
+                    false,
+                    FlatShadow());
             }
             //dibjujar cursor PB
             if(max_locked_chars_pb>0)
@@ -337,7 +344,8 @@ void MenuCharSelect::dibujar()
                         0,0,
                         Color(255,255,255,255),
                         0,0,
-                        false);
+                        false,
+                        FlatShadow());
                 }
             }
             cont++;

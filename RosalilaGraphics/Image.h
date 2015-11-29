@@ -1,3 +1,6 @@
+#ifndef ROSALILAIMAGE_H
+#define ROSALILAIMAGE_H
+
 #ifdef LINUX
 #include <SDL2/SDL_image.h>
 #endif
@@ -25,3 +28,5 @@ public:
     void setWidth(int width);
     void setHeight(int height);
 };
+
+#endif

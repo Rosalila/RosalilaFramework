@@ -5,7 +5,7 @@ Sound::Sound()
     music=NULL;
 
     writeLogLine("Initializing SLD sound engine.");
-    if( Mix_OpenAudio( 22050, AUDIO_S16SYS/*MIX_DEFAULT_FORMAT*/, 2, 4096 ) == -1 )
+    if( Mix_OpenAudio( 44100, AUDIO_S16SYS/*MIX_DEFAULT_FORMAT*/, 2, 1024 ) == -1 )
     {
         writeLogLine("Failed initializing sound engine. :(");
         return;

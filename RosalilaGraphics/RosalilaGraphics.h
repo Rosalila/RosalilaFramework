@@ -27,6 +27,7 @@
 #include <SDL2/SDL_opengl.h>
 #include <stdio.h>
 
+#include "../RosalilaGraphics/FlatShadow.h"
 #include "../RosalilaGraphics/Image.h"
 #include "../RosalilaGraphics/Timer.h"
 #include "../RosalilaGraphics/Explosion.h"
@@ -83,6 +84,8 @@ public:
     }
 };
 
+class FlatShadow;
+
 class RosalilaGraphics
 {
     public:
@@ -123,7 +126,8 @@ class RosalilaGraphics
 				 int depth_effect_y,
 				 Color color_effects,
 				 int shadow_x, int shadow_y,
-				 bool camera_align);
+				 bool camera_align,
+				 FlatShadow flat_shadow);
     void drawText(std::string text,int position_x,int position_y);
     void drawRectangle(int x,int y,int width,int height,float rotation,int red,int green,int blue,int alpha,bool camera_align);
     void draw3D();
