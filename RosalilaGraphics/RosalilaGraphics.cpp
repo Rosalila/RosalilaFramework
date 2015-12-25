@@ -271,8 +271,6 @@ void RosalilaGraphics::draw2DImage	(
     glEnable (GL_LIGHT0);
     glDisable (GL_DEPTH_TEST);
 
-
-
     //Camera and depth effect
     if(depth_effect_x>0)
     {
@@ -295,6 +293,10 @@ void RosalilaGraphics::draw2DImage	(
     {
         position_y+=camera_y;
     }
+
+    //Screen shake
+    position_x += current_screen_shake_x;
+    position_y += current_screen_shake_y;
 
     GLfloat x1=0.f+position_x;
     GLfloat y1=0.f+position_y;
@@ -759,10 +761,32 @@ void RosalilaGraphics::updateScreen()
 //    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 //    SDL_RenderClear(renderer);
 
+    if(shake_time>0)
+    {
+        shake_time--;
+        if(shake_time==0)
+        {
+            current_screen_shake_x = 0;
+            current_screen_shake_y = 0;
+        }else
+        {
+            current_screen_shake_x = (rand()*10000)%shake_magnitude;
+            current_screen_shake_y = (rand()*10000)%shake_magnitude;
+        }
+    }
+
     //SDL_RenderPresent(renderer);
     SDL_GL_SwapWindow(window);
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
+
+void RosalilaGraphics::shakeScreen(int shake_magnitude, int shake_time)
+{
+    this->shake_magnitude = shake_magnitude;
+    this->shake_time = shake_time;
+    this->shake_original_x = camera_x;
+    this->shake_original_y = camera_y;
 }
 
 void RosalilaGraphics::video(RosalilaGraphics*painter)

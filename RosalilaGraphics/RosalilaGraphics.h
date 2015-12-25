@@ -112,6 +112,14 @@ class RosalilaGraphics
     list<Explosion*> explosions;
     Cube cube;
 
+    //Screen Shake
+    int shake_magnitude;
+    int shake_time;
+    int shake_original_x;
+    int shake_original_y;
+    int current_screen_shake_x;
+    int current_screen_shake_y;
+
     RosalilaGraphics();
     ~RosalilaGraphics();
     Image* getTexture(std::string filename);
@@ -128,6 +136,7 @@ class RosalilaGraphics
 				 int shadow_x, int shadow_y,
 				 bool camera_align,
 				 FlatShadow flat_shadow);
+    void shakeScreen(int shake_magnitude, int shake_time);
     void drawText(std::string text,int position_x,int position_y);
     void drawRectangle(int x,int y,int width,int height,float rotation,int red,int green,int blue,int alpha,bool camera_align);
     void draw3D();
