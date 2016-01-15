@@ -17,8 +17,17 @@ class FlatShadow
         float alpha_end=0;
         float shadow_x;
         float shadow_y;
-        vector<Point*>points;
-        FlatShadow(Image* image, float shadow_lenght,float alpha_init,float alpha_end,float shadow_x,float shadow_y,vector<Point*>points);
+        vector<Point*>points_left;
+        vector<Point*>points_right;
+        vector<Point*>points_top;
+
+        vector<Point*>inbetween_points_left;
+        vector<Point*>inbetween_points_right;
+        vector<Point*>inbetween_points_top;
+
+        FlatShadow(Image* image, float shadow_lenght,float alpha_init,float alpha_end,float shadow_x,float shadow_y,
+                   vector<Point*>points_left,vector<Point*>points_right,vector<Point*>points_top,
+                   vector<Point*>inbetween_points_left,vector<Point*>inbetween_points_right,vector<Point*>inbetween_points_top);
         FlatShadow();
         virtual ~FlatShadow();
     protected:
