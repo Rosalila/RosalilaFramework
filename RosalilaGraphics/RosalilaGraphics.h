@@ -136,6 +136,19 @@ class RosalilaGraphics
 				 int shadow_x, int shadow_y,
 				 bool camera_align,
 				 FlatShadow flat_shadow);
+    void draw2DImageBatch(
+	             Image* texture,
+				 int size_x,int size_y,
+				 vector<int> position_x,vector<int>position_y,
+				 float scale,
+				 vector<float>rotation,
+				 bool flipHorizontally,
+				 int depth_effect_x,
+				 int depth_effect_y,
+				 Color color_effects,
+				 int shadow_x, int shadow_y,
+				 bool camera_align,
+				 FlatShadow flat_shadow);
     void shakeScreen(int shake_magnitude, int shake_time);
     void drawText(std::string text,int position_x,int position_y);
     void drawRectangle(int x,int y,int width,int height,float rotation,int red,int green,int blue,int alpha,bool camera_align);

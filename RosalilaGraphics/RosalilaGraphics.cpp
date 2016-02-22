@@ -373,7 +373,7 @@ void RosalilaGraphics::draw2DImage	(
                             0.f );
 
 
-                for(int i=0;i<flat_shadow.inbetween_points_left.size();i++)
+                for(int i=0;i<flat_shadow.inbetween_points_right.size();i++)
                 glVertex3f( x1-translate_x+flat_shadow.points_right[0]->x+flat_shadow.inbetween_points_right[i]->x,
                             y2-translate_y+flat_shadow.points_right[0]->y+flat_shadow.inbetween_points_right[i]->y,
                             0.f );
@@ -524,6 +524,124 @@ glBindTexture( GL_TEXTURE_2D, texture->getTexture() );
     //Reset the current matrix to the one that was saved.
     glPopMatrix();
 }
+
+void RosalilaGraphics::draw2DImageBatch(
+             Image* texture,
+             int size_x,int size_y,
+             vector<int> position_x,vector<int>position_y,
+             float scale,
+             vector<float>rotation,
+             bool flipHorizontally,
+             int depth_effect_x,
+             int depth_effect_y,
+             Color color_effects,
+             int shadow_x, int shadow_y,
+             bool camera_align,
+             FlatShadow flat_shadow)
+{
+
+    //Camera and depth effect
+
+    glEnable( GL_TEXTURE_2D );
+
+    glMatrixMode( GL_PROJECTION );
+    glLoadIdentity();
+    glOrtho(0.0f, screen_width, screen_height, 0.0f, -1.0f, 1.0f);
+    glMatrixMode( GL_MODELVIEW );
+
+    glDisable (GL_LIGHTING);
+    glEnable (GL_LIGHT0);
+    glDisable (GL_DEPTH_TEST);
+
+    glColor4ub(color_effects.getRed(), color_effects.getGreen(), color_effects.getBlue(),color_effects.getAlpha());
+    glEnable(GL_BLEND);
+    glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
+
+    glBindTexture( GL_TEXTURE_2D, texture->getTexture() );
+
+
+
+    glPushMatrix();
+    glTranslatef(1.0,1.0, 1.0);
+
+    glBegin( GL_QUADS);
+    for(int i=0;i<position_x.size();i++)
+    {
+
+        if(depth_effect_x>0)
+        {
+            position_x[i]-=camera_x/depth_effect_x;
+        }else if(depth_effect_x<0)
+        {
+            position_x[i]-=camera_x*-depth_effect_x;
+        }else if(camera_align)
+        {
+            position_x[i]-=camera_x;
+        }
+
+        if(depth_effect_y>0)
+        {
+            position_y[i]+=camera_y/depth_effect_y;
+        }else if(depth_effect_y<0)
+        {
+            position_y[i]+=camera_y*-depth_effect_y;
+        }else if(camera_align)
+        {
+            position_y[i]+=camera_y;
+        }
+
+        //Screen shake
+        position_x[i] += current_screen_shake_x;
+        position_y[i] += current_screen_shake_y;
+
+        GLfloat x1=0.f+position_x[i];
+        GLfloat y1=0.f+position_y[i];
+        GLfloat x2=0.f+position_x[i]+(float)size_x*scale;
+        GLfloat y2=0.f+position_y[i]+(float)size_y*scale;
+
+        //Flip
+        if(flipHorizontally)
+        {
+            GLfloat temp=x1;
+            x1=x2;
+            x2=temp;
+        }
+
+        //OpenGL draw
+        //Save the current matrix.
+
+        //Change the current matrix.
+        //glTranslatef(translate_x,translate_y, 1.0);
+
+        //glRotatef(-rotation[i], 0, 0, 1.0);
+
+
+            //Bottom-left vertex (corner)
+            glTexCoord2i( 0, 0 );
+            glVertex3f( x1, y1, 0.0f );
+
+            //Bottom-right vertex (corner)
+            glTexCoord2i( 1, 0 );
+            glVertex3f( x2, y1, 0.f );
+
+            //Top-right vertex (corner)
+            glTexCoord2i( 1, 1 );
+            glVertex3f( x2, y2, 0.f );
+
+            //Top-left vertex (corner)
+            glTexCoord2i( 0, 1 );
+            glVertex3f( x1, y2, 0.f );
+
+
+
+    }
+    glEnd();
+    glPopMatrix();
+
+    //Reset the current matrix to the one that was saved.
+//    glPopMatrix();
+}
+
 
 void RosalilaGraphics::drawRectangle(int x,int y,int width,int height,float rotation,int red,int green,int blue,int alpha,bool camera_align)
 {
