@@ -123,10 +123,10 @@ bool hitboxCollision(int a_x,int a_y,int a_width,int a_height,float a_angle,
     if(segmentIntersection(la4,lb4))
         return true;
 
+    return false;
 
 
-
-
+/*
 
     vector<Point*>intersections;
     intersections.push_back(lineIntersection(la1,lb1));
@@ -219,7 +219,7 @@ bool hitboxCollision(int a_x,int a_y,int a_width,int a_height,float a_angle,
 
     if(cont>=8)
         return true;
-
+*/
     return false;
 }
 
