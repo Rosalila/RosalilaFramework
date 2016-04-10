@@ -223,6 +223,49 @@ bool hitboxCollision(int a_x,int a_y,int a_width,int a_height,float a_angle,
     return false;
 }
 
+bool hitboxLinesCollision(Line la1,Line la2,Line la3,Line la4,
+              Line lb1,Line lb2,Line lb3,Line lb4)
+{
+
+    if(segmentIntersection(la1,lb1))
+        return true;
+    if(segmentIntersection(la1,lb2))
+        return true;
+    if(segmentIntersection(la1,lb3))
+        return true;
+    if(segmentIntersection(la1,lb4))
+        return true;
+
+    if(segmentIntersection(la2,lb1))
+        return true;
+    if(segmentIntersection(la2,lb2))
+        return true;
+    if(segmentIntersection(la2,lb3))
+        return true;
+    if(segmentIntersection(la2,lb4))
+        return true;
+
+    if(segmentIntersection(la3,lb1))
+        return true;
+    if(segmentIntersection(la3,lb2))
+        return true;
+    if(segmentIntersection(la3,lb3))
+        return true;
+    if(segmentIntersection(la3,lb4))
+        return true;
+
+    if(segmentIntersection(la4,lb1))
+        return true;
+    if(segmentIntersection(la4,lb2))
+        return true;
+    if(segmentIntersection(la4,lb3))
+        return true;
+    if(segmentIntersection(la4,lb4))
+        return true;
+
+    return false;
+}
+
 bool segmentIntersection(Line l1,Line l2)
 {
     Point* p=lineIntersection(l1,l2);

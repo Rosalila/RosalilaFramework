@@ -12,38 +12,6 @@ using namespace std;
 
 class Hitbox;
 
-class Point
-{
-public:
-    int x;
-    int y;
-    Point()
-    {
-        this->x=0;
-        this->y=0;
-    }
-    Point(int x,int y)
-    {
-        this->x=x;
-        this->y=y;
-    }
-};
-
-class Line
-{
-public:
-    Point p1;
-    Point p2;
-    Line()
-    {
-    }
-    Line(Point p1,Point p2)
-    {
-        this->p1=p1;
-        this->p2=p2;
-    }
-};
-
 bool writeLogLine(std::string text);
 bool clearLog();
 std::string toString(int number);
@@ -51,6 +19,8 @@ bool pointIsInRect(int point_x,int point_y,
               int rect_x,int rect_y,int rect_width,int rect_height);
 bool hitboxCollision(int a_x,int a_y,int a_width,int a_height,float a_angle,
               int b_x,int b_y,int b_width,int b_height,float b_angle);
+bool hitboxLinesCollision(Line la1,Line la2,Line la3,Line la4,
+              Line lb1,Line lb2,Line lb3,Line lb4);
 Point* lineIntersection(Line l1,Line l2);
 bool segmentIntersection(Line l1,Line l2);
 Point rotateAroundPoint(Point point,Point pivot,float angle);
