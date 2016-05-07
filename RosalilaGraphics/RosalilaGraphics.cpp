@@ -912,7 +912,7 @@ void RosalilaGraphics::updateScreen()
     //SDL_RenderPresent(renderer);
     SDL_GL_SwapWindow(window);
 
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 void RosalilaGraphics::shakeScreen(int shake_magnitude, int shake_time)
@@ -1009,4 +1009,16 @@ void RosalilaGraphics::video(RosalilaGraphics*painter)
 //    movie = NULL;
 //    SDL_ShowCursor(SDL_ENABLE);
 //    painter->resetScreen();
+}
+
+void RosalilaGraphics::screenshot(int x, int y, int w, int h, const char * filename)
+{
+    unsigned char * pixels = new unsigned char[w*h*4]; // 4 bytes for RGBA
+    glReadPixels(x,y,w, h, GL_BGRA, GL_UNSIGNED_BYTE, pixels);
+
+    SDL_Surface * surf = SDL_CreateRGBSurfaceFrom(pixels, w, h, 8*4, w*4, 0,0,0,0);
+    SDL_SaveBMP(surf, filename);
+
+    SDL_FreeSurface(surf);
+    delete [] pixels;
 }
