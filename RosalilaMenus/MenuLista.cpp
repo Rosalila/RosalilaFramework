@@ -131,6 +131,11 @@ bool MenuLista::estaSeleccionado()
     return seleccionado;
 }
 
+int MenuLista::getActual()
+{
+    return actual;
+}
+
 void MenuLista::setSeleccionado(bool seleccionado)
 {
     this->seleccionado=seleccionado;

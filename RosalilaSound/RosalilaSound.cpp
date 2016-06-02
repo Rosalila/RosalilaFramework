@@ -6,12 +6,12 @@ Sound::Sound()
 
     writeLogLine("Initializing SLD sound engine.");
     int channels=10;
-    if( Mix_OpenAudio( 88200, AUDIO_S16SYS/*MIX_DEFAULT_FORMAT*/, 2, 2048 ) == -1 )
+    if( Mix_OpenAudio( 44100, AUDIO_S16SYS/*MIX_DEFAULT_FORMAT*/, 2, 4096 ) == -1 )
     {
         writeLogLine("Failed initializing sound engine. :(");
         return;
     }
-    Mix_AllocateChannels(30);
+    Mix_AllocateChannels(100);
     writeLogLine("Success!");
 }
 
@@ -24,7 +24,7 @@ void Sound::drop()
 }
 void Sound::addSound(std::string variable,std::string value)
 {
-    if(sounds.find(variable)==sounds.end())
+    //if(sounds.find(variable)==sounds.end())
         sounds[variable]=Mix_LoadWAV(value.c_str());
 }
 void Sound::playSound(std::string variable)
@@ -40,16 +40,19 @@ void Sound::playSound(std::string variable)
     }
 }
 
-void Sound::playSound(std::string variable, int channel)
+int Sound::playSound(std::string variable, int channel)
 {
     if(!soundExists(variable))
     {
         writeLogLine("Error: "+variable+" sound does not exists.");
+        return -1;
     }
 
     if(sounds[variable]!=NULL)
     {
-        Mix_PlayChannel( channel, sounds[variable], 0 );
+        //Mix_HaltChannel(channel);
+        return Mix_PlayChannel( channel, sounds[variable], 0 );
+        //Mix_PlayChannel( -1, sounds[variable], 0 );
     }
 }
 

@@ -708,6 +708,34 @@ void RosalilaGraphics::frameCap()
     update->start();
 }
 
+//void RosalilaGraphics::frameCap()
+//{
+//    frame++;
+//
+//    //If a second has passed since the caption was last updated
+//
+//    //If we want to cap the frame rate
+//    if(update->get_ticks() < 17)
+//    {
+//        //Sleep the remaining frame time
+//        SDL_Delay( 17 - update->get_ticks() );
+//    }
+//
+//
+//    //current_fps=frame / ( fps->get_ticks() / 1000.f );
+//
+////    //Reset the caption
+////    SDL_WM_SetCaption( caption.c_str(), NULL );
+//
+//    //Restart the update timer
+//    if(update->get_ticks()>19)
+//    {
+//        cout<<update->get_ticks()<<endl;
+//        cout.flush();
+//    }
+//    update->start();
+//}
+
 int RosalilaGraphics::getFrameCap()
 {
     return current_fps;

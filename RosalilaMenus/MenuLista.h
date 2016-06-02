@@ -30,6 +30,7 @@ public:
     void retroceder();
     virtual void dibujar();
     bool estaSeleccionado();
+    int getActual();
     void setSeleccionado(bool seleccionado);
     std::string getAccion();
     Elemento*getElementoActual();
