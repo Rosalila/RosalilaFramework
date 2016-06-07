@@ -13,6 +13,7 @@ Sound::Sound()
     }
     Mix_AllocateChannels(100);
     writeLogLine("Success!");
+    current_music="";
 }
 
 void Sound::drop()
@@ -62,6 +63,7 @@ void Sound::playMusic(std::string path)
     writeLogLine("Playing music: "+path);
     music = Mix_LoadMUS(path.c_str());
     Mix_PlayMusic(music,-1);
+    current_music=path;
 }
 
 void Sound::playMusic(std::string path,int loops)
@@ -87,4 +89,9 @@ bool Sound::soundExists(std::string variable)
     map<std::string,Mix_Chunk*>::iterator it = sounds.find(variable);
     return it!=sounds.end();
     return false;
+}
+
+string Sound::getCurrentMusic()
+{
+    return current_music;
 }

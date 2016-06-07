@@ -162,6 +162,6 @@ class RosalilaGraphics
     int getFrameCap();
     void resetScreen();
     void video(RosalilaGraphics*painter);
-    void screenshot(int x, int y, int w, int h, const char * filename);
+    void screenshot(int x, int y, int w, int h, string filename);
 };
 #endif

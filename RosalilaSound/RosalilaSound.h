@@ -31,6 +31,7 @@ class Sound
 {
     std::map<std::string,Mix_Chunk*> sounds;
     Mix_Music *music;
+    string current_music;
 public:
     Sound();
     void drop();
@@ -41,6 +42,7 @@ public:
     void playMusic(std::string variable);
     void playMusic(std::string variable,int loops);
     void stopMusic();
+    string getCurrentMusic();
 };
 
 #endif
