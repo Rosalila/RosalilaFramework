@@ -183,7 +183,8 @@ std::string MenuCharSelect::getTipo()
 
 void MenuCharSelect::dibujar()
 {
-
+    //Hardcode do not draw char selection
+    return;
     int cont=0;
 
     for(int j=0;j<size_y;j++)

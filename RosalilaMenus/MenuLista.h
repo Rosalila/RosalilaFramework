@@ -19,6 +19,7 @@ private:
     std::string accion;
     int actual;//!!!!!!!
     std::vector<Elemento*>elementos;//!!!!!!!
+    int frame;
 public:
     MenuLista(RosalilaGraphics*painter,int x, int y,
               int flecha_izq_x,int flecha_izq_y,Image*flecha_izquierda,int flecha_der_x,int flecha_der_y,Image*flecha_derecha,

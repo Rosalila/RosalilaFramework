@@ -28,6 +28,7 @@ MenuLista::MenuLista(RosalilaGraphics*painter,int x, int y,
     this->accion=accion;
     seleccionado=false;
     this->painter=painter;
+    this->frame=0;
 }
 
 std::string MenuLista::getTipo()
@@ -93,11 +94,13 @@ void MenuLista::dibujar()
     {
         if(actual>=0 && actual<(int)elementos.size())
             elementos[actual]->dibujar();
+        if(actual!=0)
+        if(frame%60>=0 && frame%60<30)
         if(flecha_izquierda_sel!=NULL)
         {
             painter->draw2DImage
             (   flecha_izquierda_sel,
-                width,height,
+                flecha_izquierda_sel->getWidth(),flecha_izquierda_sel->getHeight(),
                 x+flecha_izq_x_sel,y+flecha_izq_y_sel,
                 1.0,
                 0.0,
@@ -108,11 +111,14 @@ void MenuLista::dibujar()
                 false,
                 FlatShadow());
         }
+
+        if(actual!=(int)elementos.size()-1)
+        if(frame%60>=0 && frame%60<30)
         if(flecha_derecha_sel!=NULL)
         {
             painter->draw2DImage
             (   flecha_derecha_sel,
-                width,height,
+                flecha_derecha_sel->getWidth(),flecha_derecha_sel->getHeight(),
                 x+flecha_der_x_sel,y+flecha_der_y_sel,
                 1.0,
                 0.0,
@@ -124,6 +130,7 @@ void MenuLista::dibujar()
                 FlatShadow());
         }
     }
+    frame++;
 }
 
 bool MenuLista::estaSeleccionado()
