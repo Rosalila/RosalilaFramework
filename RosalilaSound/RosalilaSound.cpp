@@ -41,7 +41,7 @@ void Sound::playSound(std::string variable)
     }
 }
 
-int Sound::playSound(std::string variable, int channel)
+int Sound::playSound(std::string variable, int channel, int loops)
 {
     if(!soundExists(variable))
     {
@@ -52,7 +52,7 @@ int Sound::playSound(std::string variable, int channel)
     if(sounds[variable]!=NULL)
     {
         //Mix_HaltChannel(channel);
-        return Mix_PlayChannel( channel, sounds[variable], 0 );
+        return Mix_PlayChannel( channel, sounds[variable], 1);
         //Mix_PlayChannel( -1, sounds[variable], 0 );
     }
 }
