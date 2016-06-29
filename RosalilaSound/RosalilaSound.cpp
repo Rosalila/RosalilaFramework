@@ -52,7 +52,7 @@ int Sound::playSound(std::string variable, int channel, int loops)
     if(sounds[variable]!=NULL)
     {
         //Mix_HaltChannel(channel);
-        return Mix_PlayChannel( channel, sounds[variable], 1);
+        return Mix_PlayChannel( channel, sounds[variable], loops);
         //Mix_PlayChannel( -1, sounds[variable], 0 );
     }
 }
