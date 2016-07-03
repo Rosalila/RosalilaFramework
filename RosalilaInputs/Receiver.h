@@ -31,10 +31,14 @@ public:
     bool KEYS[322];//key pressed
     bool JOYKEYS_player1[max_joystick_inputs];//joykey pressed
     bool JOYKEYS_player2[max_joystick_inputs];//joykey pressed
-    bool joy_up_pressed_player_1;
-    bool joy_down_pressed_player_1;
-    bool joy_left_pressed_player_1;
-    bool joy_right_pressed_player_1;
+    bool hat_up_pressed_player_1;
+    bool hat_down_pressed_player_1;
+    bool hat_left_pressed_player_1;
+    bool hat_right_pressed_player_1;
+    bool stick_up_pressed_player_1;
+    bool stick_down_pressed_player_1;
+    bool stick_left_pressed_player_1;
+    bool stick_right_pressed_player_1;
     bool joy_up_pressed_player_2;
     bool joy_down_pressed_player_2;
     bool joy_left_pressed_player_2;
