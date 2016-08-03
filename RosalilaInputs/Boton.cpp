@@ -1,6 +1,6 @@
 #include "Boton.h"
 
-Boton::Boton(Receiver* receiver,int teclado,std::string mapeo)
+Button::Button(Receiver* receiver,int teclado,std::string mapeo)
 {
     this->teclado=teclado;
     this->mapeo=mapeo;
@@ -9,7 +9,7 @@ Boton::Boton(Receiver* receiver,int teclado,std::string mapeo)
     //this->joystick=999;
 }
 
-Boton::Boton(Receiver* receiver,int joystick,int num_joystick,std::string mapeo)
+Button::Button(Receiver* receiver,int joystick,int num_joystick,std::string mapeo)
 {
     this->num_joystick=num_joystick;
     this->joystick=joystick;
@@ -18,7 +18,21 @@ Boton::Boton(Receiver* receiver,int joystick,int num_joystick,std::string mapeo)
     this->receiver=receiver;
 }
 
-bool Boton::estaPresionado()
+bool Button::isPressed()
+{
+    if(usando_joystick)
+    {
+        if(receiver->isJoyPressed(joystick,num_joystick))
+            return true;
+    }else
+    {
+        if (receiver->isKeyPressed(teclado))
+            return true;
+    }
+    return false;
+}
+
+bool Button::isDown()
 {
     if(usando_joystick)
     {
@@ -32,7 +46,7 @@ bool Boton::estaPresionado()
     return false;
 }
 
-std::string Boton::getMapeo()
+std::string Button::getMapeo()
 {
     return mapeo;
 }
@@ -53,7 +67,7 @@ std::string convertInt(int number)
     return returnvalue;
 }
 
-std::string Boton::getRosalilaInputs()
+std::string Button::getRosalilaInputs()
 {
     if(usando_joystick)
     {
@@ -74,7 +88,7 @@ std::string Boton::getRosalilaInputs()
     }
 }
 
-std::string Boton::keyToString()
+std::string Button::keyToString()
 {
     if(teclado==SDLK_q)
         return "Q";
@@ -131,12 +145,12 @@ std::string Boton::keyToString()
     return "error!";
 }
 
-bool Boton::usaJoystick()
+bool Button::usaJoystick()
 {
     return usando_joystick;
 }
 
-int Boton::getNumJoystick()
+int Button::getNumJoystick()
 {
     return num_joystick;
 }

@@ -1,9 +1,9 @@
-#ifndef BOTON_H
-#define BOTON_H
+#ifndef BUTTON_H
+#define BUTTON_H
 
 #include "../RosalilaInputs/Receiver.h"
 
-class Boton
+class Button
 {
 private:
 
@@ -15,9 +15,10 @@ public:
 int joystick;
 std::string mapeo;
 int teclado;
-    Boton(Receiver* receiver,int teclado,std::string mapeo);
-    Boton(Receiver* receiver,int joystick,int num_joystick,std::string mapeo);
-    bool estaPresionado();
+    Button(Receiver* receiver,int teclado,std::string mapeo);
+    Button(Receiver* receiver,int joystick,int num_joystick,std::string mapeo);
+    bool isPressed();
+    bool isDown();
     std::string getMapeo();
     std::string getRosalilaInputs();
     int getNumJoystick();

@@ -11,7 +11,7 @@ void RosalilaInputs::actualizarBuffer(std::map<std::string,std::string>*strings,
     if(!inteligencia_artificial)
     {
         for(int i=0;i<(int)cruz.size();i++)
-            if(cruz[i].estaPresionado())
+            if(cruz[i].isDown())
                 resultado+=cruz[i].getMapeo();
         if(resultado=="24" || resultado=="42")
             resultado="1";
@@ -25,12 +25,12 @@ void RosalilaInputs::actualizarBuffer(std::map<std::string,std::string>*strings,
         {
             tecla_arriba=false;
             for(int i=0;i<(int)botones.size();i++)
-                if(botones[i].estaPresionado())
+                if(botones[i].isDown())
                     resultado+=botones[i].getMapeo();
         }
         bool flag=false;
         for(int i=0;i<(int)botones.size();i++)
-            if(botones[i].estaPresionado())
+            if(botones[i].isDown())
                 flag=true;
         if(!flag)
             tecla_arriba=true;
@@ -69,7 +69,7 @@ void RosalilaInputs::actualizarBuffer()
     std::string resultado="";
     for(int i=0;i<(int)cruz.size();i++)
     {
-        if(cruz[i].estaPresionado())
+        if(cruz[i].isDown())
         {
             resultado+=cruz[i].getMapeo();
         }
@@ -87,12 +87,12 @@ void RosalilaInputs::actualizarBuffer()
     {
         tecla_arriba=false;
         for(int i=0;i<(int)botones.size();i++)
-            if(botones[i].estaPresionado())
+            if(botones[i].isDown())
                 resultado+=botones[i].getMapeo();
     }
     bool flag=false;
     for(int i=0;i<(int)botones.size();i++)
-        if(botones[i].estaPresionado())
+        if(botones[i].isDown())
             flag=true;
     if(!flag)
         tecla_arriba=true;
@@ -132,7 +132,7 @@ void RosalilaInputs::loadFromXML(int jugador,Receiver* receiver)
     TiXmlDocument *doc;
     doc=&doc_t;
 
-    std::vector<Boton> botones_temp;
+    std::vector<Button> botones_temp;
     for(TiXmlNode* input=doc->FirstChild("Input");
             input!=NULL;
             input=input->NextSibling("Input"))
@@ -199,7 +199,7 @@ void RosalilaInputs::loadFromXML(int jugador,Receiver* receiver)
                         key=SDLK_n;
                     if(boton->ToElement()->Attribute("input")[0]=='M' || boton->ToElement()->Attribute("input")[0]=='m')
                         key=SDLK_m;
-                    botones_temp.push_back(Boton(receiver,key,std::string(boton->ToElement()->Attribute("map"))));
+                    botones_temp.push_back(Button(receiver,key,std::string(boton->ToElement()->Attribute("map"))));
                 }
             }
             //Joy
@@ -220,7 +220,7 @@ void RosalilaInputs::loadFromXML(int jugador,Receiver* receiver)
                         int_boton=-6;
                     else
                         int_boton=boton->ToElement()->Attribute("input")[0]-48;
-                    botones_temp.push_back(Boton(receiver,int_boton,input->ToElement()->Attribute("joystick_number")[0]-48,boton->ToElement()->Attribute("map")));
+                    botones_temp.push_back(Button(receiver,int_boton,input->ToElement()->Attribute("joystick_number")[0]-48,boton->ToElement()->Attribute("map")));
                 }
             }
         }

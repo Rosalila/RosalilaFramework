@@ -17,8 +17,8 @@ Receiver* receiver;
 bool tecla_arriba;
 RosalilaAI *ia;
 bool inteligencia_artificial;
-vector<Boton> botones;
-vector<Boton> cruz;
+vector<Button> botones;
+vector<Button> cruz;
     RosalilaInputs(){}
     void loadFromXML(int jugador,Receiver* receiver);
     void cargarRosalilaAIXML(int jugador,std::string archivo,std::string archivo_default);
