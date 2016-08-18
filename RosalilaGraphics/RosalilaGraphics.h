@@ -30,9 +30,6 @@
 #include "../RosalilaGraphics/FlatShadow.h"
 #include "../RosalilaGraphics/Image.h"
 #include "../RosalilaGraphics/Timer.h"
-#include "../RosalilaGraphics/Explosion.h"
-#include "../RosalilaGraphics/Cube.h"
-#include "../RosalilaGraphics/Object3D.h"
 #include "../RosalilaUtility/RosalilaUtility.h"
 
 #include <iostream>
@@ -108,10 +105,6 @@ class RosalilaGraphics
     Timer *fps;
     Timer *update;
 
-    //3D
-    list<Explosion*> explosions;
-    Cube cube;
-
     //Screen Shake
     int shake_magnitude;
     int shake_time;
@@ -152,15 +145,8 @@ class RosalilaGraphics
     void shakeScreen(int shake_magnitude, int shake_time);
     void drawText(std::string text,int position_x,int position_y);
     void drawRectangle(int x,int y,int width,int height,float rotation,int red,int green,int blue,int alpha,bool camera_align);
-    void draw3D();
-    void draw3DCube(int x,int y,float size,Color color);
-    void explode(float pos_x,float pos_y);
-    void addExplosion(int x,int y);
-    void drawObject();
     void updateScreen();
     void frameCap();
-    int getFrameCap();
-    void resetScreen();
     void video(RosalilaGraphics*painter);
     void screenshot(int x, int y, int w, int h, string filename);
 };

@@ -2,6 +2,13 @@
 
 RosalilaGraphics::RosalilaGraphics()
 {
+    this->shake_magnitude=0;
+    this->shake_time=0;
+    this->shake_original_x=0;
+    this->shake_original_y=0;
+    this->current_screen_shake_x=0;
+    this->current_screen_shake_y=0;
+
     //XML Initializations
     string configxml_path=assets_directory+"config.xml";
     TiXmlDocument doc_t( configxml_path.c_str() );
@@ -83,11 +90,20 @@ RosalilaGraphics::RosalilaGraphics()
     window = SDL_CreateWindow( "Rosalila Engine", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
                                screen_resized_width, screen_resized_height,
                                SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN );
+    if(!window)
+    {
+        writeLogLine("Could not init window");
+    }
 
     if(fullscreen)
         SDL_SetWindowFullscreen(window,SDL_WINDOW_FULLSCREEN);
 
     renderer = SDL_CreateRenderer(window, -1, 0);
+
+    if(!renderer)
+    {
+        writeLogLine("Could not init render");
+    }
 
     //Set the openGL state?
     glEnable( GL_TEXTURE_2D );
@@ -155,15 +171,6 @@ RosalilaGraphics::RosalilaGraphics()
     }
 
     return;
-}
-
-void RosalilaGraphics::resetScreen()
-{
-//    //Set up the screen
-//    if(!fullscreen)
-//        screen = SDL_SetVideoMode( screen_resized_width, screen_resized_height, screen_bpp, SDL_OPENGL );
-//    else
-//        screen = SDL_SetVideoMode( screen_resized_width, screen_resized_height, screen_bpp, SDL_OPENGL | SDL_FULLSCREEN );
 }
 
 RosalilaGraphics::~RosalilaGraphics()
@@ -708,39 +715,6 @@ void RosalilaGraphics::frameCap()
     update->start();
 }
 
-//void RosalilaGraphics::frameCap()
-//{
-//    frame++;
-//
-//    //If a second has passed since the caption was last updated
-//
-//    //If we want to cap the frame rate
-//    if(update->get_ticks() < 17)
-//    {
-//        //Sleep the remaining frame time
-//        SDL_Delay( 17 - update->get_ticks() );
-//    }
-//
-//
-//    //current_fps=frame / ( fps->get_ticks() / 1000.f );
-//
-////    //Reset the caption
-////    SDL_WM_SetCaption( caption.c_str(), NULL );
-//
-//    //Restart the update timer
-//    if(update->get_ticks()>19)
-//    {
-//        cout<<update->get_ticks()<<endl;
-//        cout.flush();
-//    }
-//    update->start();
-//}
-
-int RosalilaGraphics::getFrameCap()
-{
-    return current_fps;
-}
-
 void RosalilaGraphics::drawText(std::string text,int position_x,int position_y)
 {
     if(text=="")
@@ -806,109 +780,6 @@ void RosalilaGraphics::drawText(std::string text,int position_x,int position_y)
     glDeleteTextures( 1, &texture );
 }
 
-void RosalilaGraphics::draw3D()
-{
-//    for (std::list<Explosion*>::iterator explosion = explosions.begin(); explosion != explosions.end(); explosion++)
-//        ((Explosion*)*explosion)->render(this->screen_width,this->screen_height);
-
-
-    std::list<Explosion*>::iterator i = explosions.begin();
-    while (i != explosions.end())
-    {
-        Explosion*e=(Explosion*)*i;
-        if (e->iteration>e->duration)
-        {
-            explosions.erase(i++);
-            delete e;
-        }
-        else
-        {
-            ++i;
-        }
-    }
-}
-
-void RosalilaGraphics::addExplosion(int x,int y)
-{
-//    explosions.push_back(new Explosion(x-camera_x,y-camera_y));
-}
-
-void RosalilaGraphics::draw3DCube(int x,int y,float size,Color color)
-{
-    glDisable(GL_TEXTURE_2D);
-    glEnable(GL_BLEND);
-    glMatrixMode (GL_PROJECTION);
-    glLoadIdentity ();
-/* Died as glu did
-    gluPerspective (45.0, (GLfloat) screen_width / (GLfloat) screen_height, 0.1, 100.0);
-*/
-    glMatrixMode (GL_MODELVIEW);
-
-    glEnable (GL_LIGHT0);
-    glEnable (GL_LIGHT1);
-    glLightfv (GL_LIGHT0, GL_AMBIENT, cube.light0Amb);
-    glLightfv (GL_LIGHT0, GL_DIFFUSE, cube.light0Dif);
-    glLightfv (GL_LIGHT0, GL_SPECULAR, cube.light0Spec);
-    glLightfv (GL_LIGHT0, GL_POSITION, cube.light0Pos);
-
-    glLightfv (GL_LIGHT1, GL_AMBIENT, cube.light1Amb);
-    glLightfv (GL_LIGHT1, GL_DIFFUSE, cube.light1Dif);
-    glLightfv (GL_LIGHT1, GL_SPECULAR, cube.light1Spec);
-    glLightfv (GL_LIGHT1, GL_POSITION, cube.light1Pos);
-
-    glLightModelf (GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
-    glMaterialfv (GL_FRONT_AND_BACK, GL_AMBIENT, cube.materialAmb);
-    glMaterialfv (GL_FRONT_AND_BACK, GL_DIFFUSE, cube.materialDif);
-    glMaterialfv (GL_FRONT_AND_BACK, GL_SPECULAR, cube.materialSpec);
-    glMaterialf (GL_FRONT_AND_BACK, GL_SHININESS, cube.materialShininess);
-    glEnable (GL_NORMALIZE);
-
-    cube.logic();
-
-
-    //glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-    glLoadIdentity ();
-
-    /* Place the camera */
-    //
-    glPushMatrix ();
-    float pos_x=x;
-    float pos_y=y;
-    //camera align
-    pos_x-=camera_x;
-    pos_y+=camera_y;
-
-    pos_x+=695.0;
-    pos_y+=393.0;
-    glTranslatef (-((screen_width-pos_x)/9.25), ((screen_height-pos_y)/9.25), -100.0);
-    glRotatef (cube.angle, 0.0, 1.0, 0.0);
-    cube.setMaterialColor(color.getRed(),color.getGreen(),color.getBlue(),color.getAlpha());
-
-    //Draw
-    glEnable (GL_LIGHTING);
-    glDisable (GL_LIGHT0);
-    glEnable (GL_DEPTH_TEST);
-
-/* Died as glut did
-    glutSolidCube (size);
-*/
-    glDisable (GL_LIGHTING);
-
-    glPopMatrix();
-}
-
-void RosalilaGraphics::drawObject()
-{
-    Object3D object;
-    object.draw();
-}
-
-void RosalilaGraphics::explode(float pos_x,float pos_y)
-{
-//    explosion.newExplosion(pos_x,pos_y);
-}
-
 void RosalilaGraphics::updateScreen()
 {
     //Write errors to the log
@@ -916,13 +787,14 @@ void RosalilaGraphics::updateScreen()
     error+=SDL_GetError();
     if(error!=">>>")
         writeLogLine(error);
-
+writeLogLine("eee");
     //Draw
     frameCap();
-
+writeLogLine("wq");
 //    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 //    SDL_RenderClear(renderer);
-
+writeLogLine("wer");
+shake_time=0;
     if(shake_time>0)
     {
         shake_time--;
@@ -936,9 +808,10 @@ void RosalilaGraphics::updateScreen()
             current_screen_shake_y = (rand()*10000)%shake_magnitude;
         }
     }
-
+writeLogLine("uuuu");
     //SDL_RenderPresent(renderer);
     SDL_GL_SwapWindow(window);
+    writeLogLine("aaae");
 
     //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
