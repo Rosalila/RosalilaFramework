@@ -28,18 +28,6 @@ void Sound::addSound(std::string variable,std::string value)
     //if(sounds.find(variable)==sounds.end())
         sounds[variable]=Mix_LoadWAV(value.c_str());
 }
-void Sound::playSound(std::string variable)
-{
-    if(!soundExists(variable))
-    {
-        writeLogLine("Error: "+variable+" sound does not exists.");
-    }
-
-    if(sounds[variable]!=NULL)
-    {
-        Mix_PlayChannel( 1, sounds[variable], 0 );
-    }
-}
 
 int Sound::playSound(std::string variable, int channel, int loops)
 {
@@ -55,15 +43,6 @@ int Sound::playSound(std::string variable, int channel, int loops)
         return Mix_PlayChannel( channel, sounds[variable], loops);
         //Mix_PlayChannel( -1, sounds[variable], 0 );
     }
-}
-
-void Sound::playMusic(std::string path)
-{
-    stopMusic();
-    writeLogLine("Playing music: "+path);
-    music = Mix_LoadMUS(path.c_str());
-    Mix_PlayMusic(music,-1);
-    current_music=path;
 }
 
 void Sound::playMusic(std::string path,int loops)
