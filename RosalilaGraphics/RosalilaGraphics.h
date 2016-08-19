@@ -27,6 +27,7 @@
 #include <SDL2/SDL_opengl.h>
 #include <stdio.h>
 
+#include "../RosalilaGraphics/Color.h"
 #include "../RosalilaGraphics/FlatShadow.h"
 #include "../RosalilaGraphics/Image.h"
 #include "../RosalilaGraphics/Timer.h"
@@ -35,51 +36,6 @@
 #include <iostream>
 #include <fstream>
 using namespace std;
-
-class Color
-{
-public:
-    int red;
-    int green;
-    int blue;
-    int alpha;
-
-    Color()
-    {
-        this->red=0;
-        this->green=0;
-        this->blue=0;
-        this->alpha=255;
-    }
-
-    Color(int red,int green,int blue,int alpha)
-    {
-        this->red=red;
-        this->green=green;
-        this->blue=blue;
-        this->alpha=alpha;
-    }
-
-    int getRed()
-    {
-        return red;
-    }
-
-    int getGreen()
-    {
-        return green;
-    }
-
-    int getBlue()
-    {
-        return blue;
-    }
-
-    int getAlpha()
-    {
-        return alpha;
-    }
-};
 
 class FlatShadow;
 
@@ -102,8 +58,7 @@ class RosalilaGraphics
     int frames_per_seccond;
     int frame;
     int current_fps;
-    Timer *fps;
-    Timer *update;
+    int last_tick;
 
     //Screen Shake
     int shake_magnitude;
@@ -147,7 +102,6 @@ class RosalilaGraphics
     void drawRectangle(int x,int y,int width,int height,float rotation,int red,int green,int blue,int alpha,bool camera_align);
     void updateScreen();
     void frameCap();
-    void video(RosalilaGraphics*painter);
     void screenshot(int x, int y, int w, int h, string filename);
 };
 #endif

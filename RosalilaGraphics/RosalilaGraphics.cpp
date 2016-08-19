@@ -127,10 +127,7 @@ RosalilaGraphics::RosalilaGraphics()
     //Fps cap
     frames_per_seccond = 60;
     frame = 0;
-    fps=new Timer();
-    update=new Timer();
-    fps->start();
-    update->start();
+    last_tick=SDL_GetTicks();
 
     //Init joysticks
     if( SDL_NumJoysticks() == 1 )
@@ -699,20 +696,14 @@ void RosalilaGraphics::frameCap()
     //If a second has passed since the caption was last updated
 
     //If we want to cap the frame rate
-    if(update->get_ticks() < 1000 / frames_per_seccond)
+    int ticks_difference = SDL_GetTicks() - last_tick;
+    if(ticks_difference < 1000 / frames_per_seccond)
     {
         //Sleep the remaining frame time
-        SDL_Delay( ( 1000 / frames_per_seccond ) - update->get_ticks() );
+        SDL_Delay( ( 1000 / frames_per_seccond ) - ticks_difference );
     }
 
-
-    current_fps=frame / ( fps->get_ticks() / 1000.f );
-
-//    //Reset the caption
-//    SDL_WM_SetCaption( caption.c_str(), NULL );
-
-    //Restart the update timer
-    update->start();
+    last_tick = SDL_GetTicks();
 }
 
 void RosalilaGraphics::drawText(std::string text,int position_x,int position_y)
@@ -782,19 +773,13 @@ void RosalilaGraphics::drawText(std::string text,int position_x,int position_y)
 
 void RosalilaGraphics::updateScreen()
 {
-    //Write errors to the log
     std::string error= ">>>";
     error+=SDL_GetError();
     if(error!=">>>")
         writeLogLine(error);
-writeLogLine("eee");
-    //Draw
     frameCap();
-writeLogLine("wq");
-//    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-//    SDL_RenderClear(renderer);
-writeLogLine("wer");
-shake_time=0;
+
+    shake_time=0;
     if(shake_time>0)
     {
         shake_time--;
@@ -808,12 +793,7 @@ shake_time=0;
             current_screen_shake_y = (rand()*10000)%shake_magnitude;
         }
     }
-writeLogLine("uuuu");
-    //SDL_RenderPresent(renderer);
     SDL_GL_SwapWindow(window);
-    writeLogLine("aaae");
-
-    //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 void RosalilaGraphics::shakeScreen(int shake_magnitude, int shake_time)
@@ -822,94 +802,6 @@ void RosalilaGraphics::shakeScreen(int shake_magnitude, int shake_time)
     this->shake_time = shake_time;
     this->shake_original_x = camera_x;
     this->shake_original_y = camera_y;
-}
-
-void RosalilaGraphics::video(RosalilaGraphics*painter)
-{
-//    // Surface for the movie
-//    SDL_Surface *movieSurface = 0;
-//
-//    // Holds the movie information
-//    SMPEG_Info movieInfo;
-//
-//    // Load the movie
-//    SMPEG *movie =  0;
-//
-//    painter->screen = SDL_SetVideoMode(painter->screen_resized_width, painter->screen_resized_height, painter->screen_bpp,SDL_HWSURFACE | SDL_DOUBLEBUF | SDL_ANYFORMAT);
-//
-//    // Load the movie and store the information about it
-//    movie = SMPEG_new("demo.mpg", &movieInfo, true);
-//
-//    char* error = SMPEG_error(movie);
-//
-//    if( error != NULL || movie == NULL )
-//    {
-//        printf( "Error loading MPEG: %s\n", error );
-//        return;
-//    }
-//
-//    // Create a temporary surface to render the movie to
-//    SDL_Surface *tempSurface2 = SDL_CreateRGBSurface(SDL_SWSURFACE,
-//    movieInfo.width, movieInfo.height, 32, painter->screen->format->Rmask,
-//    painter->screen->format->Gmask, painter->screen->format->Bmask, painter->screen->format->Amask);
-//
-//    // Now make a surface optimized for the main screen
-//    movieSurface = SDL_DisplayFormat(tempSurface2);
-//
-//    // Free the temporary surface
-//    SDL_FreeSurface(tempSurface2);
-//
-//    // Set the surface to draw to
-//    SMPEG_setdisplay(movie, movieSurface, 0, 0);
-//
-//    // Set the display region
-//    SMPEG_setdisplayregion(movie, 0, 0, movieInfo.width, movieInfo.height);
-//
-//    // Loop forever
-//    SMPEG_loop(movie, -1);
-//
-//    SDL_ShowCursor(SDL_DISABLE);
-//
-//    int done = 0;
-//
-//    SMPEG_play(movie);
-//    SMPEG_getinfo(movie, &movieInfo);
-//
-//    while(done == 0)
-//    {
-//        SDL_Event event;
-//
-//        while (SDL_PollEvent(&event))
-//        {
-//            if (event.type == SDL_QUIT)
-//            {
-//                done = 1;
-//            }
-//
-//            if (event.type == SDL_KEYDOWN)
-//            {
-//                if (event.key.keysym.sym == SDLK_ESCAPE)
-//                {
-//                    done = 1;
-//                }
-//            }
-//        }
-//
-//        SDL_Rect dest;
-//        dest.x = 0;
-//        dest.y = 0;
-//        SDL_BlitSurface(movieSurface, NULL, painter->screen, &dest);
-//
-//        // Flip the main screen
-//        SDL_Flip(painter->screen);
-//    }
-//
-//    SDL_FreeSurface(movieSurface);
-//    SMPEG_stop(movie);
-//    SMPEG_delete(movie);
-//    movie = NULL;
-//    SDL_ShowCursor(SDL_ENABLE);
-//    painter->resetScreen();
 }
 
 void RosalilaGraphics::screenshot(int x, int y, int w, int h, string filename)
