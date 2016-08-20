@@ -1,32 +1,32 @@
 #include "Boton.h"
 
-Button::Button(Receiver* receiver,int teclado,std::string mapeo)
+Button::Button(Receiver* receiver,int key,std::string map)
 {
-    this->teclado=teclado;
-    this->mapeo=mapeo;
-    usando_joystick=false;
+    this->key=key;
+    this->map=map;
+    uses_joystick=false;
     this->receiver=receiver;
     //this->joystick=999;
 }
 
-Button::Button(Receiver* receiver,int joystick,int num_joystick,std::string mapeo)
+Button::Button(Receiver* receiver,int joystick_button,int joystick_num,std::string map)
 {
-    this->num_joystick=num_joystick;
-    this->joystick=joystick;
-    this->mapeo=mapeo;
-    usando_joystick=true;
+    this->joystick_num=joystick_num;
+    this->joystick_button=joystick_button;
+    this->map=map;
+    uses_joystick=true;
     this->receiver=receiver;
 }
 
 bool Button::isPressed()
 {
-    if(usando_joystick)
+    if(uses_joystick)
     {
-        if(receiver->isJoyPressed(joystick,num_joystick))
+        if(receiver->isJoyPressed(joystick_button,joystick_num))
             return true;
     }else
     {
-        if (receiver->isKeyPressed(teclado))
+        if (receiver->isKeyPressed(key))
             return true;
     }
     return false;
@@ -34,21 +34,16 @@ bool Button::isPressed()
 
 bool Button::isDown()
 {
-    if(usando_joystick)
+    if(uses_joystick)
     {
-        if(receiver->isJoyDown(joystick,num_joystick))
+        if(receiver->isJoyDown(joystick_button,joystick_num))
             return true;
     }else
     {
-        if (receiver->isKeyDown(teclado))
+        if (receiver->isKeyDown(key))
             return true;
     }
     return false;
-}
-
-std::string Button::getMapeo()
-{
-    return mapeo;
 }
 
 std::string convertInt(int number)
@@ -69,17 +64,17 @@ std::string convertInt(int number)
 
 std::string Button::getRosalilaInputs()
 {
-    if(usando_joystick)
+    if(uses_joystick)
     {
-        if(joystick>=0)
-            return convertInt(joystick);
-        if(joystick==-8)
+        if(joystick_button>=0)
+            return convertInt(joystick_button);
+        if(joystick_button==-8)
             return std::string("up");
-        if(joystick==-2)
+        if(joystick_button==-2)
             return std::string("down");
-        if(joystick==-4)
+        if(joystick_button==-4)
             return std::string("left");
-        if(joystick==-6)
+        if(joystick_button==-6)
             return std::string("right");
         return std::string("d");
     }else
@@ -90,67 +85,57 @@ std::string Button::getRosalilaInputs()
 
 std::string Button::keyToString()
 {
-    if(teclado==SDLK_q)
+    if(key==SDLK_q)
         return "Q";
-    if(teclado==SDLK_w)
+    if(key==SDLK_w)
         return "W";
-    if(teclado==SDLK_e)
+    if(key==SDLK_e)
         return "E";
-    if(teclado==SDLK_r)
+    if(key==SDLK_r)
         return "R";
-    if(teclado==SDLK_t)
+    if(key==SDLK_t)
         return "T";
-    if(teclado==SDLK_y)
+    if(key==SDLK_y)
         return "Y";
-    if(teclado==SDLK_u)
+    if(key==SDLK_u)
         return "U";
-    if(teclado==SDLK_i)
+    if(key==SDLK_i)
         return "I";
-    if(teclado==SDLK_o)
+    if(key==SDLK_o)
         return "O";
-    if(teclado==SDLK_p)
+    if(key==SDLK_p)
         return "P";
-    if(teclado==SDLK_a)
+    if(key==SDLK_a)
         return "A";
-    if(teclado==SDLK_s)
+    if(key==SDLK_s)
         return "S";
-    if(teclado==SDLK_d)
+    if(key==SDLK_d)
         return "D";
-    if(teclado==SDLK_f)
+    if(key==SDLK_f)
         return "F";
-    if(teclado==SDLK_g)
+    if(key==SDLK_g)
         return "G";
-    if(teclado==SDLK_h)
+    if(key==SDLK_h)
         return "H";
-    if(teclado==SDLK_j)
+    if(key==SDLK_j)
         return "J";
-    if(teclado==SDLK_k)
+    if(key==SDLK_k)
         return "K";
-    if(teclado==SDLK_l)
+    if(key==SDLK_l)
         return "L";
-    if(teclado==SDLK_z)
+    if(key==SDLK_z)
         return "Z";
-    if(teclado==SDLK_x)
+    if(key==SDLK_x)
         return "X";
-    if(teclado==SDLK_c)
+    if(key==SDLK_c)
         return "C";
-    if(teclado==SDLK_v)
+    if(key==SDLK_v)
         return "V";
-    if(teclado==SDLK_b)
+    if(key==SDLK_b)
         return "B";
-    if(teclado==SDLK_n)
+    if(key==SDLK_n)
         return "N";
-    if(teclado==SDLK_m)
+    if(key==SDLK_m)
         return "M";
     return "error!";
-}
-
-bool Button::usaJoystick()
-{
-    return usando_joystick;
-}
-
-int Button::getNumJoystick()
-{
-    return num_joystick;
 }

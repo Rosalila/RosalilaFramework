@@ -12,7 +12,7 @@ void RosalilaInputs::actualizarBuffer(std::map<std::string,std::string>*strings,
     {
         for(int i=0;i<(int)cruz.size();i++)
             if(cruz[i].isDown())
-                resultado+=cruz[i].getMapeo();
+                resultado+=cruz[i].map;
         if(resultado=="24" || resultado=="42")
             resultado="1";
         if(resultado=="26" || resultado=="62")
@@ -26,7 +26,7 @@ void RosalilaInputs::actualizarBuffer(std::map<std::string,std::string>*strings,
             tecla_arriba=false;
             for(int i=0;i<(int)botones.size();i++)
                 if(botones[i].isDown())
-                    resultado+=botones[i].getMapeo();
+                    resultado+=botones[i].map;
         }
         bool flag=false;
         for(int i=0;i<(int)botones.size();i++)
@@ -71,7 +71,7 @@ void RosalilaInputs::actualizarBuffer()
     {
         if(cruz[i].isDown())
         {
-            resultado+=cruz[i].getMapeo();
+            resultado+=cruz[i].map;
         }
     }
 
@@ -88,7 +88,7 @@ void RosalilaInputs::actualizarBuffer()
         tecla_arriba=false;
         for(int i=0;i<(int)botones.size();i++)
             if(botones[i].isDown())
-                resultado+=botones[i].getMapeo();
+                resultado+=botones[i].map;
     }
     bool flag=false;
     for(int i=0;i<(int)botones.size();i++)
@@ -233,7 +233,7 @@ void RosalilaInputs::loadFromXML(int jugador,Receiver* receiver)
         printable_buffer_inputs.push_back("5");
     for(int i=0;i<(int)botones_temp.size();i++)
     {
-        if(botones_temp[i].getMapeo()=="2" || botones_temp[i].getMapeo()=="4" || botones_temp[i].getMapeo()=="6" || botones_temp[i].getMapeo()=="8")
+        if(botones_temp[i].map=="2" || botones_temp[i].map=="4" || botones_temp[i].map=="6" || botones_temp[i].map=="8")
         {
             this->cruz.push_back(botones_temp[i]);
         }
@@ -262,7 +262,7 @@ void RosalilaInputs::cargarRosalilaAIXML(int jugador,std::string archivo,std::st
         printable_buffer_inputs.push_back("5");
     for(int i=0;i<(int)botones.size();i++)
     {
-        if(botones[i].getMapeo()=="2" || botones[i].getMapeo()=="4" || botones[i].getMapeo()=="6" || botones[i].getMapeo()=="8")
+        if(botones[i].map=="2" || botones[i].map=="4" || botones[i].map=="6" || botones[i].map=="8")
         {
             this->cruz.push_back(botones[i]);
         }
@@ -284,16 +284,16 @@ TiXmlDocument* RosalilaInputs::getXML(TiXmlDocument *doc)
 
 	for(int i=0;i<(int)botones.size();i++)
 	{
-	    if(botones[i].usaJoystick())
+	    if(botones[i].uses_joystick)
             continue;
         TiXmlElement * cxn = new TiXmlElement( "button" );
         root->LinkEndChild( cxn );
         cxn->SetAttribute("input", (char*)botones[i].getRosalilaInputs().c_str());
-        cxn->SetAttribute("map", (char*)botones[i].getMapeo().c_str());
+        cxn->SetAttribute("map", (char*)botones[i].map.c_str());
 	}
 	for(int i=0;i<(int)cruz.size();i++)
 	{
-	    if(cruz[i].usaJoystick())
+	    if(cruz[i].uses_joystick)
             continue;
         TiXmlElement * cxn = new TiXmlElement( "button" );
         root->LinkEndChild( cxn );
@@ -307,7 +307,7 @@ TiXmlDocument* RosalilaInputs::getXML(TiXmlDocument *doc)
             cxn->SetAttribute("input", "up");
         else
             cxn->SetAttribute("input", (char*)cruz[i].getRosalilaInputs().c_str());
-        cxn->SetAttribute("map", (char*)cruz[i].getMapeo().c_str());
+        cxn->SetAttribute("map", (char*)cruz[i].map.c_str());
 	}
 
 
@@ -319,17 +319,17 @@ TiXmlDocument* RosalilaInputs::getXML(TiXmlDocument *doc)
 
 	for(int i=0;i<(int)botones.size();i++)
 	{
-	    if(!botones[i].usaJoystick())
+	    if(!botones[i].uses_joystick)
             continue;
-        root->SetDoubleAttribute("joystick_number",botones[i].getNumJoystick());
+        root->SetDoubleAttribute("joystick_number",botones[i].joystick_num);
         TiXmlElement * cxn = new TiXmlElement( "button" );
         root->LinkEndChild( cxn );
         cxn->SetAttribute("input", (char*)botones[i].getRosalilaInputs().c_str());
-        cxn->SetAttribute("map", (char*)botones[i].getMapeo().c_str());
+        cxn->SetAttribute("map", (char*)botones[i].map.c_str());
 	}
 	for(int i=0;i<(int)cruz.size();i++)
 	{
-	    if(!cruz[i].usaJoystick())
+	    if(!cruz[i].uses_joystick)
             continue;
         TiXmlElement * cxn = new TiXmlElement( "button" );
         root->LinkEndChild( cxn );
@@ -343,7 +343,7 @@ TiXmlDocument* RosalilaInputs::getXML(TiXmlDocument *doc)
             cxn->SetAttribute("input", "up");
         else
             cxn->SetAttribute("input", (char*)cruz[i].getRosalilaInputs().c_str());
-        cxn->SetAttribute("map", (char*)cruz[i].getMapeo().c_str());
+        cxn->SetAttribute("map", (char*)cruz[i].map.c_str());
 	}
 
 	return doc;
@@ -441,9 +441,9 @@ string RosalilaInputs::getJoystickInput(string map, int num_joystick)
 {
     for(int i=0;i<(int)botones.size();i++)
     {
-        if(botones[i].usaJoystick()
-            && map == botones[i].getMapeo()
-            && num_joystick == botones[i].getNumJoystick())
+        if(botones[i].uses_joystick
+            && map == botones[i].map
+            && num_joystick == botones[i].joystick_num)
         {
             return botones[i].getRosalilaInputs();
         }
@@ -455,8 +455,8 @@ string RosalilaInputs::getKeyboardInput(string map)
 {
     for(int i=0;i<(int)botones.size();i++)
     {
-        if(!botones[i].usaJoystick()
-            && map == botones[i].getMapeo())
+        if(!botones[i].uses_joystick
+            && map == botones[i].map)
         {
             return botones[i].getRosalilaInputs();
         }
@@ -464,8 +464,8 @@ string RosalilaInputs::getKeyboardInput(string map)
 
     for(int i=0;i<(int)cruz.size();i++)
     {
-        if(!cruz[i].usaJoystick()
-            && map == cruz[i].getMapeo())
+        if(!cruz[i].uses_joystick
+            && map == cruz[i].map)
         {
             return cruz[i].getRosalilaInputs();
         }
