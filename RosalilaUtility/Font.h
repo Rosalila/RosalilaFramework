@@ -23,7 +23,7 @@ using namespace std;
 class Font
 {
     public:
-        int font_size=10;
+        int font_size;
         TTF_Font* font;
         SDL_Color textColor;
         string font_path;

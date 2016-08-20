@@ -5,7 +5,6 @@ Sound::Sound()
     music=NULL;
 
     writeLogLine("Initializing SLD sound engine.");
-    int channels=10;
     if( Mix_OpenAudio( 44100, AUDIO_S16SYS/*MIX_DEFAULT_FORMAT*/, 2, 4096 ) == -1 )
     {
         writeLogLine("Failed initializing sound engine. :(");
@@ -39,10 +38,10 @@ int Sound::playSound(std::string variable, int channel, int loops)
 
     if(sounds[variable]!=NULL)
     {
-        //Mix_HaltChannel(channel);
         return Mix_PlayChannel( channel, sounds[variable], loops);
-        //Mix_PlayChannel( -1, sounds[variable], 0 );
     }
+
+    return -1;
 }
 
 void Sound::playMusic(std::string path,int loops)

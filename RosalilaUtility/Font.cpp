@@ -26,6 +26,8 @@ Font::Font(string path)
     textColor.r = 255;
     textColor.g = 255;
     textColor.b = 255;
+
+    font_size=10;
 }
 
 Font::~Font()

@@ -377,7 +377,7 @@ void RosalilaGraphics::draw2DImage	(
                             0.f );
 
 
-                for(int i=0;i<flat_shadow.inbetween_points_right.size();i++)
+                for(int i=0;i<(int)flat_shadow.inbetween_points_right.size();i++)
                 glVertex3f( x1-translate_x+flat_shadow.points_right[0]->x+flat_shadow.inbetween_points_right[i]->x,
                             y2-translate_y+flat_shadow.points_right[0]->y+flat_shadow.inbetween_points_right[i]->y,
                             0.f );
@@ -404,7 +404,7 @@ void RosalilaGraphics::draw2DImage	(
                            y1-translate_y+flat_shadow.points_left[0]->y,
                            0.f );
 
-                for(int i=0;i<flat_shadow.inbetween_points_left.size();i++)
+                for(int i=0;i<(int)flat_shadow.inbetween_points_left.size();i++)
                 glVertex3f( x1-translate_x+flat_shadow.points_left[0]->x+flat_shadow.inbetween_points_left[i]->x,
                            y1-translate_y+flat_shadow.points_left[0]->y+flat_shadow.inbetween_points_left[i]->y,
                            0.f );
@@ -428,8 +428,6 @@ void RosalilaGraphics::draw2DImage	(
         {
             float gifiti1=(flat_shadow.shadow_x-x1)*flat_shadow.shadow_lenght;
             float gifiti2=(flat_shadow.shadow_y-y1)*flat_shadow.shadow_lenght;
-            float gifiti1b=(flat_shadow.shadow_x-x2)*flat_shadow.shadow_lenght;
-            float gifiti2b=(flat_shadow.shadow_y-y2)*flat_shadow.shadow_lenght;
 
             float gifiti1x=(x2-flat_shadow.shadow_x)*flat_shadow.shadow_lenght;
             float gifiti2x=(y1-flat_shadow.shadow_y)*flat_shadow.shadow_lenght;
@@ -569,7 +567,7 @@ void RosalilaGraphics::draw2DImageBatch(
     glTranslatef(1.0,1.0, 1.0);
 
     glBegin( GL_QUADS);
-    for(int i=0;i<position_x.size();i++)
+    for(int i=0;i<(int)position_x.size();i++)
     {
 
         if(depth_effect_x>0)
