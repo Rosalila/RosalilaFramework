@@ -6,7 +6,6 @@ Button::Button(Receiver* receiver,int key,std::string map)
     this->map=map;
     uses_joystick=false;
     this->receiver=receiver;
-    //this->joystick=999;
 }
 
 Button::Button(Receiver* receiver,int joystick_button,int joystick_num,std::string map)

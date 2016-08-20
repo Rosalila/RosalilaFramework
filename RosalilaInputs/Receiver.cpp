@@ -2,24 +2,20 @@
 
 Receiver::Receiver()
 {
-    for(int i = 0; i < 322; i++)   // init them all to false
-    {
-        KEYS[i] = false;
-    }
+    for(int i = 0; i < 322; i++)
+        is_key_pressed[i] = false;
 
-    for(int i = 0; i < max_joystick_inputs; i++)   // init them all to false
-    {
-        JOYKEYS_player1[i] = false;
-    }
-    for(int i = 0; i < max_joystick_inputs; i++)   // init them all to false
-    {
-        JOYKEYS_player2[i] = false;
-    }
+    for(int i = 0; i < max_joystick_inputs; i++)
+        is_joy1_pressed[i] = false;
+
+    for(int i = 0; i < max_joystick_inputs; i++)
+        is_joy2_pressed[i] = false;
 
     hat_up_pressed_player_1=false;
     hat_down_pressed_player_1=false;
     hat_left_pressed_player_1=false;
     hat_right_pressed_player_1=false;
+
     stick_up_pressed_player_1=false;
     stick_down_pressed_player_1=false;
     stick_left_pressed_player_1=false;
@@ -29,16 +25,13 @@ Receiver::Receiver()
     joy_down_pressed_player_2=false;
     joy_left_pressed_player_2=false;
     joy_right_pressed_player_2=false;
-
-
-//    SDL_EnableKeyRepeat(0,0);
 }
 
 bool Receiver::isKeyPressed(int keycode)
 {
-    if(KEYS[keycode])
+    if(is_key_pressed[keycode])
     {
-        KEYS[keycode]=false;
+        is_key_pressed[keycode]=false;
         return true;
     }
     return false;
@@ -49,34 +42,12 @@ bool Receiver::isKeyDown(int keycode)
     if(keycode>=332)
     {
         cout<<keycode<<endl;cout.flush();
-//        exit(keycode);
         return false;
     }
-    if(KEYS[keycode])
+    if(is_key_pressed[keycode])
     {
-        //KEYS[keycode]=false;
         return true;
     }
-    return false;
-//  if (keystates[keycode])
-//  {
-//     return true;
-//  }
-//  else
-//  {
-//     return false;
-//  }
-}
-
-bool Receiver::isOuyaDown(char key)
-{
-    //Unimplemented for PC
-    return false;
-}
-
-bool Receiver::isOuyaPressed(char key)
-{
-    //Unimplemented for PC
     return false;
 }
 
@@ -104,7 +75,7 @@ bool Receiver::isJoyDown(int joyCode,int joystick)
             return hat_right_pressed_player_1 || stick_right_pressed_player_1;
         if(joyCode==-8)
             return hat_up_pressed_player_1 || stick_up_pressed_player_1;
-        if(JOYKEYS_player1[joyCode])
+        if(is_joy1_pressed[joyCode])
         {
             return true;
         }
@@ -128,7 +99,7 @@ bool Receiver::isJoyDown(int joyCode,int joystick)
             return joy_right_pressed_player_2;
         if(joyCode==-8)
             return joy_up_pressed_player_2;
-        if(JOYKEYS_player2[joyCode])
+        if(is_joy2_pressed[joyCode])
         {
             return true;
         }
@@ -204,9 +175,9 @@ bool Receiver::isJoyPressed(int joyCode,int joystick)
             stick_up_pressed_player_1 = false;
             return true;
         }
-        if(JOYKEYS_player1[joyCode])
+        if(is_joy1_pressed[joyCode])
         {
-            JOYKEYS_player1[joyCode] = false;
+            is_joy1_pressed[joyCode] = false;
             return true;
         }
         return false;
@@ -260,9 +231,9 @@ bool Receiver::isJoyPressed(int joyCode,int joystick)
             joy_up_pressed_player_2 = false;
             return true;
         }
-        if(JOYKEYS_player2[joyCode])
+        if(is_joy2_pressed[joyCode])
         {
-            JOYKEYS_player2[joyCode] = false;
+            is_joy2_pressed[joyCode] = false;
             return true;
         }
         return false;
@@ -284,30 +255,30 @@ void Receiver::updateInputs()
         if( event.type == SDL_KEYDOWN )
         {
             if(event.key.keysym.sym==SDLK_UP)
-                KEYS[SDL_SCANCODE_UP] = true;
+                is_key_pressed[SDL_SCANCODE_UP] = true;
             else if(event.key.keysym.sym==SDLK_DOWN)
-                KEYS[SDL_SCANCODE_DOWN] = true;
+                is_key_pressed[SDL_SCANCODE_DOWN] = true;
             else if(event.key.keysym.sym==SDLK_LEFT)
-                KEYS[SDL_SCANCODE_LEFT] = true;
+                is_key_pressed[SDL_SCANCODE_LEFT] = true;
             else if(event.key.keysym.sym==SDLK_RIGHT)
-                KEYS[SDL_SCANCODE_RIGHT] = true;
+                is_key_pressed[SDL_SCANCODE_RIGHT] = true;
             else if(event.key.keysym.sym<322)
-                KEYS[event.key.keysym.sym] = true;
+                is_key_pressed[event.key.keysym.sym] = true;
             else
                 writeLogLine("Key pressed but not supported:"+toString(event.key.keysym.sym));
         }
         if( event.type == SDL_KEYUP )
         {
             if(event.key.keysym.sym==SDLK_UP)
-                KEYS[SDL_SCANCODE_UP] = false;
+                is_key_pressed[SDL_SCANCODE_UP] = false;
             else if(event.key.keysym.sym==SDLK_DOWN)
-                KEYS[SDL_SCANCODE_DOWN] = false;
+                is_key_pressed[SDL_SCANCODE_DOWN] = false;
             else if(event.key.keysym.sym==SDLK_LEFT)
-                KEYS[SDL_SCANCODE_LEFT] = false;
+                is_key_pressed[SDL_SCANCODE_LEFT] = false;
             else if(event.key.keysym.sym==SDLK_RIGHT)
-                KEYS[SDL_SCANCODE_RIGHT] = false;
+                is_key_pressed[SDL_SCANCODE_RIGHT] = false;
             else if(event.key.keysym.sym<322)
-                KEYS[event.key.keysym.sym] = false;
+                is_key_pressed[event.key.keysym.sym] = false;
             else
                 writeLogLine("Key pressed but not supported:"+toString(event.key.keysym.sym));
         }
@@ -318,7 +289,7 @@ void Receiver::updateInputs()
                 if ( event.jbutton.button == i
                         && event.jbutton.which==0)
                 {
-                    JOYKEYS_player1[i]=true;
+                    is_joy1_pressed[i]=true;
                 }
             }
             for(int i=0; i<max_joystick_inputs; i++)
@@ -326,7 +297,7 @@ void Receiver::updateInputs()
                 if ( event.jbutton.button == i
                         && event.jbutton.which==1)
                 {
-                    JOYKEYS_player2[i]=true;
+                    is_joy2_pressed[i]=true;
                 }
             }
         }
@@ -337,7 +308,7 @@ void Receiver::updateInputs()
                 if ( event.jbutton.button == i
                         && event.jbutton.which==0)
                 {
-                    JOYKEYS_player1[i]=false;
+                    is_joy1_pressed[i]=false;
                 }
             }
             for(int i=0; i<max_joystick_inputs; i++)
@@ -345,7 +316,7 @@ void Receiver::updateInputs()
                 if ( event.jbutton.button == i
                         && event.jbutton.which==1)
                 {
-                    JOYKEYS_player2[i]=false;
+                    is_joy2_pressed[i]=false;
                 }
             }
         }
@@ -529,17 +500,15 @@ void Receiver::updateInputs()
                 }
             }
         }
-
     }
-    //SDL_GetKeyboardState( NULL );
 }
 
 void Receiver::unpressAllInputs()
 {
     for(int i=0;i<255;i++)
-        KEYS[i]=false;
+        is_key_pressed[i]=false;
     for(int i=0;i<max_joystick_inputs;i++)
-        JOYKEYS_player1[i]=false;
+        is_joy1_pressed[i]=false;
     for(int i=0;i<max_joystick_inputs;i++)
-        JOYKEYS_player2[i]=false;
+        is_joy2_pressed[i]=false;
 }

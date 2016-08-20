@@ -7,18 +7,18 @@
 class RosalilaAI;
 class RosalilaInputs
 {
-protected:
+public:
+
     std::vector<std::string> buffer_inputs;
     std::vector<std::string> printable_buffer_inputs;
     int jugador;
+    Receiver* receiver;
+    bool tecla_arriba;
+    RosalilaAI *ia;
+    bool inteligencia_artificial;
+    vector<Button> botones;
+    vector<Button> cruz;
 
-public:
-Receiver* receiver;
-bool tecla_arriba;
-RosalilaAI *ia;
-bool inteligencia_artificial;
-vector<Button> botones;
-vector<Button> cruz;
     RosalilaInputs(){}
     void loadFromXML(int jugador,Receiver* receiver);
     void cargarRosalilaAIXML(int jugador,std::string archivo,std::string archivo_default);

@@ -15,22 +15,12 @@ const int max_joystick_inputs=50;
 
 class Receiver
 {
-private:
-    int joystick;
 public:
-    Receiver();
-    bool isKeyDown(int keycode);
-    bool isKeyPressed(int keycode);
-    bool isOuyaDown(char key);
-    bool isOuyaPressed(char key);
-    bool isJoyDown(int joyCode,int joystick);
-    bool isJoyPressed(int joyCode,int joystick);
-    void endEventProcess();
-    void startEventProcess();
-    //SDL
-    bool KEYS[322];//key pressed
-    bool JOYKEYS_player1[max_joystick_inputs];//joykey pressed
-    bool JOYKEYS_player2[max_joystick_inputs];//joykey pressed
+    int joystick;
+
+    bool is_key_pressed[322];
+    bool is_joy1_pressed[max_joystick_inputs];
+    bool is_joy2_pressed[max_joystick_inputs];
     bool hat_up_pressed_player_1;
     bool hat_down_pressed_player_1;
     bool hat_left_pressed_player_1;
@@ -43,6 +33,12 @@ public:
     bool joy_down_pressed_player_2;
     bool joy_left_pressed_player_2;
     bool joy_right_pressed_player_2;
+
+    Receiver();
+    bool isKeyDown(int keycode);
+    bool isKeyPressed(int keycode);
+    bool isJoyDown(int joyCode,int joystick);
+    bool isJoyPressed(int joyCode,int joystick);
     void updateInputs();
     void unpressAllInputs();
 };
