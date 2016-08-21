@@ -324,7 +324,7 @@ void RosalilaGraphics::draw2DImage	(
     glTranslatef(translate_x,translate_y, 1.0);
     glRotatef(-rotation, 0, 0, 1.0);
 
-    glColor4ub(color_effects.getRed(), color_effects.getGreen(), color_effects.getBlue(),color_effects.getAlpha());
+    glColor4ub(color_effects.red, color_effects.green, color_effects.blue,color_effects.alpha);
     glEnable(GL_BLEND);
     glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
 
@@ -332,7 +332,7 @@ void RosalilaGraphics::draw2DImage	(
     {
         glBindTexture( GL_TEXTURE_2D, flat_shadow.image->getTexture() );
 
-    glColor4ub(color_effects.getRed(), color_effects.getGreen(), color_effects.getBlue(),color_effects.getAlpha());
+    glColor4ub(color_effects.red, color_effects.green, color_effects.blue,color_effects.alpha);
     glEnable(GL_BLEND);
     glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
 
@@ -463,7 +463,7 @@ void RosalilaGraphics::draw2DImage	(
 
             glEnd();
         }
-        glColor4ub(color_effects.getRed(), color_effects.getGreen(), color_effects.getBlue(),color_effects.getAlpha());
+        glColor4ub(color_effects.red, color_effects.green, color_effects.blue,color_effects.alpha);
     }
 
 
@@ -555,7 +555,7 @@ void RosalilaGraphics::draw2DImageBatch(
     glEnable (GL_LIGHT0);
     glDisable (GL_DEPTH_TEST);
 
-    glColor4ub(color_effects.getRed(), color_effects.getGreen(), color_effects.getBlue(),color_effects.getAlpha());
+    glColor4ub(color_effects.red, color_effects.green, color_effects.blue,color_effects.alpha);
     glEnable(GL_BLEND);
     glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
 

@@ -11,10 +11,6 @@ public:
 
     Color();
     Color(int red,int green,int blue,int alpha);
-    int getRed();
-    int getGreen();
-    int getBlue();
-    int getAlpha();
 };
 
 #endif

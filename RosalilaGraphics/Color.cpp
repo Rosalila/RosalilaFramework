@@ -15,23 +15,3 @@ Color::Color(int red,int green,int blue,int alpha)
     this->blue=blue;
     this->alpha=alpha;
 }
-
-int Color::getRed()
-{
-    return red;
-}
-
-int Color::getGreen()
-{
-    return green;
-}
-
-int Color::getBlue()
-{
-    return blue;
-}
-
-int Color::getAlpha()
-{
-    return alpha;
-}

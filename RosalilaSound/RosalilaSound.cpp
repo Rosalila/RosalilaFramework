@@ -1,6 +1,6 @@
 #include "RosalilaSound.h"
 
-Sound::Sound()
+RosalilaSound::RosalilaSound()
 {
     music=NULL;
 
@@ -15,20 +15,20 @@ Sound::Sound()
     current_music="";
 }
 
-void Sound::drop()
+void RosalilaSound::drop()
 {
     //TODO for each chunk
     //Mix_FreeChunk( chunk );
     Mix_FreeMusic(music);
     Mix_CloseAudio();
 }
-void Sound::addSound(std::string variable,std::string value)
+void RosalilaSound::addSound(std::string variable,std::string value)
 {
     //if(sounds.find(variable)==sounds.end())
         sounds[variable]=Mix_LoadWAV(value.c_str());
 }
 
-int Sound::playSound(std::string variable, int channel, int loops)
+int RosalilaSound::playSound(std::string variable, int channel, int loops)
 {
     if(!soundExists(variable))
     {
@@ -44,15 +44,16 @@ int Sound::playSound(std::string variable, int channel, int loops)
     return -1;
 }
 
-void Sound::playMusic(std::string path,int loops)
+void RosalilaSound::playMusic(std::string path,int loops)
 {
     stopMusic();
     writeLogLine("Playing music: "+path);
     music = Mix_LoadMUS(path.c_str());
     Mix_PlayMusic(music,loops);
+    current_music=path;
 }
 
-void Sound::stopMusic()
+void RosalilaSound::stopMusic()
 {
     if(music!=NULL)
     {
@@ -62,14 +63,9 @@ void Sound::stopMusic()
     }
 }
 
-bool Sound::soundExists(std::string variable)
+bool RosalilaSound::soundExists(std::string variable)
 {
     map<std::string,Mix_Chunk*>::iterator it = sounds.find(variable);
     return it!=sounds.end();
     return false;
-}
-
-string Sound::getCurrentMusic()
-{
-    return current_music;
 }
