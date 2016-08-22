@@ -1,9 +1,7 @@
 #include "Animation.h"
 
-Animation::Animation(int x,int y,int animation_velocity,RosalilaGraphics* painter)
+Animation::Animation(int x,int y,int animation_velocity)
 {
-    this->painter=painter;
-
     this->x=x;
     this->y=y;
     this->animation_velocity=animation_velocity;
@@ -27,7 +25,7 @@ void Animation::render()
     }
     animation_iteration++;
 
-    painter->draw2DImage
+    getRosalilaGraphics()->draw2DImage
     (   images[current_frame],
         images[current_frame]->getWidth(),images[current_frame]->getHeight(),
         this->x,this->y,
