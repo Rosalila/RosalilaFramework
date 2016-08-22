@@ -4,7 +4,7 @@
 #include <iostream>
 #include <list>
 
-#include "../system.h"
+#include "../Rosalila.h"
 
 #ifdef LINUX
 #include <SDL2/SDL_image.h>

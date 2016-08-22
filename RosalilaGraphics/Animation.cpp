@@ -25,7 +25,7 @@ void Animation::render()
     }
     animation_iteration++;
 
-    getRosalilaGraphics()->draw2DImage
+    Rosalila()->Graphics->draw2DImage
     (   images[current_frame],
         images[current_frame]->getWidth(),images[current_frame]->getHeight(),
         this->x,this->y,

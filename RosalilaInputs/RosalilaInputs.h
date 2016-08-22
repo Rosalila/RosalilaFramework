@@ -1,10 +1,11 @@
 #ifndef INPUT_H
 #define INPUT_H
 
-#include "../system.h"
+#include "../Rosalila.h"
 #include "../RosalilaInputs/Boton.h"
 #include "../RosalilaAI/RosalilaAI.h"
 class RosalilaAI;
+class Button;
 class RosalilaInputs
 {
 public:
@@ -12,7 +13,6 @@ public:
     std::vector<std::string> buffer_inputs;
     std::vector<std::string> printable_buffer_inputs;
     int jugador;
-    Receiver* receiver;
     bool tecla_arriba;
     RosalilaAI *ia;
     bool inteligencia_artificial;
@@ -20,7 +20,7 @@ public:
     vector<Button> cruz;
 
     RosalilaInputs(){}
-    void loadFromXML(int jugador,Receiver* receiver);
+    void loadFromXML(int jugador);
     void cargarRosalilaAIXML(int jugador,std::string archivo,std::string archivo_default);
     TiXmlDocument* getXML(TiXmlDocument *doc);
     void actualizarBuffer();

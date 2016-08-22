@@ -121,10 +121,9 @@ vector<std::string> RosalilaInputs::getPrintableBufferRosalilaInputs()
 //}
 
 
-void RosalilaInputs::loadFromXML(int jugador,Receiver* receiver)
+void RosalilaInputs::loadFromXML(int jugador)
 {
     this->jugador=jugador;
-    this->receiver=receiver;
     this->inteligencia_artificial=false;
     string xml_path=assets_directory+"misc/inputs.xml";
     TiXmlDocument doc_t(xml_path.c_str());
@@ -199,7 +198,7 @@ void RosalilaInputs::loadFromXML(int jugador,Receiver* receiver)
                         key=SDLK_n;
                     if(boton->ToElement()->Attribute("input")[0]=='M' || boton->ToElement()->Attribute("input")[0]=='m')
                         key=SDLK_m;
-                    botones_temp.push_back(Button(receiver,key,std::string(boton->ToElement()->Attribute("map"))));
+                    botones_temp.push_back(Button(key,std::string(boton->ToElement()->Attribute("map"))));
                 }
             }
             //Joy
@@ -220,7 +219,7 @@ void RosalilaInputs::loadFromXML(int jugador,Receiver* receiver)
                         int_boton=-6;
                     else
                         int_boton=boton->ToElement()->Attribute("input")[0]-48;
-                    botones_temp.push_back(Button(receiver,int_boton,input->ToElement()->Attribute("joystick_number")[0]-48,boton->ToElement()->Attribute("map")));
+                    botones_temp.push_back(Button(int_boton,input->ToElement()->Attribute("joystick_number")[0]-48,boton->ToElement()->Attribute("map")));
                 }
             }
         }

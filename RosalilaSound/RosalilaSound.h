@@ -1,7 +1,7 @@
 #ifndef SONIDO_H
 #define SONIDO_H
 
-#include "../system.h"
+#include "../Rosalila.h"
 
 #include <string>
 #include <vector>

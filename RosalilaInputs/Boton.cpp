@@ -1,31 +1,29 @@
 #include "Boton.h"
 
-Button::Button(Receiver* receiver,int key,std::string map)
+Button::Button(int key,std::string map)
 {
     this->key=key;
     this->map=map;
     uses_joystick=false;
-    this->receiver=receiver;
 }
 
-Button::Button(Receiver* receiver,int joystick_button,int joystick_num,std::string map)
+Button::Button(int joystick_button,int joystick_num,std::string map)
 {
     this->joystick_num=joystick_num;
     this->joystick_button=joystick_button;
     this->map=map;
     uses_joystick=true;
-    this->receiver=receiver;
 }
 
 bool Button::isPressed()
 {
     if(uses_joystick)
     {
-        if(receiver->isJoyPressed(joystick_button,joystick_num))
+        if(Rosalila()->Receiver->isJoyPressed(joystick_button,joystick_num))
             return true;
     }else
     {
-        if (receiver->isKeyPressed(key))
+        if (Rosalila()->Receiver->isKeyPressed(key))
             return true;
     }
     return false;
@@ -35,11 +33,11 @@ bool Button::isDown()
 {
     if(uses_joystick)
     {
-        if(receiver->isJoyDown(joystick_button,joystick_num))
+        if(Rosalila()->Receiver->isJoyDown(joystick_button,joystick_num))
             return true;
     }else
     {
-        if (receiver->isKeyDown(key))
+        if (Rosalila()->Receiver->isKeyDown(key))
             return true;
     }
     return false;

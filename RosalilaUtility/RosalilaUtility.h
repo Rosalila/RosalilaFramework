@@ -9,21 +9,8 @@ using namespace std;
 #define PI 3.14159265
 
 #include "Hitbox.h"
-#include "../RosalilaGraphics/RosalilaGraphics.h"
-#include "../RosalilaSound/RosalilaSound.h"
-#include "../RosalilaInputs/Receiver.h"
 
 class Hitbox;
-class RosalilaGraphics;
-class RosalilaSound;
-class Receiver;
-
-void setRosalilaSound(RosalilaSound*graphics_param);
-RosalilaSound* getRosalilaSound();
-void setReceiver(Receiver*receiver_param);
-Receiver* getReceiver();
-void setRosalilaGraphics(RosalilaGraphics*graphics_param);
-RosalilaGraphics* getRosalilaGraphics();
 bool writeLogLine(std::string text);
 bool clearLog();
 std::string toString(int number);

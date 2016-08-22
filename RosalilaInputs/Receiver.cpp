@@ -1,6 +1,6 @@
 #include "RosalilaInputs.h"
 
-Receiver::Receiver()
+RosalilaReceiver::RosalilaReceiver()
 {
     for(int i = 0; i < 322; i++)
         is_key_pressed[i] = false;
@@ -27,7 +27,7 @@ Receiver::Receiver()
     joy_right_pressed_player_2=false;
 }
 
-bool Receiver::isKeyPressed(int keycode)
+bool RosalilaReceiver::isKeyPressed(int keycode)
 {
     if(is_key_pressed[keycode])
     {
@@ -37,7 +37,7 @@ bool Receiver::isKeyPressed(int keycode)
     return false;
 }
 
-bool Receiver::isKeyDown(int keycode)
+bool RosalilaReceiver::isKeyDown(int keycode)
 {
     if(keycode>=332)
     {
@@ -51,7 +51,7 @@ bool Receiver::isKeyDown(int keycode)
     return false;
 }
 
-bool Receiver::isJoyDown(int joyCode,int joystick)
+bool RosalilaReceiver::isJoyDown(int joyCode,int joystick)
 {
     if(joystick==0)
     {
@@ -108,7 +108,7 @@ bool Receiver::isJoyDown(int joyCode,int joystick)
     return false;
 }
 
-bool Receiver::isJoyPressed(int joyCode,int joystick)
+bool RosalilaReceiver::isJoyPressed(int joyCode,int joystick)
 {
     if(joystick==0)
     {
@@ -241,7 +241,7 @@ bool Receiver::isJoyPressed(int joyCode,int joystick)
     return false;
 }
 
-void Receiver::updateInputs()
+void RosalilaReceiver::updateInputs()
 {
     //While there's events to handle
     SDL_Event event;
@@ -503,7 +503,7 @@ void Receiver::updateInputs()
     }
 }
 
-void Receiver::unpressAllInputs()
+void RosalilaReceiver::unpressAllInputs()
 {
     for(int i=0;i<255;i++)
         is_key_pressed[i]=false;

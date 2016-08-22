@@ -1,39 +1,5 @@
 #include "RosalilaUtility.h"
 
-RosalilaSound* sound;
-Receiver* receiver;
-RosalilaGraphics* graphics;
-
-void setRosalilaSound(RosalilaSound*sound_param)
-{
-    sound=sound_param;
-}
-
-RosalilaSound* getRosalilaSound()
-{
-    return sound;
-}
-
-void setReceiver(Receiver*receiver_param)
-{
-    receiver=receiver_param;
-}
-
-Receiver* getReceiver()
-{
-    return receiver;
-}
-
-void setRosalilaGraphics(RosalilaGraphics*graphics_param)
-{
-    graphics=graphics_param;
-}
-
-RosalilaGraphics* getRosalilaGraphics()
-{
-    return graphics;
-}
-
 bool writeLogLine(std::string text)
 {
     ofstream log_file("log", ios::app);
