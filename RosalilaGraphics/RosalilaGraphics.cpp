@@ -777,7 +777,6 @@ void RosalilaGraphics::updateScreen()
         writeLogLine(error);
     frameCap();
 
-    shake_time=0;
     if(shake_time>0)
     {
         shake_time--;
