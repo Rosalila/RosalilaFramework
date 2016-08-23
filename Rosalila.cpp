@@ -20,4 +20,9 @@ RosalilaContainer* Rosalila()
 void RosalilaInit()
 {
     rosalila = new RosalilaContainer();
+    rosalila->Utility->init();
+    rosalila->Sound->init();
+    rosalila->Receiver->init();
+    rosalila->Graphics->init();
+    rosalila->ApiIntegrator->init();
 }

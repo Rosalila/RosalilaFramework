@@ -1,6 +1,6 @@
 #include "RosalilaSound.h"
 
-RosalilaSound::RosalilaSound()
+void RosalilaSound::init()
 {
     music=NULL;
     if( Mix_OpenAudio( 44100, AUDIO_S16SYS/*MIX_DEFAULT_FORMAT*/, 2, 4096 ) == -1 )

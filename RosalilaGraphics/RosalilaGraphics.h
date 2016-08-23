@@ -68,8 +68,8 @@ class RosalilaGraphics
     int current_screen_shake_x;
     int current_screen_shake_y;
 
-    RosalilaGraphics();
     ~RosalilaGraphics();
+    void init();
     Image* getTexture(std::string filename);
     void draw2DImage(
 	             Image* texture,

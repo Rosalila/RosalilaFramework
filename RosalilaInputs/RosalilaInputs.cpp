@@ -1,6 +1,6 @@
 #include "RosalilaInputs.h"
 
-RosalilaReceiver::RosalilaReceiver()
+void RosalilaReceiver::init()
 {
     for(int i = 0; i < 322; i++)
         is_key_pressed[i] = false;

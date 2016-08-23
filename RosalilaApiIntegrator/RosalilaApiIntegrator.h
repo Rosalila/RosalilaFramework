@@ -7,7 +7,7 @@ using namespace std;
 class RosalilaApiIntegrator
 {
 public:
-    RosalilaApiIntegrator();
+    void init();
     void unlockAchievement(string achievement_name);
     void setScore(string leaderboard_name, double score);
     void setStat(string stat_name, double stat);

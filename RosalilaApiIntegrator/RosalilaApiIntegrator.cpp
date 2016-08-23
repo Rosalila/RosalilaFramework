@@ -1,6 +1,6 @@
 #include "RosalilaApiIntegrator.h"
 
-RosalilaApiIntegrator::RosalilaApiIntegrator()
+void RosalilaApiIntegrator::init()
 {
 
 }

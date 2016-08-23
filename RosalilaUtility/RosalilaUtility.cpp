@@ -1,5 +1,10 @@
 #include "RosalilaUtility.h"
 
+void RosalilaUtility::init()
+{
+
+}
+
 bool RosalilaUtility::writeLogLine(std::string text)
 {
     ofstream log_file("log", ios::app);

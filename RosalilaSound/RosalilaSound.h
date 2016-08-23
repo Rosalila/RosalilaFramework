@@ -33,7 +33,7 @@ public:
     std::map<std::string,Mix_Chunk*> sounds;
     Mix_Music *music;
     string current_music;
-    RosalilaSound();
+    void init();
     void drop();
     void addSound(std::string variable,std::string value);
     bool soundExists(std::string variable);

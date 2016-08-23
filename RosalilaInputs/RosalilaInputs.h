@@ -35,7 +35,7 @@ public:
     bool joy_left_pressed_player_2;
     bool joy_right_pressed_player_2;
 
-    RosalilaReceiver();
+    void init();
     bool isKeyDown(int keycode);
     bool isKeyPressed(int keycode);
     bool isJoyDown(int joyCode,int joystick);

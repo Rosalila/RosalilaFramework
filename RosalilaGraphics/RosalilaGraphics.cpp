@@ -1,6 +1,6 @@
 #include "RosalilaGraphics.h"
 
-RosalilaGraphics::RosalilaGraphics()
+void RosalilaGraphics::init()
 {
     this->shake_magnitude=0;
     this->shake_time=0;

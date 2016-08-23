@@ -1,5 +1,5 @@
-#ifndef UTILITY_H
-#define UTILITY_H
+#ifndef ROSALILA_UTILITY_H
+#define ROSALILA_UTILITY_H
 
 #include <iostream>
 #include <fstream>
@@ -15,6 +15,7 @@ class Hitbox;
 class RosalilaUtility
 {
 public:
+    void init();
     bool writeLogLine(std::string text);
     bool clearLog();
     std::string toString(int number);
