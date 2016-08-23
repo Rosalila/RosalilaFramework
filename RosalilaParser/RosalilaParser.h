@@ -10,8 +10,8 @@ class RosalilaParser
 public:
     void init();
     map<string,string> getAttributes(TiXmlNode *node);
-    map<string,Node*> getNodes(TiXmlNode *node);
-    map<string,Node*> getNodes(string file_name);
+    multimap<string,Node*> getNodes(TiXmlNode *node);
+    Node* getNodes(string file_name);
 };
 
 #endif

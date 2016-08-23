@@ -19,9 +19,9 @@ map<string,string> RosalilaParser::getAttributes(TiXmlNode *node)
     return attributes;
 }
 
-map<string,Node*> RosalilaParser::getNodes(TiXmlNode *node)
+multimap<string,Node*> RosalilaParser::getNodes(TiXmlNode *node)
 {
-    map<string,Node*> nodes;
+    multimap<string,Node*> nodes;
     if(node)
     for(TiXmlNode *node_iterator=node;
         node_iterator!=NULL;
@@ -32,29 +32,26 @@ map<string,Node*> RosalilaParser::getNodes(TiXmlNode *node)
             Node* new_node = new Node(getAttributes(node_iterator)
                                       ,getNodes(node_iterator->FirstChild())
                                      );
-            nodes[node_iterator->ToElement()->Value()]=new_node;
+            nodes.insert(pair<string,Node*>(node_iterator->ToElement()->Value(),new_node));
         }
     }
     return nodes;
 }
 
-map<string,Node*> RosalilaParser::getNodes(string file_name)
+Node* RosalilaParser::getNodes(string file_name)
 {
-    map<string,Node*> nodes;
-
     std::string main_path=file_name;
     TiXmlDocument document(main_path.c_str());
     document.LoadFile();
 
-    for(TiXmlNode *node_iterator=document.FirstChild();
-        node_iterator!=NULL;
-        node_iterator=node_iterator->NextSibling())
+    TiXmlNode *root_node=document.FirstChild();
+
+    if(root_node)
     {
-        Node* new_node = new Node(getAttributes(node_iterator)
-                                  ,getNodes(node_iterator->FirstChild())
+        return new Node(getAttributes(root_node)
+                                  ,getNodes(root_node->FirstChild())
                                  );
-        nodes[node_iterator->ToElement()->Value()]=new_node;
     }
 
-    return nodes;
+    return NULL;
 }
