@@ -5,6 +5,7 @@ RosalilaContainer::RosalilaContainer()
     this->Sound = new RosalilaSound();
     this->Receiver = new RosalilaReceiver();
     this->Graphics = new RosalilaGraphics();
+    this->ApiIntegrator = new RosalilaApiIntegrator();
 }
 
 

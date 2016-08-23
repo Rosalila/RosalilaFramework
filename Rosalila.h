@@ -26,10 +26,12 @@ using namespace std;
 #include "RosalilaGraphics/RosalilaGraphics.h"
 #include "RosalilaSound/RosalilaSound.h"
 #include "RosalilaInputs/RosalilaInputs.h"
+#include "RosalilaApiIntegrator/RosalilaApiIntegrator.h"
 
 class RosalilaGraphics;
 class RosalilaSound;
 class RosalilaReceiver;
+class RosalilaApiIntegrator;
 
 const string assets_directory="assets/";
 
@@ -39,6 +41,7 @@ public:
     RosalilaGraphics* Graphics;
     RosalilaSound* Sound;
     RosalilaReceiver* Receiver;
+    RosalilaApiIntegrator* ApiIntegrator;
     RosalilaContainer();
 };
 
