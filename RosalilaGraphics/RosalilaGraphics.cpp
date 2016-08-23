@@ -61,14 +61,14 @@ RosalilaGraphics::RosalilaGraphics()
     //Initialize all SDL subsystems
     if( SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK) < 0 )
     {
-        writeLogLine(SDL_GetError());
+        //Rosalila()->Utility->writeLogLine(SDL_GetError());
         return;
     }
 
     //Initialize SDL_ttf
     if( TTF_Init() == -1 )
     {
-        writeLogLine(SDL_GetError());
+        //Rosalila()->Utility->writeLogLine(SDL_GetError());
         return;
     }
 
@@ -82,7 +82,7 @@ RosalilaGraphics::RosalilaGraphics()
 
     if(font==NULL)
     {
-        writeLogLine("Could not init font. Place it on /misc/font.ttf .");
+        //Rosalila()->Utility->writeLogLine("Could not init font. Place it on /misc/font.ttf .");
     }
 
     SDL_GL_SetAttribute( SDL_GL_DOUBLEBUFFER, 1 ); // *new*
@@ -92,7 +92,7 @@ RosalilaGraphics::RosalilaGraphics()
                                SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN );
     if(!window)
     {
-        writeLogLine("Could not init window");
+        //Rosalila()->Utility->writeLogLine("Could not init window");
     }
 
     if(fullscreen)
@@ -102,7 +102,7 @@ RosalilaGraphics::RosalilaGraphics()
 
     if(!renderer)
     {
-        writeLogLine("Could not init render");
+        //Rosalila()->Utility->writeLogLine("Could not init render");
     }
 
     //Set the openGL state?
@@ -132,30 +132,30 @@ RosalilaGraphics::RosalilaGraphics()
     //Init joysticks
     if( SDL_NumJoysticks() == 1 )
     {
-        writeLogLine("1 joystick was found.");
+//        Rosalila()->Utility->writeLogLine("1 joystick was found.");
         joystick_1 = SDL_JoystickOpen( 0 );
-        if(joystick_1 != NULL)
-            writeLogLine("Joystick for player 1 initialized succesfully.");
-        else
-            writeLogLine("Error initializing joystick for player 1.");
+//        if(joystick_1 != NULL)
+//            Rosalila()->Utility->writeLogLine("Joystick for player 1 initialized succesfully.");
+//        else
+//            Rosalila()->Utility->writeLogLine("Error initializing joystick for player 1.");
     }
     if( SDL_NumJoysticks() == 2 )
     {
-        writeLogLine("2 joysticks were found.");
+//        Rosalila()->Utility->writeLogLine("2 joysticks were found.");
         joystick_1 = SDL_JoystickOpen( 0 );
-        if(joystick_1 != NULL)
-            writeLogLine("Joystick for player 1 initialized succesfully.");
-        else
-            writeLogLine("Error initializing joystick for player 1.");
+//        if(joystick_1 != NULL)
+//            Rosalila()->Utility->writeLogLine("Joystick for player 1 initialized succesfully.");
+//        else
+//            Rosalila()->Utility->writeLogLine("Error initializing joystick for player 1.");
         joystick_2 = SDL_JoystickOpen( 1 );
-        if(joystick_2 != NULL)
-            writeLogLine("Joystick for player 2 initialized succesfully.");
-        else
-            writeLogLine("Error initializing joystick for player 2.");
+//        if(joystick_2 != NULL)
+//            Rosalila()->Utility->writeLogLine("Joystick for player 2 initialized succesfully.");
+//        else
+//            Rosalila()->Utility->writeLogLine("Error initializing joystick for player 2.");
     }
 
     //If everything initialized fine
-    writeLogLine("Success! SDL initialized.");
+//    Rosalila()->Utility->writeLogLine("Success! SDL initialized.");
 
      SDL_GL_CreateContext(window);
     GLenum error = GL_NO_ERROR;
@@ -201,7 +201,7 @@ Image* RosalilaGraphics::getTexture(std::string filename)
                     //else
                             //texture_format = GL_BGR;
             } else {
-                writeLogLine("Warning: "+ filename+ " is not truecolor. This will probably break.");
+                Rosalila()->Utility->writeLogLine("Warning: "+ filename+ " is not truecolor. This will probably break.");
                     // this error should not go unhandled
             }
 
@@ -229,7 +229,7 @@ Image* RosalilaGraphics::getTexture(std::string filename)
     }
     else {
         std::string sdl_error=SDL_GetError();
-        writeLogLine("SDL could not load "+filename+": "+sdl_error);
+        Rosalila()->Utility->writeLogLine("SDL could not load "+filename+": "+sdl_error);
         SDL_Quit();
         return NULL;
     }
@@ -245,7 +245,7 @@ Image* RosalilaGraphics::getTexture(std::string filename)
         SDL_FreeSurface( surface );
     }
 
-    writeLogLine(filename+" loaded");
+    Rosalila()->Utility->writeLogLine(filename+" loaded");
 
     return image;
 }
@@ -774,7 +774,7 @@ void RosalilaGraphics::updateScreen()
     std::string error= ">>>";
     error+=SDL_GetError();
     if(error!=">>>")
-        writeLogLine(error);
+        Rosalila()->Utility->writeLogLine(error);
     frameCap();
 
     if(shake_time>0)

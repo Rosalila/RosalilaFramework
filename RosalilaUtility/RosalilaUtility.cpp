@@ -1,6 +1,6 @@
 #include "RosalilaUtility.h"
 
-bool writeLogLine(std::string text)
+bool RosalilaUtility::writeLogLine(std::string text)
 {
     ofstream log_file("log", ios::app);
     log_file<<text<<"\n";
@@ -9,7 +9,7 @@ bool writeLogLine(std::string text)
     return true;
 }
 
-bool clearLog()
+bool RosalilaUtility::clearLog()
 {
     ofstream log_file;
     log_file.open ("log");
@@ -19,7 +19,7 @@ bool clearLog()
     return true;
 }
 
-std::string toString(int number)
+std::string RosalilaUtility::toString(int number)
 {
     if (number == 0)
         return "0";
@@ -40,7 +40,7 @@ std::string toString(int number)
 }
 
 
-bool pointIsInRect(int point_x,int point_y,
+bool RosalilaUtility::pointIsInRect(int point_x,int point_y,
               int rect_x,int rect_y,int rect_width,int rect_height)
 {
     if(point_x>rect_x&& point_x<rect_x+rect_width
@@ -49,7 +49,7 @@ bool pointIsInRect(int point_x,int point_y,
     return false;
 }
 
-bool hitboxCollision(int a_x,int a_y,int a_width,int a_height,float a_angle,
+bool RosalilaUtility::hitboxCollision(int a_x,int a_y,int a_width,int a_height,float a_angle,
               int b_x,int b_y,int b_width,int b_height,float b_angle)
 {
     Point pa1(a_x,
@@ -223,7 +223,7 @@ bool hitboxCollision(int a_x,int a_y,int a_width,int a_height,float a_angle,
     return false;
 }
 
-bool hitboxLinesCollision(Line la1,Line la2,Line la3,Line la4,
+bool RosalilaUtility::hitboxLinesCollision(Line la1,Line la2,Line la3,Line la4,
               Line lb1,Line lb2,Line lb3,Line lb4)
 {
 
@@ -266,7 +266,7 @@ bool hitboxLinesCollision(Line la1,Line la2,Line la3,Line la4,
     return false;
 }
 
-bool segmentIntersection(Line l1,Line l2)
+bool RosalilaUtility::segmentIntersection(Line l1,Line l2)
 {
     Point* p=lineIntersection(l1,l2);
     if(p!=NULL)
@@ -305,7 +305,7 @@ bool segmentIntersection(Line l1,Line l2)
     return false;
 }
 
-Point* lineIntersection(Line l1,Line l2) {
+Point* RosalilaUtility::lineIntersection(Line l1,Line l2) {
     Point p1=l1.p1;
     Point p2=l1.p2;
     Point p3=l2.p1;
@@ -338,7 +338,7 @@ Point* lineIntersection(Line l1,Line l2) {
     return ret;
 }
 
-Point rotateAroundPoint(Point point,Point pivot,float angle)
+Point RosalilaUtility::rotateAroundPoint(Point point,Point pivot,float angle)
 {
     //Move the universe (the point b)
     float s = sin(angle*PI/180);
@@ -359,7 +359,7 @@ Point rotateAroundPoint(Point point,Point pivot,float angle)
     return Point(res_x,res_y);
 }
 
-bool collisionCheck(Hitbox* hb_azul,Hitbox* hb_roja)
+bool RosalilaUtility::collisionCheck(Hitbox* hb_azul,Hitbox* hb_roja)
 {
     int x1r=hb_roja->x;
     int y1r=hb_roja->y;

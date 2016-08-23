@@ -3,15 +3,11 @@
 RosalilaSound::RosalilaSound()
 {
     music=NULL;
-
-    writeLogLine("Initializing SLD sound engine.");
     if( Mix_OpenAudio( 44100, AUDIO_S16SYS/*MIX_DEFAULT_FORMAT*/, 2, 4096 ) == -1 )
     {
-        writeLogLine("Failed initializing sound engine. :(");
         return;
     }
     Mix_AllocateChannels(100);
-    writeLogLine("Success!");
     current_music="";
 }
 
@@ -32,7 +28,7 @@ int RosalilaSound::playSound(std::string variable, int channel, int loops)
 {
     if(!soundExists(variable))
     {
-        writeLogLine("Error: "+variable+" sound does not exists.");
+        Rosalila()->Utility->writeLogLine("Error: "+variable+" sound does not exists.");
         return -1;
     }
 
@@ -47,7 +43,7 @@ int RosalilaSound::playSound(std::string variable, int channel, int loops)
 void RosalilaSound::playMusic(std::string path,int loops)
 {
     stopMusic();
-    writeLogLine("Playing music: "+path);
+    Rosalila()->Utility->writeLogLine("Playing music: "+path);
     music = Mix_LoadMUS(path.c_str());
     Mix_PlayMusic(music,loops);
     current_music=path;

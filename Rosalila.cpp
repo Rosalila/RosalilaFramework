@@ -2,6 +2,7 @@
 
 RosalilaContainer::RosalilaContainer()
 {
+    this->Utility= new RosalilaUtility();
     this->Sound = new RosalilaSound();
     this->Receiver = new RosalilaReceiver();
     this->Graphics = new RosalilaGraphics();
@@ -13,8 +14,6 @@ RosalilaContainer*rosalila=NULL;
 
 RosalilaContainer* Rosalila()
 {
-    if(!rosalila)
-        rosalila = new RosalilaContainer();
     return rosalila;
 }
 

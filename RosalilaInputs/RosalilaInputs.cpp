@@ -265,7 +265,7 @@ void RosalilaReceiver::updateInputs()
             else if(event.key.keysym.sym<322)
                 is_key_pressed[event.key.keysym.sym] = true;
             else
-                writeLogLine("Key pressed but not supported:"+toString(event.key.keysym.sym));
+                Rosalila()->Utility->writeLogLine("Key pressed but not supported:"+Rosalila()->Utility->toString(event.key.keysym.sym));
         }
         if( event.type == SDL_KEYUP )
         {
@@ -280,7 +280,7 @@ void RosalilaReceiver::updateInputs()
             else if(event.key.keysym.sym<322)
                 is_key_pressed[event.key.keysym.sym] = false;
             else
-                writeLogLine("Key pressed but not supported:"+toString(event.key.keysym.sym));
+                Rosalila()->Utility->writeLogLine("Key pressed but not supported:"+Rosalila()->Utility->toString(event.key.keysym.sym));
         }
         if( event.type == SDL_JOYBUTTONDOWN )
         {
