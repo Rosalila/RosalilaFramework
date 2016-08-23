@@ -2,7 +2,7 @@
 #define BUTTON_H
 
 #include "../Rosalila.h"
-#include "../RosalilaInputs/Receiver.h"
+#include "../RosalilaInputs/RosalilaInputs.h"
 
 class Button
 {

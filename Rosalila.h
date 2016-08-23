@@ -25,7 +25,7 @@ using namespace std;
 
 #include "RosalilaGraphics/RosalilaGraphics.h"
 #include "RosalilaSound/RosalilaSound.h"
-#include "RosalilaInputs/Receiver.h"
+#include "RosalilaInputs/RosalilaInputs.h"
 
 class RosalilaGraphics;
 class RosalilaSound;

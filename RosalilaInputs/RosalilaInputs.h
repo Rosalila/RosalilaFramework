@@ -1,43 +1,47 @@
-#ifndef INPUT_H
-#define INPUT_H
+#ifndef MYEVENTRECEIVER_H
+#define MYEVENTRECEIVER_H
 
-#include "../Rosalila.h"
-#include "../RosalilaInputs/Boton.h"
-#include "../RosalilaAI/RosalilaAI.h"
-class RosalilaAI;
-class Button;
-class RosalilaInputs
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <stdarg.h>
+using namespace std;
+
+#include "../TinyXml/tinyxml.h"
+#include "SDL2/SDL.h"
+#include "../RosalilaUtility/RosalilaUtility.h"
+
+
+const int max_joystick_inputs=50;
+
+class RosalilaReceiver
 {
 public:
+    int joystick;
 
-    std::vector<std::string> buffer_inputs;
-    std::vector<std::string> printable_buffer_inputs;
-    int jugador;
-    bool tecla_arriba;
-    RosalilaAI *ia;
-    bool inteligencia_artificial;
-    vector<Button> botones;
-    vector<Button> cruz;
+    bool is_key_pressed[322];
+    bool is_joy1_pressed[max_joystick_inputs];
+    bool is_joy2_pressed[max_joystick_inputs];
+    bool hat_up_pressed_player_1;
+    bool hat_down_pressed_player_1;
+    bool hat_left_pressed_player_1;
+    bool hat_right_pressed_player_1;
+    bool stick_up_pressed_player_1;
+    bool stick_down_pressed_player_1;
+    bool stick_left_pressed_player_1;
+    bool stick_right_pressed_player_1;
+    bool joy_up_pressed_player_2;
+    bool joy_down_pressed_player_2;
+    bool joy_left_pressed_player_2;
+    bool joy_right_pressed_player_2;
 
-    RosalilaInputs(){}
-    void loadFromXML(int jugador);
-    void cargarRosalilaAIXML(int jugador,std::string archivo,std::string archivo_default);
-    TiXmlDocument* getXML(TiXmlDocument *doc);
-    void actualizarBuffer();
-    void actualizarBuffer(std::map<std::string,std::string>*strings,
-                          std::map<std::string,std::string>*strings_contrario,
-                          std::map<std::string,int>*enteros,
-                          std::map<std::string,int>*enteros_contrario
-                          );
-    std::vector<std::string> getBufferRosalilaInputs();
-    std::vector<std::string> getPrintableBufferRosalilaInputs();
-    void endEventProcess();
-    void startEventProcess();
-    void limpiarBuffer();
-    void editInput(int player,int joystick_number,string input,string map);
-    void editKeyboardInput(int player,string input,string map);
-    string getJoystickInput(string map, int num_joystick);
-    string getKeyboardInput(string map);
+    RosalilaReceiver();
+    bool isKeyDown(int keycode);
+    bool isKeyPressed(int keycode);
+    bool isJoyDown(int joyCode,int joystick);
+    bool isJoyPressed(int joyCode,int joystick);
+    void updateInputs();
+    void unpressAllInputs();
 };
 
-#endif
+#endif // MYEVENTRECEIVER_H>

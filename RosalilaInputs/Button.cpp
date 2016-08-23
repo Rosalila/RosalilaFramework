@@ -1,4 +1,4 @@
-#include "Boton.h"
+#include "Button.h"
 
 Button::Button(int key,std::string map)
 {
