@@ -13,12 +13,25 @@ bool Node::hasAttribute(string name)
 
 Node* Node::getNodeByName(string name)
 {
-    for(map<string,Node*>::iterator hitbox_iterator=nodes.begin();
-        hitbox_iterator!=nodes.end();
-        hitbox_iterator++)
+    for(map<string,Node*>::iterator nodes_iterator=nodes.begin();
+        nodes_iterator!=nodes.end();
+        nodes_iterator++)
     {
-        if(name==hitbox_iterator->first)
-            return hitbox_iterator->second;
+        if(name==nodes_iterator->first)
+            return nodes_iterator->second;
     }
     return NULL;
+}
+
+vector<Node*> Node::getNodesByName(string name)
+{
+    vector<Node*> nodes_return;
+    for(map<string,Node*>::iterator nodes_iterator=nodes.begin();
+        nodes_iterator!=nodes.end();
+        nodes_iterator++)
+    {
+        if(name==nodes_iterator->first)
+            nodes_return.push_back(nodes_iterator->second);
+    }
+    return nodes_return;
 }

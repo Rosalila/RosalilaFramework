@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <map>
+#include <vector>
 
 using namespace std;
 
@@ -14,6 +15,7 @@ public:
     Node(map<string,string>attributes,multimap<string,Node*>nodes);
     bool hasAttribute(string name);
     Node*getNodeByName(string name);
+    vector<Node*> getNodesByName(string name);
 };
 
 #endif
