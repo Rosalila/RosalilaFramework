@@ -7,7 +7,6 @@
 #include <stdarg.h>
 using namespace std;
 
-#include "../TinyXml/tinyxml.h"
 #include "SDL2/SDL.h"
 #include "../RosalilaUtility/RosalilaUtility.h"
 

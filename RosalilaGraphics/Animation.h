@@ -9,7 +9,6 @@
 #include <SDL2/SDL_opengl.h>
 #include <stdio.h>
 
-#include "../TinyXml/tinyxml.h"
 #include "RosalilaGraphics.h"
 #include "../RosalilaSound/RosalilaSound.h"
 #include "../RosalilaInputs/RosalilaInputs.h"

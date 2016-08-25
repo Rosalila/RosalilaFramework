@@ -21,9 +21,6 @@
 #include <SDL2_ttf/SDL_ttf.h>
 #endif
 
-
-#include "../TinyXml/tinyxml.h"
-
 #include <SDL2/SDL_opengl.h>
 #include <stdio.h>
 

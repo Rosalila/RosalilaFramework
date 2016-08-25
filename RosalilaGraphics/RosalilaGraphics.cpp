@@ -10,46 +10,40 @@ void RosalilaGraphics::init()
     this->current_screen_shake_y=0;
 
     //XML Initializations
-    string configxml_path=assets_directory+"config.xml";
-    TiXmlDocument doc_t( configxml_path.c_str() );
-    doc_t.LoadFile();
-    TiXmlDocument *doc;
-    doc=&doc_t;
+    Node* root_node = Rosalila()->Parser->getNodes(assets_directory+"config.xml");
 
-    TiXmlNode *config_file=doc->FirstChild("ConfigFile");
+    Node* resolution_node = root_node->getNodeByName("Resolution");
+    screen_width=atoi(resolution_node->attributes["x"].c_str());
+    screen_height=atoi(resolution_node->attributes["y"].c_str());
 
-    TiXmlElement *screensize_element=config_file->FirstChild("Resolution")->ToElement();
-    screen_width=atoi(screensize_element->Attribute("x"));
-    screen_height=atoi(screensize_element->Attribute("y"));
+    Node* screen_size_node = root_node->getNodeByName("ScreenSize");
+    int screen_resized_width=atoi(screen_size_node->attributes["x"].c_str());
+    int screen_resized_height=atoi(screen_size_node->attributes["y"].c_str());
 
-    TiXmlElement *resolution_element=config_file->FirstChild("ScreenSize")->ToElement();
-    int screen_resized_width=atoi(resolution_element->Attribute("x"));
-    int screen_resized_height=atoi(resolution_element->Attribute("y"));
+    Node* fullscreen_node = root_node->getNodeByName("Fullscreen");
+    fullscreen=fullscreen_node->attributes["enabled"]=="yes";
 
-    TiXmlElement *fullscreen_element=config_file->FirstChild("Fullscreen")->ToElement();
-    fullscreen=strcmp(fullscreen_element->Attribute("enabled"),"yes")==0;
-
-    TiXmlElement *font_element=config_file->FirstChild("Font")->ToElement();
+    Node* font_node = root_node->getNodeByName("Font");
 
     int font_size=10;
-    if(font_element->Attribute("size")!=NULL)
+    if(font_node->hasAttribute("size"))
     {
-        font_size=atoi(font_element->Attribute("size"));
+        font_size=atoi(font_node->attributes["size"].c_str());
     }
     int font_red=0;
-    if(font_element->Attribute("red")!=NULL)
+    if(font_node->hasAttribute("red"))
     {
-        font_red=atoi(font_element->Attribute("red"));
+        font_red=atoi(font_node->attributes["red"].c_str());
     }
     int font_green=0;
-    if(font_element->Attribute("green")!=NULL)
+    if(font_node->hasAttribute("green"))
     {
-        font_green=atoi(font_element->Attribute("green"));
+        font_green=atoi(font_node->attributes["green"].c_str());
     }
     int font_blue=0;
-    if(font_element->Attribute("blue")!=NULL)
+    if(font_node->hasAttribute("blue"))
     {
-        font_blue=atoi(font_element->Attribute("blue"));
+        font_blue=atoi(font_node->attributes["blue"].c_str());
     }
     //Internal initializations
     joystick_1 = NULL;

@@ -2,7 +2,6 @@
 #define HITBOX_H
 
 #include "Line.h"
-#include "../TinyXml/tinyxml.h"
 #include "../RosalilaGraphics/RosalilaGraphics.h"
 #include "../RosalilaSound/RosalilaSound.h"
 #include "../RosalilaInputs/RosalilaInputs.h"

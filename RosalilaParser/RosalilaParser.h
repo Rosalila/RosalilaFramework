@@ -2,6 +2,7 @@
 #define ROSALILA_PARSER_H
 
 #include "Node.h"
+#include "TinyXml/tinyxml.h"
 #include "../Rosalila.h"
 #include "../RosalilaUtility/RosalilaUtility.h"
 
