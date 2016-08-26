@@ -2,6 +2,8 @@
 #define ROSALILA_API_INTEGRATOR_H
 
 #include <iostream>
+#include "Steam/SteamIntegration.h"
+
 using namespace std;
 
 class RosalilaApiIntegrator
