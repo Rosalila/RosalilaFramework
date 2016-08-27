@@ -25,7 +25,22 @@ void RosalilaApiIntegrator::storeData(string key, string data)
     steamStoreData(key, data);
 }
 
-string RosalilaApiIntegrator::retreiveData(string key)
+double RosalilaApiIntegrator::getStat(string stat_name)
 {
-    return steamRetreiveData(key);
+    return steamGetStat(stat_name);
+}
+
+string RosalilaApiIntegrator::getData(string key)
+{
+    return steamGetData(key);
+}
+
+void RosalilaApiIntegrator::updateCallbacks()
+{
+    steamUpdateCallbacks();
+}
+
+string RosalilaApiIntegrator::getState()
+{
+    return steamGetState();
 }

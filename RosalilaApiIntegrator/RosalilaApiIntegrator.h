@@ -13,8 +13,11 @@ public:
     void unlockAchievement(string achievement_name);
     void setScore(string leaderboard_name, double score);
     void setStat(string stat_name, double stat);
+    double getStat(string stat_name);
     void storeData(string key, string data);
-    string retreiveData(string key);
+    string getData(string key);
+    void updateCallbacks();
+    string getState();
 };
 
 #endif
