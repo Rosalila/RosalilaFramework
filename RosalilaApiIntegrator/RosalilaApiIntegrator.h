@@ -14,7 +14,7 @@ public:
     void unlockAchievement(string achievement_name);
 
     void setScore(string leaderboard_name, double score, char* data, int data_size);
-    vector<LeaderboardEntry*> getLeaderboard(string leaderboard_name);
+    Leaderboard* getLeaderboard(string leaderboard_name);
 
     void setStat(string stat_name, double stat);
     double getStat(string stat_name);

@@ -15,7 +15,7 @@ void RosalilaApiIntegrator::setScore(string leaderboard_name, double score, char
     steamSetScore(leaderboard_name, score, data, data_size);
 }
 
-vector<LeaderboardEntry*> RosalilaApiIntegrator::getLeaderboard(string leaderboard_name)
+Leaderboard* RosalilaApiIntegrator::getLeaderboard(string leaderboard_name)
 {
     return steamGetLeaderboard(leaderboard_name);
 }
