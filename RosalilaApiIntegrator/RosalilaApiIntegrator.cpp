@@ -10,9 +10,9 @@ void RosalilaApiIntegrator::unlockAchievement(string achievement_name)
     steamUnlockAchievement(achievement_name);
 }
 
-void RosalilaApiIntegrator::setScore(string leaderboard_name, double score)
+void RosalilaApiIntegrator::setScore(string leaderboard_name, double score, char* data, int data_size)
 {
-    steamSetScore(leaderboard_name, score);
+    steamSetScore(leaderboard_name, score, data, data_size);
 }
 
 vector<LeaderboardEntry*> RosalilaApiIntegrator::getLeaderboard(string leaderboard_name)
