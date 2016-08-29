@@ -11,9 +11,10 @@ public:
     int rank;
     int score;
     int details;
-    int data;
+    char* data;
+    int data_size;
 
-    LeaderboardEntry(string name, int rank, int score, int details, int data);
+    LeaderboardEntry(string name, int rank, int score, int details);
 };
 
 #endif
