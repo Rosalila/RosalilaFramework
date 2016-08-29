@@ -10,14 +10,19 @@ void RosalilaApiIntegrator::unlockAchievement(string achievement_name)
     steamUnlockAchievement(achievement_name);
 }
 
-void RosalilaApiIntegrator::setScore(string leaderboard_name, double score, char* data, int data_size)
+void RosalilaApiIntegrator::setScore(string leaderboard_name, double score, char* attachment, int attachment_size)
 {
-    steamSetScore(leaderboard_name, score, data, data_size);
+    steamSetScore(leaderboard_name, score, attachment, attachment_size);
 }
 
 Leaderboard* RosalilaApiIntegrator::getLeaderboard(string leaderboard_name)
 {
     return steamGetLeaderboard(leaderboard_name);
+}
+
+void RosalilaApiIntegrator::downloadEntryAttachment(LeaderboardEntry* leaderboard_entry)
+{
+    steamDownloadEntryAttachment(leaderboard_entry);
 }
 
 void RosalilaApiIntegrator::setStat(string stat_name, double stat)

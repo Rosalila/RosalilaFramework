@@ -11,8 +11,9 @@ public:
     int rank;
     int score;
     int details;
-    char* data;
-    int data_size;
+    char* attachment;
+    int attachment_size;
+    string attachment_state;
 
     LeaderboardEntry(string name, int rank, int score, int details);
 };
