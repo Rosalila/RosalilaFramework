@@ -15,6 +15,9 @@ class Hitbox;
 class RosalilaUtility
 {
 public:
+    int random_seed;
+    int current_random_requests;
+
     void init();
     bool writeLogLine(std::string text);
     bool clearLog();
@@ -29,6 +32,8 @@ public:
     bool segmentIntersection(Line l1,Line l2);
     Point rotateAroundPoint(Point point,Point pivot,float angle);
     bool collisionCheck(Hitbox* hb_azul,Hitbox* hb_roja);
+    void setRandomSeed(int random_seed);
+    int getRandomNumber();
 };
 
 #endif

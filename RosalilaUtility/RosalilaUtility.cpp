@@ -2,7 +2,8 @@
 
 void RosalilaUtility::init()
 {
-
+    random_seed=-1;
+    current_random_requests=-1;
 }
 
 bool RosalilaUtility::writeLogLine(std::string text)
@@ -387,4 +388,22 @@ bool RosalilaUtility::collisionCheck(Hitbox* hb_azul,Hitbox* hb_roja)
           (y1a<=y1r && y1r<=y2r && y2r<=y2a) ||
           (y1a<=y1r && y1r<=y2a && y2a<=y2r)
           );
+}
+
+void RosalilaUtility::setRandomSeed(int random_seed)
+{
+    this->random_seed=random_seed;
+    this->current_random_requests=0;
+}
+
+int RosalilaUtility::getRandomNumber()
+{
+    current_random_requests++;
+    int ret = 0;
+    for(int i=0;i<current_random_requests;i++)
+    {
+        ret+=current_random_requests*random_seed;
+        ret+=(i*15436)%6;
+    }
+    return ret;
 }
