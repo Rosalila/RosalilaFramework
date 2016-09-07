@@ -16,7 +16,6 @@ class RosalilaUtility
 {
 public:
     int random_seed;
-    int current_random_requests;
 
     void init();
     bool writeLogLine(std::string text);
