@@ -2,12 +2,15 @@
 
 void RosalilaGraphics::init()
 {
-    this->shake_magnitude=0;
-    this->shake_time=0;
-    this->shake_original_x=0;
-    this->shake_original_y=0;
-    this->current_screen_shake_x=0;
-    this->current_screen_shake_y=0;
+    this->shake_magnitude = 0;
+    this->shake_time = 0;
+    this->shake_original_x = 0;
+    this->shake_original_y = 0;
+    this->current_screen_shake_x = 0;
+    this->current_screen_shake_y = 0;
+    this->current_grayscale_percentage = 1.0;
+    this->target_grayscale_percentage = this->current_grayscale_percentage;
+    this->grayscale_change_speed = 0;
 
     //XML Initializations
     Node* root_node = Rosalila()->Parser->getNodes(assets_directory+"config.xml");
@@ -258,6 +261,17 @@ void RosalilaGraphics::draw2DImage	(
              bool camera_align,
              FlatShadow flat_shadow)
 {
+    double grey_scale = (color_effects.red+color_effects.green+color_effects.blue)/3;
+
+    double red_difference = color_effects.red-grey_scale;
+    double green_difference = color_effects.green-grey_scale;
+    double blue_difference = color_effects.blue-grey_scale;
+
+    color_effects.red = grey_scale + red_difference*current_grayscale_percentage;
+    color_effects.green = grey_scale + green_difference*current_grayscale_percentage;
+    color_effects.blue = grey_scale + blue_difference*current_grayscale_percentage;
+
+
     glEnable( GL_TEXTURE_2D );
 
     glMatrixMode( GL_PROJECTION );
@@ -784,6 +798,9 @@ void RosalilaGraphics::updateScreen()
             current_screen_shake_y = (rand()*10000)%shake_magnitude;
         }
     }
+
+    updateGrayscale();
+
     SDL_GL_SwapWindow(window);
 }
 
@@ -793,6 +810,33 @@ void RosalilaGraphics::shakeScreen(int shake_magnitude, int shake_time)
     this->shake_time = shake_time;
     this->shake_original_x = camera_x;
     this->shake_original_y = camera_y;
+}
+
+void RosalilaGraphics::setGrayscale(double target_grayscale_percentage, double grayscale_change_speed)
+{
+    this->target_grayscale_percentage = target_grayscale_percentage;
+    this->grayscale_change_speed = grayscale_change_speed;
+    updateGrayscale();
+}
+
+void RosalilaGraphics::updateGrayscale()
+{
+    if(current_grayscale_percentage<target_grayscale_percentage)
+    {
+       current_grayscale_percentage+=grayscale_change_speed;
+       if(current_grayscale_percentage>target_grayscale_percentage)
+       {
+           current_grayscale_percentage=target_grayscale_percentage;
+       }
+    }
+    if(current_grayscale_percentage>target_grayscale_percentage)
+    {
+       current_grayscale_percentage-=grayscale_change_speed;
+       if(current_grayscale_percentage<target_grayscale_percentage)
+       {
+           current_grayscale_percentage=target_grayscale_percentage;
+       }
+    }
 }
 
 void RosalilaGraphics::screenshot(int x, int y, int w, int h, string filename)
