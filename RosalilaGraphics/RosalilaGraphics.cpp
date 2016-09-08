@@ -2,13 +2,7 @@
 
 void RosalilaGraphics::init()
 {
-    this->shake_magnitude = 0;
-    this->shake_time = 0;
-    this->shake_original_x = 0;
-    this->shake_original_y = 0;
-    this->current_screen_shake_x = 0;
-    this->current_screen_shake_y = 0;
-
+    screen_shake_effect.init();
     grayscale_effect.init();
 
     //XML Initializations
@@ -306,8 +300,8 @@ void RosalilaGraphics::draw2DImage	(
     }
 
     //Screen shake
-    position_x += current_screen_shake_x;
-    position_y += current_screen_shake_y;
+    position_x += screen_shake_effect.current_x;
+    position_y += screen_shake_effect.current_y;
 
     GLfloat x1=0.f+position_x;
     GLfloat y1=0.f+position_y;
@@ -600,8 +594,8 @@ void RosalilaGraphics::draw2DImageBatch(
         }
 
         //Screen shake
-        position_x[i] += current_screen_shake_x;
-        position_y[i] += current_screen_shake_y;
+        position_x[i] += screen_shake_effect.current_x;
+        position_y[i] += screen_shake_effect.current_y;
 
         GLfloat x1=0.f+position_x[i];
         GLfloat y1=0.f+position_y[i];
@@ -784,31 +778,23 @@ void RosalilaGraphics::updateScreen()
         Rosalila()->Utility->writeLogLine(error);
     frameCap();
 
-    if(shake_time>0)
+    if(screen_shake_effect.time>0)
     {
-        shake_time--;
-        if(shake_time==0)
+        screen_shake_effect.time--;
+        if(screen_shake_effect.time==0)
         {
-            current_screen_shake_x = 0;
-            current_screen_shake_y = 0;
+            screen_shake_effect.current_x = 0;
+            screen_shake_effect.current_y = 0;
         }else
         {
-            current_screen_shake_x = (rand()*10000)%shake_magnitude;
-            current_screen_shake_y = (rand()*10000)%shake_magnitude;
+            screen_shake_effect.current_x = (rand()*10000)%screen_shake_effect.magnitude;
+            screen_shake_effect.current_y = (rand()*10000)%screen_shake_effect.magnitude;
         }
     }
 
     grayscale_effect.update();
 
     SDL_GL_SwapWindow(window);
-}
-
-void RosalilaGraphics::shakeScreen(int shake_magnitude, int shake_time)
-{
-    this->shake_magnitude = shake_magnitude;
-    this->shake_time = shake_time;
-    this->shake_original_x = camera_x;
-    this->shake_original_y = camera_y;
 }
 
 

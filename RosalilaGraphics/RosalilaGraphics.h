@@ -30,6 +30,7 @@
 #include "../RosalilaGraphics/Timer.h"
 #include "../RosalilaUtility/RosalilaUtility.h"
 #include "../RosalilaGraphics/Effects/GrayscaleEffect.h"
+#include "../RosalilaGraphics/Effects/ScreenShakeEffect.h"
 
 #include <iostream>
 #include <fstream>
@@ -58,14 +59,7 @@ class RosalilaGraphics
     int current_fps;
     int last_tick;
 
-    //Screen Shake
-    int shake_magnitude;
-    int shake_time;
-    int shake_original_x;
-    int shake_original_y;
-    int current_screen_shake_x;
-    int current_screen_shake_y;
-
+    ScreenShakeEffect screen_shake_effect;
     GrayscaleEffect grayscale_effect;
 
     ~RosalilaGraphics();
@@ -97,7 +91,6 @@ class RosalilaGraphics
 				 int shadow_x, int shadow_y,
 				 bool camera_align,
 				 FlatShadow flat_shadow);
-    void shakeScreen(int shake_magnitude, int shake_time);
     void drawText(std::string text,int position_x,int position_y);
     void drawRectangle(int x,int y,int width,int height,float rotation,int red,int green,int blue,int alpha,bool camera_align);
     void updateScreen();
