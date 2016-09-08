@@ -30,6 +30,7 @@
 #include "../RosalilaGraphics/Timer.h"
 #include "../RosalilaUtility/RosalilaUtility.h"
 #include "../RosalilaGraphics/Effects/GrayscaleEffect.h"
+#include "../RosalilaGraphics/Effects/TransparencyEffect.h"
 #include "../RosalilaGraphics/Effects/ScreenShakeEffect.h"
 
 #include <iostream>
@@ -59,6 +60,7 @@ class RosalilaGraphics
     int current_fps;
     int last_tick;
 
+    TransparencyEffect transparency_effect;
     ScreenShakeEffect screen_shake_effect;
     GrayscaleEffect grayscale_effect;
 

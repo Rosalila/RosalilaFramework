@@ -4,6 +4,7 @@ void RosalilaGraphics::init()
 {
     screen_shake_effect.init();
     grayscale_effect.init();
+    transparency_effect.init();
 
     //XML Initializations
     Node* root_node = Rosalila()->Parser->getNodes(assets_directory+"config.xml");
@@ -263,6 +264,8 @@ void RosalilaGraphics::draw2DImage	(
     color_effects.red = grey_scale + red_difference * grayscale_effect.current_percentage;
     color_effects.green = grey_scale + green_difference * grayscale_effect.current_percentage;
     color_effects.blue = grey_scale + blue_difference * grayscale_effect.current_percentage;
+
+    color_effects.alpha = (double)color_effects.alpha * transparency_effect.current_percentage;
 
 
     glEnable( GL_TEXTURE_2D );
@@ -778,21 +781,9 @@ void RosalilaGraphics::updateScreen()
         Rosalila()->Utility->writeLogLine(error);
     frameCap();
 
-    if(screen_shake_effect.time>0)
-    {
-        screen_shake_effect.time--;
-        if(screen_shake_effect.time==0)
-        {
-            screen_shake_effect.current_x = 0;
-            screen_shake_effect.current_y = 0;
-        }else
-        {
-            screen_shake_effect.current_x = (rand()*10000)%screen_shake_effect.magnitude;
-            screen_shake_effect.current_y = (rand()*10000)%screen_shake_effect.magnitude;
-        }
-    }
-
     grayscale_effect.update();
+    transparency_effect.update();
+    screen_shake_effect.update();
 
     SDL_GL_SwapWindow(window);
 }

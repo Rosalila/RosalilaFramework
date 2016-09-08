@@ -1,6 +1,8 @@
 #ifndef SCREEN_SHAKE_EFFECT_H
 #define SCREEN_SHAKE_EFFECT_H
 
+#include <stdlib.h>
+
 class ScreenShakeEffect
 {
 public:

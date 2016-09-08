@@ -20,5 +20,17 @@ void ScreenShakeEffect::set(int magnitude, int time, int original_x, int origina
 
 void ScreenShakeEffect::update()
 {
-
+    if(time>0)
+    {
+        time--;
+        if(time==0)
+        {
+            current_x = 0;
+            current_y = 0;
+        }else
+        {
+            current_x = (rand()*10000)%magnitude;
+            current_y = (rand()*10000)%magnitude;
+        }
+    }
 }
