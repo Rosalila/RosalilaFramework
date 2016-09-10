@@ -145,6 +145,8 @@ void RosalilaGraphics::init()
 //            Rosalila()->Utility->writeLogLine("Error initializing joystick for player 2.");
     }
 
+
+
     //If everything initialized fine
 //    Rosalila()->Utility->writeLogLine("Success! SDL initialized.");
 
@@ -152,13 +154,12 @@ void RosalilaGraphics::init()
     GLenum error = GL_NO_ERROR;
     error = glGetError();
     if( error != GL_NO_ERROR ) {
-/* Died as glu did
-         printf( "Error initializing OpenGL! %s\n", gluErrorString( error ) );
-*/
          exit(12);
     }
 
-    return;
+    notification_background = getTexture(assets_directory+"misc/messages/notification_background.png");
+    notification_background_x = screen_width/2 - notification_background->getWidth()/2;
+    notification_background_y = screen_height - notification_background->getHeight();
 }
 
 RosalilaGraphics::~RosalilaGraphics()
@@ -784,6 +785,40 @@ void RosalilaGraphics::updateScreen()
     grayscale_effect.update();
     transparency_effect.update();
     screen_shake_effect.update();
+
+
+    notification_handler.update();
+    if(notification_handler.notifications.size()>0)
+    {
+        Notification* current_notification = *notification_handler.notifications.begin();
+
+        Rosalila()->Graphics->draw2DImage
+        (   notification_background,
+            notification_background->getWidth(),notification_background->getHeight(),
+            current_notification->x,current_notification->y,
+            1.0,
+            0.0,
+            false,
+            0,0,
+            Color(255,255,255,255),
+            0,0,
+            false,
+            FlatShadow());
+
+
+        Rosalila()->Graphics->draw2DImage
+        (   current_notification->image,
+            current_notification->image->getWidth(),current_notification->image->getHeight(),
+            current_notification->x,current_notification->y,
+            1.0,
+            0.0,
+            false,
+            0,0,
+            Color(255,255,255,255),
+            0,0,
+            false,
+            FlatShadow());
+    }
 
     SDL_GL_SwapWindow(window);
 }

@@ -24,20 +24,22 @@
 #include <SDL2/SDL_opengl.h>
 #include <stdio.h>
 
-#include "../RosalilaGraphics/Color.h"
-#include "../RosalilaGraphics/FlatShadow.h"
-#include "../RosalilaGraphics/Image.h"
-#include "../RosalilaGraphics/Timer.h"
+#include "Color.h"
+#include "FlatShadow.h"
+#include "Image.h"
+#include "Timer.h"
 #include "../RosalilaUtility/RosalilaUtility.h"
-#include "../RosalilaGraphics/Effects/GrayscaleEffect.h"
-#include "../RosalilaGraphics/Effects/TransparencyEffect.h"
-#include "../RosalilaGraphics/Effects/ScreenShakeEffect.h"
+#include "Effects/GrayscaleEffect.h"
+#include "Effects/TransparencyEffect.h"
+#include "Effects/ScreenShakeEffect.h"
+#include "Notifications/NotificationHandler.h"
 
 #include <iostream>
 #include <fstream>
 using namespace std;
 
 class FlatShadow;
+class NotificationHandler;
 
 class RosalilaGraphics
 {
@@ -59,6 +61,11 @@ class RosalilaGraphics
     int frame;
     int current_fps;
     int last_tick;
+
+    Image* notification_background;
+    int notification_background_x;
+    int notification_background_y;
+    NotificationHandler notification_handler;
 
     TransparencyEffect transparency_effect;
     ScreenShakeEffect screen_shake_effect;
