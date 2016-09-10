@@ -13,6 +13,7 @@ class NotificationHandler
 public:
     list<Notification*>notifications;
     void update();
+    void interruptCurrentNotification();
 };
 
 #endif

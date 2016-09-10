@@ -9,22 +9,28 @@ Notification::Notification(Image* image, int x, int y, int target_y, int duratio
     this->target_y = target_y;
     this->duration = duration;
     this->initial_y = y;
+    this->velocity = 3;
 }
 
 void Notification::update()
 {
     if(y<=target_y)
         frame++;
+
+    int current_velocity;
+
+    if(y==target_y)
+        current_velocity = 0;
+
     if(frame<duration)
-    {
-        if(y>target_y)
-        {
-            y--;
-        }
-    }else
-    {
-        y++;
-    }
+        current_velocity = -velocity;
+    else
+        current_velocity = velocity;
+
+    y+=current_velocity;
+
+    if(y<target_y && current_velocity<0)
+        y=target_y;
 }
 
 bool Notification::isFinished()

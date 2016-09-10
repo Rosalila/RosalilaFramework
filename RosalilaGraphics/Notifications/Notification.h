@@ -13,6 +13,7 @@ public:
     int frame;
     int duration;
     int initial_y;
+    int velocity;
     Notification(Image* image, int x, int y, int target_y, int duration);
     void update();
     bool isFinished();
