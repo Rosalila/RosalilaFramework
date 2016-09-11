@@ -100,7 +100,7 @@ class RosalilaGraphics
 				 int shadow_x, int shadow_y,
 				 bool camera_align,
 				 FlatShadow flat_shadow);
-    void drawText(std::string text,int position_x,int position_y);
+    void drawText(std::string text, int position_x, int position_y, bool center_x, bool center_y);
     void drawRectangle(int x,int y,int width,int height,float rotation,int red,int green,int blue,int alpha,bool camera_align);
     void updateScreen();
     void frameCap();

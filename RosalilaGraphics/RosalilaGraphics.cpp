@@ -709,7 +709,7 @@ void RosalilaGraphics::frameCap()
     last_tick = SDL_GetTicks();
 }
 
-void RosalilaGraphics::drawText(std::string text,int position_x,int position_y)
+void RosalilaGraphics::drawText(std::string text,int position_x,int position_y, bool center_x, bool center_y)
 {
     if(text=="")
         text=" ";
@@ -738,9 +738,17 @@ void RosalilaGraphics::drawText(std::string text,int position_x,int position_y)
     glTexImage2D(GL_TEXTURE_2D, 0, message->format->BytesPerPixel, message->w, message->h, 0, textFormat, GL_UNSIGNED_BYTE, message->pixels);
 
     GLfloat x1=0.f+position_x;
+    if(center_x)
+    {
+        x1+=0.f+screen_width/2-message->w/2;
+    }
     GLfloat y1=0.f+position_y;
-    GLfloat x2=0.f+position_x+message->w;
-    GLfloat y2=0.f+position_y+message->h;
+    if(center_y)
+    {
+        y1+=0.f+screen_height/2-message->h/2;
+    }
+    GLfloat x2=0.f+x1+message->w;
+    GLfloat y2=0.f+y1+message->h;
     SDL_FreeSurface(message);
 
 
