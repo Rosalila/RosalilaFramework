@@ -13,7 +13,8 @@ public:
 
     void unlockAchievement(string achievement_name);
 
-    void setScore(string leaderboard_name, double score, char* attachment, int attachment_size);
+    void setScore(string leaderboard_name, double score);
+    void storeLeaderboardAttachment(string leaderboard_name, char* attachment, int attachment_size);
     Leaderboard* getLeaderboard(string leaderboard_name);
     void downloadEntryAttachment(LeaderboardEntry* leaderboard_entry);
 
