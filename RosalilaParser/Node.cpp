@@ -6,6 +6,14 @@ Node::Node(map<string,string>attributes,multimap<string,Node*>nodes)
     this->nodes=nodes;
 }
 
+Node::~Node()
+{
+    for(multimap<string,Node*>::iterator i = nodes.begin(); i!=nodes.end(); i++)
+    {
+        delete (*i).second;
+    }
+}
+
 bool Node::hasAttribute(string name)
 {
     return this->attributes.count(name);

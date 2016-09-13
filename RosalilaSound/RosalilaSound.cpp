@@ -20,7 +20,7 @@ void RosalilaSound::drop()
 }
 void RosalilaSound::addSound(std::string variable,std::string value)
 {
-    //if(sounds.find(variable)==sounds.end())
+    if(sounds.find(variable)==sounds.end())
         sounds[variable]=Mix_LoadWAV(value.c_str());
 }
 
