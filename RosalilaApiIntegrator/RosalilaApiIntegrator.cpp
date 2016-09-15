@@ -25,6 +25,11 @@ Leaderboard* RosalilaApiIntegrator::getLeaderboard(string leaderboard_name)
     return steamGetLeaderboard(leaderboard_name);
 }
 
+void RosalilaApiIntegrator::findLeaderboard(string leaderboard_name)
+{
+    steamFindLeaderboard(leaderboard_name);
+}
+
 void RosalilaApiIntegrator::downloadEntryAttachment(LeaderboardEntry* leaderboard_entry)
 {
     steamDownloadEntryAttachment(leaderboard_entry);

@@ -16,6 +16,7 @@ public:
     void setScore(string leaderboard_name, double score);
     void storeLeaderboardAttachment(string leaderboard_name, char* attachment, int attachment_size);
     Leaderboard* getLeaderboard(string leaderboard_name);
+    void findLeaderboard(string leaderboard_name);
     void downloadEntryAttachment(LeaderboardEntry* leaderboard_entry);
 
     void setStat(string stat_name, double stat);
