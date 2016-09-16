@@ -841,3 +841,12 @@ void RosalilaGraphics::screenshot(int x, int y, int w, int h, string filename)
     SDL_FreeSurface(surf);
     delete [] pixels;
 }
+
+void RosalilaGraphics::clearScreen(Color color)
+{
+    float red = ((float)color.red)/255.0f;
+    float green = ((float)color.green)/255.0f;
+    float blue = ((float)color.blue)/255.0f;
+    glClearColor( red, green, blue, 0.0f );
+    glClear( GL_COLOR_BUFFER_BIT );
+}

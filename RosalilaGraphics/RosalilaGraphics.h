@@ -104,6 +104,7 @@ class RosalilaGraphics
     void drawRectangle(int x,int y,int width,int height,float rotation,int red,int green,int blue,int alpha,bool camera_align);
     void updateScreen();
     void frameCap();
+    void clearScreen(Color color);
     void screenshot(int x, int y, int w, int h, string filename);
 };
 #endif
