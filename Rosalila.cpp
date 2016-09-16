@@ -2,11 +2,12 @@
 
 RosalilaContainer::RosalilaContainer()
 {
+    this->Parser = new RosalilaParser();
     this->Utility= new RosalilaUtility();
     this->Sound = new RosalilaSound();
     this->Receiver = new RosalilaReceiver();
-    this->Graphics = new RosalilaGraphics();
     this->ApiIntegrator = new RosalilaApiIntegrator();
+    this->Graphics = new RosalilaGraphics();
 }
 
 
@@ -20,9 +21,10 @@ RosalilaContainer* Rosalila()
 void RosalilaInit()
 {
     rosalila = new RosalilaContainer();
-    rosalila->Graphics->init();
+    rosalila->Parser->init();
     rosalila->Utility->init();
     rosalila->Sound->init();
     rosalila->Receiver->init();
     rosalila->ApiIntegrator->init();
+    rosalila->Graphics->init();
 }

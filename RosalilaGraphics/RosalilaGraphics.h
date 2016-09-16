@@ -45,7 +45,6 @@ class RosalilaGraphics
 {
     public:
     SDL_Window* window;
-    SDL_Renderer* renderer;
     TTF_Font* font;
     SDL_Color textColor;
     int screen_width;
@@ -71,6 +70,7 @@ class RosalilaGraphics
     ScreenShakeEffect screen_shake_effect;
     GrayscaleEffect grayscale_effect;
 
+    RosalilaGraphics();
     ~RosalilaGraphics();
     void init();
     Image* getTexture(std::string filename);

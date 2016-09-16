@@ -1,5 +1,10 @@
 #include "RosalilaGraphics.h"
 
+RosalilaGraphics::RosalilaGraphics()
+{
+
+}
+
 void RosalilaGraphics::init()
 {
     screen_shake_effect.init();
@@ -88,13 +93,6 @@ void RosalilaGraphics::init()
 
     if(fullscreen)
         SDL_SetWindowFullscreen(window,SDL_WINDOW_FULLSCREEN);
-
-    renderer = SDL_CreateRenderer(window, -1, 0);
-
-    if(!renderer)
-    {
-        //Rosalila()->Utility->writeLogLine("Could not init render");
-    }
 
     //Set the openGL state?
     glEnable( GL_TEXTURE_2D );
