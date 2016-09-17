@@ -512,3 +512,13 @@ void RosalilaReceiver::unpressAllInputs()
     for(int i=0;i<max_joystick_inputs;i++)
         is_joy2_pressed[i]=false;
 }
+
+bool RosalilaReceiver::isPressed(string action_name)
+{
+    return controls[action_name]->isPressed();
+}
+
+bool RosalilaReceiver::isDown(string action_name)
+{
+    return controls[action_name]->isDown();
+}

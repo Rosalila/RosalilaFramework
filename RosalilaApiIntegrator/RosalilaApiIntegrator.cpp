@@ -65,17 +65,17 @@ string RosalilaApiIntegrator::getState()
     return steamGetState();
 }
 
-void setCurrentControllerActionSet(string action_set_name)
+void RosalilaApiIntegrator::setCurrentControllerActionSet(string action_set_name)
 {
     steamSetCurrentControllerActionSet(action_set_name);
 }
 
-bool isControllerActionDown(string action_name)
+bool RosalilaApiIntegrator::isControllerActionDown(string action_name)
 {
     steamIsControllerActionDown(action_name);
 }
 
-bool isUsingSteamController()
+bool RosalilaApiIntegrator::isUsingSteamController()
 {
     return steamIsUsingSteamController();
 }

@@ -4,18 +4,23 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <map>
 #include <stdarg.h>
 using namespace std;
 
 #include "SDL2/SDL.h"
 #include "../RosalilaUtility/RosalilaUtility.h"
+#include "Button.h"
 
+class Button;
 
 const int max_joystick_inputs=50;
 
 class RosalilaReceiver
 {
 public:
+    map<string,Button*> controls;
+
     int joystick;
 
     bool is_key_pressed[322];
@@ -41,6 +46,9 @@ public:
     bool isJoyPressed(int joyCode,int joystick);
     void updateInputs();
     void unpressAllInputs();
+
+    bool isPressed(string action_name);
+    bool isDown(string action_name);
 };
 
 #endif // MYEVENTRECEIVER_H>
