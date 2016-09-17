@@ -2,6 +2,7 @@
 
 void RosalilaUtility::init()
 {
+    clearLog();
 }
 
 bool RosalilaUtility::writeLogLine(std::string text)

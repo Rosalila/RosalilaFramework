@@ -27,6 +27,10 @@ public:
 
     void updateCallbacks();
     string getState();
+
+    void setCurrentControllerActionSet(string action_set_name);
+    bool isControllerActionDown(string action_name);
+    bool isUsingSteamController();
 };
 
 #endif
