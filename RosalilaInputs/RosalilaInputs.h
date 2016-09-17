@@ -19,6 +19,7 @@ const int max_joystick_inputs=50;
 class RosalilaReceiver
 {
 public:
+    bool button_up_flag;
     map<string,Button*> controls;
 
     int joystick;

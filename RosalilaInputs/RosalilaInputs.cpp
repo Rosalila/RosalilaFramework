@@ -25,6 +25,8 @@ void RosalilaReceiver::init()
     joy_down_pressed_player_2=false;
     joy_left_pressed_player_2=false;
     joy_right_pressed_player_2=false;
+
+    button_up_flag=true;
 }
 
 bool RosalilaReceiver::isKeyPressed(int keycode)
@@ -515,10 +517,87 @@ void RosalilaReceiver::unpressAllInputs()
 
 bool RosalilaReceiver::isPressed(string action_name)
 {
+    if(Rosalila()->ApiIntegrator->isUsingSteamController())
+    {
+
+        if(action_name == "8" && button_up_flag)
+        {
+            if(Rosalila()->ApiIntegrator->isControllerActionDown("up") || Rosalila()->ApiIntegrator->isControllerActionDown("menu_up"))
+            {
+                button_up_flag = false;
+                return true;
+            }
+        }
+        if(action_name == "2" && button_up_flag)
+        {
+            if(Rosalila()->ApiIntegrator->isControllerActionDown("down") || Rosalila()->ApiIntegrator->isControllerActionDown("menu_down"))
+            {
+                button_up_flag = false;
+                return true;
+            }
+        }
+        if(action_name == "4" && button_up_flag)
+        {
+            if(Rosalila()->ApiIntegrator->isControllerActionDown("left") || Rosalila()->ApiIntegrator->isControllerActionDown("menu_left"))
+            {
+                button_up_flag = false;
+                return true;
+            }
+        }
+        if(action_name == "6" && button_up_flag)
+        {
+            if(Rosalila()->ApiIntegrator->isControllerActionDown("right") || Rosalila()->ApiIntegrator->isControllerActionDown("menu_right"))
+            {
+                button_up_flag = false;
+                return true;
+            }
+        }
+        if(action_name == "a" && button_up_flag)
+        {
+            if(Rosalila()->ApiIntegrator->isControllerActionDown("action") || Rosalila()->ApiIntegrator->isControllerActionDown("menu_select"))
+            {
+                button_up_flag = false;
+                return true;
+            }
+        }
+
+        if(!Rosalila()->ApiIntegrator->isControllerActionDown("up")
+           && !Rosalila()->ApiIntegrator->isControllerActionDown("down")
+           && !Rosalila()->ApiIntegrator->isControllerActionDown("left")
+           && !Rosalila()->ApiIntegrator->isControllerActionDown("right")
+           && !Rosalila()->ApiIntegrator->isControllerActionDown("action")
+           && !Rosalila()->ApiIntegrator->isControllerActionDown("back")
+
+           && !Rosalila()->ApiIntegrator->isControllerActionDown("menu_up")
+           && !Rosalila()->ApiIntegrator->isControllerActionDown("menu_down")
+           && !Rosalila()->ApiIntegrator->isControllerActionDown("menu_left")
+           && !Rosalila()->ApiIntegrator->isControllerActionDown("menu_right")
+           && !Rosalila()->ApiIntegrator->isControllerActionDown("menu_select")
+           && !Rosalila()->ApiIntegrator->isControllerActionDown("menu_cancel")
+           )
+           button_up_flag = true;
+
+        return false;
+    }
     return controls[action_name]->isPressed();
 }
 
 bool RosalilaReceiver::isDown(string action_name)
 {
+    if(Rosalila()->ApiIntegrator->isUsingSteamController())
+    {
+        if(action_name == "8")
+            return Rosalila()->ApiIntegrator->isControllerActionDown("up") || Rosalila()->ApiIntegrator->isControllerActionDown("menu_up");
+        if(action_name == "2")
+            return Rosalila()->ApiIntegrator->isControllerActionDown("down") || Rosalila()->ApiIntegrator->isControllerActionDown("menu_down");
+        if(action_name == "4")
+            return Rosalila()->ApiIntegrator->isControllerActionDown("left") || Rosalila()->ApiIntegrator->isControllerActionDown("menu_left");
+        if(action_name == "6")
+            return Rosalila()->ApiIntegrator->isControllerActionDown("right") || Rosalila()->ApiIntegrator->isControllerActionDown("menu_right");
+        if(action_name == "a")
+            return Rosalila()->ApiIntegrator->isControllerActionDown("action") || Rosalila()->ApiIntegrator->isControllerActionDown("menu_select");
+
+        return false;
+    }
     return controls[action_name]->isDown();
 }

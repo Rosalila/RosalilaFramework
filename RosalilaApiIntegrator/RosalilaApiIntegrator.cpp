@@ -72,7 +72,7 @@ void RosalilaApiIntegrator::setCurrentControllerActionSet(string action_set_name
 
 bool RosalilaApiIntegrator::isControllerActionDown(string action_name)
 {
-    steamIsControllerActionDown(action_name);
+    return steamIsControllerActionDown(action_name);
 }
 
 bool RosalilaApiIntegrator::isUsingSteamController()
