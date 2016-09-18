@@ -43,7 +43,6 @@ bool RosalilaReceiver::isKeyDown(int keycode)
 {
     if(keycode>=332)
     {
-        cout<<keycode<<endl;cout.flush();
         return false;
     }
     if(is_key_pressed[keycode])
