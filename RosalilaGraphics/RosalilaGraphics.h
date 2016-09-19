@@ -29,6 +29,7 @@
 #include "Image.h"
 #include "Timer.h"
 #include "../RosalilaUtility/RosalilaUtility.h"
+#include "../RosalilaUtility/Rectangle.h"
 #include "Effects/GrayscaleEffect.h"
 #include "Effects/TransparencyEffect.h"
 #include "Effects/ScreenShakeEffect.h"
@@ -102,6 +103,7 @@ class RosalilaGraphics
 				 FlatShadow flat_shadow);
     void drawText(std::string text, int position_x, int position_y, bool center_x, bool center_y);
     void drawRectangle(int x,int y,int width,int height,float rotation,int red,int green,int blue,int alpha,bool camera_align);
+    void drawRectangles(vector<Rectangle*>rectangles,Color color,bool camera_align);
     void updateScreen();
     void frameCap();
     void clearScreen(Color color);

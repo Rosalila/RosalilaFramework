@@ -30,6 +30,7 @@ public:
     Point* lineIntersection(Line l1,Line l2);
     bool segmentIntersection(Line l1,Line l2);
     Point rotateAroundPoint(Point point,Point pivot,float angle);
+    Point realRotateAroundPoint(Point point,Point pivot,float angle);
     bool collisionCheck(Hitbox* hb_azul,Hitbox* hb_roja);
     void setRandomSeed(int random_seed);
     int getRandomNumber();

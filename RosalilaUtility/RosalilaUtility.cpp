@@ -345,6 +345,22 @@ Point* RosalilaUtility::lineIntersection(Line l1,Line l2) {
 
 Point RosalilaUtility::rotateAroundPoint(Point point,Point pivot,float angle)
 {
+//  float s = sin(angle*PI/180);
+//  float c = cos(angle*PI/180);
+//
+//   translate point back to origin:
+//  point.x -= pivot.x;
+//  point.y -= pivot.y;
+//
+//   rotate point
+//  float xnew = point.x * c - point.y * s;
+//  float ynew = point.x * s + point.y * c;
+//
+//   translate point back:
+//  point.x = xnew + pivot.x;
+//  point.y = ynew + pivot.y;
+//  return point;
+
     //Move the universe (the point b)
     float s = sin(angle*PI/180);
     float c = cos(angle*PI/180);
@@ -362,6 +378,26 @@ Point RosalilaUtility::rotateAroundPoint(Point point,Point pivot,float angle)
     res_y = ynew + pivot.y;
 
     return Point(res_x,res_y);
+}
+
+
+Point RosalilaUtility::realRotateAroundPoint(Point point,Point pivot,float angle)
+{
+  float s = sin(-angle*PI/180);
+  float c = cos(-angle*PI/180);
+
+//   translate point back to origin:
+  point.x -= pivot.x;
+  point.y -= pivot.y;
+
+//   rotate point
+  float xnew = point.x * c - point.y * s;
+  float ynew = point.x * s + point.y * c;
+
+//   translate point back:
+  point.x = xnew + pivot.x;
+  point.y = ynew + pivot.y;
+  return point;
 }
 
 bool RosalilaUtility::collisionCheck(Hitbox* hb_azul,Hitbox* hb_roja)

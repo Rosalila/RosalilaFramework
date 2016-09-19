@@ -469,16 +469,7 @@ void RosalilaGraphics::draw2DImage	(
         glColor4ub(color_effects.red, color_effects.green, color_effects.blue,color_effects.alpha);
     }
 
-
-
-
-
-//if((flat_shadow.shadow_x!=0 || flat_shadow.shadow_y!=0) && flat_shadow.points.size()>0)
-//{
-//
-//}else
-//{
-glBindTexture( GL_TEXTURE_2D, texture->getTexture() );
+    glBindTexture( GL_TEXTURE_2D, texture->getTexture() );
 
 
     glBegin( GL_QUADS);
@@ -499,32 +490,6 @@ glBindTexture( GL_TEXTURE_2D, texture->getTexture() );
         glVertex3f( x1-translate_x, y2-translate_y, 0.f );
 
     glEnd();
-//}
-
-
-    //if(shadow_x!=0 || shadow_y!=0)
-    if(false)
-    {
-        glColor4ub(0, 0, 0,100);
-        glBegin( GL_QUADS );
-            //Bottom-left vertex (corner)
-            glTexCoord2i( 0, 0 );
-            glVertex3f( x1-translate_x-size_x/3, y1-translate_y+((double)size_y/1.2), 0.0f );
-
-            //Bottom-right vertex (corner)
-            glTexCoord2i( 1, 0 );
-            glVertex3f( x2-translate_x-size_x/3, y1-translate_y+((double)size_y/1.2), 0.f );
-
-            //Top-right vertex (corner)
-            glTexCoord2i( 1, 1 );
-            glVertex3f( x2-translate_x, y2-translate_y, 0.f );
-
-            //Top-left vertex (corner)
-            glTexCoord2i( 0, 1 );
-            glVertex3f( x1-translate_x, y2-translate_y, 0.f );
-
-        glEnd();
-    }
 
     //Reset the current matrix to the one that was saved.
     glPopMatrix();
@@ -683,10 +648,69 @@ void RosalilaGraphics::drawRectangle(int x,int y,int width,int height,float rota
     x-=translate_x;
     y-=translate_y;
 
-    glRecti(x, y, width+x, height+y);
+//    glRecti(x, y, width+x, height+y);
+
+
+
+    glBegin(GL_QUADS);   //We want to draw a quad, i.e. shape with four sides
+      glColor4ub(red,green,blue,alpha);
+      glVertex2f(0, 0);
+      glVertex2f(0, height);
+      glVertex2f(width, height);
+      glVertex2f(width, 0);
+    glEnd();
+
     glFlush();
 
     //Reset the current matrix to the one that was saved.
+    glPopMatrix();
+}
+
+void RosalilaGraphics::drawRectangles(vector<Rectangle*>rectangles,Color color,bool camera_align)
+{
+    glLoadIdentity();
+    glMatrixMode( GL_MODELVIEW );
+
+    glColor4ub(color.red,color.green,color.blue,color.alpha);
+    glPushMatrix();
+
+    glTranslatef(0,0, 1.0);
+
+    glBegin(GL_QUADS);
+
+    for(int i=0;i<rectangles.size();i++)
+    {
+        if(camera_align)
+        {
+            rectangles[i]->y+=camera_y;
+            rectangles[i]->x-=camera_x;
+        }
+
+        Point p1(rectangles[i]->x,
+                 rectangles[i]->y);
+        Point p2(rectangles[i]->x,
+                  rectangles[i]->y+rectangles[i]->height);
+        Point p3(rectangles[i]->x+rectangles[i]->width,
+                  rectangles[i]->y+rectangles[i]->height);
+        Point p4(rectangles[i]->x+rectangles[i]->width,
+                  rectangles[i]->y);
+
+        p1 = Rosalila()->Utility->realRotateAroundPoint(p1,p1,rectangles[i]->angle);
+        p2 = Rosalila()->Utility->realRotateAroundPoint(p2,p1,rectangles[i]->angle);
+        p3 = Rosalila()->Utility->realRotateAroundPoint(p3,p1,rectangles[i]->angle);
+        p4 = Rosalila()->Utility->realRotateAroundPoint(p4,p1,rectangles[i]->angle);
+
+          glVertex2f(p1.x, p1.y);
+          glVertex2f(p2.x, p2.y);
+          glVertex2f(p3.x, p3.y);
+          glVertex2f(p4.x, p4.y);
+//          glVertex2f(0+rectangles[i]->x, rectangles[i]->height+rectangles[i]->y);
+//          glVertex2f(rectangles[i]->width+rectangles[i]->x, rectangles[i]->height+rectangles[i]->y);
+//          glVertex2f(rectangles[i]->width+rectangles[i]->x, 0+rectangles[i]->y);
+    }
+
+    glEnd();
+    glFlush();
     glPopMatrix();
 }
 
