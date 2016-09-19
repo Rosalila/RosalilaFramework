@@ -17,19 +17,12 @@ void Notification::update()
     if(y<=target_y)
         frame++;
 
-    int current_velocity;
-
-    if(y==target_y)
-        current_velocity = 0;
-
     if(frame<duration)
-        current_velocity = -velocity;
+        y-=velocity;
     else
-        current_velocity = velocity;
+        y+=velocity;
 
-    y+=current_velocity;
-
-    if(y<target_y && current_velocity<0)
+    if(y<target_y)
         y=target_y;
 }
 
