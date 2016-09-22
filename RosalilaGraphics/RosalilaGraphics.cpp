@@ -666,13 +666,18 @@ void RosalilaGraphics::drawRectangle(int x,int y,int width,int height,float rota
     glPopMatrix();
 }
 
-void RosalilaGraphics::drawRectangles(vector<Rectangle*>rectangles,Color color,bool camera_align)
+void RosalilaGraphics::drawRectangles(vector<DrawableRectangle*>rectangles,bool camera_align)
 {
     glLoadIdentity();
     glMatrixMode( GL_MODELVIEW );
 
-    glColor4ub(color.red,color.green,color.blue,color.alpha);
     glPushMatrix();
+
+    glDisable (GL_LIGHTING);
+    glEnable (GL_LIGHT0);
+    glDisable (GL_DEPTH_TEST);
+
+    glDisable(GL_TEXTURE_2D);
 
     glTranslatef(0,0, 1.0);
 
@@ -682,9 +687,11 @@ void RosalilaGraphics::drawRectangles(vector<Rectangle*>rectangles,Color color,b
     {
         if(camera_align)
         {
-            rectangles[i]->y+=camera_y;
             rectangles[i]->x-=camera_x;
+            rectangles[i]->y+=camera_y;
         }
+        rectangles[i]->x += screen_shake_effect.current_x;
+        rectangles[i]->y += screen_shake_effect.current_y;
 
         Point p1(rectangles[i]->x,
                  rectangles[i]->y);
@@ -695,18 +702,20 @@ void RosalilaGraphics::drawRectangles(vector<Rectangle*>rectangles,Color color,b
         Point p4(rectangles[i]->x+rectangles[i]->width,
                   rectangles[i]->y);
 
-        p1 = Rosalila()->Utility->realRotateAroundPoint(p1,p1,rectangles[i]->angle);
-        p2 = Rosalila()->Utility->realRotateAroundPoint(p2,p1,rectangles[i]->angle);
-        p3 = Rosalila()->Utility->realRotateAroundPoint(p3,p1,rectangles[i]->angle);
-        p4 = Rosalila()->Utility->realRotateAroundPoint(p4,p1,rectangles[i]->angle);
+        Point center(rectangles[i]->x+rectangles[i]->width/2,
+                     rectangles[i]->y+rectangles[i]->height/2);
 
-          glVertex2f(p1.x, p1.y);
-          glVertex2f(p2.x, p2.y);
-          glVertex2f(p3.x, p3.y);
-          glVertex2f(p4.x, p4.y);
-//          glVertex2f(0+rectangles[i]->x, rectangles[i]->height+rectangles[i]->y);
-//          glVertex2f(rectangles[i]->width+rectangles[i]->x, rectangles[i]->height+rectangles[i]->y);
-//          glVertex2f(rectangles[i]->width+rectangles[i]->x, 0+rectangles[i]->y);
+        p1 = Rosalila()->Utility->realRotateAroundPoint(p1,center,rectangles[i]->angle);
+        p2 = Rosalila()->Utility->realRotateAroundPoint(p2,center,rectangles[i]->angle);
+        p3 = Rosalila()->Utility->realRotateAroundPoint(p3,center,rectangles[i]->angle);
+        p4 = Rosalila()->Utility->realRotateAroundPoint(p4,center,rectangles[i]->angle);
+
+        glColor4ub(rectangles[i]->color.red,rectangles[i]->color.green,rectangles[i]->color.blue,rectangles[i]->color.alpha);
+
+        glVertex2f(p1.x, p1.y);
+        glVertex2f(p2.x, p2.y);
+        glVertex2f(p3.x, p3.y);
+        glVertex2f(p4.x, p4.y);
     }
 
     glEnd();
