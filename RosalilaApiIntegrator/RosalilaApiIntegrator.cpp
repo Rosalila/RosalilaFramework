@@ -79,3 +79,8 @@ bool RosalilaApiIntegrator::isUsingSteamController()
 {
     return steamIsUsingSteamController();
 }
+
+void RosalilaApiIntegrator::showControllerBindingPanel()
+{
+    steamShowControllerBindingPanel();
+}

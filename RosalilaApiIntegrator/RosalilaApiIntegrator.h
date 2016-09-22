@@ -31,6 +31,7 @@ public:
     void setCurrentControllerActionSet(string action_set_name);
     bool isControllerActionDown(string action_name);
     bool isUsingSteamController();
+    void showControllerBindingPanel();
 };
 
 #endif
