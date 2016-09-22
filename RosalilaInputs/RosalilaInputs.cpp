@@ -559,6 +559,14 @@ bool RosalilaReceiver::isPressed(string action_name)
                 return true;
             }
         }
+        if(action_name == "b" && button_up_flag)
+        {
+            if(Rosalila()->ApiIntegrator->isControllerActionDown("back") || Rosalila()->ApiIntegrator->isControllerActionDown("menu_cancel"))
+            {
+                button_up_flag = false;
+                return true;
+            }
+        }
 
         if(!Rosalila()->ApiIntegrator->isControllerActionDown("up")
            && !Rosalila()->ApiIntegrator->isControllerActionDown("down")
@@ -595,6 +603,8 @@ bool RosalilaReceiver::isDown(string action_name)
             return Rosalila()->ApiIntegrator->isControllerActionDown("right") || Rosalila()->ApiIntegrator->isControllerActionDown("menu_right");
         if(action_name == "a")
             return Rosalila()->ApiIntegrator->isControllerActionDown("action") || Rosalila()->ApiIntegrator->isControllerActionDown("menu_select");
+        if(action_name == "b")
+            return Rosalila()->ApiIntegrator->isControllerActionDown("back") || Rosalila()->ApiIntegrator->isControllerActionDown("menu_cancel");
 
         return false;
     }
