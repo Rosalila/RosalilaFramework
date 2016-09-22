@@ -666,7 +666,7 @@ void RosalilaGraphics::drawRectangle(int x,int y,int width,int height,float rota
     glPopMatrix();
 }
 
-void RosalilaGraphics::drawRectangles(vector<DrawableRectangle*>rectangles,bool camera_align)
+void RosalilaGraphics::drawRectangles(vector<DrawableRectangle*>rectangles, int depth_effect_x, int depth_effect_y,bool camera_align)
 {
     glLoadIdentity();
     glMatrixMode( GL_MODELVIEW );
@@ -685,11 +685,31 @@ void RosalilaGraphics::drawRectangles(vector<DrawableRectangle*>rectangles,bool 
 
     for(int i=0;i<rectangles.size();i++)
     {
-        if(camera_align)
+
+
+        //Camera and depth effect
+        if(depth_effect_x>0)
+        {
+            rectangles[i]->x-=camera_x/depth_effect_x;
+        }else if(depth_effect_x<0)
+        {
+            rectangles[i]->x-=camera_x*-depth_effect_x;
+        }else if(camera_align)
         {
             rectangles[i]->x-=camera_x;
+        }
+
+        if(depth_effect_y>0)
+        {
+            rectangles[i]->y+=camera_y/depth_effect_y;
+        }else if(depth_effect_y<0)
+        {
+            rectangles[i]->y+=camera_y*-depth_effect_y;
+        }else if(camera_align)
+        {
             rectangles[i]->y+=camera_y;
         }
+
         rectangles[i]->x += screen_shake_effect.current_x;
         rectangles[i]->y += screen_shake_effect.current_y;
 
