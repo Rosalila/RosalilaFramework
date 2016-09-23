@@ -266,7 +266,6 @@ void RosalilaGraphics::draw2DImage	(
 
     color_effects.alpha = (double)color_effects.alpha * transparency_effect.current_percentage;
 
-
     glEnable( GL_TEXTURE_2D );
 
     glMatrixMode( GL_PROJECTION );
@@ -685,7 +684,17 @@ void RosalilaGraphics::drawRectangles(vector<DrawableRectangle*>rectangles, int 
 
     for(int i=0;i<rectangles.size();i++)
     {
+        double grey_scale = (rectangles[i]->color.red+rectangles[i]->color.green+rectangles[i]->color.blue)/3;
 
+        double red_difference = rectangles[i]->color.red-grey_scale;
+        double green_difference = rectangles[i]->color.green-grey_scale;
+        double blue_difference = rectangles[i]->color.blue-grey_scale;
+
+        rectangles[i]->color.red = grey_scale + red_difference * grayscale_effect.current_percentage;
+        rectangles[i]->color.green = grey_scale + green_difference * grayscale_effect.current_percentage;
+        rectangles[i]->color.blue = grey_scale + blue_difference * grayscale_effect.current_percentage;
+
+        rectangles[i]->color.alpha = (double)rectangles[i]->color.alpha * transparency_effect.current_percentage;
 
         //Camera and depth effect
         if(depth_effect_x>0)
