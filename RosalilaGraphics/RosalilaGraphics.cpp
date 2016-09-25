@@ -752,6 +752,88 @@ void RosalilaGraphics::drawRectangles(vector<DrawableRectangle*>rectangles, int 
     glPopMatrix();
 }
 
+void RosalilaGraphics::drawTriangles(vector<DrawableTriangle*>triangles, int depth_effect_x, int depth_effect_y,bool camera_align)
+{
+    glLoadIdentity();
+    glMatrixMode( GL_MODELVIEW );
+
+    glPushMatrix();
+
+    glDisable (GL_LIGHTING);
+    glEnable (GL_LIGHT0);
+    glDisable (GL_DEPTH_TEST);
+
+    glDisable(GL_TEXTURE_2D);
+
+    glTranslatef(0,0, 1.0);
+
+    glBegin(GL_TRIANGLES);
+
+    for(int i=0;i<triangles.size();i++)
+    {
+        double grey_scale = (triangles[i]->color.red+triangles[i]->color.green+triangles[i]->color.blue)/3;
+
+        double red_difference = triangles[i]->color.red-grey_scale;
+        double green_difference = triangles[i]->color.green-grey_scale;
+        double blue_difference = triangles[i]->color.blue-grey_scale;
+
+        triangles[i]->color.red = grey_scale + red_difference * grayscale_effect.current_percentage;
+        triangles[i]->color.green = grey_scale + green_difference * grayscale_effect.current_percentage;
+        triangles[i]->color.blue = grey_scale + blue_difference * grayscale_effect.current_percentage;
+
+        triangles[i]->color.alpha = (double)triangles[i]->color.alpha * transparency_effect.current_percentage;
+
+        //Camera and depth effect
+        if(depth_effect_x>0)
+        {
+            triangles[i]->x-=camera_x/depth_effect_x;
+        }else if(depth_effect_x<0)
+        {
+            triangles[i]->x-=camera_x*-depth_effect_x;
+        }else if(camera_align)
+        {
+            triangles[i]->x-=camera_x;
+        }
+
+        if(depth_effect_y>0)
+        {
+            triangles[i]->y+=camera_y/depth_effect_y;
+        }else if(depth_effect_y<0)
+        {
+            triangles[i]->y+=camera_y*-depth_effect_y;
+        }else if(camera_align)
+        {
+            triangles[i]->y+=camera_y;
+        }
+
+        triangles[i]->x += screen_shake_effect.current_x;
+        triangles[i]->y += screen_shake_effect.current_y;
+
+        triangles[i]->p1.x += triangles[i]->x;
+        triangles[i]->p1.y += triangles[i]->y;
+        triangles[i]->p2.x += triangles[i]->x;
+        triangles[i]->p2.y += triangles[i]->y;
+        triangles[i]->p3.x += triangles[i]->x;
+        triangles[i]->p3.y += triangles[i]->y;
+
+        Point center(triangles[i]->x,triangles[i]->y);//This should not be the center
+
+        triangles[i]->p1 = Rosalila()->Utility->realRotateAroundPoint(triangles[i]->p1,center,triangles[i]->angle);
+        triangles[i]->p2 = Rosalila()->Utility->realRotateAroundPoint(triangles[i]->p2,center,triangles[i]->angle);
+        triangles[i]->p3 = Rosalila()->Utility->realRotateAroundPoint(triangles[i]->p3,center,triangles[i]->angle);
+
+        glColor4ub(triangles[i]->color.red,triangles[i]->color.green,triangles[i]->color.blue,triangles[i]->color.alpha);
+
+        glVertex2f(triangles[i]->p1.x, triangles[i]->p1.y);
+        glVertex2f(triangles[i]->p2.x, triangles[i]->p2.y);
+        glVertex2f(triangles[i]->p3.x, triangles[i]->p3.y);
+    }
+
+    glEnd();
+    glFlush();
+    glPopMatrix();
+}
+
 void RosalilaGraphics::frameCap()
 {
     frame++;

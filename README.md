@@ -3,16 +3,23 @@ Rosalila Engine
 rosalilastudio.com
 github.com/rosalila/engine
 
+#Core values
 
-Build instructions using Code::Blocks:
+This engine is being developed with the following values ordered by importance
 
-1. Install the dependencies
----------------------------
+1. Simplicity
+2. Adaptability
+3. Performance
+
+#Dependencies
+
+##Instalation
+
 * apt-get install libsdl1.2-dev libsdl-image1.2-dev libsdl-mixer1.2-dev libsdl-ttf2.0-dev freeglut3-dev
 * yum install SDL-devel SDL_mixer-devel SDL_image-devel SDL_ttf-devel freeglut-devel 
 
-2. Link the libraries
----------------------
+##Linkage
+
 In Code::Blocks: "Linker settings" -> "Other linker options"
 Add the following:
 
@@ -32,8 +39,3 @@ Windows:
 -lSDL2_image
 -lSDL2_mixer
 -lSDL2_ttf
-
-
-3. Celebrate
-------------
-Well done, Robert Paulson.
