@@ -10,21 +10,26 @@ RosalilaContainer::RosalilaContainer()
     this->Graphics = new RosalilaGraphics();
 }
 
+void RosalilaContainer::update()
+{
+    Receiver->updateInputs();
+    Graphics->updateScreen();
+    ApiIntegrator->updateCallbacks();
+}
 
-RosalilaContainer*rosalila=NULL;
+void RosalilaContainer::init()
+{
+    Parser->init();
+    Utility->init();
+    Sound->init();
+    Receiver->init();
+    ApiIntegrator->init();
+    Graphics->init();
+}
+
+RosalilaContainer* rosalila = new RosalilaContainer();;
 
 RosalilaContainer* Rosalila()
 {
     return rosalila;
-}
-
-void RosalilaInit()
-{
-    rosalila = new RosalilaContainer();
-    rosalila->Parser->init();
-    rosalila->Utility->init();
-    rosalila->Sound->init();
-    rosalila->Receiver->init();
-    rosalila->ApiIntegrator->init();
-    rosalila->Graphics->init();
 }

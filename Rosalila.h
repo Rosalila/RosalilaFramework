@@ -49,10 +49,10 @@ public:
     RosalilaUtility* Utility;
     RosalilaParser* Parser;
     RosalilaContainer();
+    void init();
+    void update();
 };
 
 RosalilaContainer* Rosalila();
-void RosalilaInit();
-
 
 #endif // SYSTEM_H_INCLUDED
