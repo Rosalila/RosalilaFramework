@@ -3,6 +3,12 @@
 void RosalilaUtility::init()
 {
     clearLog();
+    current_non_seeded_random_number_index = 0;
+    srand(time(NULL));
+    for(int i=0;i<1000;i++)
+    {
+        non_seeded_random_numbers.push_back(rand());
+    }
 }
 
 bool RosalilaUtility::writeLogLine(std::string text)
@@ -434,4 +440,13 @@ void RosalilaUtility::setRandomSeed(int random_seed)
 int RosalilaUtility::getRandomNumber()
 {
     return rand();
+}
+
+int RosalilaUtility::getNonSeededRandomNumber()
+{
+    int response = non_seeded_random_numbers[current_non_seeded_random_number_index];
+    current_non_seeded_random_number_index++;
+    if(current_non_seeded_random_number_index>=non_seeded_random_numbers.size())
+        current_non_seeded_random_number_index=0;
+    return response;
 }

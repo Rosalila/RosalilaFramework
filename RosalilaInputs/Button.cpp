@@ -19,11 +19,11 @@ bool Button::isPressed()
 {
     if(uses_joystick)
     {
-        if(Rosalila()->Receiver->isJoyPressed(joystick_button,joystick_num))
+        if(rosalila()->receiver->isJoyPressed(joystick_button,joystick_num))
             return true;
     }else
     {
-        if (Rosalila()->Receiver->isKeyPressed(key))
+        if (rosalila()->receiver->isKeyPressed(key))
             return true;
     }
     return false;
@@ -33,11 +33,11 @@ bool Button::isDown()
 {
     if(uses_joystick)
     {
-        if(Rosalila()->Receiver->isJoyDown(joystick_button,joystick_num))
+        if(rosalila()->receiver->isJoyDown(joystick_button,joystick_num))
             return true;
     }else
     {
-        if (Rosalila()->Receiver->isKeyDown(key))
+        if (rosalila()->receiver->isKeyDown(key))
             return true;
     }
     return false;
@@ -49,7 +49,7 @@ std::string Button::getRosalilaInputs()
     if(uses_joystick)
     {
         if(joystick_button>=0)
-            return Rosalila()->Utility->toString(joystick_button);
+            return rosalila()->utility->toString(joystick_button);
         if(joystick_button==-8)
             return std::string("up");
         if(joystick_button==-2)

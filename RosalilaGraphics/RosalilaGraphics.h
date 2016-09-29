@@ -31,9 +31,11 @@
 #include "../RosalilaUtility/RosalilaUtility.h"
 #include "Drawables/DrawableRectangle.h"
 #include "Drawables/DrawableTriangle.h"
+#include "Drawables/DrawablePoint.h"
 #include "Effects/GrayscaleEffect.h"
 #include "Effects/TransparencyEffect.h"
 #include "Effects/ScreenShakeEffect.h"
+#include "Effects/PointExplosionEffect.h"
 #include "Notifications/NotificationHandler.h"
 
 #include <iostream>
@@ -42,6 +44,7 @@ using namespace std;
 
 class FlatShadow;
 class NotificationHandler;
+class PointExplosionEffect;
 
 class RosalilaGraphics
 {
@@ -71,6 +74,7 @@ class RosalilaGraphics
     TransparencyEffect transparency_effect;
     ScreenShakeEffect screen_shake_effect;
     GrayscaleEffect grayscale_effect;
+    PointExplosionEffect* point_explosion_effect;
 
     RosalilaGraphics();
     ~RosalilaGraphics();
@@ -106,6 +110,7 @@ class RosalilaGraphics
     void drawRectangle(int x,int y,int width,int height,float rotation,int red,int green,int blue,int alpha,bool camera_align);
     void drawRectangles(vector<DrawableRectangle*>rectangles, int depth_effect_x, int depth_effect_y,bool camera_align);
     void drawTriangles(vector<DrawableTriangle*>triangles, int depth_effect_x, int depth_effect_y,bool camera_align);
+    void drawPoints(list<DrawablePoint*>points, int depth_effect_x, int depth_effect_y,bool camera_align);
     void updateScreen();
     void frameCap();
     void clearScreen(Color color);

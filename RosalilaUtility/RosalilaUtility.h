@@ -16,6 +16,8 @@ class RosalilaUtility
 {
 public:
     int random_seed;
+    vector<int> non_seeded_random_numbers;
+    int current_non_seeded_random_number_index;
 
     void init();
     bool writeLogLine(std::string text);
@@ -34,6 +36,7 @@ public:
     bool collisionCheck(Hitbox* hb_azul,Hitbox* hb_roja);
     void setRandomSeed(int random_seed);
     int getRandomNumber();
+    int getNonSeededRandomNumber();
 };
 
 #endif

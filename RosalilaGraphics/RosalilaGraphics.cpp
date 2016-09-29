@@ -10,9 +10,10 @@ void RosalilaGraphics::init()
     screen_shake_effect.init();
     grayscale_effect.init();
     transparency_effect.init();
+    point_explosion_effect =  new PointExplosionEffect();
 
     //XML Initializations
-    Node* root_node = Rosalila()->Parser->getNodes(assets_directory+"config.xml");
+    Node* root_node = rosalila()->parser->getNodes(assets_directory+"config.xml");
 
     Node* resolution_node = root_node->getNodeByName("Resolution");
     screen_width=atoi(resolution_node->attributes["x"].c_str());
@@ -57,14 +58,14 @@ void RosalilaGraphics::init()
     //Initialize all SDL subsystems
     if( SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK) < 0 )
     {
-        //Rosalila()->Utility->writeLogLine(SDL_GetError());
+        //rosalila()->utility->writeLogLine(SDL_GetError());
         return;
     }
 
     //Initialize SDL_ttf
     if( TTF_Init() == -1 )
     {
-        //Rosalila()->Utility->writeLogLine(SDL_GetError());
+        //rosalila()->utility->writeLogLine(SDL_GetError());
         return;
     }
 
@@ -78,7 +79,7 @@ void RosalilaGraphics::init()
 
     if(font==NULL)
     {
-        //Rosalila()->Utility->writeLogLine("Could not init font. Place it on /misc/font.ttf .");
+        //rosalila()->utility->writeLogLine("Could not init font. Place it on /misc/font.ttf .");
     }
 
     SDL_GL_SetAttribute( SDL_GL_DOUBLEBUFFER, 1 ); // *new*
@@ -88,7 +89,7 @@ void RosalilaGraphics::init()
                                SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN );
     if(!window)
     {
-        //Rosalila()->Utility->writeLogLine("Could not init window");
+        //rosalila()->utility->writeLogLine("Could not init window");
     }
 
     if(fullscreen)
@@ -121,32 +122,32 @@ void RosalilaGraphics::init()
     //Init joysticks
     if( SDL_NumJoysticks() == 1 )
     {
-//        Rosalila()->Utility->writeLogLine("1 joystick was found.");
+//        rosalila()->utility->writeLogLine("1 joystick was found.");
         joystick_1 = SDL_JoystickOpen( 0 );
 //        if(joystick_1 != NULL)
-//            Rosalila()->Utility->writeLogLine("Joystick for player 1 initialized succesfully.");
+//            rosalila()->utility->writeLogLine("Joystick for player 1 initialized succesfully.");
 //        else
-//            Rosalila()->Utility->writeLogLine("Error initializing joystick for player 1.");
+//            rosalila()->utility->writeLogLine("Error initializing joystick for player 1.");
     }
     if( SDL_NumJoysticks() == 2 )
     {
-//        Rosalila()->Utility->writeLogLine("2 joysticks were found.");
+//        rosalila()->utility->writeLogLine("2 joysticks were found.");
         joystick_1 = SDL_JoystickOpen( 0 );
 //        if(joystick_1 != NULL)
-//            Rosalila()->Utility->writeLogLine("Joystick for player 1 initialized succesfully.");
+//            rosalila()->utility->writeLogLine("Joystick for player 1 initialized succesfully.");
 //        else
-//            Rosalila()->Utility->writeLogLine("Error initializing joystick for player 1.");
+//            rosalila()->utility->writeLogLine("Error initializing joystick for player 1.");
         joystick_2 = SDL_JoystickOpen( 1 );
 //        if(joystick_2 != NULL)
-//            Rosalila()->Utility->writeLogLine("Joystick for player 2 initialized succesfully.");
+//            rosalila()->utility->writeLogLine("Joystick for player 2 initialized succesfully.");
 //        else
-//            Rosalila()->Utility->writeLogLine("Error initializing joystick for player 2.");
+//            rosalila()->utility->writeLogLine("Error initializing joystick for player 2.");
     }
 
 
 
     //If everything initialized fine
-//    Rosalila()->Utility->writeLogLine("Success! SDL initialized.");
+//    rosalila()->utility->writeLogLine("Success! SDL initialized.");
 
      SDL_GL_CreateContext(window);
     GLenum error = GL_NO_ERROR;
@@ -191,7 +192,7 @@ Image* RosalilaGraphics::getTexture(std::string filename)
                     //else
                             //texture_format = GL_BGR;
             } else {
-                Rosalila()->Utility->writeLogLine("Warning: "+ filename+ " is not truecolor. This will probably break.");
+                rosalila()->utility->writeLogLine("Warning: "+ filename+ " is not truecolor. This will probably break.");
                     // this error should not go unhandled
             }
 
@@ -219,7 +220,7 @@ Image* RosalilaGraphics::getTexture(std::string filename)
     }
     else {
         std::string sdl_error=SDL_GetError();
-        Rosalila()->Utility->writeLogLine("SDL could not load "+filename+": "+sdl_error);
+        rosalila()->utility->writeLogLine("SDL could not load "+filename+": "+sdl_error);
         SDL_Quit();
         return NULL;
     }
@@ -235,7 +236,7 @@ Image* RosalilaGraphics::getTexture(std::string filename)
         SDL_FreeSurface( surface );
     }
 
-    Rosalila()->Utility->writeLogLine(filename+" loaded");
+    rosalila()->utility->writeLogLine(filename+" loaded");
 
     return image;
 }
@@ -734,10 +735,10 @@ void RosalilaGraphics::drawRectangles(vector<DrawableRectangle*>rectangles, int 
         Point center(rectangles[i]->x+rectangles[i]->width/2,
                      rectangles[i]->y+rectangles[i]->height/2);
 
-        p1 = Rosalila()->Utility->realRotateAroundPoint(p1,center,rectangles[i]->angle);
-        p2 = Rosalila()->Utility->realRotateAroundPoint(p2,center,rectangles[i]->angle);
-        p3 = Rosalila()->Utility->realRotateAroundPoint(p3,center,rectangles[i]->angle);
-        p4 = Rosalila()->Utility->realRotateAroundPoint(p4,center,rectangles[i]->angle);
+        p1 = rosalila()->utility->realRotateAroundPoint(p1,center,rectangles[i]->angle);
+        p2 = rosalila()->utility->realRotateAroundPoint(p2,center,rectangles[i]->angle);
+        p3 = rosalila()->utility->realRotateAroundPoint(p3,center,rectangles[i]->angle);
+        p4 = rosalila()->utility->realRotateAroundPoint(p4,center,rectangles[i]->angle);
 
         glColor4ub(rectangles[i]->color.red,rectangles[i]->color.green,rectangles[i]->color.blue,rectangles[i]->color.alpha);
 
@@ -748,6 +749,65 @@ void RosalilaGraphics::drawRectangles(vector<DrawableRectangle*>rectangles, int 
     }
 
     glEnd();
+    glFlush();
+    glPopMatrix();
+}
+
+void RosalilaGraphics::drawPoints(list<DrawablePoint*>points, int depth_effect_x, int depth_effect_y,bool camera_align)
+{
+    glLoadIdentity();
+    glMatrixMode( GL_MODELVIEW );
+
+    glPushMatrix();
+
+    glDisable (GL_LIGHTING);
+    glEnable (GL_LIGHT0);
+    glDisable (GL_DEPTH_TEST);
+
+    glDisable(GL_TEXTURE_2D);
+
+    glTranslatef(0,0, 1.0);
+
+
+    glPointSize(5);
+    glBegin(GL_POINTS);
+
+
+    for(list<DrawablePoint*>::iterator i=points.begin();
+        i!=points.end();
+        i++)
+    {
+        int x = (*i)->point.x;
+        int y = (*i)->point.y;
+
+        //Camera and depth effect
+        if(depth_effect_x>0)
+        {
+            x-=camera_x/depth_effect_x;
+        }else if(depth_effect_x<0)
+        {
+            x-=camera_x*-depth_effect_x;
+        }else if(camera_align)
+        {
+            x-=camera_x;
+        }
+
+        if(depth_effect_y>0)
+        {
+            y+=camera_y/depth_effect_y;
+        }else if(depth_effect_y<0)
+        {
+            y+=camera_y*-depth_effect_y;
+        }else if(camera_align)
+        {
+            y+=camera_y;
+        }
+
+        glColor4ub((*i)->color.red,(*i)->color.green,(*i)->color.blue,(*i)->color.alpha);
+        glVertex3f(x, y, 0.0f);
+    }
+
+    glEnd( );
     glFlush();
     glPopMatrix();
 }
@@ -818,9 +878,9 @@ void RosalilaGraphics::drawTriangles(vector<DrawableTriangle*>triangles, int dep
 
         Point center(triangles[i]->x,triangles[i]->y);//This should not be the center
 
-        triangles[i]->p1 = Rosalila()->Utility->realRotateAroundPoint(triangles[i]->p1,center,triangles[i]->angle);
-        triangles[i]->p2 = Rosalila()->Utility->realRotateAroundPoint(triangles[i]->p2,center,triangles[i]->angle);
-        triangles[i]->p3 = Rosalila()->Utility->realRotateAroundPoint(triangles[i]->p3,center,triangles[i]->angle);
+        triangles[i]->p1 = rosalila()->utility->realRotateAroundPoint(triangles[i]->p1,center,triangles[i]->angle);
+        triangles[i]->p2 = rosalila()->utility->realRotateAroundPoint(triangles[i]->p2,center,triangles[i]->angle);
+        triangles[i]->p3 = rosalila()->utility->realRotateAroundPoint(triangles[i]->p3,center,triangles[i]->angle);
 
         glColor4ub(triangles[i]->color.red,triangles[i]->color.green,triangles[i]->color.blue,triangles[i]->color.alpha);
 
@@ -929,20 +989,22 @@ void RosalilaGraphics::updateScreen()
     std::string error= ">>>";
     error+=SDL_GetError();
     if(error!=">>>")
-        Rosalila()->Utility->writeLogLine(error);
+        rosalila()->utility->writeLogLine(error);
     frameCap();
 
     grayscale_effect.update();
     transparency_effect.update();
     screen_shake_effect.update();
+    point_explosion_effect->update();
 
+    drawPoints(point_explosion_effect->current_points, 0, 0, true);
 
     notification_handler.update();
     if(notification_handler.notifications.size()>0)
     {
         Notification* current_notification = *notification_handler.notifications.begin();
 
-        Rosalila()->Graphics->draw2DImage
+        rosalila()->graphics->draw2DImage
         (   notification_background,
             notification_background->getWidth(),notification_background->getHeight(),
             current_notification->x,current_notification->y,
@@ -956,7 +1018,7 @@ void RosalilaGraphics::updateScreen()
             FlatShadow());
 
 
-        Rosalila()->Graphics->draw2DImage
+        rosalila()->graphics->draw2DImage
         (   current_notification->image,
             current_notification->image->getWidth(),current_notification->image->getHeight(),
             current_notification->x,current_notification->y,

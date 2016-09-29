@@ -266,7 +266,7 @@ void RosalilaReceiver::updateInputs()
             else if(event.key.keysym.sym<322)
                 is_key_pressed[event.key.keysym.sym] = true;
             else
-                Rosalila()->Utility->writeLogLine("Key pressed but not supported:"+Rosalila()->Utility->toString(event.key.keysym.sym));
+                rosalila()->utility->writeLogLine("Key pressed but not supported:"+rosalila()->utility->toString(event.key.keysym.sym));
         }
         if( event.type == SDL_KEYUP )
         {
@@ -281,7 +281,7 @@ void RosalilaReceiver::updateInputs()
             else if(event.key.keysym.sym<322)
                 is_key_pressed[event.key.keysym.sym] = false;
             else
-                Rosalila()->Utility->writeLogLine("Key pressed but not supported:"+Rosalila()->Utility->toString(event.key.keysym.sym));
+                rosalila()->utility->writeLogLine("Key pressed but not supported:"+rosalila()->utility->toString(event.key.keysym.sym));
         }
         if( event.type == SDL_JOYBUTTONDOWN )
         {
@@ -516,12 +516,12 @@ void RosalilaReceiver::unpressAllInputs()
 
 bool RosalilaReceiver::isPressed(string action_name)
 {
-    if(Rosalila()->ApiIntegrator->isUsingSteamController())
+    if(rosalila()->api_integrator->isUsingSteamController())
     {
 
         if(action_name == "8" && button_up_flag)
         {
-            if(Rosalila()->ApiIntegrator->isControllerActionDown("up") || Rosalila()->ApiIntegrator->isControllerActionDown("menu_up"))
+            if(rosalila()->api_integrator->isControllerActionDown("up") || rosalila()->api_integrator->isControllerActionDown("menu_up"))
             {
                 button_up_flag = false;
                 return true;
@@ -529,7 +529,7 @@ bool RosalilaReceiver::isPressed(string action_name)
         }
         if(action_name == "2" && button_up_flag)
         {
-            if(Rosalila()->ApiIntegrator->isControllerActionDown("down") || Rosalila()->ApiIntegrator->isControllerActionDown("menu_down"))
+            if(rosalila()->api_integrator->isControllerActionDown("down") || rosalila()->api_integrator->isControllerActionDown("menu_down"))
             {
                 button_up_flag = false;
                 return true;
@@ -537,7 +537,7 @@ bool RosalilaReceiver::isPressed(string action_name)
         }
         if(action_name == "4" && button_up_flag)
         {
-            if(Rosalila()->ApiIntegrator->isControllerActionDown("left") || Rosalila()->ApiIntegrator->isControllerActionDown("menu_left"))
+            if(rosalila()->api_integrator->isControllerActionDown("left") || rosalila()->api_integrator->isControllerActionDown("menu_left"))
             {
                 button_up_flag = false;
                 return true;
@@ -545,7 +545,7 @@ bool RosalilaReceiver::isPressed(string action_name)
         }
         if(action_name == "6" && button_up_flag)
         {
-            if(Rosalila()->ApiIntegrator->isControllerActionDown("right") || Rosalila()->ApiIntegrator->isControllerActionDown("menu_right"))
+            if(rosalila()->api_integrator->isControllerActionDown("right") || rosalila()->api_integrator->isControllerActionDown("menu_right"))
             {
                 button_up_flag = false;
                 return true;
@@ -553,7 +553,7 @@ bool RosalilaReceiver::isPressed(string action_name)
         }
         if(action_name == "a" && button_up_flag)
         {
-            if(Rosalila()->ApiIntegrator->isControllerActionDown("action") || Rosalila()->ApiIntegrator->isControllerActionDown("menu_select"))
+            if(rosalila()->api_integrator->isControllerActionDown("action") || rosalila()->api_integrator->isControllerActionDown("menu_select"))
             {
                 button_up_flag = false;
                 return true;
@@ -561,26 +561,26 @@ bool RosalilaReceiver::isPressed(string action_name)
         }
         if(action_name == "b" && button_up_flag)
         {
-            if(Rosalila()->ApiIntegrator->isControllerActionDown("back") || Rosalila()->ApiIntegrator->isControllerActionDown("menu_cancel"))
+            if(rosalila()->api_integrator->isControllerActionDown("back") || rosalila()->api_integrator->isControllerActionDown("menu_cancel"))
             {
                 button_up_flag = false;
                 return true;
             }
         }
 
-        if(!Rosalila()->ApiIntegrator->isControllerActionDown("up")
-           && !Rosalila()->ApiIntegrator->isControllerActionDown("down")
-           && !Rosalila()->ApiIntegrator->isControllerActionDown("left")
-           && !Rosalila()->ApiIntegrator->isControllerActionDown("right")
-           && !Rosalila()->ApiIntegrator->isControllerActionDown("action")
-           && !Rosalila()->ApiIntegrator->isControllerActionDown("back")
+        if(!rosalila()->api_integrator->isControllerActionDown("up")
+           && !rosalila()->api_integrator->isControllerActionDown("down")
+           && !rosalila()->api_integrator->isControllerActionDown("left")
+           && !rosalila()->api_integrator->isControllerActionDown("right")
+           && !rosalila()->api_integrator->isControllerActionDown("action")
+           && !rosalila()->api_integrator->isControllerActionDown("back")
 
-           && !Rosalila()->ApiIntegrator->isControllerActionDown("menu_up")
-           && !Rosalila()->ApiIntegrator->isControllerActionDown("menu_down")
-           && !Rosalila()->ApiIntegrator->isControllerActionDown("menu_left")
-           && !Rosalila()->ApiIntegrator->isControllerActionDown("menu_right")
-           && !Rosalila()->ApiIntegrator->isControllerActionDown("menu_select")
-           && !Rosalila()->ApiIntegrator->isControllerActionDown("menu_cancel")
+           && !rosalila()->api_integrator->isControllerActionDown("menu_up")
+           && !rosalila()->api_integrator->isControllerActionDown("menu_down")
+           && !rosalila()->api_integrator->isControllerActionDown("menu_left")
+           && !rosalila()->api_integrator->isControllerActionDown("menu_right")
+           && !rosalila()->api_integrator->isControllerActionDown("menu_select")
+           && !rosalila()->api_integrator->isControllerActionDown("menu_cancel")
            )
            button_up_flag = true;
 
@@ -591,20 +591,20 @@ bool RosalilaReceiver::isPressed(string action_name)
 
 bool RosalilaReceiver::isDown(string action_name)
 {
-    if(Rosalila()->ApiIntegrator->isUsingSteamController())
+    if(rosalila()->api_integrator->isUsingSteamController())
     {
         if(action_name == "8")
-            return Rosalila()->ApiIntegrator->isControllerActionDown("up") || Rosalila()->ApiIntegrator->isControllerActionDown("menu_up");
+            return rosalila()->api_integrator->isControllerActionDown("up") || rosalila()->api_integrator->isControllerActionDown("menu_up");
         if(action_name == "2")
-            return Rosalila()->ApiIntegrator->isControllerActionDown("down") || Rosalila()->ApiIntegrator->isControllerActionDown("menu_down");
+            return rosalila()->api_integrator->isControllerActionDown("down") || rosalila()->api_integrator->isControllerActionDown("menu_down");
         if(action_name == "4")
-            return Rosalila()->ApiIntegrator->isControllerActionDown("left") || Rosalila()->ApiIntegrator->isControllerActionDown("menu_left");
+            return rosalila()->api_integrator->isControllerActionDown("left") || rosalila()->api_integrator->isControllerActionDown("menu_left");
         if(action_name == "6")
-            return Rosalila()->ApiIntegrator->isControllerActionDown("right") || Rosalila()->ApiIntegrator->isControllerActionDown("menu_right");
+            return rosalila()->api_integrator->isControllerActionDown("right") || rosalila()->api_integrator->isControllerActionDown("menu_right");
         if(action_name == "a")
-            return Rosalila()->ApiIntegrator->isControllerActionDown("action") || Rosalila()->ApiIntegrator->isControllerActionDown("menu_select");
+            return rosalila()->api_integrator->isControllerActionDown("action") || rosalila()->api_integrator->isControllerActionDown("menu_select");
         if(action_name == "b")
-            return Rosalila()->ApiIntegrator->isControllerActionDown("back") || Rosalila()->ApiIntegrator->isControllerActionDown("menu_cancel");
+            return rosalila()->api_integrator->isControllerActionDown("back") || rosalila()->api_integrator->isControllerActionDown("menu_cancel");
 
         return false;
     }

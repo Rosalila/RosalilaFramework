@@ -42,17 +42,17 @@ const string assets_directory="assets/";
 class RosalilaContainer
 {
 public:
-    RosalilaGraphics* Graphics;
-    RosalilaSound* Sound;
-    RosalilaReceiver* Receiver;
-    RosalilaApiIntegrator* ApiIntegrator;
-    RosalilaUtility* Utility;
-    RosalilaParser* Parser;
+    RosalilaGraphics* graphics;
+    RosalilaSound* sound;
+    RosalilaReceiver* receiver;
+    RosalilaApiIntegrator* api_integrator;
+    RosalilaUtility* utility;
+    RosalilaParser* parser;
     RosalilaContainer();
     void init();
     void update();
 };
 
-RosalilaContainer* Rosalila();
+RosalilaContainer* rosalila();
 
 #endif // SYSTEM_H_INCLUDED

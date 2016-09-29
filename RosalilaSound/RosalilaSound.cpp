@@ -28,7 +28,7 @@ int RosalilaSound::playSound(std::string variable, int channel, int loops)
 {
     if(!soundExists(variable))
     {
-        Rosalila()->Utility->writeLogLine("Error: "+variable+" sound does not exists.");
+        rosalila()->utility->writeLogLine("Error: "+variable+" sound does not exists.");
         return -1;
     }
 
@@ -43,7 +43,7 @@ int RosalilaSound::playSound(std::string variable, int channel, int loops)
 void RosalilaSound::playMusic(std::string path,int loops)
 {
     stopMusic();
-    Rosalila()->Utility->writeLogLine("Playing music: "+path);
+    rosalila()->utility->writeLogLine("Playing music: "+path);
     music = Mix_LoadMUS(path.c_str());
     Mix_PlayMusic(music,loops);
     current_music=path;

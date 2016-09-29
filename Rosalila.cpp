@@ -2,34 +2,34 @@
 
 RosalilaContainer::RosalilaContainer()
 {
-    this->Parser = new RosalilaParser();
-    this->Utility= new RosalilaUtility();
-    this->Sound = new RosalilaSound();
-    this->Receiver = new RosalilaReceiver();
-    this->ApiIntegrator = new RosalilaApiIntegrator();
-    this->Graphics = new RosalilaGraphics();
+    this->parser = new RosalilaParser();
+    this->utility= new RosalilaUtility();
+    this->sound = new RosalilaSound();
+    this->receiver = new RosalilaReceiver();
+    this->api_integrator = new RosalilaApiIntegrator();
+    this->graphics = new RosalilaGraphics();
 }
 
 void RosalilaContainer::update()
 {
-    Receiver->updateInputs();
-    Graphics->updateScreen();
-    ApiIntegrator->updateCallbacks();
+    receiver->updateInputs();
+    graphics->updateScreen();
+    api_integrator->updateCallbacks();
 }
 
 void RosalilaContainer::init()
 {
-    Parser->init();
-    Utility->init();
-    Sound->init();
-    Receiver->init();
-    ApiIntegrator->init();
-    Graphics->init();
+    parser->init();
+    utility->init();
+    sound->init();
+    receiver->init();
+    api_integrator->init();
+    graphics->init();
 }
 
-RosalilaContainer* rosalila = new RosalilaContainer();;
+RosalilaContainer* rosalila_container = new RosalilaContainer();;
 
-RosalilaContainer* Rosalila()
+RosalilaContainer* rosalila()
 {
-    return rosalila;
+    return rosalila_container;
 }

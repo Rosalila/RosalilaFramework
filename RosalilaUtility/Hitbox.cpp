@@ -83,7 +83,7 @@ void Hitbox::setValues(int x,int y, int width, int height,float angle)
 
 bool Hitbox::collides(Hitbox hitbox_param)
 {
-    return Rosalila()->Utility->hitboxLinesCollision(this->line1,this->line2,this->line3,this->line4,
+    return rosalila()->utility->hitboxLinesCollision(this->line1,this->line2,this->line3,this->line4,
                                 hitbox_param.line1,hitbox_param.line2,hitbox_param.line3,hitbox_param.line4);
 }
 
@@ -93,14 +93,14 @@ bool Hitbox::collides(Hitbox hitbox_param,int hitbox_x,int hitbox_y,int hitbox_a
     hitbox_param.setY(hitbox_param.getY()+hitbox_y);
     hitbox_param.setAngle(hitbox_param.getAngle()+hitbox_angle);
 
-    return Rosalila()->Utility->hitboxLinesCollision(this->line1,this->line2,this->line3,this->line4,
+    return rosalila()->utility->hitboxLinesCollision(this->line1,this->line2,this->line3,this->line4,
                                 hitbox_param.line1,hitbox_param.line2,hitbox_param.line3,hitbox_param.line4);
 }
 
 Hitbox Hitbox::getPlacedHitbox(double x, double y)
 {
     Hitbox hitbox = *this;
-    Point rotated=Rosalila()->Utility->rotateAroundPoint(Point(hitbox.getX(),hitbox.getY()),
+    Point rotated=rosalila()->utility->rotateAroundPoint(Point(hitbox.getX(),hitbox.getY()),
                                     Point(x,y),
                                     0);
     hitbox.setX(rotated.x);
@@ -113,7 +113,7 @@ Hitbox Hitbox::getPlacedHitbox(double x, double y)
 Hitbox Hitbox::getPlacedHitbox(double x, double y,float a)
 {
     Hitbox hitbox = *this;
-    Point rotated=Rosalila()->Utility->rotateAroundPoint(Point(hitbox.getX(),hitbox.getY()),
+    Point rotated=rosalila()->utility->rotateAroundPoint(Point(hitbox.getX(),hitbox.getY()),
                                     Point(x,y),
                                     a+hitbox.getAngle());
     hitbox.setX(rotated.x);
