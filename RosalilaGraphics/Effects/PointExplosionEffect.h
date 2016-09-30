@@ -26,7 +26,7 @@ class PointExplosionEffect
 {
 public:
     list<DrawablePoint*> current_points;
-    void explode(int x, int y, Color color);
+    void explode(int x, int y, Color color, int intensity);
     void update();
 };
 

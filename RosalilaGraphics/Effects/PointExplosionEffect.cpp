@@ -19,16 +19,21 @@ void PointExplosion::update()
     color.alpha-=10;
 }
 
-void PointExplosionEffect::explode(int x, int y, Color color)
+void PointExplosionEffect::explode(int x, int y, Color color, int intensity)
 {
-    for(int i=0;i<25;i++)
+    int amount = intensity;
+    double duration = intensity;
+    for(int i=0;i<amount;i++)
     {
+        double angle = rosalila()->utility->getNonSeededRandomNumber()%360;
+        double velocity = rosalila()->utility->getNonSeededRandomNumber()%intensity/3;
+
         current_points.push_back(new PointExplosion(Point(x,y),
                                                     color,
                                                     5,
-                                                    rosalila()->utility->getNonSeededRandomNumber()%360,
-                                                    2*rosalila()->utility->getNonSeededRandomNumber()%10,
-                                                    15));
+                                                    angle,
+                                                    velocity,
+                                                    duration));
     }
 }
 
