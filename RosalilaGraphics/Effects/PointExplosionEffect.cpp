@@ -16,7 +16,7 @@ void PointExplosion::update()
     this->point.x += cos (this->angle * PI / 180) * this->velocity;
     this->point.y -= sin (this->angle * PI / 180) * this->velocity;
     frame++;
-    color.alpha-=10;
+    color.alpha-=8;
 }
 
 void PointExplosionEffect::explode(int x, int y, Color color, int intensity)
