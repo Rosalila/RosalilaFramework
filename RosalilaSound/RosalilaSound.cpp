@@ -24,7 +24,7 @@ void RosalilaSound::addSound(std::string variable,std::string value)
         sounds[variable]=Mix_LoadWAV(value.c_str());
 }
 
-int RosalilaSound::playSound(std::string variable, int channel, int loops)
+int RosalilaSound::playSound(std::string variable, int channel, int loops, int panning, bool uses_camera)
 {
     if(!soundExists(variable))
     {
@@ -34,7 +34,13 @@ int RosalilaSound::playSound(std::string variable, int channel, int loops)
 
     if(sounds[variable]!=NULL)
     {
-        return Mix_PlayChannel( channel, sounds[variable], loops);
+        panning = panning*128/rosalila()->graphics->screen_width;
+        if(uses_camera)
+            panning += rosalila()->graphics->camera_x;
+        int left = panning + 128;
+        int return_channel = Mix_PlayChannel( channel, sounds[variable], loops);
+        Mix_SetPanning(return_channel, left, 254 - left);
+        return return_channel;
     }
 
     return -1;
