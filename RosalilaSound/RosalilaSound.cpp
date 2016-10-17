@@ -3,7 +3,7 @@
 void RosalilaSound::init()
 {
     music=NULL;
-    if( Mix_OpenAudio( 44100, AUDIO_S16SYS/*MIX_DEFAULT_FORMAT*/, 2, 4096 ) == -1 )
+    if( Mix_OpenAudio( 44100, AUDIO_S16SYS/*MIX_DEFAULT_FORMAT*/, 2, 512 ) == -1 )
     {
         return;
     }
@@ -34,12 +34,11 @@ int RosalilaSound::playSound(std::string variable, int channel, int loops, int p
 
     if(sounds[variable]!=NULL)
     {
-        panning = panning*128/rosalila()->graphics->screen_width;
         if(uses_camera)
-            panning += rosalila()->graphics->camera_x;
-        int left = panning + 128;
+            panning -= rosalila()->graphics->camera_x;
+        int left = panning*255/rosalila()->graphics->screen_width;
         int return_channel = Mix_PlayChannel( channel, sounds[variable], loops);
-        Mix_SetPanning(return_channel, left, 254 - left);
+        Mix_SetPanning(return_channel, 254 - left, left);
         return return_channel;
     }
 
