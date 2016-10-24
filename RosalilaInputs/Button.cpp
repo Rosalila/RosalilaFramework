@@ -2,6 +2,8 @@
 
 Button::Button(int key,std::string map)
 {
+    this->joystick_num=-1;
+    this->joystick_button=-1;
     this->key=key;
     this->map=map;
     uses_joystick=false;
@@ -9,6 +11,7 @@ Button::Button(int key,std::string map)
 
 Button::Button(int joystick_button,int joystick_num,std::string map)
 {
+    this->key=-1;
     this->joystick_num=joystick_num;
     this->joystick_button=joystick_button;
     this->map=map;

@@ -1,9 +1,9 @@
 Rosalila Engine
 ===============
 
-Rosalila engine is a simplified, adaptable and free as in freedom game engine written in C++.
+Rosalila Engine is a simplified, adaptable and free as in freedom game engine written in C++.
 
-#Core values
+#Keywords
 
 This engine is being developed with the following values ordered by importance:
 
@@ -13,12 +13,12 @@ This engine is being developed with the following values ordered by importance:
 
 #Features
 
-* **Graphics**: SDL + OpenGL wrapper for 2d graphics
-* **Sound**: SDL sound wraper for sound effects and music
-* **Input**: SDL + Steam Controller API wraper for keyboard and gamepads
+* **Graphics**: SDL2 + OpenGL wrapper for 2d graphics
+* **Sound**: SDL2 sound wraper for sound effects and music
+* **Input**: SDL2 + Steam Controller API wraper for keyboard and gamepads
 * **Parser**: TinyXML wraper for XML parsing
 * **Rosalila API**: Steam API wraper for achievements, stats, leaderboards and user generated content
-* **Utility**: Useful stuff that games tend to need such as hitbox collision, math stuff etc...
+* **Utility**: Useful stuff that games tend to need such as collision detection, math, seeded random, logs etc...
 
 #Development
 
