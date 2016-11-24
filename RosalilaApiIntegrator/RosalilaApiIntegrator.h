@@ -11,6 +11,8 @@ class RosalilaApiIntegrator
 public:
     void init();
 
+    bool isUsingApi();
+
     void unlockAchievement(string achievement_name);
 
     void setScore(string leaderboard_name, double score);

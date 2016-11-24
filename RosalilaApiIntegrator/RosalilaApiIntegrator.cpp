@@ -5,6 +5,11 @@ void RosalilaApiIntegrator::init()
     steamInit();
 }
 
+bool RosalilaApiIntegrator::isUsingApi()
+{
+    steamIsUsingApi();
+}
+
 void RosalilaApiIntegrator::unlockAchievement(string achievement_name)
 {
     steamUnlockAchievement(achievement_name);
