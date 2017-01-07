@@ -21,7 +21,16 @@ void RosalilaSound::drop()
 void RosalilaSound::addSound(std::string variable,std::string value)
 {
     if(sounds.find(variable)==sounds.end())
+    {
         sounds[variable]=Mix_LoadWAV(value.c_str());
+        if(sounds[variable])
+        {
+            rosalila()->utility->writeLogLine("Sound " + value + " loaded");
+        }else
+        {
+            rosalila()->utility->writeLogLine("Could not load sound " + value);
+        }
+    }
 }
 
 int RosalilaSound::playSound(std::string variable, int channel, int loops, int panning, bool uses_camera)
@@ -34,11 +43,15 @@ int RosalilaSound::playSound(std::string variable, int channel, int loops, int p
 
     if(sounds[variable]!=NULL)
     {
-        if(uses_camera)
-            panning -= rosalila()->graphics->camera_x;
-        int left = panning*255/rosalila()->graphics->screen_width;
         int return_channel = Mix_PlayChannel( channel, sounds[variable], loops);
-        Mix_SetPanning(return_channel, 254 - left, left);
+        if(panning != 0)
+        {
+            if(uses_camera)
+                panning -= rosalila()->graphics->camera_x;
+            int left = panning*255/rosalila()->graphics->screen_width;
+            Mix_SetPanning(return_channel, 254 - left, left);
+        }
+
         return return_channel;
     }
 
