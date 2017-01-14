@@ -446,7 +446,7 @@ int RosalilaUtility::getNonSeededRandomNumber()
 {
     int response = non_seeded_random_numbers[current_non_seeded_random_number_index];
     current_non_seeded_random_number_index++;
-    if(current_non_seeded_random_number_index>=non_seeded_random_numbers.size())
+    if(current_non_seeded_random_number_index >= (int)non_seeded_random_numbers.size())
         current_non_seeded_random_number_index=0;
     return response;
 }

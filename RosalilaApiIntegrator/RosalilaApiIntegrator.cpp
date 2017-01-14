@@ -7,7 +7,7 @@ void RosalilaApiIntegrator::init()
 
 bool RosalilaApiIntegrator::isUsingApi()
 {
-    steamIsUsingApi();
+    return steamIsUsingApi();
 }
 
 void RosalilaApiIntegrator::unlockAchievement(string achievement_name)

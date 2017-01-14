@@ -683,7 +683,7 @@ void RosalilaGraphics::drawRectangles(vector<DrawableRectangle*>rectangles, int 
 
     glBegin(GL_QUADS);
 
-    for(int i=0;i<rectangles.size();i++)
+    for(int i=0;i<(int)rectangles.size();i++)
     {
         double grey_scale = (rectangles[i]->color.red+rectangles[i]->color.green+rectangles[i]->color.blue)/3;
 
@@ -829,7 +829,7 @@ void RosalilaGraphics::drawTriangles(vector<DrawableTriangle*>triangles, int dep
 
     glBegin(GL_TRIANGLES);
 
-    for(int i=0;i<triangles.size();i++)
+    for(int i=0;i<(int)triangles.size();i++)
     {
         double grey_scale = (triangles[i]->color.red+triangles[i]->color.green+triangles[i]->color.blue)/3;
 
