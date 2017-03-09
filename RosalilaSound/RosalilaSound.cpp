@@ -48,7 +48,11 @@ int RosalilaSound::playSound(std::string variable, int channel, int loops, int p
         {
             if(uses_camera)
                 panning -= rosalila()->graphics->camera_x;
-            int left = panning*255/rosalila()->graphics->screen_width;
+            if(panning>rosalila()->graphics->screen_width)
+                panning = rosalila()->graphics->screen_width;
+            if(panning<0)
+                panning=0;
+            int left = panning*254/rosalila()->graphics->screen_width;
             Mix_SetPanning(return_channel, 254 - left, left);
         }
 
