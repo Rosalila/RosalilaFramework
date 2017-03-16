@@ -1,4 +1,5 @@
-include RosalilaApiIntegrator/Steam
+#include RosalilaApiIntegrator/Steam/Sources.mk
+STEAM_API_INTEGRATOR_SOURCES=Rosalila/RosalilaApiIntegrator/Steam/LeaderboardHandler.cpp Rosalila/RosalilaApiIntegrator/Steam/SteamIntegration.cpp
 ROSALILA_API_INTEGRATOR_SOURCES=Rosalila/RosalilaApiIntegrator/Leaderboard.cpp Rosalila/RosalilaApiIntegrator/LeaderboardEntry.cpp Rosalila/RosalilaApiIntegrator/RosalilaApiIntegrator.cpp $(STEAM_API_INTEGRATOR_SOURCES)
 ROSALILA_GRAPHICS=Rosalila/RosalilaGraphics/Animation.cpp Rosalila/RosalilaGraphics/Color.cpp Rosalila/RosalilaGraphics/FlatShadow.cpp Rosalila/RosalilaGraphics/Image.cpp Rosalila/RosalilaGraphics/RosalilaGraphics.cpp Rosalila/RosalilaGraphics/Timer.cpp Rosalila/RosalilaGraphics/Effects/GrayscaleEffect.cpp Rosalila/RosalilaGraphics/Effects/ScreenShakeEffect.cpp Rosalila/RosalilaGraphics/Effects/TransparencyEffect.cpp Rosalila/RosalilaGraphics/Effects/PointExplosionEffect.cpp Rosalila/RosalilaGraphics/Notifications/Notification.cpp Rosalila/RosalilaGraphics/Notifications/NotificationHandler.cpp Rosalila/RosalilaGraphics/Drawables/DrawableRectangle.cpp
 ROSALILA_INPUT=Rosalila/RosalilaInputs/Button.cpp Rosalila/RosalilaInputs/RosalilaInputs.cpp
