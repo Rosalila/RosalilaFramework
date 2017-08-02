@@ -9,6 +9,9 @@ void RosalilaUtility::init()
     {
         non_seeded_random_numbers.push_back(rand());
     }
+
+    checksums["blabla.xml"] = new vector<int>();
+    checksums["blabla.xml"]->push_back(666);
 }
 
 bool RosalilaUtility::writeLogLine(std::string text)
@@ -451,7 +454,7 @@ int RosalilaUtility::getNonSeededRandomNumber()
     return response;
 }
 
-double RosalilaUtility::checksumFileA(string file_name)
+int RosalilaUtility::checksumFileA(string file_name)
 {
   unsigned int checksum = 0;
   ifstream file(file_name.c_str());
@@ -461,20 +464,7 @@ double RosalilaUtility::checksumFileA(string file_name)
   return checksum;
 }
 
-double RosalilaUtility::checksumFileB(string file_name)
-{
-  unsigned int checksum = 1;
-  FILE *file = fopen(file_name.c_str(),"rb");
-  while (!feof(file) && !ferror(file)) {
-    unsigned int current_char = (unsigned int)fgetc(file);
-    if(current_char != 0)
-      checksum ^= current_char;
-  }
-  fclose(file);
-  return checksum;
-}
-
-double RosalilaUtility::checksumFileC(string file_name)
+int RosalilaUtility::checksumFileB(string file_name)
 {
   unsigned int checksum = 0;
   FILE *file = fopen(file_name.c_str(),"rb");
@@ -485,3 +475,29 @@ double RosalilaUtility::checksumFileC(string file_name)
   return checksum;
 }
 
+int RosalilaUtility::checksumFileC(string file_name)
+{
+  int checksum = 1;
+  FILE *file = fopen(file_name.c_str(),"rb");
+  while (!feof(file) && !ferror(file)) {
+    int character = fgetc(file);
+    if(character>0)
+      checksum=checksum*character;
+    checksum>>=2;
+    if(checksum==0)
+      checksum = 1;
+  }
+  fclose(file);
+  return checksum;
+}
+
+bool RosalilaUtility::checkFile(string file_name)
+{
+  int checksum_a = rosalila()->utility->checksumFileA(file_name);
+  int checksum_b = rosalila()->utility->checksumFileB(file_name);
+  int checksum_c = rosalila()->utility->checksumFileC(file_name);
+  cout<<file_name<<"!"<<endl;
+  cout<<checksum_a<<"$$"<<checksum_b<<"$$"<<checksum_c<<endl;
+
+  return true;
+}

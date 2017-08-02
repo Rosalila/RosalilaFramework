@@ -6,6 +6,7 @@
 #include <cmath>
 #include <vector>
 #include <ctime>
+#include <map>
 using namespace std;
 #define PI 3.14159265
 
@@ -19,6 +20,7 @@ public:
     int random_seed;
     vector<int> non_seeded_random_numbers;
     int current_non_seeded_random_number_index;
+    map< string,vector<int>* > checksums;
 
     void init();
     bool writeLogLine(std::string text);
@@ -38,9 +40,11 @@ public:
     void setRandomSeed(int random_seed);
     int getRandomNumber();
     int getNonSeededRandomNumber();
-    double checksumFileA(string file_name);
-    double checksumFileB(string file_name);
-    double checksumFileC(string file_name);
+
+    int checksumFileA(string file_name);
+    int checksumFileB(string file_name);
+    int checksumFileC(string file_name);
+    bool checkFile(string file_name);
 };
 
 #endif

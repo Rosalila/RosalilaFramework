@@ -33,6 +33,8 @@ public:
     std::map<std::string,Mix_Chunk*> sounds;
     Mix_Music *music;
     string current_music;
+    int target_fade_volume;
+    int target_fade_velocity;
     void init();
     void drop();
     void addSound(std::string variable,std::string value);
@@ -40,6 +42,10 @@ public:
     int playSound(std::string variable, int channel,int loops, int panning, bool uses_camera);
     void playMusic(std::string variable,int loops);
     void stopMusic();
+    int getMusicVolume();
+    void setMusicVolume(int volume);
+    void fadeMusicVolume(int volume, int velocity);
+    void update();
 };
 
 #endif
