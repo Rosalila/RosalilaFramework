@@ -99,7 +99,7 @@ string RosalilaApiIntegrator::getState()
 {
 	string state = "";
 	#ifdef STEAM
-    state steamGetState();
+    state = steamGetState();
 	#endif
 	return state;
 }
