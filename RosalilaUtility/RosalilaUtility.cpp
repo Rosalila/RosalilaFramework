@@ -13,10 +13,18 @@ void RosalilaUtility::init()
     checksums["blabla.xml"] = new vector<int>();
     checksums["blabla.xml"]->push_back(666);
 
+	#ifdef LINUX
     char *absolute_path_ptr = realpath(".", NULL);
     this->absolute_path = absolute_path_ptr;
     this->absolute_path += "/";
     delete absolute_path_ptr;
+	#endif
+	#ifdef WINDOWS
+	char cCurrentPath[FILENAME_MAX];
+	_getcwd(cCurrentPath, sizeof(cCurrentPath));
+    cCurrentPath[sizeof(cCurrentPath) - 1] = '\0';
+	this->absolute_path = cCurrentPath;
+	#endif
 }
 
 bool RosalilaUtility::writeLogLine(std::string text)

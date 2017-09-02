@@ -2,7 +2,10 @@
 #define ROSALILA_API_INTEGRATOR_H
 
 #include <iostream>
+
+#ifdef STEAM
 #include "Steam/SteamIntegration.h"
+#endif
 
 using namespace std;
 
@@ -17,9 +20,13 @@ public:
 
     void setScore(string leaderboard_name, double score);
     void storeLeaderboardAttachment(string leaderboard_name, char* attachment, int attachment_size);
+	#ifdef STEAM
     Leaderboard* getLeaderboard(string leaderboard_name);
-    void findLeaderboard(string leaderboard_name);
+	
     void downloadEntryAttachment(LeaderboardEntry* leaderboard_entry);
+	#endif
+	
+	void findLeaderboard(string leaderboard_name);
 
     void setStat(string stat_name, double stat);
     double getStat(string stat_name);
@@ -34,6 +41,8 @@ public:
     bool isControllerActionDown(string action_name);
     bool isUsingSteamController();
     void showControllerBindingPanel();
+	
 };
+
 
 #endif
