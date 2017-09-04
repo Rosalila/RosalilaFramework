@@ -7,8 +7,13 @@
 #include <vector>
 #include <ctime>
 #include <map>
+
+#include <dirent.h>
+
+#ifdef WINDOWS
 #include "dirent.h"
 #include <direct.h>
+#endif
 using namespace std;
 #define PI 3.14159265
 
