@@ -143,3 +143,10 @@ void Hitbox::setLines()
     line3.set(point3,point4);
     line4.set(point4,point1);
 }
+
+Hitbox Hitbox::getFlippedHitbox()
+{
+    Hitbox hitbox = *this;
+    hitbox.x = -hitbox.x - hitbox.width;
+    return hitbox;
+}

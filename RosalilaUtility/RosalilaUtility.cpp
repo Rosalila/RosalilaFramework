@@ -450,3 +450,38 @@ int RosalilaUtility::getNonSeededRandomNumber()
         current_non_seeded_random_number_index=0;
     return response;
 }
+
+double RosalilaUtility::checksumFileA(string file_name)
+{
+  unsigned int checksum = 0;
+  ifstream file(file_name.c_str());
+  file.seekg(0,ios::end);
+  checksum = file.tellg();
+  file.close();
+  return checksum;
+}
+
+double RosalilaUtility::checksumFileB(string file_name)
+{
+  unsigned int checksum = 1;
+  FILE *file = fopen(file_name.c_str(),"rb");
+  while (!feof(file) && !ferror(file)) {
+    unsigned int current_char = (unsigned int)fgetc(file);
+    if(current_char != 0)
+      checksum ^= current_char;
+  }
+  fclose(file);
+  return checksum;
+}
+
+double RosalilaUtility::checksumFileC(string file_name)
+{
+  unsigned int checksum = 0;
+  FILE *file = fopen(file_name.c_str(),"rb");
+  while (!feof(file) && !ferror(file)) {
+    checksum += fgetc(file);
+  }
+  fclose(file);
+  return checksum;
+}
+

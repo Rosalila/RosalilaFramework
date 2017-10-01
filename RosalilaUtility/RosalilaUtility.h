@@ -38,6 +38,9 @@ public:
     void setRandomSeed(int random_seed);
     int getRandomNumber();
     int getNonSeededRandomNumber();
+    double checksumFileA(string file_name);
+    double checksumFileB(string file_name);
+    double checksumFileC(string file_name);
 };
 
 #endif
