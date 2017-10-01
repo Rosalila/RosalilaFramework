@@ -16,6 +16,9 @@ void Animation::addImage(Image*image)
 
 void Animation::render()
 {
+    if(images.size()<=0)
+        return;
+
     if(animation_iteration>=animation_velocity)
     {
         current_frame++;

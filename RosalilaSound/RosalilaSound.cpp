@@ -87,3 +87,36 @@ bool RosalilaSound::soundExists(std::string variable)
     return it!=sounds.end();
     return false;
 }
+
+int RosalilaSound::getMusicVolume()
+{
+  return Mix_VolumeMusic(-1);
+}
+
+void RosalilaSound::setMusicVolume(int volume)
+{
+  Mix_VolumeMusic(volume);
+}
+
+void RosalilaSound::fadeMusicVolume(int volume, int velocity)
+{
+  this->target_fade_volume = volume;
+  this->target_fade_velocity = velocity;
+}
+
+void RosalilaSound::update()
+{
+  int new_volume;
+  if(rosalila()->sound->getMusicVolume() < target_fade_volume)
+  {
+    new_volume = this->getMusicVolume() + target_fade_velocity;
+    if(new_volume > 128)
+      new_volume = 128;
+  }else
+  {
+    new_volume = this->getMusicVolume() - target_fade_velocity;
+    if(new_volume < 0)
+      new_volume = 0;
+  }
+  this->setMusicVolume(new_volume);
+}

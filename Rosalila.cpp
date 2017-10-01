@@ -15,6 +15,7 @@ void RosalilaContainer::update()
     receiver->updateInputs();
     graphics->updateScreen();
     api_integrator->updateCallbacks();
+    sound->update();
 }
 
 void RosalilaContainer::init()

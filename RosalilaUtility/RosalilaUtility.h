@@ -6,6 +6,14 @@
 #include <cmath>
 #include <vector>
 #include <ctime>
+#include <map>
+
+#include <dirent.h>
+
+#ifdef WINDOWS
+#include "dirent.h"
+#include <direct.h>
+#endif
 using namespace std;
 #define PI 3.14159265
 
@@ -19,6 +27,8 @@ public:
     int random_seed;
     vector<int> non_seeded_random_numbers;
     int current_non_seeded_random_number_index;
+    map< string,vector<int>* > checksums;
+    string absolute_path;
 
     void init();
     bool writeLogLine(std::string text);
@@ -41,6 +51,9 @@ public:
     double checksumFileA(string file_name);
     double checksumFileB(string file_name);
     double checksumFileC(string file_name);
+    bool checkFile(string file_name);
+    string getAbsolutePath();
+    vector<string> getDirectoryNames(string path);
 };
 
 #endif

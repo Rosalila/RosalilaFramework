@@ -9,6 +9,22 @@ void RosalilaUtility::init()
     {
         non_seeded_random_numbers.push_back(rand());
     }
+
+    checksums["blabla.xml"] = new vector<int>();
+    checksums["blabla.xml"]->push_back(666);
+
+	#ifdef LINUX
+    char *absolute_path_ptr = realpath(".", NULL);
+    this->absolute_path = absolute_path_ptr;
+    this->absolute_path += "/";
+    delete absolute_path_ptr;
+	#endif
+	#ifdef WINDOWS
+	char cCurrentPath[FILENAME_MAX];
+	_getcwd(cCurrentPath, sizeof(cCurrentPath));
+    cCurrentPath[sizeof(cCurrentPath) - 1] = '\0';
+	this->absolute_path = cCurrentPath;
+	#endif
 }
 
 bool RosalilaUtility::writeLogLine(std::string text)
@@ -485,3 +501,44 @@ double RosalilaUtility::checksumFileC(string file_name)
   return checksum;
 }
 
+bool RosalilaUtility::checkFile(string file_name)
+{
+  int checksum_a = rosalila()->utility->checksumFileA(file_name);
+  int checksum_b = rosalila()->utility->checksumFileB(file_name);
+  int checksum_c = rosalila()->utility->checksumFileC(file_name);
+  cout<<file_name<<"!"<<endl;
+  cout<<checksum_a<<"$$"<<checksum_b<<"$$"<<checksum_c<<endl;
+
+  return true;
+}
+
+string RosalilaUtility::getAbsolutePath()
+{
+  return absolute_path;
+}
+
+vector<string> RosalilaUtility::getDirectoryNames(string path)
+{
+  vector<string> directories;
+  struct dirent *ent;
+  DIR *dir;
+
+  if(path[path.size()-1]!='/')
+    path += '/';
+
+  if ((dir = opendir (path.c_str())) != NULL)
+  {
+    while ((ent = readdir (dir)) != NULL)
+    {
+      DIR* current_dir;
+      string current_file_path = path + ent->d_name;
+      if ((current_dir = opendir( current_file_path.c_str() )) != NULL && strcmp(ent->d_name,".") != 0 && strcmp(ent->d_name,"..") != 0)
+      {
+        directories.push_back(ent->d_name);
+        closedir(current_dir);
+      }
+    }
+    closedir (dir);
+  }
+  return directories;
+}
