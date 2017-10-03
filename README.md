@@ -14,10 +14,10 @@ This engine is being developed with the following values ordered by importance:
 ## Features
 
 * **Graphics**: SDL2 + OpenGL wrapper for 2d graphics
-* **Sound**: SDL2 sound wraper for sound effects and music
-* **Input**: SDL2 + Steam Controller API wraper for keyboard and gamepads
-* **Parser**: TinyXML wraper for XML parsing
-* **Rosalila API**: Steam API wraper for achievements, stats, leaderboards and user generated content
+* **Sound**: SDL2 sound wrapper for sound effects and music
+* **Input**: SDL2 + Steam Controller API wrapper for keyboard and gamepads
+* **Parser**: TinyXML wrapper for XML parsing
+* **Rosalila API**: Steam API wrapper for achievements, stats, leaderboards and user generated content
 * **Utility**: Useful stuff that games tend to need such as collision detection, math, seeded random, logs etc...
 
 ## Development
