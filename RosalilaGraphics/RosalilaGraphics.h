@@ -107,6 +107,7 @@ class RosalilaGraphics
 				 bool camera_align,
 				 FlatShadow flat_shadow);
     void drawText(std::string text, int position_x, int position_y, bool center_x, bool center_y);
+    void drawText(TTF_Font* font, std::string text, int position_x, int position_y, bool center_x, bool center_y);
     void drawRectangle(int x,int y,int width,int height,float rotation,int red,int green,int blue,int alpha,bool camera_align);
     void drawRectangles(vector<DrawableRectangle*>rectangles, int depth_effect_x, int depth_effect_y,bool camera_align);
     void drawTriangles(vector<DrawableTriangle*>triangles, int depth_effect_x, int depth_effect_y,bool camera_align);
