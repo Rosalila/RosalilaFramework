@@ -912,79 +912,85 @@ void RosalilaGraphics::frameCap()
 }
 void RosalilaGraphics::drawText(std::string text,int position_x,int position_y, bool center_x, bool center_y)
 {
-    if(text=="")
-        text=" ";
-    GLuint texture;
+  position_x += screen_shake_effect.current_x;
+  position_y += screen_shake_effect.current_y;
 
-    SDL_Surface *message = NULL;
-    message = TTF_RenderUTF8_Blended( font, text.c_str(), textColor );
+  if(text=="")
+      text=" ";
+  GLuint texture;
 
-
-    // Prepare the texture for the font
-    GLenum textFormat;
-    if(message->format->BytesPerPixel == 4)
-    {
-        // alpha
-        if(message->format->Rmask == 0x000000ff)
-            textFormat = GL_RGBA;
-        else
-            textFormat = GL_BGRA_EXT;
-    }
-
-    // Create the font's texture
-    glGenTextures(1, &texture);
-    glBindTexture(GL_TEXTURE_2D, texture);
-    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
-    glTexImage2D(GL_TEXTURE_2D, 0, message->format->BytesPerPixel, message->w, message->h, 0, textFormat, GL_UNSIGNED_BYTE, message->pixels);
-
-    GLfloat x1=0.f+position_x;
-    if(center_x)
-    {
-        x1+=0.f+screen_width/2-message->w/2;
-    }
-    GLfloat y1=0.f+position_y;
-    if(center_y)
-    {
-        y1+=0.f+screen_height/2-message->h/2;
-    }
-    GLfloat x2=0.f+x1+message->w;
-    GLfloat y2=0.f+y1+message->h;
-    SDL_FreeSurface(message);
+  SDL_Surface *message = NULL;
+  message = TTF_RenderUTF8_Blended( font, text.c_str(), textColor );
 
 
-    //OpenGL draw
-    glBindTexture( GL_TEXTURE_2D, texture );
-    glColor3ub(255, 255, 255);
-    glEnable(GL_TEXTURE_2D);
-    glEnable(GL_BLEND);
-    glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
-    glBegin( GL_QUADS );
+  // Prepare the texture for the font
+  GLenum textFormat;
+  if(message->format->BytesPerPixel == 4)
+  {
+      // alpha
+      if(message->format->Rmask == 0x000000ff)
+          textFormat = GL_RGBA;
+      else
+          textFormat = GL_BGRA_EXT;
+  }
 
-        //Bottom-left vertex (corner)
-        glTexCoord2i( 0, 0 );
-        glVertex3f( x1, y1, 0.0f );
+  // Create the font's texture
+  glGenTextures(1, &texture);
+  glBindTexture(GL_TEXTURE_2D, texture);
+  glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
+  glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
+  glTexImage2D(GL_TEXTURE_2D, 0, message->format->BytesPerPixel, message->w, message->h, 0, textFormat, GL_UNSIGNED_BYTE, message->pixels);
 
-        //Bottom-right vertex (corner)
-        glTexCoord2i( 1, 0 );
-        glVertex3f( x2, y1, 0.f );
+  GLfloat x1=0.f+position_x;
+  if(center_x)
+  {
+      x1+=0.f+screen_width/2-message->w/2;
+  }
+  GLfloat y1=0.f+position_y;
+  if(center_y)
+  {
+      y1+=0.f+screen_height/2-message->h/2;
+  }
+  GLfloat x2=0.f+x1+message->w;
+  GLfloat y2=0.f+y1+message->h;
+  SDL_FreeSurface(message);
 
-        //Top-right vertex (corner)
-        glTexCoord2i( 1, 1 );
-        glVertex3f( x2, y2, 0.f );
 
-        //Top-left vertex (corner)
-        glTexCoord2i( 0, 1 );
-        glVertex3f( x1, y2, 0.f );
+  //OpenGL draw
+  glBindTexture( GL_TEXTURE_2D, texture );
+  glColor3ub(255, 255, 255);
+  glEnable(GL_TEXTURE_2D);
+  glEnable(GL_BLEND);
+  glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
+  glBegin( GL_QUADS );
 
-    glEnd();
-    glDisable(GL_BLEND);
-    glDisable(GL_TEXTURE_2D);
-    glDeleteTextures( 1, &texture );
+      //Bottom-left vertex (corner)
+      glTexCoord2i( 0, 0 );
+      glVertex3f( x1, y1, 0.0f );
+
+      //Bottom-right vertex (corner)
+      glTexCoord2i( 1, 0 );
+      glVertex3f( x2, y1, 0.f );
+
+      //Top-right vertex (corner)
+      glTexCoord2i( 1, 1 );
+      glVertex3f( x2, y2, 0.f );
+
+      //Top-left vertex (corner)
+      glTexCoord2i( 0, 1 );
+      glVertex3f( x1, y2, 0.f );
+
+  glEnd();
+  glDisable(GL_BLEND);
+  glDisable(GL_TEXTURE_2D);
+  glDeleteTextures( 1, &texture );
 }
 
 void RosalilaGraphics::drawText(TTF_Font* font, std::string text, int position_x, int position_y, bool center_x, bool center_y)
 {
+  position_x += screen_shake_effect.current_x;
+  position_y += screen_shake_effect.current_y;
+
   if(text=="")
       text=" ";
   GLuint texture;
