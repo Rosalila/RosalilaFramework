@@ -542,3 +542,29 @@ vector<string> RosalilaUtility::getDirectoryNames(string path)
   }
   return directories;
 }
+
+vector<string> RosalilaUtility::getFileNames(string path)
+{
+  vector<string> directories;
+  struct dirent *ent;
+  DIR *dir;
+
+  if(path[path.size()-1]!='/')
+    path += '/';
+
+  if ((dir = opendir (path.c_str())) != NULL)
+  {
+    while ((ent = readdir (dir)) != NULL)
+    {
+      DIR* current_dir;
+      string current_file_path = path + ent->d_name;
+      if ((current_dir = opendir( current_file_path.c_str() )) == NULL && strcmp(ent->d_name,".") != 0 && strcmp(ent->d_name,"..") != 0)
+      {
+        directories.push_back(ent->d_name);
+        closedir(current_dir);
+      }
+    }
+    closedir (dir);
+  }
+  return directories;
+}

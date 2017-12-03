@@ -54,6 +54,7 @@ public:
     bool checkFile(string file_name);
     string getAbsolutePath();
     vector<string> getDirectoryNames(string path);
+    vector<string> getFileNames(string path);
 };
 
 #endif
