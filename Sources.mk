@@ -6,5 +6,6 @@ ROSALILA_GRAPHICS=Rosalila/RosalilaGraphics/Animation.cpp Rosalila/RosalilaGraph
 ROSALILA_INPUT=Rosalila/RosalilaInputs/Button.cpp Rosalila/RosalilaInputs/RosalilaInputs.cpp
 ROSALILA_PARSER=Rosalila/RosalilaParser/Node.cpp Rosalila/RosalilaParser/RosalilaParser.cpp Rosalila/RosalilaParser/TinyXml/tinystr.cpp Rosalila/RosalilaParser/TinyXml/tinyxml.cpp Rosalila/RosalilaParser/TinyXml/tinyxmlerror.cpp Rosalila/RosalilaParser/TinyXml/tinyxmlparser.cpp
 ROSALILA_SOUND=Rosalila/RosalilaSound/RosalilaSound.cpp
+ROSALILA_NET=Rosalila/RosalilaNet/RosalilaNet.cpp
 ROSALILA_UTILITY=Rosalila/RosalilaUtility/Hitbox.cpp Rosalila/RosalilaUtility/Line.cpp Rosalila/RosalilaUtility/Point.cpp Rosalila/RosalilaUtility/RosalilaUtility.cpp
-ROSALILA_SOURCES=Rosalila/Rosalila.cpp $(ROSALILA_API_INTEGRATOR_SOURCES) $(ROSALILA_GRAPHICS) $(ROSALILA_INPUT) $(ROSALILA_PARSER) $(ROSALILA_SOUND) $(ROSALILA_UTILITY)
+ROSALILA_SOURCES=Rosalila/Rosalila.cpp $(ROSALILA_API_INTEGRATOR_SOURCES) $(ROSALILA_GRAPHICS) $(ROSALILA_INPUT) $(ROSALILA_PARSER) $(ROSALILA_SOUND) $(ROSALILA_NET) $(ROSALILA_UTILITY)
