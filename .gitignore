@@ -1,2 +1,4 @@
 RosalilaApiIntegrator/Steam
 *.o
+examples/build/*
+build/*

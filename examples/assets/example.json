@@ -1,0 +1,14 @@
+{
+  "a": "Hello",
+  "b": "World",
+  "Tag":
+  {
+    "Subtag": "value"
+  },
+  "Array":
+  [
+    {"value": "10"},
+    {"value": "20"},
+    {"value": "30"}
+  ]
+}
