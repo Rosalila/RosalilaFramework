@@ -2,22 +2,15 @@ language: c++
 
 os:
   - linux
-  - osx
 
 dist: xenial
 sudo: false
 
 before_install:
-  - if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then
-      sudo apt-get install -y libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libsdl2-net-dev libglew-dev ;
-    fi
-
+  - sudo apt-get install -y libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libsdl2-net-dev libglew-dev
+    
 script:
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-      cmake . ;
-    else
-      CXX=/usr/bin/g++-5 CC=/usr/bin/gcc-5 cmake . ;
-    fi
+  - CXX=/usr/bin/g++-5 CC=/usr/bin/gcc-5 cmake .
   - make -j2
 
 deploy:
@@ -28,12 +21,3 @@ deploy:
     skip_cleanup: true
     on:
       tags: true
-      condition: $TRAVIS_OS_NAME != "osx"
-  - provider: releases
-    api_key: "${token}"
-    file:
-      - "Macos.zip"
-    skip_cleanup: true
-    on:
-      tags: true
-      condition: $TRAVIS_OS_NAME == "osx"
