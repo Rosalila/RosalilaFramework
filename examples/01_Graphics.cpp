@@ -16,6 +16,7 @@ int main()
         1.0,
         0.0,
         false,
+        false,
         Color(255, 255, 255,255));
     
     rosalila()->graphics->draw2DImage
@@ -24,6 +25,7 @@ int main()
         100,100,
         1.0,
         0.0,
+        false,
         false,
         Color(255, 255, 255,255));
 

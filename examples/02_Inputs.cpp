@@ -19,6 +19,7 @@ int main()
         1.0,
         0.0,
         mirror_image,
+        false,
         Color(255, 255, 255,255));
     
     if(rosalila()->receiver->isDown(player_1, "left"))
