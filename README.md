@@ -1,6 +1,9 @@
 Rosalila Engine
 ===============
 
+[![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/Rosalila/RosalilaEngine/blob/master/LICENSE)
+[![Travis](https://img.shields.io/travis/Rosalila/RosalilaEngine.svg?logo=travis)](https://travis-ci.org/Rosalila/RosalilaEngine)
+
 A modern game engine for programmers that like doing more than learning.
 
 ## Keywords
