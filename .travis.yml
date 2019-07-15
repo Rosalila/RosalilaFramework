@@ -8,27 +8,17 @@ dist: xenial
 sudo: false
 
 before_install:
-  - sudo apt-get install -y libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libsdl2-net-dev libglew-dev
+  - if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then
+      sudo apt-get install -y libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libsdl2-net-dev libglew-dev
+    fi
 
 script:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-      cmake -D test=on . ;
+      cmake . ;
     else
-      CXX=/usr/bin/g++-5 CC=/usr/bin/gcc-5 cmake -Dtest=on . ;
+      CXX=/usr/bin/g++-5 CC=/usr/bin/gcc-5 cmake . ;
     fi
   - make -j2
-  - make test
-  - if [[ "$TRAVIS_TAG" ]]; then
-      cmake -D mode=static . ;
-      make -j2 ; 
-    fi
-  - if [ "$TRAVIS_TAG" ]; then
-      if [ "$TRAVIS_OS_NAME" == "osx" ]; then
-        zip Macos.zip libmodio.a libmodio.dylib;
-      else
-        zip Linux.zip libmodio.a libmodio.so;
-      fi
-    fi
 
 deploy:
   - provider: releases
