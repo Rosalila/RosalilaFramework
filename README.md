@@ -23,3 +23,19 @@ This engine is being developed with the following values ordered by importance:
 ## Development
 
 Check out our [wiki](https://github.com/Rosalila/RosalilaEngine/wiki).
+
+## Build
+
+### Dependencies
+
+```
+sudo apt-get install g++ cmake libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libsdl2-net-dev libglew-dev
+```
+
+### Compile
+
+```
+mkdir build
+cd build
+cmake ..
+```
