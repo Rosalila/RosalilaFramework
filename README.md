@@ -42,7 +42,18 @@ rosalila()->graphics->draw2DImage
     color_effects);
 ```
 
-### Recieve inputs
+### Play music and sounds
+
+```c++
+rosalila()->sound->playMusic("../assets/music.ogg", music_loops);
+rosalila()->sound->addSound("my_sound", "../assets/sound.ogg");
+
+[...]
+
+rosalila()->sound->playSound("my_sound", sound_channel, sound_loops, panning);
+```
+
+### Check if an input is down or was pressed
 
 ```c++
 if(rosalila()->receiver->isDown(player_1, "up"))
@@ -68,6 +79,134 @@ vector<Node*> array = example_root_node->getNodesByName("Array");
 for(auto array_element : array)
 {
   cout << array_element->attributes["value"] << endl;
+}
+```
+
+## Getting started
+
+Link the Rosalila libraries and include it.
+
+```c++
+#include "Rosalila.h"
+
+int main()
+{
+  rosalila()->init("config.json");
+  
+  // Initialize stuff here
+  
+  while(true)
+  {
+    // Draw, play sounds, check inputs here
+
+    rosalila()->update();
+  }
+
+  return 0;
+}
+```
+
+Also, setup a `font.ttf`, `notification_background.png` and a `config.json` file.
+
+`config.json`
+```json
+{
+  "Resolution": 
+  {
+    "x": "1280",
+    "y": "720"
+  },
+  "ScreenSize": 
+  {
+    "x": "1280",
+    "y": "720"
+  },
+  "Fullscreen": 
+  {
+    "enabled": "no"
+  },
+  "Font": 
+  {
+    "path": "font.ttf",
+    "red": "255",
+    "green": "255",
+    "blue": "255",
+    "size": "30"
+  },
+  "Notifications": 
+  {
+    "background_path": "notification_background.png"
+  },
+  "Inputs": 
+  {
+    "Player": 
+    {
+      "number": "0",
+      "Type": 
+      [
+        {
+          "name": "keyboard",
+          "button": 
+          [
+            {
+              "name": "up",
+              "key": "up"
+            },            
+            {
+              "name": "down",
+              "key": "down"
+            },            
+            {
+              "name": "left",
+              "key": "left"
+            },            
+            {
+              "name": "right",
+              "key": "right"
+            },            
+            {
+              "name": "a",
+              "key": "z"
+            },            
+            {
+              "name": "b",
+              "key": "x"
+            }
+          ]
+        },        
+        {
+          "name": "gamepad",
+          "button": 
+          [            
+            {
+              "name": "up",
+              "key": "up"
+            },            
+            {
+              "name": "down",
+              "key": "down"
+            },            
+            {
+              "name": "left",
+              "key": "left"
+            },            
+            {
+              "name": "right",
+              "key": "right"
+            },            
+            {
+              "name": "a",
+              "key": "1"
+            },            
+            {
+              "name": "b",
+              "key": "2"
+            }
+          ]
+        }
+      ]
+    }
+  }
 }
 ```
 
