@@ -23,8 +23,7 @@ Rosalila Engine
 
 ## Usage
 
-
-### Draw images
+### Draw an image
 
 ```c++
 Image* image = rosalila()->graphics->getTexture("image.png");
@@ -40,6 +39,14 @@ rosalila()->graphics->draw2DImage
     flip_horizontally,
     blend_effect,
     color_effects);
+```
+
+### Draw a rectangle
+
+```c++
+rosalila()->graphics->drawRectangle(x, y,
+                                    width, height,
+                                    rotation, red, green, blue, alpha);
 ```
 
 ### Play music and sounds
@@ -63,8 +70,99 @@ if(rosalila()->receiver->isDown(player_1, "up"))
 
 if(rosalila()->receiver->isPressed(player_1, "a"))
 {
-    // a was pressed
+    // a was pressed!
 }
+```
+
+### Unlock an achievement
+
+```c++
+rosalila()->api_integrator->unlockAchievement("My achievement");
+```
+
+### Get a stat
+
+```c++
+int counter = rosalila()->api_integrator->getStat("My counter");
+```
+
+### Set a stat
+
+```c++
+rosalila()->api_integrator->setStat("My counter",counter + 1);
+```
+
+### Submit a leaderboard entry
+
+```c++
+TODO
+```
+
+### Retrieve leaderboard data
+
+```c++
+TODO
+```
+
+### Check if player's API is running
+
+```c++
+TODO
+```
+
+### Trigger a notification
+
+```c++
+TODO
+```
+
+### Get a random number
+
+```c++
+rosalila()->utility->getRandomNumber()
+```
+
+### Greyscale effect??
+
+```c++
+rosalila()->graphics->grayscale_effect.set(1, 0.003);
+```
+
+### Fade music???
+
+```c++
+rosalila()->sound->fadeMusicVolume(128, 2);
+```
+
+### Set transparency effect???
+
+```c++
+rosalila()->graphics->transparency_effect.set(1, 0.03);
+```
+
+### Get screen size???
+
+```c++
+int width = rosalila()->graphics->screen_width;
+int height = rosalila()->graphics->screen_height;
+```
+
+### Get a non seeded random number
+
+```c++
+int rosalila()->utility->getNonSeededRandomNumber();
+```
+
+### Set a random seed???
+
+```c++
+rosalila()->utility->setRandomSeed(time(NULL));
+```
+
+### Write a log line
+
+```c++
+rosalila()->utility->writeLogLine("My log text.");
 ```
 
 ### Read json
@@ -72,11 +170,10 @@ if(rosalila()->receiver->isPressed(player_1, "a"))
 ```c++
 Node* example_root_node = rosalila()->parser->getNodes("example.json");
 
-std::string a = example_root_node->attributes["a"];
 Node* tag = example_root_node->getNodeByName("Tag");
-std::string subtag = tag->attributes["Subtag"];
-vector<Node*> array = example_root_node->getNodesByName("Array");
-for(auto array_element : array)
+cout << tag->attributes["a"] << endl;
+
+for(auto array_element : example_root_node->getNodesByName("Array"))
 {
   cout << array_element->attributes["value"] << endl;
 }
@@ -108,7 +205,8 @@ int main()
 
 Also, setup a `font.ttf`, `notification_background.png` and a `config.json` file.
 
-`config.json`
+config.json:
+
 ```json
 {
   "Resolution": 
