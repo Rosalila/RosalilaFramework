@@ -4,7 +4,7 @@ Image::Image()
 {
     width=-1;
     height=-1;
-    scale = 0.0;
+    scale = 1.0;
     rotation = 0.0;
     horizontal_flip = false;
     blend_effect = false;
@@ -35,11 +35,13 @@ void Image::setTexture(GLuint texture)
 
 void Image::setWidth(int width)
 {
-    this->width=width;
+    this->width = width;
+    this->original_width = width;
 }
 void Image::setHeight(int height)
 {
-    this->height=height;
+    this->height = height;
+    this->original_height = height;
 }
 
 Image::~Image()

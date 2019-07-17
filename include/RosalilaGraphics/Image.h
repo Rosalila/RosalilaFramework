@@ -57,6 +57,8 @@ class ROSALILA_DLL Image
 {
 public:
     GLuint texture;
+    int original_width;
+    int original_height;
 
     int width;
     int height;

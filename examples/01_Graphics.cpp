@@ -9,8 +9,8 @@ int main()
 
   while(true)
   {
-    rosalila()->graphics->draw2DImage(image, 0, 0);
-    rosalila()->graphics->draw2DImage(image2, 0, 0);
+    rosalila()->graphics->drawImage(image, 0, 0);
+    rosalila()->graphics->drawImage(image2, 0, 0);
 
     rosalila()->update();
   }

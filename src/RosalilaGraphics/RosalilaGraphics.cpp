@@ -244,7 +244,7 @@ Image* RosalilaGraphics::getImage(std::string filename)
     return image;
 }
 
-void RosalilaGraphics::draw2DImage (Image* texture, int x, int y)
+void RosalilaGraphics::drawImage (Image* texture, int x, int y)
 {
     double grey_scale = (texture->color_filter.red+texture->color_filter.green+texture->color_filter.blue)/3;
 
@@ -818,11 +818,11 @@ void RosalilaGraphics::updateScreen()
     {
         Notification* current_notification = *notification_handler.notifications.begin();
 
-        rosalila()->graphics->draw2DImage(notification_background, 
+        rosalila()->graphics->drawImage(notification_background, 
                                           current_notification->x,
                                           current_notification->y);
 
-        rosalila()->graphics->draw2DImage(current_notification->image, 
+        rosalila()->graphics->drawImage(current_notification->image, 
                                           current_notification->x,
                                           current_notification->y);
     }

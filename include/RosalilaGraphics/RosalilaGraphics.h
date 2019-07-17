@@ -86,7 +86,7 @@ class ROSALILA_DLL RosalilaGraphics
     ~RosalilaGraphics();
     void init();
     Image* getImage(std::string filename);
-    void draw2DImage(Image* texture, int x, int y);
+    void drawImage(Image* texture, int x, int y);
     void draw2DImageBatch(
 	             Image* texture,
 				 int size_x,int size_y,

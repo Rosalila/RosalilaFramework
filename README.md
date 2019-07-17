@@ -33,13 +33,14 @@ Image* image = rosalila()->graphics->getImage("image.png");
 [...]
 
 image.scale = 0.5; // defaults to 1.0
+image.width = image.original_width * 2;
 image.rotation = 45.0; // defaults to 0.0
 image.flip_horizontally = true; // defaults to false
 image.blend_effect = true; //  defaults to false
 image.color_effects.red = 0; // defaults to RGBA(255,255,255,255)
 image.color_effects.alpha = 128;
 
-rosalila()->graphics->draw2DImage(image,x,y);
+rosalila()->graphics->drawImage(image,x,y);
 ```
 
 #### Draw a rectangle

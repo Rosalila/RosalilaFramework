@@ -12,7 +12,7 @@ int main()
 
   while(true)
   {
-    rosalila()->graphics->draw2DImage(image, x, y);
+    rosalila()->graphics->drawImage(image, x, y);
     
     if(rosalila()->receiver->isDown(player_1, "left"))
       x--;
