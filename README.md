@@ -23,7 +23,9 @@ Rosalila Engine
 
 ## Usage
 
-### Draw an image
+### The basics
+
+#### Draw an image
 
 ```c++
 Image* image = rosalila()->graphics->getTexture("image.png");
@@ -41,131 +43,111 @@ rosalila()->graphics->draw2DImage
     color_effects);
 ```
 
-### Draw a rectangle
+#### Draw a rectangle
 
 ```c++
-rosalila()->graphics->drawRectangle(x, y,
-                                    width, height,
-                                    rotation, red, green, blue, alpha);
+rosalila()->graphics->drawRectangle(10, 20, // position
+                                    200, 150, // size
+                                    1.0, // rotation
+                                    255, 0, 0, 255); // RGBA color
 ```
 
-### Play music and sounds
+#### Play music and sounds
 
 ```c++
-rosalila()->sound->playMusic("../assets/music.ogg", music_loops);
-rosalila()->sound->addSound("my_sound", "../assets/sound.ogg");
+rosalila()->sound->playMusic("music.ogg", 0 /*music loops, 0 means infinite*/);
+rosalila()->sound->addSound("my_sound", "sound.ogg");
 
 [...]
 
 rosalila()->sound->playSound("my_sound", sound_channel, sound_loops, panning);
 ```
 
-### Check if an input is down or was pressed
+#### Check if an input is down or was pressed
 
 ```c++
-if(rosalila()->receiver->isDown(player_1, "up"))
+if(rosalila()->receiver->isDown(0 /*0 is player 1, 1 is player 2 etc.*/, "up"))
 {
-    // Up was pressed!
+    // Player 1's "Up" button is down!
 }
 
-if(rosalila()->receiver->isPressed(player_1, "a"))
+if(rosalila()->receiver->isPressed(1 /*0 is player 1, 1 is player 2 etc.*/, "a"))
 {
-    // a was pressed!
+    // Player 2 pressed the "a" button!
 }
 ```
 
-### Unlock an achievement
+### Advanced stuff
+
+#### Unlock an achievement (Compatible with Steamworks)
 
 ```c++
 rosalila()->api_integrator->unlockAchievement("My achievement");
 ```
 
-### Get a stat
+#### Get a stat
 
 ```c++
 int counter = rosalila()->api_integrator->getStat("My counter");
 ```
 
-### Set a stat
+#### Set a stat
 
 ```c++
 rosalila()->api_integrator->setStat("My counter",counter + 1);
 ```
 
-### Submit a leaderboard entry
+#### Submit a leaderboard entry
 
 ```c++
 TODO
 ```
 
-### Retrieve leaderboard data
+#### Retrieve leaderboard data
 
 ```c++
 TODO
 ```
 
-### Check if player's API is running
+#### Check if player's API is running
 
 ```c++
 TODO
 ```
 
-### Trigger a notification
+#### Trigger a notification
 
 ```c++
 TODO
 ```
 
-### Get a random number
-
-```c++
-rosalila()->utility->getRandomNumber()
-```
-
-### Greyscale effect??
-
-```c++
-rosalila()->graphics->grayscale_effect.set(1, 0.003);
-```
-
-### Fade music???
-
-```c++
-rosalila()->sound->fadeMusicVolume(128, 2);
-```
-
-### Set transparency effect???
-
-```c++
-rosalila()->graphics->transparency_effect.set(1, 0.03);
-```
-
-### Get screen size???
+#### Get screen size???
 
 ```c++
 int width = rosalila()->graphics->screen_width;
 int height = rosalila()->graphics->screen_height;
 ```
 
-### Get a non seeded random number
+#### Get a random number
 
 ```c++
-int rosalila()->utility->getNonSeededRandomNumber();
+int random_number = rosalila()->utility->getRandomNumber();
+int non_seeded_random_number = rosalila()->utility->getNonSeededRandomNumber();
 ```
 
-### Set a random seed???
+#### Seed randoms
 
 ```c++
-rosalila()->utility->setRandomSeed(time(NULL));
+rosalila()->utility->setRandomSeed(543245 /*seed*/);
 ```
 
-### Write a log line
+#### Write a log line
 
 ```c++
 rosalila()->utility->writeLogLine("My log text.");
 ```
 
-### Read json
+#### Read json
 
 ```c++
 Node* example_root_node = rosalila()->parser->getNodes("example.json");
@@ -177,6 +159,29 @@ for(auto array_element : example_root_node->getNodesByName("Array"))
 {
   cout << array_element->attributes["value"] << endl;
 }
+```
+
+### Fancy details
+
+#### Fade music???
+
+```c++
+rosalila()->sound->fadeMusicVolume(128 /*Target volume, int, 0 min 128 max*/,
+                                   2 /*Delta change speed, int*/);
+```
+
+#### Greyscale effect??
+
+```c++
+rosalila()->graphics->grayscale_effect.set(1 /*Target greyscale percentage, double*/,
+                                           0.003 /*Delta change speed, double*/);
+```
+
+#### Set transparency effect???
+
+```c++
+rosalila()->graphics->transparency_effect.set(1 /*Target alpha percentage, double*/,
+                                              0.03 /*Delta change speed, double*/);
 ```
 
 ## Getting started
