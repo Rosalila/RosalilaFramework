@@ -3,7 +3,7 @@
 int main()
 {
   rosalila()->init("../assets/config.json");
-  Image* image = rosalila()->graphics->getTexture("../assets/image.png");
+  Image* image = rosalila()->graphics->getImage("../assets/image.png");
 
   bool music_is_playing = true;
   int player_1 = 0;

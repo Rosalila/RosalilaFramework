@@ -3,7 +3,7 @@
 int main()
 {
   rosalila()->init("../assets/config.json");
-  Image* image = rosalila()->graphics->getTexture("../assets/image.png");
+  Image* image = rosalila()->graphics->getImage("../assets/image.png");
 
   Node* example_root_node = rosalila()->parser->getNodes("../assets/example.json");
   

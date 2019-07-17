@@ -157,7 +157,7 @@ void RosalilaGraphics::init()
     }
 
     Node* notifications_node = root_node->getNodeByName("Notifications");
-    notification_background = getTexture(notifications_node->attributes["background_path"]);
+    notification_background = getImage(notifications_node->attributes["background_path"]);
     notification_background_x = screen_width/2 - notification_background->getWidth()/2;
     notification_background_y = screen_height - notification_background->getHeight();
 
@@ -171,7 +171,7 @@ RosalilaGraphics::~RosalilaGraphics()
 }
 
 
-Image* RosalilaGraphics::getTexture(std::string filename)
+Image* RosalilaGraphics::getImage(std::string filename)
 {
     SDL_Surface *surface;
     GLenum texture_format;
@@ -244,27 +244,19 @@ Image* RosalilaGraphics::getTexture(std::string filename)
     return image;
 }
 
-void RosalilaGraphics::draw2DImage	(
-             Image* texture,
-             int size_x,int size_y,
-             int position_x,int position_y,
-             float scale,
-             float rotation,
-             bool flipHorizontally,
-             bool blend_effect,
-             Color color_effects)
+void RosalilaGraphics::draw2DImage (Image* texture, int x, int y)
 {
-    double grey_scale = (color_effects.red+color_effects.green+color_effects.blue)/3;
+    double grey_scale = (texture->color_filter.red+texture->color_filter.green+texture->color_filter.blue)/3;
 
-    double red_difference = color_effects.red-grey_scale;
-    double green_difference = color_effects.green-grey_scale;
-    double blue_difference = color_effects.blue-grey_scale;
+    double red_difference = texture->color_filter.red-grey_scale;
+    double green_difference = texture->color_filter.green-grey_scale;
+    double blue_difference = texture->color_filter.blue-grey_scale;
 
-    color_effects.red = grey_scale + red_difference * grayscale_effect.current_percentage;
-    color_effects.green = grey_scale + green_difference * grayscale_effect.current_percentage;
-    color_effects.blue = grey_scale + blue_difference * grayscale_effect.current_percentage;
+    texture->color_filter.red = grey_scale + red_difference * grayscale_effect.current_percentage;
+    texture->color_filter.green = grey_scale + green_difference * grayscale_effect.current_percentage;
+    texture->color_filter.blue = grey_scale + blue_difference * grayscale_effect.current_percentage;
 
-    color_effects.alpha = (double)color_effects.alpha * transparency_effect.current_percentage;
+    texture->color_filter.alpha = (double)texture->color_filter.alpha * transparency_effect.current_percentage;
 
     glEnable( GL_TEXTURE_2D );
 
@@ -278,16 +270,16 @@ void RosalilaGraphics::draw2DImage	(
     glDisable (GL_DEPTH_TEST);
 
     //Screen shake
-    position_x += screen_shake_effect.current_x;
-    position_y += screen_shake_effect.current_y;
+    x += screen_shake_effect.current_x;
+    y += screen_shake_effect.current_y;
 
-    GLfloat x1=0.f+position_x;
-    GLfloat y1=0.f+position_y;
-    GLfloat x2=0.f+position_x+(float)size_x*scale;
-    GLfloat y2=0.f+position_y+(float)size_y*scale;
+    GLfloat x1 = 0.f + x;
+    GLfloat y1 = 0.f + y;
+    GLfloat x2 = 0.f + x + (float)texture->width * texture->scale;
+    GLfloat y2 = 0.f + y + (float)texture->height * texture->scale;
 
     //Flip
-    if(flipHorizontally)
+    if(texture->horizontal_flip)
     {
         GLfloat temp=x1;
         x1=x2;
@@ -298,12 +290,12 @@ void RosalilaGraphics::draw2DImage	(
     //Save the current matrix.
     glPushMatrix();
     //Change the current matrix.
-    float translate_x=(x2-x1)/2+position_x;
-    float translate_y=(y2-y1)/2+position_y;
+    float translate_x = (x2-x1) / 2 + x;
+    float translate_y = (y2-y1) /2 + y;
     glTranslatef(translate_x,translate_y, 1.0);
-    glRotatef(-rotation, 0, 0, 1.0);
+    glRotatef(-texture->rotation, 0, 0, 1.0);
 
-    glColor4ub(color_effects.red, color_effects.green, color_effects.blue,color_effects.alpha);
+    glColor4ub(texture->color_filter.red, texture->color_filter.green, texture->color_filter.blue,texture->color_filter.alpha);
     glEnable(GL_BLEND);
     //glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
     //glBlendFunc(GL_SRC_ALPHA, GL_ONE); // additive
@@ -315,7 +307,7 @@ void RosalilaGraphics::draw2DImage	(
     //glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE);
     //glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
     //glBlendFuncSeparate(GL_SRC_COLOR, GL_ONE, GL_ZERO, GL_ONE_MINUS_SRC_COLOR);
-    if(blend_effect)
+    if(texture->blend_effect)
         glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_COLOR, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
     else
         glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
@@ -826,26 +818,13 @@ void RosalilaGraphics::updateScreen()
     {
         Notification* current_notification = *notification_handler.notifications.begin();
 
-        rosalila()->graphics->draw2DImage
-        (   notification_background,
-            notification_background->getWidth(),notification_background->getHeight(),
-            current_notification->x,current_notification->y,
-            1.0,
-            0.0,
-            false,
-            false,
-            Color(255,255,255,255));
+        rosalila()->graphics->draw2DImage(notification_background, 
+                                          current_notification->x,
+                                          current_notification->y);
 
-
-        rosalila()->graphics->draw2DImage
-        (   current_notification->image,
-            current_notification->image->getWidth(),current_notification->image->getHeight(),
-            current_notification->x,current_notification->y,
-            1.0,
-            0.0,
-            false,
-            false,
-            Color(255,255,255,255));
+        rosalila()->graphics->draw2DImage(current_notification->image, 
+                                          current_notification->x,
+                                          current_notification->y);
     }
 
     SDL_GL_SwapWindow(window);

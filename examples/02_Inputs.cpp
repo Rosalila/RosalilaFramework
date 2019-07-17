@@ -4,23 +4,15 @@ int main()
 {
   rosalila()->init("../assets/config.json");
 
-  Image* image = rosalila()->graphics->getTexture("../assets/image.png");
+  Image* image = rosalila()->graphics->getImage("../assets/image.png");
 
   int x = 0;
   int y = 0;
   int player_1 = 0;
-  bool mirror_image = false;
+
   while(true)
   {
-    rosalila()->graphics->draw2DImage
-    (   image,
-        image->getWidth(),image->getHeight(),
-        x,y,
-        1.0,
-        0.0,
-        mirror_image,
-        false,
-        Color(255, 255, 255,255));
+    rosalila()->graphics->draw2DImage(image, x, y);
     
     if(rosalila()->receiver->isDown(player_1, "left"))
       x--;
@@ -32,7 +24,7 @@ int main()
       y++;
     
     if(rosalila()->receiver->isPressed(player_1, "a"))
-      mirror_image = !mirror_image;
+      image->horizontal_flip = !image->horizontal_flip;
 
     rosalila()->update();
   }

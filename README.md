@@ -13,7 +13,7 @@ Rosalila Engine
 | Feature | Supported |
 |----------|------------ |
 | Windows / Linux / MacOS | ✔ |
-| Flexible OpenGL wrapper | ✔ |
+| Flexible 2d graphics | ✔ |
 | Siplified sound and music API | ✔ |
 | PC, XInput, PS4 and Steam input supported | ✔ |
 | Built in JSON parsing | ✔ |
@@ -28,19 +28,18 @@ Rosalila Engine
 #### Draw an image
 
 ```c++
-Image* image = rosalila()->graphics->getTexture("image.png");
+Image* image = rosalila()->graphics->getImage("image.png");
 
 [...]
 
-rosalila()->graphics->draw2DImage
-(   image,
-    image->getWidth(),image->getHeight(),
-    x,y,
-    scale,
-    rotation,
-    flip_horizontally,
-    blend_effect,
-    color_effects);
+image.scale = 0.5; // defaults to 1.0
+image.rotation = 45.0; // defaults to 0.0
+image.flip_horizontally = true; // defaults to false
+image.blend_effect = true; //  defaults to false
+image.color_effects.red = 0; // defaults to RGBA(255,255,255,255)
+image.color_effects.alpha = 128;
+
+rosalila()->graphics->draw2DImage(image,x,y);
 ```
 
 #### Draw a rectangle
@@ -49,7 +48,7 @@ rosalila()->graphics->draw2DImage
 rosalila()->graphics->drawRectangle(10, 20, // position
                                     200, 150, // size
                                     1.0, // rotation
-                                    255, 0, 0, 255); // RGBA color
+                                    255, 0, 0, 255); // RGBA
 ```
 
 #### Play music and sounds

@@ -4,6 +4,14 @@ Image::Image()
 {
     width=-1;
     height=-1;
+    scale = 0.0;
+    rotation = 0.0;
+    horizontal_flip = false;
+    blend_effect = false;
+    color_filter.red = 255;
+    color_filter.green = 255;
+    color_filter.blue = 255;
+    color_filter.alpha = 255;
 }
 
 int Image::getWidth()

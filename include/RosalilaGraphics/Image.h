@@ -51,12 +51,20 @@
 #include <SDL2/SDL_opengl.h>
 #include <stdio.h>
 
+#include "Color.h"
+
 class ROSALILA_DLL Image
 {
 public:
     GLuint texture;
+
     int width;
     int height;
+    float scale;
+    float rotation;
+    bool horizontal_flip;
+    bool blend_effect;
+    Color color_filter;
 
     Image();
     ~Image();
