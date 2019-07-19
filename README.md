@@ -5,14 +5,14 @@ Rosalila Engine
 [![Travis](https://img.shields.io/travis/Rosalila/RosalilaEngine.svg?logo=travis)](https://travis-ci.org/Rosalila/RosalilaEngine)
 
 1. **Simple**: You only need to understand a few functions to create your game.
-2. **Modern**: Use the prebuilt third party API’s support to catch up with the thrends. Read more
-3. **Libre**: Free as in freedom, available even for commercial projects. Read more
+2. **Modern**: Use the prebuilt third party API’s support to catch up with the thrends.
+3. **Libre**: Free as in freedom, available even for commercial projects.
 
 | Feature | Supported |
 |----------|------------ |
 | Windows / Linux / MacOS | ✔ |
 | Flexible 2d graphics | ✔ |
-| Siplified sound and music API | ✔ |
+| Simplified sound and music api | ✔ |
 | PC, XInput, PS4 and Steam input supported | ✔ |
 | Built in JSON parsing | ✔ |
 | Steamworks | ✔ |
@@ -27,16 +27,16 @@ Rosalila Engine
 
 ```c++
 Image* image = rosalila()->graphics->getImage("image.png");
-rosalila()->graphics->drawImage(image,x,y);
+rosalila()->graphics->drawImage(image, 100, 200 /*x, y position*/);
 ```
 
 #### Draw a rectangle
 
 ```c++
-rosalila()->graphics->drawRectangle(10, 20, // position
-                                    200, 150, // size
-                                    1.0, // rotation
-                                    255, 0, 0, 255); // RGBA
+rosalila()->graphics->drawRectangle(10, 20, /*position*/
+                                    200, 150, /*size*/
+                                    0.0, /*rotation*/
+                                    255, 0, 0, 255); /*RGBA*/
 ```
 
 #### Play music and sounds
@@ -48,6 +48,10 @@ rosalila()->sound->addSound("my_sound", "sound.ogg");
 [...]
 
 rosalila()->sound->playSound("my_sound", -1 /*channel, use -1 to autopick*/, 1 /*loops, 0 means infinite*/, -1 /*stereo panning, 0 means mono, range from 1 to screen width*/);
+
+[...]
+
+rosalila()->sound->stopMusic();
 ```
 
 #### Check if an input is down or was pressed
@@ -66,31 +70,37 @@ if(rosalila()->receiver->isPressed(1 /*0 is player 1, 1 is player 2 etc.*/, "a")
 
 ### Advanced stuff
 
-#### Unlock an achievement (Compatible with Steamworks)
+#### Unlock an achievement (Compatible with Steam)
+
+![Alt text](img/achievements.png?raw=true)
 
 ```c++
 rosalila()->api_integrator->unlockAchievement("My achievement");
 ```
 
-#### Get a stat
+#### Get a stat (Compatible with Steam)
+
+![Alt text](img/stats.png?raw=true)
 
 ```c++
 int counter = rosalila()->api_integrator->getStat("My counter");
 ```
 
-#### Set a stat
+#### Set a stat (Compatible with Steam)
 
 ```c++
 rosalila()->api_integrator->setStat("My counter",counter + 1);
 ```
 
-#### Submit a leaderboard entry
+#### Submit a leaderboard entry (Compatible with Steam)
+
+![Alt text](img/leaderboards.png?raw=true)
 
 ```c++
-TODO
+rosalila()->api_integrator->setScore("Top scores", 143 /*score*/);
 ```
 
-#### Retrieve leaderboard data
+#### Get leaderboard (Compatible with Steam)
 
 ```c++
 rosalila()->api_integrator->findLeaderboard("Top scores"); // Retreive the leaderboard externally
@@ -127,7 +137,7 @@ if (rosalila()->api_integrator->getState() != "error")
 }
 ```
 
-#### Check if player's API is running
+#### Check if external API is running (Compatible with Steam)
 
 ```c++
 if (rosalila()->api_integrator->isUsingApi())
@@ -138,15 +148,21 @@ if (rosalila()->api_integrator->isUsingApi())
 
 #### Trigger a notification
 
+![Alt text](img/notifications.gif?raw=true)
+
 ```c++
 rosalila()->graphics->notification_handler.notifications.push_back(
   new Notification(image,
                     0 /*x*/, 0 /*y*/,
-                    100 /*target y, used for moving animation*/
+                    100 /*target y, used for moving animation*/,
                     300 /*duration, in frames*/));
+
+[...]
+
+rosalila()->graphics->notification_handler.interruptCurrentNotification(); // Interrupt / Hide it
 ```
 
-#### Get screen size?
+#### Get screen size
 
 ```c++
 int width = rosalila()->graphics->screen_width;
@@ -191,14 +207,16 @@ for(auto array_element : example_root_node->getNodesByName("Array"))
 
 #### Add gfx to your images
 
+![Alt text](img/gfx.gif?raw=true)
+
 ```c++
 image.scale = 0.5; // defaults to 1.0
 image.width = image.original_width * 2;
 image.rotation = 45.0; // defaults to 0.0
 image.flip_horizontally = true; // defaults to false
 image.blend_effect = true; //  defaults to false
-image.color_effects.red = 0; // defaults to RGBA(255,255,255,255)
-image.color_effects.alpha = 128;
+image.color_filter.red = 0; // defaults to RGBA(255,255,255,255)
+image.color_filter.alpha = 128;
 ```
 
 #### Fade music
@@ -208,14 +226,7 @@ rosalila()->sound->fadeMusicVolume(128 /*Target volume, 0 min 128 max*/,
                                    2 /*Delta change speed*/);
 ```
 
-#### Greyscale effect
-
-```c++
-rosalila()->graphics->grayscale_effect.set(1.0 /*Target greyscale percentage*/,
-                                           0.003 /*Delta change speed*/);
-```
-
-#### Set transparency effect?
+#### Set transparency effect
 
 ```c++
 rosalila()->graphics->transparency_effect.set(1.0 /*Target alpha percentage*/,
