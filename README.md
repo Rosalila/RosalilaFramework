@@ -8,8 +8,6 @@ Rosalila Engine
 2. **Modern**: Use the prebuilt third party API’s support to catch up with the thrends. Read more
 3. **Libre**: Free as in freedom, available even for commercial projects. Read more
 
-## Features
-
 | Feature | Supported |
 |----------|------------ |
 | Windows / Linux / MacOS | ✔ |
@@ -29,17 +27,6 @@ Rosalila Engine
 
 ```c++
 Image* image = rosalila()->graphics->getImage("image.png");
-
-[...]
-
-image.scale = 0.5; // defaults to 1.0
-image.width = image.original_width * 2;
-image.rotation = 45.0; // defaults to 0.0
-image.flip_horizontally = true; // defaults to false
-image.blend_effect = true; //  defaults to false
-image.color_effects.red = 0; // defaults to RGBA(255,255,255,255)
-image.color_effects.alpha = 128;
-
 rosalila()->graphics->drawImage(image,x,y);
 ```
 
@@ -60,7 +47,7 @@ rosalila()->sound->addSound("my_sound", "sound.ogg");
 
 [...]
 
-rosalila()->sound->playSound("my_sound", sound_channel, sound_loops, panning);
+rosalila()->sound->playSound("my_sound", -1 /*channel, use -1 to autopick*/, 1 /*loops, 0 means infinite*/, -1 /*stereo panning, 0 means mono, range from 1 to screen width*/);
 ```
 
 #### Check if an input is down or was pressed
@@ -68,12 +55,12 @@ rosalila()->sound->playSound("my_sound", sound_channel, sound_loops, panning);
 ```c++
 if(rosalila()->receiver->isDown(0 /*0 is player 1, 1 is player 2 etc.*/, "up"))
 {
-    // Player 1's "Up" button is down!
+    // Player 1's "Up" button is down
 }
 
 if(rosalila()->receiver->isPressed(1 /*0 is player 1, 1 is player 2 etc.*/, "a"))
 {
-    // Player 2 pressed the "a" button!
+    // Player 2 pressed the "a" button
 }
 ```
 
@@ -106,22 +93,60 @@ TODO
 #### Retrieve leaderboard data
 
 ```c++
-TODO
+rosalila()->api_integrator->findLeaderboard("Top scores"); // Retreive the leaderboard externally
+
+while (rosalila()->api_integrator->getState() == "loading") // Wait for it...
+{
+  rosalila()->update();
+}
+
+if (rosalila()->api_integrator->getState() != "error")
+{
+  Leaderboard *leaderboard = rosalila()->api_integrator->getLeaderboard("Top scores");
+
+  for (auto entry : current_leaderboard->top_entries) // Inspect entries
+  {
+    int rank = entry->rank;
+    std::string name = entry->name;
+    int score = entry->score;
+    [...]
+  }
+
+  for (auto entry : current_leaderboard->near_entries) // Same thing for entries near the player
+  {
+    [...]
+  }
+
+  for (auto entry : current_leaderboard->friends_entries) // And for his friend's entries
+  {
+    [...]
+  }
+} else
+{
+  // Handle errors
+}
 ```
 
 #### Check if player's API is running
 
 ```c++
-TODO
+if (rosalila()->api_integrator->isUsingApi())
+{
+  // External api is running
+}
 ```
 
 #### Trigger a notification
 
 ```c++
-TODO
+rosalila()->graphics->notification_handler.notifications.push_back(
+  new Notification(image,
+                    0 /*x*/, 0 /*y*/,
+                    100 /*target y, used for moving animation*/
+                    300 /*duration, in frames*/));
 ```
 
-#### Get screen size???
+#### Get screen size?
 
 ```c++
 int width = rosalila()->graphics->screen_width;
@@ -163,25 +188,38 @@ for(auto array_element : example_root_node->getNodesByName("Array"))
 
 ### Fancy details
 
-#### Fade music???
+
+#### Add gfx to your images
 
 ```c++
-rosalila()->sound->fadeMusicVolume(128 /*Target volume, int, 0 min 128 max*/,
-                                   2 /*Delta change speed, int*/);
+image.scale = 0.5; // defaults to 1.0
+image.width = image.original_width * 2;
+image.rotation = 45.0; // defaults to 0.0
+image.flip_horizontally = true; // defaults to false
+image.blend_effect = true; //  defaults to false
+image.color_effects.red = 0; // defaults to RGBA(255,255,255,255)
+image.color_effects.alpha = 128;
 ```
 
-#### Greyscale effect??
+#### Fade music
 
 ```c++
-rosalila()->graphics->grayscale_effect.set(1 /*Target greyscale percentage, double*/,
-                                           0.003 /*Delta change speed, double*/);
+rosalila()->sound->fadeMusicVolume(128 /*Target volume, 0 min 128 max*/,
+                                   2 /*Delta change speed*/);
 ```
 
-#### Set transparency effect???
+#### Greyscale effect
 
 ```c++
-rosalila()->graphics->transparency_effect.set(1 /*Target alpha percentage, double*/,
-                                              0.03 /*Delta change speed, double*/);
+rosalila()->graphics->grayscale_effect.set(1.0 /*Target greyscale percentage*/,
+                                           0.003 /*Delta change speed*/);
+```
+
+#### Set transparency effect?
+
+```c++
+rosalila()->graphics->transparency_effect.set(1.0 /*Target alpha percentage*/,
+                                              0.03 /*Delta change speed*/);
 ```
 
 ## Getting started
@@ -323,4 +361,5 @@ sudo apt-get install g++ cmake libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev l
 mkdir build
 cd build
 cmake ..
+make
 ```
