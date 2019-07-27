@@ -84,7 +84,7 @@ void RosalilaGraphics::init()
 
     SDL_GL_SetAttribute( SDL_GL_DOUBLEBUFFER, 1 ); // *new*
 
-    window = SDL_CreateWindow( "Rosalila Engine", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+    window = SDL_CreateWindow( "Rosalila Framework", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
                                screen_resized_width, screen_resized_height,
                                SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN );
     if(!window)
