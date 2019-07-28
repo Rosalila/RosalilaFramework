@@ -257,7 +257,7 @@ int main()
 }
 ```
 
-Also, setup a `font.ttf`, `notification_background.png` and a `config.json` file.
+Also setup an `config.json` file. Notice the `Font` and `Notifications` tags are optional.
 
 config.json:
 
@@ -277,17 +277,17 @@ config.json:
   {
     "enabled": "no"
   },
-  "Font": 
+  "Font OPTIONAL": 
   {
-    "path": "font.ttf",
+    "path": "../assets/font.ttf",
     "red": "255",
     "green": "255",
     "blue": "255",
     "size": "30"
   },
-  "Notifications": 
+  "Notifications OPTIONAL": 
   {
-    "background_path": "notification_background.png"
+    "background_path": "../assets/notification_background.png"
   },
   "Inputs": 
   {
@@ -361,6 +361,14 @@ config.json:
   }
 }
 ```
+
+## Sample project
+
+The [Rosalila Framework Example](https://github.com/Rosalila/FrameworkExample) is a very simple project using the Rosalila Framework. It helps you getting started.
+
+## Examples
+
+Take a look at the [Code Examples](https://github.com/Rosalila/Framework/tree/master/examples) for quick code recipes.
 
 ## Build
 

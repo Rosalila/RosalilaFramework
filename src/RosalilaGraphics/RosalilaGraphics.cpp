@@ -26,28 +26,6 @@ void RosalilaGraphics::init()
     Node* fullscreen_node = root_node->getNodeByName("Fullscreen");
     fullscreen=fullscreen_node->attributes["enabled"]=="yes";
 
-    Node* font_node = root_node->getNodeByName("Font");
-
-    int font_size=10;
-    if(font_node->hasAttribute("size"))
-    {
-        font_size=atoi(font_node->attributes["size"].c_str());
-    }
-    int font_red=0;
-    if(font_node->hasAttribute("red"))
-    {
-        font_red=atoi(font_node->attributes["red"].c_str());
-    }
-    int font_green=0;
-    if(font_node->hasAttribute("green"))
-    {
-        font_green=atoi(font_node->attributes["green"].c_str());
-    }
-    int font_blue=0;
-    if(font_node->hasAttribute("blue"))
-    {
-        font_blue=atoi(font_node->attributes["blue"].c_str());
-    }
     //Internal initializations
     joystick_1 = NULL;
     joystick_2 = NULL;
@@ -68,15 +46,42 @@ void RosalilaGraphics::init()
         return;
     }
 
+    int font_size=10;
+    int font_red=0;
+    int font_green=0;
+    int font_blue=0;
+    Node* font_node = root_node->getNodeByName("Font");
+    
+    if(root_node->hasAttribute("Font"))
+    {
+
+        if(font_node->hasAttribute("size"))
+        {
+            font_size=atoi(font_node->attributes["size"].c_str());
+        }
+        if(font_node->hasAttribute("red"))
+        {
+            font_red=atoi(font_node->attributes["red"].c_str());
+        }
+        if(font_node->hasAttribute("green"))
+        {
+            font_green=atoi(font_node->attributes["green"].c_str());
+        }
+        if(font_node->hasAttribute("blue"))
+        {
+            font_blue=atoi(font_node->attributes["blue"].c_str());
+        }
+        if(font_node->hasAttribute("path"))
+        {
+            font = TTF_OpenFont( font_node->attributes["path"].c_str(), font_size );
+        }
+    }
+
     font = NULL;
     textColor.r = font_red;
     textColor.g = font_green;
     textColor.b = font_blue;
-
-    std::string font_path = font_node->attributes["path"];
-
-    font = TTF_OpenFont( font_path.c_str(), font_size );
-
+    
     if(font==NULL)
     {
         //rosalila()->utility->writeLogLine("Could not init font. Place it on /misc/font.ttf .");
@@ -156,10 +161,20 @@ void RosalilaGraphics::init()
          exit(12);
     }
 
-    Node* notifications_node = root_node->getNodeByName("Notifications");
-    notification_background = getImage(notifications_node->attributes["background_path"]);
-    notification_background_x = screen_width/2 - notification_background->getWidth()/2;
-    notification_background_y = screen_height - notification_background->getHeight();
+    notification_background = NULL;
+    notification_background_x = 0;
+    notification_background_y = 0;
+
+    if(root_node->hasAttribute("Notifications"))
+    {
+        Node* notifications_node = root_node->getNodeByName("Notifications");
+        if(notifications_node->hasAttribute("background_path"))
+        {
+            notification_background = getImage(notifications_node->attributes["background_path"]);
+            notification_background_x = screen_width/2 - notification_background->getWidth()/2;
+            notification_background_y = screen_height - notification_background->getHeight();
+        }
+    }
 
     glewInit();
 }
@@ -818,6 +833,7 @@ void RosalilaGraphics::updateScreen()
     {
         Notification* current_notification = *notification_handler.notifications.begin();
 
+        if(notification_background)
         rosalila()->graphics->drawImage(notification_background, 
                                           current_notification->x,
                                           current_notification->y);
