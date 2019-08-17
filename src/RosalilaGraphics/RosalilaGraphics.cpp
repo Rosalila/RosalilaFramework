@@ -188,6 +188,11 @@ RosalilaGraphics::~RosalilaGraphics()
 
 Image* RosalilaGraphics::getImage(std::string filename)
 {
+    if(!rosalila()->utility->fileExists(filename))
+    {
+        rosalila()->utility->writeLogLine("Warning: "+ filename+ " does not exist. Image could not be loaded.");        
+        return NULL;
+    }
     SDL_Surface *surface;
     GLenum texture_format;
     GLint  nOfColors;

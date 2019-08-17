@@ -568,3 +568,13 @@ vector<string> RosalilaUtility::getFileNames(string path)
   }
   return directories;
 }
+
+int RosalilaUtility::fileExists(std::string filename)
+{
+  FILE* ftestexist;
+  ftestexist = fopen(filename.c_str(), "rb");
+  if (ftestexist == NULL)
+    return 0;
+  fclose(ftestexist);
+  return 1;
+}

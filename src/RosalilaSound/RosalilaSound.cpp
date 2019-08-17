@@ -20,6 +20,11 @@ void RosalilaSound::drop()
 }
 void RosalilaSound::addSound(std::string variable,std::string value)
 {
+    if(!rosalila()->utility->fileExists(value.c_str()))
+    {
+        rosalila()->utility->writeLogLine("Warning: " + value + " does not exist. Could not load sound.");
+        return;
+    }
     if(sounds.find(variable)==sounds.end())
     {
         sounds[variable]=Mix_LoadWAV(value.c_str());
