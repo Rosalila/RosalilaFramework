@@ -3,6 +3,7 @@ Rosalila Framework
 
 [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/Rosalila/RosalilaFramework/blob/master/LICENSE)
 [![Travis](https://img.shields.io/travis/Rosalila/RosalilaFramework.svg?logo=travis)](https://travis-ci.org/Rosalila/RosalilaFramework)
+[![Appveyor](https://img.shields.io/travis/modio/SDK.svg?logo=appveyor)](https://ci.appveyor.com/project/Turupawn/rosalilaframework)
 
 1. **Simple**: You only need to understand a few functions to create your game.
 2. **Modern**: Use the prebuilt third party API’s support to catch up with the thrends.
