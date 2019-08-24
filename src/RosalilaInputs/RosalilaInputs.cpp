@@ -29,10 +29,10 @@ void RosalilaReceiver::init()
   button_up_flag = true;
 
   Node *root_node = rosalila()->parser->getNodes(CONFIG_FILE_PATH);
-  Node *inputs_node = root_node->getNodeByName("Inputs");
-  for (auto player : inputs_node->getNodesByName("Player"))
+  Node *inputs_node = root_node->getNodeByName("inputs");
+  for (auto player : inputs_node->getNodesByName("player"))
   {
-    for (auto type : player->getNodesByName("Type"))
+    for (auto type : player->getNodesByName("type"))
     {
       vector<Node *> button_nodes = player->getNodesByName("button");
       for(auto button : type->getNodesByName("button"))

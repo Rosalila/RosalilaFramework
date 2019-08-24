@@ -15,15 +15,15 @@ void RosalilaGraphics::init()
     //XML Initializations
     Node* root_node = rosalila()->parser->getNodes(CONFIG_FILE_PATH);
 
-    Node* resolution_node = root_node->getNodeByName("Resolution");
+    Node* resolution_node = root_node->getNodeByName("resolution");
     screen_width=atoi(resolution_node->attributes["x"].c_str());
     screen_height=atoi(resolution_node->attributes["y"].c_str());
 
-    Node* screen_size_node = root_node->getNodeByName("ScreenSize");
+    Node* screen_size_node = root_node->getNodeByName("screen_size");
     int screen_resized_width=atoi(screen_size_node->attributes["x"].c_str());
     int screen_resized_height=atoi(screen_size_node->attributes["y"].c_str());
 
-    Node* fullscreen_node = root_node->getNodeByName("Fullscreen");
+    Node* fullscreen_node = root_node->getNodeByName("fullscreen");
     fullscreen=fullscreen_node->attributes["enabled"]=="yes";
 
     //Internal initializations
@@ -50,9 +50,9 @@ void RosalilaGraphics::init()
     int font_red=0;
     int font_green=0;
     int font_blue=0;
-    Node* font_node = root_node->getNodeByName("Font");
+    Node* font_node = root_node->getNodeByName("font");
     
-    if(root_node->hasAttribute("Font"))
+    if(root_node->hasAttribute("font"))
     {
 
         if(font_node->hasAttribute("size"))
@@ -165,9 +165,9 @@ void RosalilaGraphics::init()
     notification_background_x = 0;
     notification_background_y = 0;
 
-    if(root_node->hasAttribute("Notifications"))
+    if(root_node->hasAttribute("notifications"))
     {
-        Node* notifications_node = root_node->getNodeByName("Notifications");
+        Node* notifications_node = root_node->getNodeByName("notifications");
         if(notifications_node->hasAttribute("background_path"))
         {
             notification_background = getImage(notifications_node->attributes["background_path"]);

@@ -1,19 +1,19 @@
 {
-  "Resolution": 
+  "resolution": 
   {
     "x": "1280",
     "y": "720"
   },
-  "ScreenSize": 
+  "screen_size": 
   {
     "x": "1280",
     "y": "720"
   },
-  "Fullscreen": 
+  "fullscreen": 
   {
     "enabled": "no"
   },
-  "Font": 
+  "font": 
   {
     "path": "../assets/font.ttf",
     "red": "255",
@@ -21,23 +21,23 @@
     "blue": "255",
     "size": "30"
   },
-  "Notifications": 
+  "notifications": 
   {
     "background_path": "../assets/notification_background.png"
   },
-  "Network": 
+  "network": 
   {
     "server_ip": "127.0.0.1",
     "server_ipx": "165.227.107.214",
     "server_port": "3069",
     "packet_size": "512"
   },
-  "Inputs": 
+  "inputs": 
   {
-    "Player": 
+    "player": 
     {
       "number": "0",
-      "Type": 
+      "type": 
       [
         {
           "name": "keyboard",
