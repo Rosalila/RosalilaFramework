@@ -262,81 +262,6 @@ Also setup an `config.json` file. Notice the `Font` and `Notifications` tags are
 
 #### config.json
 
-| Attribute | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `resolution`    | [resolution](#resolution)       | ✔ | Screen resolution, in pixels |
-| `screen_size`   | [screen_size](#screen_size)     | ✔ | Screen size, in pixels |
-| `fullscreen`    | [fullscreen](#fullscreen)       | ✔ | Fullscreen settings |
-| `inputs`        | [inputs](#inputs)               | ✔ | Input settings |
-| `font`          | [font](#font)                   |   | Fullscreen settings |
-| `notifications` | [notifications](#notifications) |   | Notification settings |
-
-#### resolution
-
-| Attribute | Type | Required | Description |
-|-----------|------|----------|-------------|
-| x | `integer` | ✔ | Resolution width |
-| y | `integer` | ✔ | Resolution height |
-
-#### screen_size
-
-| Attribute | Type | Required | Description |
-|-----------|------|----------|-------------|
-| x | `integer` | ✔ | Screen width |
-| y | `integer` | ✔ | Screen height |
-
-#### fullscreen
-
-| Attribute | Type | Required | Description |
-|-----------|------|----------|-------------|
-| enabled | `yes/no` | ✔ | Defines whether the game will go fullscreen or not |
-
-#### font
-
-| Attribute | Type | Required | Description |
-|-----------|------|----------|-------------|
-| path  | `file path` | ✔ | Path to the `.ttf` file |
-| red   | `integer`   | ✔ | Amount of red color from 0 to 255 |
-| green | `integer`   | ✔ | Amount of green color from 0 to 255 |
-| blue  | `integer`   | ✔ | Amount of blue color from 0 to 255 |
-| size  | `integer`   | ✔ | Font size |
-
-#### notifications
-
-| Attribute | Type | Required | Description |
-|-----------|------|----------|-------------|
-| background_path  | `file path` | ✔ | Path to the notification box `.png` background |
-
-#### inputs
-
-| Attribute | Type | Required | Description |
-|-----------|------|----------|-------------|
-| player[]  | [player](#player) | ✔ | Array of player's button configuration |
-
-
-#### player
-
-| Attribute | Type | Required | Description |
-|-----------|------|----------|-------------|
-| number | `integer`     | ✔ | Player number from 0 onwards... |
-| type[] | [type](#type) | ✔ | Array of types of inputs (gamepad or keyboard) |
-
-#### type
-
-| Attribute | Type | Required | Description |
-|-----------|------|----------|-------------|
-| name     | `keyboard/gamepad` | ✔ | Type of input configuration |
-| button[] | [button](#button)  | ✔ | Button key-name mapping |
-
-#### button
-
-| Attribute | Type | Required | Description |
-|-----------|------|----------|-------------|
-| name | `string` | ✔ | Name of the button to be used on your game |
-| key  | `string` | ✔ | Key associated to the name |
-
-config.json:
-
 ```json
 {
   "resolution": 
@@ -425,6 +350,79 @@ config.json:
   }
 }
 ```
+
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `resolution`    | [resolution](#resolution)       | ✔ | Screen resolution, in pixels |
+| `screen_size`   | [screen_size](#screen_size)     | ✔ | Screen size, in pixels |
+| `fullscreen`    | [fullscreen](#fullscreen)       | ✔ | Fullscreen settings |
+| `inputs`        | [inputs](#inputs)               | ✔ | Input settings |
+| `font`          | [font](#font)                   |   | Fullscreen settings |
+| `notifications` | [notifications](#notifications) |   | Notification settings |
+
+#### resolution
+
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| x | `integer` | ✔ | Resolution width |
+| y | `integer` | ✔ | Resolution height |
+
+#### screen_size
+
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| x | `integer` | ✔ | Screen width |
+| y | `integer` | ✔ | Screen height |
+
+#### fullscreen
+
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| enabled | `yes/no` | ✔ | Defines whether the game will go fullscreen or not |
+
+#### font
+
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| path  | `file path` | ✔ | Path to the `.ttf` file |
+| red   | `integer`   | ✔ | Amount of red color from 0 to 255 |
+| green | `integer`   | ✔ | Amount of green color from 0 to 255 |
+| blue  | `integer`   | ✔ | Amount of blue color from 0 to 255 |
+| size  | `integer`   | ✔ | Font size |
+
+#### notifications
+
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| background_path  | `file path` | ✔ | Path to the notification box `.png` background |
+
+#### inputs
+
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| player[]  | [player](#player) | ✔ | Array of player's button configuration |
+
+
+#### player
+
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| number | `integer`     | ✔ | Player number from 0 onwards... |
+| type[] | [type](#type) | ✔ | Array of types of inputs (gamepad or keyboard) |
+
+#### type
+
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| name     | `keyboard/gamepad` | ✔ | Type of input configuration |
+| button[] | [button](#button)  | ✔ | Button key-name mapping |
+
+#### button
+
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| name | `string` | ✔ | Name of the button to be used on your game |
+| key  | `string` | ✔ | Key associated to the name |
 
 ## Sample project
 
