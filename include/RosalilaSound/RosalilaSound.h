@@ -10,18 +10,19 @@
 using namespace std;
 
 //SDL
-#include "SDL2/SDL.h"
-
 #ifdef LINUX
+#include "SDL2/SDL.h"
 #include <SDL2/SDL_mixer.h>
 #endif
 
 #ifdef WINDOWS
+#include "SDL2/SDL.h"
 #include <SDL2/SDL_mixer.h>
 #endif
 
 #ifdef OSX
-#include <SDL2_mixer/SDL_mixer.h>
+#include "SDL.h"
+#include <SDL_mixer.h>
 #endif
 
 #include "../RosalilaUtility/RosalilaUtility.h"

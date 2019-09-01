@@ -8,7 +8,18 @@
 #include <stdarg.h>
 using namespace std;
 
+#ifdef LINUX
 #include "SDL2/SDL.h"
+#endif
+
+#ifdef WINDOWS
+#include "SDL2/SDL.h"
+#endif
+
+#ifdef OSX
+#include "SDL.h"
+#endif
+
 #include "../RosalilaUtility/RosalilaUtility.h"
 
 const int max_joystick_inputs = 50;
