@@ -8,9 +8,20 @@ include_directories(include)
 file(GLOB_RECURSE SOURCES "src/*.cpp")
 
 IF (APPLE)
-  find_package(ZLIB REQUIRED)
-  find_package(CURL REQUIRED)
-  target_link_libraries(rosalila ${CURL_LIBRARIES} ZLIB::ZLIB)
+  set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/CMAKE")
+  add_definitions(-DROSALILA_DYNAMICLIB)
+  add_library(rosalila SHARED ${SOURCES})
+  FIND_PACKAGE(SDL2 REQUIRED)
+  FIND_PACKAGE(SDL2_IMAGE REQUIRED)
+  FIND_PACKAGE(SDL2TTF REQUIRED)
+  FIND_PACKAGE(SDL2Mixer REQUIRED)
+
+  find_package(OpenGL REQUIRED)
+
+  include_directories(${SDL2_INCLUDE_DIR} ${SDL2TTF_INCLUDE_DIR} ${SDL2_IMAGE_INCLUDE_DIR} ${SDL2Mixer_INCLUDE_DIR})
+  
+  add_definitions(-DGLEW_STATIC)
+  target_link_libraries(rosalila ${OPENGL_LIBRARIES} ${SDL2_LIBRARY} ${SDL2TTF_LIBRARY} ${SDL2_IMAGE_LIBRARY} ${SDL2Mixer_LIBRARY})
 ENDIF()
 
 IF (UNIX AND NOT APPLE)

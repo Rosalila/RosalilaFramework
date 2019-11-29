@@ -436,7 +436,21 @@ Take a look at the [Code Examples](https://github.com/Rosalila/Framework/tree/ma
 
 ```
 # Dependencies
+
+## Linux
+
+```
 sudo apt-get install g++ cmake libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libsdl2-net-dev libglew-dev
+```
+
+## MacOS
+
+```
+brew install sdl2
+brew install sdl2_image
+brew install sdl2_mixer
+brew install sdl2_ttf
+```
 
 # Compile
 mkdir build

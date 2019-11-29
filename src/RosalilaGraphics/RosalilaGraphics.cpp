@@ -7,11 +7,13 @@ RosalilaGraphics::RosalilaGraphics()
 
 void RosalilaGraphics::init()
 {
+    rosalila()->utility->writeLogLine("Initializing graphics");
     screen_shake_effect.init();
     grayscale_effect.init();
     transparency_effect.init();
     point_explosion_effect =  new PointExplosionEffect();
 
+    rosalila()->utility->writeLogLine("Parsing config");
     //XML Initializations
     Node* root_node = rosalila()->parser->getNodes(CONFIG_FILE_PATH);
 
@@ -32,6 +34,7 @@ void RosalilaGraphics::init()
 
     screen_bpp = 32;
 
+    rosalila()->utility->writeLogLine("Initializing SDL");
     //Initialize all SDL subsystems
     if( SDL_Init(/*SDL_INIT_VIDEO |*/ SDL_INIT_JOYSTICK) < 0 )
     {
@@ -46,6 +49,7 @@ void RosalilaGraphics::init()
         return;
     }
 
+    rosalila()->utility->writeLogLine("Setting up font");
     int font_size=10;
     int font_red=0;
     int font_green=0;
@@ -87,8 +91,10 @@ void RosalilaGraphics::init()
         //rosalila()->utility->writeLogLine("Could not init font. Place it on /misc/font.ttf .");
     }
 
+    rosalila()->utility->writeLogLine("OpenGL stuff");
     SDL_GL_SetAttribute( SDL_GL_DOUBLEBUFFER, 1 ); // *new*
 
+    rosalila()->utility->writeLogLine("Windowed or fullscreen setup stuff");
     window = SDL_CreateWindow( "Rosalila Framework", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
                                screen_resized_width, screen_resized_height,
                                SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN );
@@ -100,31 +106,42 @@ void RosalilaGraphics::init()
     if(fullscreen)
         SDL_SetWindowFullscreen(window,SDL_WINDOW_FULLSCREEN);
 
+cout<<"XXX1s"<<endl;
+printf("xxx");
+    rosalila()->utility->writeLogLine("GL flags setup");
+printf("OpenGL version supported by this platform (%s): \n",
+        glGetString(GL_VERSION));
+cout<<"XXX"<<endl;
     //Set the openGL state?
-    glEnable( GL_TEXTURE_2D );
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    //glEnable( GL_TEXTURE_2D );
+    //glEnable(GL_BLEND);
+    //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+    rosalila()->utility->writeLogLine("GL flags setupA");
     glClearColor( 0.0f, 0.0f, 0.0f, 0.0f );
 
     glViewport( 0, 0, screen_resized_width, screen_resized_height );
 
+    rosalila()->utility->writeLogLine("GL flags setupB");
     glClear( GL_COLOR_BUFFER_BIT );
 
     glMatrixMode( GL_PROJECTION );
     glLoadIdentity();
 
+    rosalila()->utility->writeLogLine("GL flags setupC");
     glOrtho(0.0f, screen_width, screen_height, 0.0f, -1.0f, 1.0f);
 
     glMatrixMode( GL_MODELVIEW );
     glLoadIdentity();
 
+    rosalila()->utility->writeLogLine("GL flags setupD");
     //Fps cap
     frames_per_seccond = 60;
     frame = 0;
     last_tick=SDL_GetTicks();
 
-    //Init joysticks
+    rosalila()->utility->writeLogLine("Setting up inputs");
+    //Init joystickss
     if( SDL_NumJoysticks() == 1 )
     {
 //        rosalila()->utility->writeLogLine("1 joystick was found.");
@@ -154,13 +171,15 @@ void RosalilaGraphics::init()
     //If everything initialized fine
 //    rosalila()->utility->writeLogLine("Success! SDL initialized.");
 
-     SDL_GL_CreateContext(window);
+    rosalila()->utility->writeLogLine("More GL stuff");
+    SDL_GL_CreateContext(window);
     GLenum error = GL_NO_ERROR;
     error = glGetError();
     if( error != GL_NO_ERROR ) {
          exit(12);
     }
 
+    rosalila()->utility->writeLogLine("Notifications");
     notification_background = NULL;
     notification_background_x = 0;
     notification_background_y = 0;
@@ -176,7 +195,10 @@ void RosalilaGraphics::init()
         }
     }
 
-    glewInit();
+    #ifndef OSX
+        glewInit();
+    #endif
+    rosalila()->utility->writeLogLine("Graphics initialization finished");
 }
 
 RosalilaGraphics::~RosalilaGraphics()
@@ -327,12 +349,14 @@ void RosalilaGraphics::drawImage (Image* texture, int x, int y)
     //glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE);
     //glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
     //glBlendFuncSeparate(GL_SRC_COLOR, GL_ONE, GL_ZERO, GL_ONE_MINUS_SRC_COLOR);
+    
+    /*
     if(texture->blend_effect)
         glBlendFuncSeparate(GL_ONE, GL_ONE_MINUS_SRC_COLOR, GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         //glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_COLOR, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
     else
         glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
-    
+    */
     glBindTexture( GL_TEXTURE_2D, texture->getTexture() );
 
 

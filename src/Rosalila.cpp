@@ -29,15 +29,10 @@ void RosalilaContainer::update()
 
 void RosalilaContainer::init(std::string config_file_path)
 {
-  std::cout<<"A1!"<<std::endl;
-  std::cout<<"A1!*"<<std::endl;
-  std::cout<<"A1!*"<<config_file_path<<std::endl;
+  std::cout<<"Config file: "<<config_file_path<<std::endl;
   CONFIG_FILE_PATH = config_file_path;
-  std::cout<<"A2!"<<std::endl;
   this->utility->writeLogLine("Initializing parser.");
-  std::cout<<"A3!"<<std::endl;  
   parser->init();
-  std::cout<<"A4!"<<std::endl;  
 
   this->utility->writeLogLine("Parser initialized.");
   this->utility->writeLogLine("Initializing utility.");

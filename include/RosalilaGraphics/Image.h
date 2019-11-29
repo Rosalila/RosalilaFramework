@@ -38,17 +38,20 @@
 
 
 
-
+#ifdef WINDOWS
+#include <SDL2/SDL_opengl.h>
+#endif
 
 #ifdef LINUX
+#include <SDL2/SDL_opengl.h>
 #include <SDL2/SDL_image.h>
 #endif
 
 #ifdef OSX
-#include <SDL2_image/SDL_image.h>
+#include <SDL_opengl.h>
+#include <SDL_image.h>
 #endif
 
-#include <SDL2/SDL_opengl.h>
 #include <stdio.h>
 
 #include "Color.h"
