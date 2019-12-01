@@ -196,7 +196,7 @@ cout<<"XXX"<<endl;
     }
 
     #ifndef OSX
-        glewInit();
+        //glewInit();
     #endif
     rosalila()->utility->writeLogLine("Graphics initialization finished");
 }
