@@ -115,7 +115,7 @@ void RosalilaGraphics::init()
     }
 
     #ifndef OSX
-        glewInit();
+        //glewInit();
     #endif
 
 cout<<"XXX1s"<<endl;
