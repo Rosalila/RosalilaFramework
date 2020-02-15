@@ -71,6 +71,12 @@ jobs:
           sudo apt-get update
           sudo apt-get install libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libsdl2-net-dev libglew-dev ${{ matrix.packages }}
 
+      - name: Install packages (Ubuntu)
+        if: runner.os == 'macOS'
+        run: |
+          brew update
+          brew install sdl2 brew install sdl2_image brew install sdl2_mixer brew install sdl2_ttf
+
       - name: Install packages (Windows)
         if: runner.os == 'Windows' && matrix.packages
         run: |
@@ -100,31 +106,3 @@ jobs:
         run: |
           cd ${{ matrix.build-dir || '.' }}
           ctest -C ${{ matrix.build-config || 'Release' }} --output-on-failure
-
-  docs:
-    name: Build docs
-
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Install mdBook
-        uses: peaceiris/actions-mdbook@v1
-
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Checkout wiki
-        uses: actions/checkout@v2
-        with:
-          repository: modio/SDK.wiki
-          path: wiki
-
-      - name: Build
-        run: |
-          mkdir -p book/src
-          cp wiki/*.md book/src/
-          rename.ul '::' '__' book/src/*
-          cd book
-          cat src/_Sidebar.md | ./linkfix.py summary > src/SUMMARY.md
-          mdbook build -d docs
-          zip -r ../docs.zip docs/*
