@@ -106,9 +106,21 @@ void RosalilaGraphics::init()
     if(fullscreen)
         SDL_SetWindowFullscreen(window,SDL_WINDOW_FULLSCREEN);
 
+    rosalila()->utility->writeLogLine("More GL stuff");
+    SDL_GL_CreateContext(window);
+    GLenum error = GL_NO_ERROR;
+    error = glGetError();
+    if( error != GL_NO_ERROR ) {
+         exit(12);
+    }
+
+    #ifndef OSX
+        glewInit();
+    #endif
+
 cout<<"XXX1s"<<endl;
 printf("xxx");
-    rosalila()->utility->writeLogLine("GL flags setup");
+    rosalila()->utility->writeLogLine("GL flags setupY");
 printf("OpenGL version supported by this platform (%s): \n",
         glGetString(GL_VERSION));
 cout<<"XXX"<<endl;
@@ -171,14 +183,6 @@ cout<<"XXX"<<endl;
     //If everything initialized fine
 //    rosalila()->utility->writeLogLine("Success! SDL initialized.");
 
-    rosalila()->utility->writeLogLine("More GL stuff");
-    SDL_GL_CreateContext(window);
-    GLenum error = GL_NO_ERROR;
-    error = glGetError();
-    if( error != GL_NO_ERROR ) {
-         exit(12);
-    }
-
     rosalila()->utility->writeLogLine("Notifications");
     notification_background = NULL;
     notification_background_x = 0;
@@ -195,9 +199,6 @@ cout<<"XXX"<<endl;
         }
     }
 
-    #ifndef OSX
-        glewInit();
-    #endif
     rosalila()->utility->writeLogLine("Graphics initialization finished");
 }
 
