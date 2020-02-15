@@ -71,11 +71,11 @@ jobs:
           sudo apt-get update
           sudo apt-get install libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libsdl2-net-dev libglew-dev ${{ matrix.packages }}
 
-      - name: Install packages (Ubuntu)
+      - name: Install packages (macOS)
         if: runner.os == 'macOS'
         run: |
           brew update
-          brew install sdl2 brew install sdl2_image brew install sdl2_mixer brew install sdl2_ttf
+          brew install sdl2 sdl2_image sdl2_mixer sdl2_ttf
 
       - name: Install packages (Windows)
         if: runner.os == 'Windows' && matrix.packages
