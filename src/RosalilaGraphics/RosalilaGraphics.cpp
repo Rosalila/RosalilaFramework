@@ -54,11 +54,10 @@ void RosalilaGraphics::init()
     int font_red=0;
     int font_green=0;
     int font_blue=0;
+    this->font = NULL;
     Node* font_node = root_node->getNodeByName("font");
-    
-    if(root_node->hasAttribute("font"))
+    if(font_node)
     {
-
         if(font_node->hasAttribute("size"))
         {
             font_size=atoi(font_node->attributes["size"].c_str());
@@ -77,19 +76,23 @@ void RosalilaGraphics::init()
         }
         if(font_node->hasAttribute("path"))
         {
-            font = TTF_OpenFont( font_node->attributes["path"].c_str(), font_size );
+            std::cout<<"!!"<<font_node->attributes["path"]<<endl;
+            this->font = TTF_OpenFont( font_node->attributes["path"].c_str(), font_size );
         }
     }
 
-    font = NULL;
     textColor.r = font_red;
     textColor.g = font_green;
     textColor.b = font_blue;
     
     if(font==NULL)
     {
-        //rosalila()->utility->writeLogLine("Could not init font. Place it on /misc/font.ttf .");
+        rosalila()->utility->writeLogLine("Error: Could not init font.");
+    }else
+    {
+        rosalila()->utility->writeLogLine("Font initialized.");
     }
+    
 
     rosalila()->utility->writeLogLine("OpenGL stuff");
     SDL_GL_SetAttribute( SDL_GL_DOUBLEBUFFER, 1 ); // *new*
