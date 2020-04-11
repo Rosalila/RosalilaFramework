@@ -3,3 +3,4 @@ RosalilaApiIntegrator/Steam
 examples/build/*
 build/*
 .vscode/*
+.DS_Store
