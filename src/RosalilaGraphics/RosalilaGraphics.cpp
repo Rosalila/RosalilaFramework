@@ -202,6 +202,12 @@ cout<<"XXX"<<endl;
         }
     }
 
+    #ifndef OSX
+        //glewInit();
+    #endif
+
+    SDL_SetWindowPosition(window, 0, 0);
+
     rosalila()->utility->writeLogLine("Graphics initialization finished");
 }
 
