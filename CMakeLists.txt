@@ -29,7 +29,7 @@ IF (UNIX AND NOT APPLE)
   add_library(rosalila SHARED ${SOURCES})
   
   add_definitions(-DGLEW_STATIC)
-  target_link_libraries (rosalila GLEW GL SDL2 SDL2_mixer SDL2_image SDL2_ttf SDL2_net)
+  target_link_libraries (rosalila GL SDL2 SDL2_mixer SDL2_image SDL2_ttf)
 ENDIF ()
 
 IF (MINGW)
