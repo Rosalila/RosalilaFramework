@@ -85,6 +85,12 @@ class ROSALILA_DLL RosalilaGraphics
     GrayscaleEffect grayscale_effect;
     PointExplosionEffect* point_explosion_effect;
 
+    //Image font
+    int image_font_space = 0;
+    int image_font_new_line_space = 0;
+    Image* image_font;
+    SDL_Rect image_font_character_rectangles[256];
+
     RosalilaGraphics();
     ~RosalilaGraphics();
     void init();
@@ -108,5 +114,9 @@ class ROSALILA_DLL RosalilaGraphics
     void frameCap();
     void clearScreen(Color color);
     void screenshot(int x, int y, int w, int h, string filename);
+    //Image font
+    void initImageFont();
+    void drawText(int x, int y, std::string text);
+    void drawCroppedImage (Image* texture, int x, int y, int crop_x, int crop_y, int crop_w, int crop_h);
 };
 #endif

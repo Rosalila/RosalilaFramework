@@ -5,6 +5,210 @@ RosalilaGraphics::RosalilaGraphics()
 
 }
 
+void RosalilaGraphics::initImageFont()
+{
+    rosalila()->utility->writeLogLine("Setting up image font");
+    this->image_font = NULL;
+    Node* root_node = rosalila()->parser->getNodes(CONFIG_FILE_PATH);
+    Node* image_font_node = root_node->getNodeByName("image_font");
+    if(image_font_node)
+    {
+        if(image_font_node->hasAttribute("path"))
+        {
+            std::cout<<"Image font path: "<<image_font_node->attributes["path"]<<endl;
+            this->image_font = this->getImage(assets_directory + image_font_node->attributes["path"]);
+        }
+    }
+
+    if(!this->image_font)
+    {
+        rosalila()->utility->writeLogLine("Warning: Could not load image font");
+        return;
+    }
+
+    GLubyte* pixels = new GLubyte[this->image_font->width*this->image_font->height*4];
+    glBindTexture(GL_TEXTURE_2D, this->image_font->texture);
+    glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
+
+    //Set the cell dimensions
+    int cellW = this->image_font->width / 16;
+    int cellH = this->image_font->height / 16;
+
+    //New line variables
+    int top = cellH;
+    int baseA = cellH;
+
+    int currentChar = 0;
+
+    //Go through the cell rows
+    for( int rows = 0; rows < 16; ++rows )
+    {
+        //Go through the cell columns
+        for( int cols = 0; cols < 16; ++cols )
+        {
+            //Set the character offset
+            image_font_character_rectangles[ currentChar ].x = cellW * cols;
+            image_font_character_rectangles[ currentChar ].y = cellH * rows;
+
+            //Set the dimensions of the character
+            image_font_character_rectangles[ currentChar ].w = cellW;
+            image_font_character_rectangles[ currentChar ].h = cellH;
+
+            //Find Left Side
+            //Go through pixel columns
+            for( int pCol = 0; pCol < cellW; ++pCol )
+            {
+                //Go through pixel rows
+                for( int pRow = 0; pRow < cellH; ++pRow )
+                {
+                    //Get the pixel offsets
+                    int pX = ( cellW * cols ) + pCol;
+                    int pY = ( cellH * rows ) + pRow;
+
+                    GLuint r, g, b, a; // or GLubyte r, g, b, a;
+                    size_t row = pRow * 256;
+                    size_t col = pCol * 4;
+
+                    //If a non colorkey pixel is found
+                    if( pixels[row + col + 0] )
+                    {
+                        //Set the x offset
+                        image_font_character_rectangles[ currentChar ].x = pX;
+
+                        //Break the loops
+                        pCol = cellW;
+                        pRow = cellH;
+                    }
+                }
+            }
+
+            //Find Right Side
+            //Go through pixel columns
+            for( int pColW = cellW - 1; pColW >= 0; --pColW )
+            {
+                //Go through pixel rows
+                for( int pRowW = 0; pRowW < cellH; ++pRowW )
+                {
+                    //Get the pixel offsets
+                    int pX = ( cellW * cols ) + pColW;
+                    int pY = ( cellH * rows ) + pRowW;
+
+                    //If a non colorkey pixel is found
+                    if( pixels[pX+pY+3] )
+                    {
+                        //Set the width
+                        image_font_character_rectangles[ currentChar ].w = ( pX - image_font_character_rectangles[ currentChar ].x ) + 1;
+
+                        //Break the loops
+                        pColW = -1;
+                        pRowW = cellH;
+                    }
+                }
+            }
+
+            //Find Top
+            //Go through pixel rows
+            for( int pRow = 0; pRow < cellH; ++pRow )
+            {
+                //Go through pixel columns
+                for( int pCol = 0; pCol < cellW; ++pCol )
+                {
+                    //Get the pixel offsets
+                    int pX = ( cellW * cols ) + pCol;
+                    int pY = ( cellH * rows ) + pRow;
+
+                    //If a non colorkey pixel is found
+                    if( pixels[pX+pY+3] )
+                    {
+                        //If new top is found
+                        if( pRow < top )
+                        {
+                            top = pRow;
+                        }
+
+                        //Break the loops
+                        pCol = cellW;
+                        pRow = cellH;
+                    }
+                }
+            }
+
+            //Find Bottom of A
+            if( currentChar == 'A' )
+            {
+                //Go through pixel rows
+                for( int pRow = cellH - 1; pRow >= 0; --pRow )
+                {
+                    //Go through pixel columns
+                    for( int pCol = 0; pCol < cellW; ++pCol )
+                    {
+                        //Get the pixel offsets
+                        int pX = ( cellW * cols ) + pCol;
+                        int pY = ( cellH * rows ) + pRow;
+
+                        //If a non colorkey pixel is found
+                        if( pixels[pX+pY+3] )
+                        {
+                            //Bottom of a is found
+                            baseA = pRow;
+
+                            //Break the loops
+                            pCol = cellW;
+                            pRow = -1;
+                        }
+                    }
+                }
+            }
+
+            //Go to the next character
+            ++currentChar;
+        }
+    }
+
+    //Calculate space
+    this->image_font_space = cellW / 2;
+
+    //Calculate new line
+    this->image_font_new_line_space = baseA - top;
+
+    //Lop off excess top pixels
+    for( int i = 0; i < 256; ++i )
+    {
+        image_font_character_rectangles[ i ].y += top;
+        image_font_character_rectangles[ i ].h -= top;
+    }
+}
+
+void RosalilaGraphics::drawText( int x, int y, std::string text )
+{
+    if( this->image_font )
+    {
+		int curX = x, curY = y;
+        for( int i = 0; i < text.length(); ++i )
+        {
+            if( text[ i ] == ' ' )
+            {
+                curX += this->image_font_space;
+            }
+            else if( text[ i ] == '\n' )
+            {
+                curY += this->image_font_new_line_space;
+                curX = x;
+            }
+            else
+            {
+                int ascii = (unsigned char)text[ i ];
+                this->image_font->color_filter.red=255;
+                this->image_font->color_filter.green=255;
+                this->image_font->color_filter.blue=255;
+                this->image_font->color_filter.alpha=255;
+                this->drawCroppedImage (this->image_font, curX, curY, image_font_character_rectangles[ ascii ].x, image_font_character_rectangles[ ascii ].y, image_font_character_rectangles[ ascii ].w, image_font_character_rectangles[ ascii ].h);
+                curX += image_font_character_rectangles[ ascii ].w + 1;
+            }
+        }
+    }
+}
+
 void RosalilaGraphics::init()
 {
     rosalila()->utility->writeLogLine("Initializing graphics");
@@ -76,7 +280,7 @@ void RosalilaGraphics::init()
         }
         if(font_node->hasAttribute("path"))
         {
-            std::cout<<"!!"<<font_node->attributes["path"]<<endl;
+            std::cout<<"TTF path"<<font_node->attributes["path"]<<endl;
             this->font = TTF_OpenFont( font_node->attributes["path"].c_str(), font_size );
         }
     }
@@ -92,7 +296,6 @@ void RosalilaGraphics::init()
     {
         rosalila()->utility->writeLogLine("Font initialized.");
     }
-    
 
     rosalila()->utility->writeLogLine("OpenGL stuff");
     SDL_GL_SetAttribute( SDL_GL_DOUBLEBUFFER, 1 ); // *new*
@@ -121,12 +324,9 @@ void RosalilaGraphics::init()
         //glewInit();
     #endif
 
-cout<<"XXX1s"<<endl;
-printf("xxx");
-    rosalila()->utility->writeLogLine("GL flags setupY");
-printf("OpenGL version supported by this platform (%s): \n",
-        glGetString(GL_VERSION));
-cout<<"XXX"<<endl;
+    rosalila()->utility->writeLogLine("GL flags setup");
+    printf("OpenGL version supported by this platform (%s): \n",
+    glGetString(GL_VERSION));
     //Set the openGL state?
     //glEnable( GL_TEXTURE_2D );
     //glEnable(GL_BLEND);
@@ -207,6 +407,8 @@ cout<<"XXX"<<endl;
     #endif
 
     SDL_SetWindowPosition(window, 0, 0);
+
+    initImageFont();
 
     rosalila()->utility->writeLogLine("Graphics initialization finished");
 }
@@ -387,6 +589,113 @@ void RosalilaGraphics::drawImage (Image* texture, int x, int y)
         glTexCoord2i( 0, 1 );
         glVertex3f( x1-translate_x, y2-translate_y, 0.f );
 
+    glEnd();
+
+    //Reset the current matrix to the one that was saved.
+    glPopMatrix();
+}
+
+void RosalilaGraphics::drawCroppedImage (Image* texture, int x, int y, int crop_x, int crop_y, int crop_width, int crop_height)
+{
+    double grey_scale = (texture->color_filter.red+texture->color_filter.green+texture->color_filter.blue)/3;
+
+    double red_difference = texture->color_filter.red-grey_scale;
+    double green_difference = texture->color_filter.green-grey_scale;
+    double blue_difference = texture->color_filter.blue-grey_scale;
+
+    texture->color_filter.red = grey_scale + red_difference * grayscale_effect.current_percentage;
+    texture->color_filter.green = grey_scale + green_difference * grayscale_effect.current_percentage;
+    texture->color_filter.blue = grey_scale + blue_difference * grayscale_effect.current_percentage;
+
+    texture->color_filter.alpha = (double)texture->color_filter.alpha * transparency_effect.current_percentage;
+
+    glEnable( GL_TEXTURE_2D );
+
+    glMatrixMode( GL_PROJECTION );
+    glLoadIdentity();
+    glOrtho(0.0f, screen_width, screen_height, 0.0f, -1.0f, 1.0f);
+    glMatrixMode( GL_MODELVIEW );
+
+    glDisable (GL_LIGHTING);
+    glEnable (GL_LIGHT0);
+    glDisable (GL_DEPTH_TEST);
+
+    //Screen shake
+    x += screen_shake_effect.current_x;
+    y += screen_shake_effect.current_y;
+
+    
+    double x_crop_percent = double(crop_x) / texture->width;
+    double width_crop_percenent = double(crop_width) / texture->width;
+    double y_crop_percent = double(crop_y) / texture->height;
+    double height_crop_percent = double(crop_height) / texture->height;
+
+    GLfloat x1 = 0.f + x;
+    GLfloat y1 = 0.f + y;
+    GLfloat x2 = 0.f + x + (float)texture->width * texture->scale;
+    GLfloat y2 = 0.f + y + (float)texture->height * texture->scale;
+
+    x1*=width_crop_percenent;
+    x2*=width_crop_percenent;
+    y1*=height_crop_percent;
+    y2*=height_crop_percent;
+
+    //Flip
+    if(texture->horizontal_flip)
+    {
+        GLfloat temp=x1;
+        x1=x2;
+        x2=temp;
+    }
+
+    //OpenGL draw
+    //Save the current matrix.
+    glPushMatrix();
+    //Change the current matrix.
+    float translate_x = (x2-x1) / 2 + x;
+    float translate_y = (y2-y1) /2 + y;
+    glTranslatef(translate_x,translate_y, 1.0);
+    glRotatef(-texture->rotation, 0, 0, 1.0);
+
+    glColor4ub(texture->color_filter.red, texture->color_filter.green, texture->color_filter.blue,texture->color_filter.alpha);
+    glEnable(GL_BLEND);
+    //glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
+    //glBlendFunc(GL_SRC_ALPHA, GL_ONE); // additive
+    // GL_ONE_MINUS_SRC_COLOR - funky
+    // GL_SRC_ALPHA - wuut
+    // GL_ONE_MINUS_SRC_ALPHA - standard
+    // GL_ONE - additive
+    // glBlendFunc(GL_ZERO, GL_SRC_ALPHA);
+    //glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE);
+    //glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+    //glBlendFuncSeparate(GL_SRC_COLOR, GL_ONE, GL_ZERO, GL_ONE_MINUS_SRC_COLOR);
+    
+    /*
+    if(texture->blend_effect)
+        glBlendFuncSeparate(GL_ONE, GL_ONE_MINUS_SRC_COLOR, GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        //glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_COLOR, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+    else
+        glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
+    */
+    glBindTexture( GL_TEXTURE_2D, texture->getTexture() );
+
+
+    glBegin( GL_QUADS);
+        //Bottom-left vertex (corner)
+        glTexCoord2f(x_crop_percent, y_crop_percent);
+        glVertex3d(x1, y1, 0.0f);
+
+        //Bottom-right vertex (corner)
+        glTexCoord2f(width_crop_percenent + x_crop_percent, y_crop_percent);
+        glVertex3d(x2, y1, 0.f);
+
+        //Top-right vertex (corner)
+        glTexCoord2f(width_crop_percenent + x_crop_percent, height_crop_percent + y_crop_percent);
+        glVertex3d(x2, y2, 0.f);
+
+        //Top-left vertex (corner)
+        glTexCoord2f(x_crop_percent, height_crop_percent + y_crop_percent);
+        glVertex3d(x1, y2, 0.f);
     glEnd();
 
     //Reset the current matrix to the one that was saved.

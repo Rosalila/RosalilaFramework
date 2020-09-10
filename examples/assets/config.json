@@ -21,6 +21,14 @@
     "blue": "255",
     "size": "30"
   },
+  "image_font": 
+  {
+    "path": "image_font.png",
+    "red": "255",
+    "green": "255",
+    "blue": "255",
+    "size": "30"
+  },
   "notifications": 
   {
     "background_path": "../assets/notification_background.png"
