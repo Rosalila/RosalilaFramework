@@ -28,7 +28,8 @@ Node *jsonToNode(nlohmann::json json_object)
     }
     else
     {
-      attributes[it.key()] = it.value();
+      std::string it_value = it.value();
+      attributes[it.key()] = it_value;
     }
   }
 
