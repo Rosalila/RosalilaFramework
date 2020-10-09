@@ -18,9 +18,9 @@ void Notification::update()
         frame++;
 
     if(frame<duration)
-        y-=velocity;
+        y-= (int)velocity;
     else
-        y+=velocity;
+        y+= (int)velocity;
 
     if(y<target_y)
         y=target_y;

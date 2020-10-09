@@ -4,7 +4,7 @@ void RosalilaUtility::init()
 {
     clearLog();
     current_non_seeded_random_number_index = 0;
-    srand(time(NULL));
+    srand((unsigned int)time(NULL));
     for(int i=0;i<1000;i++)
     {
         non_seeded_random_numbers.push_back(rand());
@@ -82,27 +82,27 @@ bool RosalilaUtility::hitboxCollision(int a_x,int a_y,int a_width,int a_height,f
     Point pa1(a_x,
               a_y);
 
-    Point pa2(a_x + cos (a_angle*PI/180) * a_width
-             ,a_y - sin (a_angle*PI/180) * a_width);
+	Point pa2((int)(a_x + cos(a_angle*PI / 180) * a_width),
+		(int)(a_y - sin(a_angle*PI / 180) * a_width));
 
-    Point pa3(a_x + cos (a_angle*PI/180) * a_width + sin (a_angle*PI/180) * a_height,
-              a_y - sin (a_angle*PI/180) * a_width + cos (a_angle*PI/180) * a_height);
+    Point pa3((int)(a_x + cos (a_angle*PI/180) * a_width + sin (a_angle*PI/180) * a_height),
+		(int)(a_y - sin (a_angle*PI/180) * a_width + cos (a_angle*PI/180) * a_height));
 
-    Point pa4(a_x + sin (a_angle*PI/180) * a_height,
-              a_y + cos (a_angle*PI/180) * a_height);
+    Point pa4((int)(a_x + sin (a_angle*PI/180) * a_height),
+		(int)(a_y + cos (a_angle*PI/180) * a_height));
 
 
     Point pb1(b_x,
               b_y);
 
-    Point pb2(b_x + cos (b_angle*PI/180) * b_width
-             ,b_y - sin (b_angle*PI/180) * b_width);
+	Point pb2((int)(b_x + cos(b_angle*PI / 180) * b_width),
+		(int)(b_y - sin(b_angle*PI / 180) * b_width));
 
-    Point pb3(b_x + cos (b_angle*PI/180) * b_width + sin (b_angle*PI/180) * b_height,
-              b_y - sin (b_angle*PI/180) * b_width + cos (b_angle*PI/180) * b_height);
+	Point pb3((int)(b_x + cos(b_angle*PI / 180) * b_width + sin(b_angle*PI / 180) * b_height),
+		(int)(b_y - sin(b_angle*PI / 180) * b_width + cos(b_angle*PI / 180) * b_height));
 
-    Point pb4(b_x + sin (b_angle*PI/180) * b_height,
-              b_y + cos (b_angle*PI/180) * b_height);
+	Point pb4((int)(b_x + sin(b_angle*PI / 180) * b_height),
+		(int)(b_y + cos(b_angle*PI / 180) * b_height));
 
     Line la1(pa1,pa2);
     Line la2(pa2,pa3);
@@ -340,8 +340,8 @@ Point* RosalilaUtility::lineIntersection(Line l1,Line l2) {
 
     // Store the values for fast access and easy
     // equations-to-code conversion
-    float x1 = p1.x, x2 = p2.x, x3 = p3.x, x4 = p4.x;
-    float y1 = p1.y, y2 = p2.y, y3 = p3.y, y4 = p4.y;
+	float x1 = (float)p1.x, x2 = (float)p2.x, x3 = (float)p3.x, x4 = (float)p4.x;
+    float y1 = (float)p1.y, y2 = (float)p2.y, y3 = (float)p3.y, y4 = (float)p4.y;
 
     float d = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
     // If d is zero, there is no intersection
@@ -360,8 +360,8 @@ Point* RosalilaUtility::lineIntersection(Line l1,Line l2) {
 
     // Return the point of intersection
     Point* ret = new Point();
-    ret->x = x;
-    ret->y = y;
+    ret->x = (int)x;
+    ret->y = (int)y;
     return ret;
 }
 
@@ -384,8 +384,8 @@ Point RosalilaUtility::rotateAroundPoint(Point point,Point pivot,float angle)
 //  return point;
 
     //Move the universe (the point b)
-    float s = sin(angle*PI/180);
-    float c = cos(angle*PI/180);
+    float s = (float)sin(angle*PI/180);
+    float c = (float)cos(angle*PI/180);
 
     // translate point back to origin:
     int res_x = point.x;
@@ -396,8 +396,8 @@ Point RosalilaUtility::rotateAroundPoint(Point point,Point pivot,float angle)
     float ynew = -res_x * s + res_y * c;
 
     // translate point back:
-    res_x = xnew + pivot.x;
-    res_y = ynew + pivot.y;
+    res_x = (int)(xnew + pivot.x);
+    res_y = (int)(ynew + pivot.y);
 
     return Point(res_x,res_y);
 }
@@ -405,8 +405,8 @@ Point RosalilaUtility::rotateAroundPoint(Point point,Point pivot,float angle)
 
 Point RosalilaUtility::realRotateAroundPoint(Point point,Point pivot,float angle)
 {
-  float s = sin(-angle*PI/180);
-  float c = cos(-angle*PI/180);
+  float s = (float)(sin(-angle*PI/180));
+  float c = (float)(cos(-angle*PI/180));
 
 //   translate point back to origin:
   point.x -= pivot.x;
@@ -417,8 +417,8 @@ Point RosalilaUtility::realRotateAroundPoint(Point point,Point pivot,float angle
   float ynew = point.x * s + point.y * c;
 
 //   translate point back:
-  point.x = xnew + pivot.x;
-  point.y = ynew + pivot.y;
+  point.x = (int)(xnew + pivot.x);
+  point.y = (int)(ynew + pivot.y);
   return point;
 }
 
@@ -472,7 +472,7 @@ double RosalilaUtility::checksumFileA(string file_name)
   unsigned int checksum = 0;
   ifstream file(file_name.c_str());
   file.seekg(0,ios::end);
-  checksum = file.tellg();
+  checksum = (unsigned int)file.tellg();
   file.close();
   return checksum;
 }
@@ -503,9 +503,9 @@ double RosalilaUtility::checksumFileC(string file_name)
 
 bool RosalilaUtility::checkFile(string file_name)
 {
-  int checksum_a = rosalila()->utility->checksumFileA(file_name);
-  int checksum_b = rosalila()->utility->checksumFileB(file_name);
-  int checksum_c = rosalila()->utility->checksumFileC(file_name);
+  int checksum_a = (int)rosalila()->utility->checksumFileA(file_name);
+  int checksum_b = (int)rosalila()->utility->checksumFileB(file_name);
+  int checksum_c = (int)rosalila()->utility->checksumFileC(file_name);
   cout<<file_name<<"!"<<endl;
   cout<<checksum_a<<"$$"<<checksum_b<<"$$"<<checksum_c<<endl;
 

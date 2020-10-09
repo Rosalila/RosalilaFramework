@@ -65,7 +65,6 @@ void RosalilaGraphics::initImageFont()
                     int pX = ( cellW * cols ) + pCol;
                     int pY = ( cellH * rows ) + pRow;
 
-                    GLuint r, g, b, a; // or GLubyte r, g, b, a;
                     size_t row = pRow * 256;
                     size_t col = pCol * 4;
 
@@ -184,7 +183,7 @@ void RosalilaGraphics::drawText( int x, int y, std::string text )
     if( this->image_font )
     {
 		int curX = x, curY = y;
-        for( int i = 0; i < text.length(); ++i )
+        for( int i = 0; i < (int)text.length(); ++i )
         {
             if( text[ i ] == ' ' )
             {
@@ -506,11 +505,11 @@ void RosalilaGraphics::drawImage (Image* texture, int x, int y)
     double green_difference = texture->color_filter.green-grey_scale;
     double blue_difference = texture->color_filter.blue-grey_scale;
 
-    texture->color_filter.red = grey_scale + red_difference * grayscale_effect.current_percentage;
-    texture->color_filter.green = grey_scale + green_difference * grayscale_effect.current_percentage;
-    texture->color_filter.blue = grey_scale + blue_difference * grayscale_effect.current_percentage;
+    texture->color_filter.red = (int)(grey_scale + red_difference * grayscale_effect.current_percentage);
+	texture->color_filter.green = (int)(grey_scale + green_difference * grayscale_effect.current_percentage);
+    texture->color_filter.blue = (int)(grey_scale + blue_difference * grayscale_effect.current_percentage);
 
-    texture->color_filter.alpha = (double)texture->color_filter.alpha * transparency_effect.current_percentage;
+    texture->color_filter.alpha = (int)(texture->color_filter.alpha * transparency_effect.current_percentage);
 
     glEnable( GL_TEXTURE_2D );
 
@@ -603,11 +602,11 @@ void RosalilaGraphics::drawCroppedImage (Image* texture, int x, int y, int crop_
     double green_difference = texture->color_filter.green-grey_scale;
     double blue_difference = texture->color_filter.blue-grey_scale;
 
-    texture->color_filter.red = grey_scale + red_difference * grayscale_effect.current_percentage;
-    texture->color_filter.green = grey_scale + green_difference * grayscale_effect.current_percentage;
-    texture->color_filter.blue = grey_scale + blue_difference * grayscale_effect.current_percentage;
+    texture->color_filter.red = (int)(grey_scale + red_difference * grayscale_effect.current_percentage);
+    texture->color_filter.green = (int)(grey_scale + green_difference * grayscale_effect.current_percentage);
+    texture->color_filter.blue = (int)(grey_scale + blue_difference * grayscale_effect.current_percentage);
 
-    texture->color_filter.alpha = (double)texture->color_filter.alpha * transparency_effect.current_percentage;
+    texture->color_filter.alpha = (int)(texture->color_filter.alpha * transparency_effect.current_percentage);
 
     glEnable( GL_TEXTURE_2D );
 
@@ -635,10 +634,10 @@ void RosalilaGraphics::drawCroppedImage (Image* texture, int x, int y, int crop_
     GLfloat x2 = 0.f + x + (float)texture->width * texture->scale;
     GLfloat y2 = 0.f + y + (float)texture->height * texture->scale;
 
-    x1*=width_crop_percenent;
-    x2*=width_crop_percenent;
-    y1*=height_crop_percent;
-    y2*=height_crop_percent;
+    x1 *= (GLfloat)width_crop_percenent;
+    x2 *= (GLfloat)width_crop_percenent;
+    y1 *= (GLfloat)height_crop_percent;
+    y2 *= (GLfloat)height_crop_percent;
 
     //Flip
     if(texture->horizontal_flip)
@@ -682,19 +681,19 @@ void RosalilaGraphics::drawCroppedImage (Image* texture, int x, int y, int crop_
 
     glBegin( GL_QUADS);
         //Bottom-left vertex (corner)
-        glTexCoord2f(x_crop_percent, y_crop_percent);
+        glTexCoord2f((GLfloat)x_crop_percent, (GLfloat)y_crop_percent);
         glVertex3d(x1, y1, 0.0f);
 
         //Bottom-right vertex (corner)
-        glTexCoord2f(width_crop_percenent + x_crop_percent, y_crop_percent);
+        glTexCoord2f((GLfloat)(width_crop_percenent + x_crop_percent), (GLfloat)y_crop_percent);
         glVertex3d(x2, y1, 0.f);
 
         //Top-right vertex (corner)
-        glTexCoord2f(width_crop_percenent + x_crop_percent, height_crop_percent + y_crop_percent);
+        glTexCoord2f((GLfloat)(width_crop_percenent + x_crop_percent), (GLfloat)(height_crop_percent + y_crop_percent));
         glVertex3d(x2, y2, 0.f);
 
         //Top-left vertex (corner)
-        glTexCoord2f(x_crop_percent, height_crop_percent + y_crop_percent);
+        glTexCoord2f((GLfloat)x_crop_percent, (GLfloat)(height_crop_percent + y_crop_percent));
         glVertex3d(x1, y2, 0.f);
     glEnd();
 
@@ -814,12 +813,12 @@ void RosalilaGraphics::drawRectangle(int x,int y,int width,int height,float rota
     //Save the current matrix.
     glPushMatrix();
     //Change the current matrix.
-    float translate_x=x;
-    float translate_y=y;
+	GLfloat translate_x = (GLfloat)x;
+	GLfloat translate_y = (GLfloat)y;
     glTranslatef(translate_x,translate_y, 1.0);
     glRotatef(-rotation, 0, 0, 1.0);
-    x-=translate_x;
-    y-=translate_y;
+    x -= (int)translate_x;
+    y -= (int)translate_y;
 
 //    glRecti(x, y, width+x, height+y);
 
@@ -828,9 +827,9 @@ void RosalilaGraphics::drawRectangle(int x,int y,int width,int height,float rota
     glBegin(GL_QUADS);   //We want to draw a quad, i.e. shape with four sides
       glColor4ub(red,green,blue,alpha);
       glVertex2f(0, 0);
-      glVertex2f(0, height);
-      glVertex2f(width, height);
-      glVertex2f(width, 0);
+      glVertex2f(0, (GLfloat)height);
+      glVertex2f((GLfloat)width, (GLfloat)height);
+      glVertex2f((GLfloat)width, 0);
     glEnd();
 
     glFlush();
@@ -864,11 +863,11 @@ void RosalilaGraphics::drawRectangles(vector<DrawableRectangle*>rectangles)
         double green_difference = rectangles[i]->color.green-grey_scale;
         double blue_difference = rectangles[i]->color.blue-grey_scale;
 
-        rectangles[i]->color.red = grey_scale + red_difference * grayscale_effect.current_percentage;
-        rectangles[i]->color.green = grey_scale + green_difference * grayscale_effect.current_percentage;
-        rectangles[i]->color.blue = grey_scale + blue_difference * grayscale_effect.current_percentage;
+        rectangles[i]->color.red = (int)(grey_scale + red_difference * grayscale_effect.current_percentage);
+        rectangles[i]->color.green = (int)(grey_scale + green_difference * grayscale_effect.current_percentage);
+        rectangles[i]->color.blue = (int)(grey_scale + blue_difference * grayscale_effect.current_percentage);
 
-        rectangles[i]->color.alpha = (double)rectangles[i]->color.alpha * transparency_effect.current_percentage;
+        rectangles[i]->color.alpha = (int)(rectangles[i]->color.alpha * transparency_effect.current_percentage);
 
         rectangles[i]->x += screen_shake_effect.current_x;
         rectangles[i]->y += screen_shake_effect.current_y;
@@ -885,17 +884,17 @@ void RosalilaGraphics::drawRectangles(vector<DrawableRectangle*>rectangles)
         Point center(rectangles[i]->x+rectangles[i]->width/2,
                      rectangles[i]->y+rectangles[i]->height/2);
 
-        p1 = rosalila()->utility->realRotateAroundPoint(p1,center,rectangles[i]->angle);
-        p2 = rosalila()->utility->realRotateAroundPoint(p2,center,rectangles[i]->angle);
-        p3 = rosalila()->utility->realRotateAroundPoint(p3,center,rectangles[i]->angle);
-        p4 = rosalila()->utility->realRotateAroundPoint(p4,center,rectangles[i]->angle);
+        p1 = rosalila()->utility->realRotateAroundPoint(p1,center, (float)rectangles[i]->angle);
+        p2 = rosalila()->utility->realRotateAroundPoint(p2,center, (float)rectangles[i]->angle);
+        p3 = rosalila()->utility->realRotateAroundPoint(p3,center, (float)rectangles[i]->angle);
+        p4 = rosalila()->utility->realRotateAroundPoint(p4,center, (float)rectangles[i]->angle);
 
         glColor4ub(rectangles[i]->color.red,rectangles[i]->color.green,rectangles[i]->color.blue,rectangles[i]->color.alpha);
 
-        glVertex2f(p1.x, p1.y);
-        glVertex2f(p2.x, p2.y);
-        glVertex2f(p3.x, p3.y);
-        glVertex2f(p4.x, p4.y);
+        glVertex2f((GLfloat)p1.x, (GLfloat)p1.y);
+        glVertex2f((GLfloat)p2.x, (GLfloat)p2.y);
+        glVertex2f((GLfloat)p3.x, (GLfloat)p3.y);
+        glVertex2f((GLfloat)p4.x, (GLfloat)p4.y);
     }
 
     glEnd();
@@ -931,7 +930,7 @@ void RosalilaGraphics::drawPoints(list<DrawablePoint*>points)
         int y = (*i)->point.y;
 
         glColor4ub((*i)->color.red,(*i)->color.green,(*i)->color.blue,(*i)->color.alpha);
-        glVertex3f(x, y, 0.0f);
+        glVertex3f((GLfloat)x, (GLfloat)y, 0.0f);
     }
 
     glEnd( );
@@ -964,11 +963,11 @@ void RosalilaGraphics::drawTriangles(vector<DrawableTriangle*>triangles)
         double green_difference = triangles[i]->color.green-grey_scale;
         double blue_difference = triangles[i]->color.blue-grey_scale;
 
-        triangles[i]->color.red = grey_scale + red_difference * grayscale_effect.current_percentage;
-        triangles[i]->color.green = grey_scale + green_difference * grayscale_effect.current_percentage;
-        triangles[i]->color.blue = grey_scale + blue_difference * grayscale_effect.current_percentage;
+        triangles[i]->color.red = (int)(grey_scale + red_difference * grayscale_effect.current_percentage);
+        triangles[i]->color.green = (int)(grey_scale + green_difference * grayscale_effect.current_percentage);
+        triangles[i]->color.blue = (int)(grey_scale + blue_difference * grayscale_effect.current_percentage);
 
-        triangles[i]->color.alpha = (double)triangles[i]->color.alpha * transparency_effect.current_percentage;
+        triangles[i]->color.alpha = (int)(triangles[i]->color.alpha * transparency_effect.current_percentage);
 
         triangles[i]->x += screen_shake_effect.current_x;
         triangles[i]->y += screen_shake_effect.current_y;
@@ -982,15 +981,15 @@ void RosalilaGraphics::drawTriangles(vector<DrawableTriangle*>triangles)
 
         Point center(triangles[i]->x,triangles[i]->y);//This should not be the center
 
-        triangles[i]->p1 = rosalila()->utility->realRotateAroundPoint(triangles[i]->p1,center,triangles[i]->angle);
-        triangles[i]->p2 = rosalila()->utility->realRotateAroundPoint(triangles[i]->p2,center,triangles[i]->angle);
-        triangles[i]->p3 = rosalila()->utility->realRotateAroundPoint(triangles[i]->p3,center,triangles[i]->angle);
+        triangles[i]->p1 = rosalila()->utility->realRotateAroundPoint(triangles[i]->p1,center, (GLfloat)triangles[i]->angle);
+        triangles[i]->p2 = rosalila()->utility->realRotateAroundPoint(triangles[i]->p2,center, (GLfloat)triangles[i]->angle);
+        triangles[i]->p3 = rosalila()->utility->realRotateAroundPoint(triangles[i]->p3,center, (GLfloat)triangles[i]->angle);
 
         glColor4ub(triangles[i]->color.red,triangles[i]->color.green,triangles[i]->color.blue,triangles[i]->color.alpha);
 
-        glVertex2f(triangles[i]->p1.x, triangles[i]->p1.y);
-        glVertex2f(triangles[i]->p2.x, triangles[i]->p2.y);
-        glVertex2f(triangles[i]->p3.x, triangles[i]->p3.y);
+        glVertex2f((GLfloat)triangles[i]->p1.x, (GLfloat)triangles[i]->p1.y);
+        glVertex2f((GLfloat)triangles[i]->p2.x, (GLfloat)triangles[i]->p2.y);
+        glVertex2f((GLfloat)triangles[i]->p3.x, (GLfloat)triangles[i]->p3.y);
     }
 
     glEnd();

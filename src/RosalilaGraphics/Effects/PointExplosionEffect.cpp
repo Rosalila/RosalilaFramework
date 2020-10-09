@@ -13,8 +13,8 @@ PointExplosion::PointExplosion(Point point, Color color, int size, double angle,
 
 void PointExplosion::update()
 {
-    this->point.x += cos (this->angle * PI / 180) * this->velocity;
-    this->point.y -= sin (this->angle * PI / 180) * this->velocity;
+    this->point.x += (int)(cos (this->angle * PI / 180) * this->velocity);
+    this->point.y -= (int)(sin (this->angle * PI / 180) * this->velocity);
     frame++;
     color.alpha-=8;
 }
@@ -33,7 +33,7 @@ void PointExplosionEffect::explode(int x, int y, Color color, int intensity)
                                                     5,
                                                     angle,
                                                     velocity,
-                                                    duration));
+                                                    (int)duration));
     }
 }
 

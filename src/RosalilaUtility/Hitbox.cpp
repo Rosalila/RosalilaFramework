@@ -101,7 +101,7 @@ Hitbox Hitbox::getPlacedHitbox(double x, double y)
 {
     Hitbox hitbox = *this;
     Point rotated=rosalila()->utility->rotateAroundPoint(Point(hitbox.getX(),hitbox.getY()),
-                                    Point(x,y),
+                                    Point((int)x, (int)y),
                                     0);
     hitbox.setX(rotated.x);
     hitbox.setY(rotated.y);
@@ -114,7 +114,7 @@ Hitbox Hitbox::getPlacedHitbox(double x, double y,float a)
 {
     Hitbox hitbox = *this;
     Point rotated=rosalila()->utility->rotateAroundPoint(Point(hitbox.getX(),hitbox.getY()),
-                                    Point(x,y),
+                                    Point((int)x, (int)y),
                                     a+hitbox.getAngle());
     hitbox.setX(rotated.x);
     hitbox.setY(rotated.y);
@@ -128,14 +128,14 @@ void Hitbox::setLines()
     Point point1(x,
               y);
 
-    Point point2(x + cos (angle*PI/180) * width
-             ,y - sin (angle*PI/180) * width);
+    Point point2((int)(x + cos (angle*PI/180) * width),
+				(int)(y - sin (angle*PI/180) * width));
 
-    Point point3(x + cos (angle*PI/180) * width + sin (angle*PI/180) * height,
-              y - sin (angle*PI/180) * width + cos (angle*PI/180) * height);
+    Point point3((int)(x + cos (angle*PI/180) * width + sin (angle*PI/180) * height),
+				(int)(y - sin (angle*PI/180) * width + cos (angle*PI/180) * height));
 
-    Point point4(x + sin (angle*PI/180) * height,
-              y + cos (angle*PI/180) * height);
+    Point point4((int)(x + sin (angle*PI/180) * height),
+				(int)(y + cos (angle*PI/180) * height));
 
 
     line1.set(point1,point2);
