@@ -432,20 +432,18 @@ The [Rosalila Framework Example](https://github.com/Rosalila/FrameworkExample) i
 
 Take a look at the [Code Examples](https://github.com/Rosalila/Framework/tree/master/examples) for quick code recipes.
 
-## Build
+## Build Dependencies
 
+### Linux
+```shell
+sudo apt-get install g++ \
+cmake libsdl2-dev libsdl2-image-dev \
+libsdl2-mixer-dev libsdl2-ttf-dev \
+libsdl2-net-dev libglew-dev
 ```
-# Dependencies
 
-## Linux
-
-```
-sudo apt-get install g++ cmake libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libsdl2-net-dev libglew-dev
-```
-
-## MacOS
-
-```
+### MacOS
+```shell
 brew install sdl2
 brew install sdl2_image
 brew install sdl2_mixer
@@ -453,6 +451,7 @@ brew install sdl2_ttf
 ```
 
 # Compile
+```shell
 mkdir build
 cd build
 cmake ..
