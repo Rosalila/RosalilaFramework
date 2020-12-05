@@ -99,26 +99,23 @@ jobs:
           CXXFLAGS: ${{ matrix.cxxflags || env.CXXFLAGS }}
           LDFLAGS: ${{ matrix.ldflags || env.LDFLAGS }}
 
+      - name: Compile source code
+        run: |
+          cd ${{ matrix.build-src-dir || '.' }}
+          cmake --build . --config ${{ matrix.build-config || 'Release' }}
+
       - name: Prepare artifact
+        if: runner.os == 'Linux' || runner.os == 'macOS'
         shell: bash
         run: |
           mkdir Release
           mv librosalila* Release
-          mv *.lib Release
 
       - name: Upload artifact
         uses: actions/upload-artifact@v1
         with:
           name: JustTestin
           path: Release
-
-      - name: Compile source code
-        run: |
-          cd ${{ matrix.build-src-dir || '.' }}
-          cmake --build . --config ${{ matrix.build-config || 'Release' }}
-          zip -r tribilin.zip . -i Release/*
-          echo "::set-output name=asset_name::tribilin.zip"
-          echo "::set-output name=asset_path::tribilin.zip"
 
       - name: Run test cases
         run: |
@@ -132,6 +129,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Zip artifact
+        run: |
+          zip -r tribilin.zip . -i Release/*
+          echo "::set-output name=asset_name::tribilin.zip"
+          echo "::set-output name=asset_path::tribilin.zip"
+
       - name: Upload Release Asset
         id: upload-release-asset 
         uses: actions/upload-release-asset@v1
