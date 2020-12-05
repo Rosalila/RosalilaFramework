@@ -135,13 +135,11 @@ jobs:
           echo "::set-output name=asset_name::tribilin.zip"
           echo "::set-output name=asset_path::tribilin.zip"
 
-      - name: Upload Release Asset
-        id: upload-release-asset 
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ github.event.release.upload_url }}
-          asset_path: ./tribilin.zip
-          asset_name: tribilin.zip
-          asset_content_type: application/zip
+    - name: Create GitHub release
+      uses: Roang-zero1/github-upload-release-artifacts-action@master
+      with:
+        args:
+        - Release/
+        - librosalila.dylib
+        - librosalila.so
+        - rosalila.lib
