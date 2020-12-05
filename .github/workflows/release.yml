@@ -129,17 +129,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Zip artifact
-        run: |
-          zip -r tribilin.zip . -i Release/*
-          echo "::set-output name=asset_name::tribilin.zip"
-          echo "::set-output name=asset_path::tribilin.zip"
+      - name: Checkout
+        uses: actions/checkout@v2
 
-      - name: Create GitHub release
-        uses: Roang-zero1/github-upload-release-artifacts-action@master
+      - name: Download Artifact
+        uses: actions/download-artifact@v1
         with:
-          args:
-          - Release/
-          - librosalila.dylib
-          - librosalila.so
-          - rosalila.lib
+          name: JustTestin
+          path: artifacts/JustTestin
+
+      - name: Build
+        id: build
+        run: |
+          zip -r tribilin.zip . -i artifacts/*
+
+      - name: Upload Release Asset
+        id: upload-release-asset 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          asset_path: ./my-artifact.zip
+          asset_name: my-artifact.zip
+          asset_content_type: application/zip
