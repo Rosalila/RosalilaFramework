@@ -141,8 +141,8 @@ jobs:
       - name: Build
         id: build
         run: |
-          zip -r tribilin.zip . -i artifacts/*
-          ls
+          zip -r tribilin.zip artifacts/*
+          ls artifacts/
 
       - name: Upload Release Asset
         id: upload-release-asset 
