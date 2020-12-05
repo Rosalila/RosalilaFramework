@@ -119,3 +119,13 @@ jobs:
         with:
           name: JustTestin
           path: Release
+
+      - name: Upload
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_name: ${{ steps.build.outputs.asset_name }}
+          asset_path: ${{ steps.build.outputs.asset_path }}
+          asset_content_type: application/zip
