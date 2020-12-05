@@ -117,7 +117,8 @@ jobs:
     needs: build
 
     runs-on: ubuntu-latest
-    
+
+    steps:
       - name: Prepare artifact
         if: runner.os == 'Linux' || runner.os == 'macOS'
         shell: bash
