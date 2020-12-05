@@ -101,7 +101,7 @@ jobs:
         run: |
           cd ${{ matrix.build-src-dir || '.' }}
           cmake --build . --config ${{ matrix.build-config || 'Release' }}
-          zip -r "tribilin.zip" Release/*
+          zip -r tribilin.zip . -i Release/*
           echo "::set-output name=asset_name::tribilin.zip"
           echo "::set-output name=asset_path::tribilin.zip"
 
