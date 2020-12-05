@@ -106,3 +106,16 @@ jobs:
         run: |
           cd ${{ matrix.build-dir || '.' }}
           ctest -C ${{ matrix.build-config || 'Release' }} --output-on-failure
+
+      - name: Prepare artifact
+        if: runner.os == 'Linux' || runner.os == 'macOS'
+        shell: bash
+        run: |
+          mkdir Release
+          mv librosalila* Release
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: ${{ matrix.artifact-name }}
+          path: Release
