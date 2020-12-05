@@ -99,6 +99,19 @@ jobs:
           CXXFLAGS: ${{ matrix.cxxflags || env.CXXFLAGS }}
           LDFLAGS: ${{ matrix.ldflags || env.LDFLAGS }}
 
+      - name: Prepare artifact
+        shell: bash
+        run: |
+          mkdir Release
+          mv librosalila* Release
+          mv *.lib Release
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: JustTestin
+          path: Release
+
       - name: Compile source code
         run: |
           cd ${{ matrix.build-src-dir || '.' }}
@@ -119,19 +132,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Prepare artifact
-        if: runner.os == 'Linux' || runner.os == 'macOS'
-        shell: bash
-        run: |
-          mkdir Release
-          mv librosalila* Release
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v1
-        with:
-          name: JustTestin
-          path: Release
-
       - name: Upload Release Asset
         id: upload-release-asset 
         uses: actions/upload-release-asset@v1
