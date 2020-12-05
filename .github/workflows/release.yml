@@ -112,6 +112,12 @@ jobs:
           cd ${{ matrix.build-dir || '.' }}
           ctest -C ${{ matrix.build-config || 'Release' }} --output-on-failure
 
+  upload:
+    name: Generate rosalila.zip
+    needs: build
+
+    runs-on: ubuntu-latest
+    
       - name: Prepare artifact
         if: runner.os == 'Linux' || runner.os == 'macOS'
         shell: bash
