@@ -135,11 +135,11 @@ jobs:
           echo "::set-output name=asset_name::tribilin.zip"
           echo "::set-output name=asset_path::tribilin.zip"
 
-    - name: Create GitHub release
-      uses: Roang-zero1/github-upload-release-artifacts-action@master
-      with:
-        args:
-        - Release/
-        - librosalila.dylib
-        - librosalila.so
-        - rosalila.lib
+      - name: Create GitHub release
+        uses: Roang-zero1/github-upload-release-artifacts-action@master
+        with:
+          args:
+          - Release/
+          - librosalila.dylib
+          - librosalila.so
+          - rosalila.lib
