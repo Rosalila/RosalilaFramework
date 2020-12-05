@@ -117,5 +117,5 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v1
         with:
-          name: ${{ matrix.artifact-name }}
+          name: JustTestin
           path: Release
